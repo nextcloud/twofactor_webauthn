@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<info xmlns:xsi= "http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="https://apps.nextcloud.com/schema/apps/info.xsd">
+    <id>twofactor_webauthn</id>
+    <name>Two-Factor Webauthn</name>
+    <summary>Webauthn two-factor provider</summary>
+    <description>A two-factor provider for webauthn devices</description>
+    <version>0.0.1</version>
+    <licence>agpl</licence>
+
+    <author>Michael Blumenstein</author>
+    <namespace>TwoFactorWebauthn</namespace>
+    <category>security</category>
+
+    <website>https://github.com/michib/nextcloud_twofactor_webauthn/#readme</website>
+    <bugs>https://github.com/michib/nextcloud_twofactor_webauthn/issues</bugs>
+    <repository type="git">https://github.com/michib/nextcloud_twofactor_webauthn.git</repository>
+
+    <dependencies>
+        <php min-version="7.1" max-version="7.3"></php>
+        <database>sqlite</database>
+        <database>mysql</database>
+        <database>pgsql</database>
+        <nextcloud min-version="16" max-version="17" />
+    </dependencies>
+
+    <two-factor-providers>
+        <provider>OCA\TwoFactorWebauthn\Provider\WebauthnProvider</provider>
+    </two-factor-providers>
+
+    <activity>
+        <settings>
+            <setting>OCA\TwoFactorWebauthn\Activity\Setting</setting>
+        </settings>
+        <providers>
+            <provider>OCA\TwoFactorWebauthn\Activity\Provider</provider>
+        </providers>
+    </activity>
+</info>

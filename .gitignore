@@ -1,0 +1,13 @@
+/build
+/js
+
+/.idea/
+/coverage
+/.nyc_output
+/node_modules
+
+/nbproject/private/
+/vendor
+composer.phar
+
+/tests/clover.xml
