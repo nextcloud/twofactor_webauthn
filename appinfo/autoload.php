@@ -1,3 +1,5 @@
+<?php
+
 /**
  * Nextcloud - U2F 2FA
  *
@@ -7,12 +9,4 @@
  * @author Christoph Wurst <christoph@winzerhof-wurst.at>
  * @copyright Christoph Wurst 2016
  */
-
-/** icons for personal page settings **/
-.nav-icon-webauthn-second-factor-auth, .icon-webauthn-device {
-	background-image: url('../img/app-dark.svg?v=1');
-}
-
-#webauthn-http-warning {
-	color: var(--color-warning);
-}
+require_once __DIR__ . '/../vendor/autoload.php';
