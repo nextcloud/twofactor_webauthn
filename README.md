@@ -1,6 +1,14 @@
 # Twofactor Webauthn
 Place this app in **nextcloud/apps/**
 
+## Credits
+
+Credits are going to:
+ * Christoph Wurst for his Project https://github.com/nextcloud/twofactor_u2f
+ * Spomky for his Project https://github.com/web-auth/webauthn-framework
+ 
+twofactor_u2f has been used as a Template for this Project. And most of the needed Code for the Webauthn functionality could be taken from webauthn-framework and his great documentation
+
 ## Building the app
 
 The app can be built by using the provided Makefile by running:
