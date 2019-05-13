@@ -83,7 +83,7 @@ class WebauthnPublicKeyCredentialSourceRepository implements PublicKeyCredential
             return $name;
         }
         
-        $entity = $this->publicKeyCredentialEntityMapper->findPublicKeyCredential($publicKeyCredentialSource->getPublicKeyCredentialId());
+        $entity = $this->publicKeyCredentialEntityMapper->findPublicKeyCredential(base64_encode($publicKeyCredentialSource->getPublicKeyCredentialId()));
         return $entity == null ? 'default' : $entity->getName();
     }
 }

@@ -14,11 +14,13 @@ use Cose\Algorithms;
 use Exception;
 use OCA\TwoFactorWebauthn\Db\PublicKeyCredentialEntity;
 use OCA\TwoFactorWebauthn\Db\PublicKeyCredentialEntityMapper;
+use OCA\TwoFactorWebauthn\Event\StateChanged;
 use OCA\TwoFactorWebauthn\Repository\WebauthnPublicKeyCredentialSourceRepository;
 use OCP\ISession;
 use OCP\IUser;
 use Slim\Http\Environment;
 use Slim\Http\Request;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Throwable;
 use Webauthn\AttestationStatement\AndroidKeyAttestationStatementSupport;
 use Webauthn\AttestationStatement\AttestationObjectLoader;
@@ -59,6 +61,10 @@ class WebauthnManager
      * @var PublicKeyCredentialEntityMapper
      */
     private $mapper;
+    /**
+     * @var EventDispatcherInterface
+     */
+    private $eventDispatcher;
 
 
     /**
@@ -70,12 +76,14 @@ class WebauthnManager
     public function __construct(
         ISession $session,
         WebauthnPublicKeyCredentialSourceRepository $repository,
-        PublicKeyCredentialEntityMapper $mapper
+        PublicKeyCredentialEntityMapper $mapper,
+        EventDispatcherInterface $eventDispatcher
     )
     {
         $this->session = $session;
         $this->repository = $repository;
         $this->mapper = $mapper;
+        $this->eventDispatcher = $eventDispatcher;
     }
 
     public function startRegistration(IUser $user): PublicKeyCredentialCreationOptions
@@ -128,7 +136,7 @@ class WebauthnManager
         return $publicKeyCredentialCreationOptions;
     }
 
-    public function finishRegister(string $name, $data): array
+    public function finishRegister(IUser $user, string $name, $data): array
     {
         if (!$this->session->exists('webauthn')) {
             throw new Exception('session token does not exist');
@@ -205,6 +213,7 @@ class WebauthnManager
         );
 
         $this->repository->saveCredentialSource($publicKeyCredentialSource, $name);
+        $this->eventDispatcher->dispatch(StateChanged::class, new StateChanged($user, true));
 
         return [
             'id' => base64_encode($publicKeyCredentialSource->getPublicKeyCredentialId()),
@@ -229,6 +238,8 @@ class WebauthnManager
         Assertion::eq($credential->getUserHandle(), $user->getUID());
 
         $this->mapper->delete($credential);
+
+        $this->eventDispatcher->dispatch(StateChanged::class, new StateChanged($user, false));
     }
 
     public function startAuthenticate(IUser $user): PublicKeyCredentialRequestOptions

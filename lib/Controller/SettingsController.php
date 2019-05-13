@@ -45,7 +45,7 @@ class SettingsController extends Controller
      */
     public function finishRegister(string $name, string $data): JSONResponse
     {
-        return new JSONResponse($this->manager->finishRegister($name, $data));
+        return new JSONResponse($this->manager->finishRegister($this->userSession->getUser(), $name, $data));
     }
 
     /**
