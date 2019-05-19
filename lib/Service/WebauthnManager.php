@@ -232,16 +232,6 @@ class WebauthnManager
         }, $credentials);
     }
 
-    public function removeDevice(IUser $user, string $id)
-    {
-        $credential = $this->mapper->findPublicKeyCredential($id);
-        Assertion::eq($credential->getUserHandle(), $user->getUID());
-
-        $this->mapper->delete($credential);
-
-        $this->eventDispatcher->dispatch(StateChanged::class, new StateChanged($user, false));
-    }
-
     public function startAuthenticate(IUser $user): PublicKeyCredentialRequestOptions
     {
         // Extensions
@@ -346,5 +336,24 @@ class WebauthnManager
         } catch (Exception $exception) {
             return false;
         }
+    }
+
+    public function removeDevice(IUser $user, string $id)
+    {
+        $credential = $this->mapper->findPublicKeyCredential($id);
+        Assertion::eq($credential->getUserHandle(), $user->getUID());
+
+        $this->mapper->delete($credential);
+
+        $this->eventDispatcher->dispatch(StateChanged::class, new StateChanged($user, false));
+    }
+
+    public function removeAllDevices(IUser $user)
+    {
+        foreach ($this->mapper->findPublicKeyCredentials($user->getUID()) as $credential) {
+            $this->mapper->delete($credential);
+        }
+
+        $this->eventDispatcher->dispatch(StateChanged::class, new StateChanged($user, false));
     }
 }

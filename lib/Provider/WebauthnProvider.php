@@ -7,7 +7,6 @@ require_once(__DIR__ . '/../../appinfo/autoload.php');
 
 use OCA\TwoFactorWebauthn\Service\WebauthnManager;
 use OCA\TwoFactorWebauthn\Settings\Personal;
-use OCP\Authentication\TwoFactorAuth\IActivatableByAdmin;
 use OCP\Authentication\TwoFactorAuth\IDeactivatableByAdmin;
 use OCP\Authentication\TwoFactorAuth\IPersonalProviderSettings;
 use OCP\Authentication\TwoFactorAuth\IProvider;
@@ -16,7 +15,7 @@ use OCP\Authentication\TwoFactorAuth\IProvidesPersonalSettings;
 use OCP\IUser;
 use OCP\Template;
 
-class WebauthnProvider implements IProvider, IProvidesPersonalSettings, IProvidesIcons, IDeactivatableByAdmin, IActivatableByAdmin
+class WebauthnProvider implements IProvider, IProvidesPersonalSettings, IProvidesIcons, IDeactivatableByAdmin
 {
     /**
      * @var WebauthnManager
@@ -165,20 +164,7 @@ class WebauthnProvider implements IProvider, IProvidesPersonalSettings, IProvide
      */
     public function disableFor(IUser $user)
     {
-        return null;
+        return $this->manager->removeAllDevices($user);
     }
-
-    /**
-     * Enable this provider for the given user.
-     *
-     * @param IUser $user the user to activate this provider for
-     *
-     * @return void
-     *
-     * @since 15.0.0
-     */
-    public function enableFor(IUser $user)
-    {
-        return null;
-    }
+    
 }
