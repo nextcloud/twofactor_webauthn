@@ -49,6 +49,8 @@ use Webauthn\TokenBinding\TokenBindingNotSupportedHandler;
 
 class WebauthnManager
 {
+    const TWOFACTORAUTH_WEBAUTHN_REGISTRATION = 'twofactorauth_webauthn_registration';
+    const TWOFACTORAUTH_WEBAUTHN_REQUEST = 'twofactorauth_webauthn_request';
     /**
      * @var ISession
      */
@@ -90,7 +92,7 @@ class WebauthnManager
     {
         $rpEntity = new PublicKeyCredentialRpEntity(
             'Nextcloud', //Name
-            null,              //ID
+            null,           //ID
             null                            //Icon
         );
 
@@ -127,23 +129,12 @@ class WebauthnManager
             null
         );
 
-        $this->session->set('webauthn', $publicKeyCredentialCreationOptions->jsonSerialize());
-
-        if (!$this->session->exists('webauthn')) {
-            throw new Exception('session token does not created');
-        }
+        $this->session->set(self::TWOFACTORAUTH_WEBAUTHN_REGISTRATION, $publicKeyCredentialCreationOptions->jsonSerialize());
 
         return $publicKeyCredentialCreationOptions;
     }
 
-    public function finishRegister(IUser $user, string $name, $data): array
-    {
-        if (!$this->session->exists('webauthn')) {
-            throw new Exception('session token does not exist');
-        }
-        // Retrieve the PublicKeyCredentialCreationOptions object created earlier
-        $publicKeyCredentialCreationOptions = PublicKeyCredentialCreationOptions::createFromArray($this->session->get('webauthn'));
-
+    private function buildPacketAttestationStatementSupport(Decoder $decoder): PackedAttestationStatementSupport {
         // Cose Algorithm Manager
         $coseAlgorithmManager = new Manager();
         $coseAlgorithmManager->add(new ECDSA\ES256());
@@ -153,37 +144,63 @@ class WebauthnManager
         $coseAlgorithmManager->add(new RSA\RS256());
         $coseAlgorithmManager->add(new RSA\RS512());
 
-        // Create a CBOR Decoder object
-        $otherObjectManager = new OtherObjectManager();
-        $tagObjectManager = new TagObjectManager();
-        $decoder = new Decoder($tagObjectManager, $otherObjectManager);
+        return new PackedAttestationStatementSupport($decoder, $coseAlgorithmManager);
+    }
 
-        // The token binding handler
-        $tokenBindnigHandler = new TokenBindingNotSupportedHandler();
-
+    private function buildAttestationStatementSupportManager(Decoder $decoder): AttestationStatementSupportManager {
         // Attestation Statement Support Manager
         $attestationStatementSupportManager = new AttestationStatementSupportManager();
         $attestationStatementSupportManager->add(new NoneAttestationStatementSupport());
         $attestationStatementSupportManager->add(new FidoU2FAttestationStatementSupport($decoder));
-//        $attestationStatementSupportManager->add(new AndroidSafetyNetAttestationStatementSupport($httpClient, 'GOOGLE_SAFETYNET_API_KEY'));
         $attestationStatementSupportManager->add(new AndroidKeyAttestationStatementSupport($decoder));
         $attestationStatementSupportManager->add(new TPMAttestationStatementSupport());
-        $attestationStatementSupportManager->add(new PackedAttestationStatementSupport($decoder, $coseAlgorithmManager));
+        $attestationStatementSupportManager->add($this->buildPacketAttestationStatementSupport($decoder));
 
+        return $attestationStatementSupportManager;
+    }
+
+    private function buildDecoder(): Decoder {
+        // Create a CBOR Decoder object
+        $otherObjectManager = new OtherObjectManager();
+        $tagObjectManager = new TagObjectManager();
+        return new Decoder($tagObjectManager, $otherObjectManager);
+    }
+
+    public function buildPublicKeyCredentialLoader(AttestationStatementSupportManager $attestationStatementSupportManager, Decoder $decoder): PublicKeyCredentialLoader
+    {
         // Attestation Object Loader
         $attestationObjectLoader = new AttestationObjectLoader($attestationStatementSupportManager, $decoder);
 
         // Public Key Credential Loader
         $publicKeyCredentialLoader = new PublicKeyCredentialLoader($attestationObjectLoader, $decoder);
+        return $publicKeyCredentialLoader;
+    }
 
-// Extension Output Checker Handler
+    public function finishRegister(IUser $user, string $name, $data): array
+    {
+        if (!$this->session->exists(self::TWOFACTORAUTH_WEBAUTHN_REGISTRATION)) {
+            throw new Exception('Twofactor Webauthn registration process was not properly initialized');
+        }
+        // Retrieve the PublicKeyCredentialCreationOptions object created earlier
+        $publicKeyCredentialCreationOptions = PublicKeyCredentialCreationOptions::createFromArray($this->session->get(self::TWOFACTORAUTH_WEBAUTHN_REGISTRATION));
+
+        $decoder = $this->buildDecoder();
+
+        // The token binding handler
+        $tokenBindingHandler = new TokenBindingNotSupportedHandler();
+
+        $attestationStatementSupportManager = $this->buildAttestationStatementSupportManager($decoder);
+
+        $publicKeyCredentialLoader = $this->buildPublicKeyCredentialLoader($attestationStatementSupportManager, $decoder);
+
+        // Extension Output Checker Handler
         $extensionOutputCheckerHandler = new ExtensionOutputCheckerHandler();
 
 // Authenticator Attestation Response Validator
         $authenticatorAttestationResponseValidator = new AuthenticatorAttestationResponseValidator(
             $attestationStatementSupportManager,
             $this->repository,
-            $tokenBindnigHandler,
+            $tokenBindingHandler,
             $extensionOutputCheckerHandler
         );
 
@@ -256,7 +273,7 @@ class WebauthnManager
             $extensions
         );
 
-        $this->session->set('twofactor_webauthn_req', $publicKeyCredentialRequestOptions->jsonSerialize());
+        $this->session->set(self::TWOFACTORAUTH_WEBAUTHN_REQUEST, $publicKeyCredentialRequestOptions->jsonSerialize());
 
         return $publicKeyCredentialRequestOptions;
     }
@@ -264,34 +281,18 @@ class WebauthnManager
     public function finishAuthenticate(IUser $user, string $data)
     {
 
+        if (!$this->session->exists(self::TWOFACTORAUTH_WEBAUTHN_REQUEST)) {
+            throw new Exception('Twofactor Webauthn request process was not properly initialized');
+        }
+
         // Retrieve the Options passed to the device
-        $publicKeyCredentialRequestOptions = PublicKeyCredentialRequestOptions::createFromArray($this->session->get('twofactor_webauthn_req'));
+        $publicKeyCredentialRequestOptions = PublicKeyCredentialRequestOptions::createFromArray($this->session->get(self::TWOFACTORAUTH_WEBAUTHN_REQUEST));
 
-        // Cose Algorithm Manager
-        $coseAlgorithmManager = new Manager();
-        $coseAlgorithmManager->add(new ECDSA\ES256());
-        $coseAlgorithmManager->add(new ECDSA\ES512());
-        $coseAlgorithmManager->add(new EdDSA\EdDSA());
-        $coseAlgorithmManager->add(new RSA\RS1());
-        $coseAlgorithmManager->add(new RSA\RS256());
-        $coseAlgorithmManager->add(new RSA\RS512());
+        $decoder = $this->buildDecoder();
 
-        // Create a CBOR Decoder object
-        $otherObjectManager = new OtherObjectManager();
-        $tagObjectManager = new TagObjectManager();
-        $decoder = new Decoder($tagObjectManager, $otherObjectManager);
+        $attestationStatementSupportManager = $this->buildAttestationStatementSupportManager($decoder);
 
-        // Attestation Statement Support Manager
-        $attestationStatementSupportManager = new AttestationStatementSupportManager();
-        $attestationStatementSupportManager->add(new NoneAttestationStatementSupport());
-        $attestationStatementSupportManager->add(new FidoU2FAttestationStatementSupport($decoder));
-        $attestationStatementSupportManager->add(new PackedAttestationStatementSupport($decoder, $coseAlgorithmManager));
-
-        // Attestation Object Loader
-        $attestationObjectLoader = new AttestationObjectLoader($attestationStatementSupportManager, $decoder);
-
-        // Public Key Credential Loader
-        $publicKeyCredentialLoader = new PublicKeyCredentialLoader($attestationObjectLoader, $decoder);
+        $publicKeyCredentialLoader = $this->buildPublicKeyCredentialLoader($attestationStatementSupportManager, $decoder);
 
         // Public Key Credential Source Repository
         $publicKeyCredentialSourceRepository = $this->repository;

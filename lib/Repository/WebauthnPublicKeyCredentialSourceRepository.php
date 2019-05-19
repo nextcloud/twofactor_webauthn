@@ -56,7 +56,7 @@ class WebauthnPublicKeyCredentialSourceRepository implements PublicKeyCredential
     public function findOneByCredentialId(string $publicKeyCredentialId): ?PublicKeyCredentialSource
     {
         $entity = $this->publicKeyCredentialEntityMapper->findPublicKeyCredential(base64_encode($publicKeyCredentialId));
-        return $entity == null ? null : $entity->toPublicKeyCredentialSource();
+        return $entity === null ? null : $entity->toPublicKeyCredentialSource();
     }
 
     /**
@@ -79,11 +79,11 @@ class WebauthnPublicKeyCredentialSourceRepository implements PublicKeyCredential
     }
 
     private function getName(PublicKeyCredentialSource $publicKeyCredentialSource, string $name = null): string {
-        if ($name != null) {
+        if ($name !== null) {
             return $name;
         }
         
         $entity = $this->publicKeyCredentialEntityMapper->findPublicKeyCredential(base64_encode($publicKeyCredentialSource->getPublicKeyCredentialId()));
-        return $entity == null ? 'default' : $entity->getName();
+        return $entity === null ? 'default' : $entity->getName();
     }
 }
