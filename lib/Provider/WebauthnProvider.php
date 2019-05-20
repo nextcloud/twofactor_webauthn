@@ -43,6 +43,7 @@ use OCP\Authentication\TwoFactorAuth\IPersonalProviderSettings;
 use OCP\Authentication\TwoFactorAuth\IProvider;
 use OCP\Authentication\TwoFactorAuth\IProvidesIcons;
 use OCP\Authentication\TwoFactorAuth\IProvidesPersonalSettings;
+use OCP\IL10N;
 use OCP\IUser;
 use OCP\Template;
 
@@ -52,14 +53,19 @@ class WebauthnProvider implements IProvider, IProvidesPersonalSettings, IProvide
      * @var WebauthnManager
      */
     private $manager;
+    /**
+     * @var IL10N
+     */
+    private $l10n;
 
 
     /**
      * WebauthnProvider constructor.
      */
-    public function __construct(WebauthnManager $manager)
+    public function __construct(IL10N $l10n, WebauthnManager $manager)
     {
         $this->manager = $manager;
+        $this->l10n = $l10n;
     }
 
 
@@ -131,7 +137,7 @@ class WebauthnProvider implements IProvider, IProvidesPersonalSettings, IProvide
      */
     public function getDisplayName(): string
     {
-        return 'Webauthn Devices';
+        return $this->l10n->t('Webauthn Devices');
     }
 
     /**
@@ -145,7 +151,7 @@ class WebauthnProvider implements IProvider, IProvidesPersonalSettings, IProvide
      */
     public function getDescription(): string
     {
-        return 'Use Webauthn for second factor authentication';
+        return $this->l10n->t('Use Webauthn for second factor authentication');
     }
 
     /**
