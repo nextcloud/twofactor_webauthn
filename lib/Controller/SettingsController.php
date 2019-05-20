@@ -59,6 +59,7 @@ class SettingsController extends Controller
         parent::__construct($AppName, $request);
         $this->manager = $manager;
         $this->userSession = $userSession;
+        $this->request = $request;
     }
 
     /**
@@ -68,7 +69,7 @@ class SettingsController extends Controller
      */
     public function startRegister(): JSONResponse
     {
-        return new JSONResponse($this->manager->startRegistration($this->userSession->getUser()));
+        return new JSONResponse($this->manager->startRegistration($this->userSession->getUser(), $this->request->getServerHost()));
     }
 
     /**

@@ -44,6 +44,7 @@ use OCP\Authentication\TwoFactorAuth\IProvider;
 use OCP\Authentication\TwoFactorAuth\IProvidesIcons;
 use OCP\Authentication\TwoFactorAuth\IProvidesPersonalSettings;
 use OCP\IL10N;
+use OCP\IRequest;
 use OCP\IUser;
 use OCP\Template;
 
@@ -57,15 +58,20 @@ class WebauthnProvider implements IProvider, IProvidesPersonalSettings, IProvide
      * @var IL10N
      */
     private $l10n;
+    /**
+     * @var IRequest
+     */
+    private $request;
 
 
     /**
      * WebauthnProvider constructor.
      */
-    public function __construct(IL10N $l10n, WebauthnManager $manager)
+    public function __construct(IL10N $l10n, IRequest $request, WebauthnManager $manager)
     {
         $this->manager = $manager;
         $this->l10n = $l10n;
+        $this->request = $request;
     }
 
 
@@ -93,7 +99,7 @@ class WebauthnProvider implements IProvider, IProvidesPersonalSettings, IProvide
      */
     public function getTemplate(IUser $user): Template
     {
-        $publicKey = $this->manager->startAuthenticate($user);
+        $publicKey = $this->manager->startAuthenticate($user, $this->request->getServerHost());
 
         $tmpl = new Template('twofactor_webauthn', 'challenge');
         $tmpl->assign('publicKey', $publicKey);

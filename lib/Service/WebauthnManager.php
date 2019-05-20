@@ -120,11 +120,11 @@ class WebauthnManager
         $this->eventDispatcher = $eventDispatcher;
     }
 
-    public function startRegistration(IUser $user): PublicKeyCredentialCreationOptions
+    public function startRegistration(IUser $user, string $serverHost): PublicKeyCredentialCreationOptions
     {
         $rpEntity = new PublicKeyCredentialRpEntity(
             'Nextcloud', //Name
-            null,           //ID
+            $this->stripPort($serverHost),           //ID
             null                            //Icon
         );
 
@@ -281,7 +281,11 @@ class WebauthnManager
         }, $credentials);
     }
 
-    public function startAuthenticate(IUser $user): PublicKeyCredentialRequestOptions
+    private function stripPort(string $serverHost): string {
+        return preg_replace('/(:\d+$)/', '', $serverHost);
+    }
+
+    public function startAuthenticate(IUser $user, string $serverHost): PublicKeyCredentialRequestOptions
     {
         // Extensions
         $extensions = new AuthenticationExtensionsClientInputs();
@@ -299,7 +303,7 @@ class WebauthnManager
         $publicKeyCredentialRequestOptions = new PublicKeyCredentialRequestOptions(
             random_bytes(32),                                                    // Challenge
             60000,                                                              // Timeout
-            null,                                                                  // Relying Party ID
+            $this->stripPort($serverHost),                                                                  // Relying Party ID
             $registeredPublicKeyCredentialDescriptors,                                  // Registered PublicKeyCredentialDescriptor classes
             PublicKeyCredentialRequestOptions::USER_VERIFICATION_REQUIREMENT_PREFERRED, // User verification requirement
             $extensions
