@@ -5,14 +5,14 @@ Place this app in **nextcloud/apps/**
 
 The development of this software was made possible using the following components:
 
-###twofactor_u2f
+### twofactor_u2f
 twofactor_u2f (https://github.com/nextcloud/twofactor_u2f) by Christoph Wurst (https://github.com/ChristophWurst)
 
 Licensed Under: AGPL
 
 This project used the great twofactor provider u2f created by Christoph Wurst as a template.
 
-###webauthn-framework
+### webauthn-framework
 webauthn-framework (https://github.com/web-auth/webauthn-framework) by Florent Morselli (https://github.com/Spomky)
 
 Licensed Under: MIT
