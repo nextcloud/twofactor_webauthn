@@ -1,13 +1,24 @@
 # Twofactor Webauthn
 Place this app in **nextcloud/apps/**
 
-## Credits
+## Software Credits
 
-Credits are going to:
- * Christoph Wurst for his Project https://github.com/nextcloud/twofactor_u2f
- * Spomky for his Project https://github.com/web-auth/webauthn-framework
+The development of this software was made possible using the following components:
+
+###twofactor_u2f
+twofactor_u2f (https://github.com/nextcloud/twofactor_u2f) by Christoph Wurst (https://github.com/ChristophWurst)
+
+Licensed Under: AGPL
+
+This project used the great twofactor provider u2f created by Christoph Wurst as a template.
+
+###webauthn-framework
+webauthn-framework (https://github.com/web-auth/webauthn-framework) by Florent Morselli (https://github.com/Spomky)
+
+Licensed Under: MIT
+
+The webauthn-framework provided most of the code and documentation for implementing the webauthn authentication.
  
-twofactor_u2f has been used as a Template for this Project. And most of the needed Code for the Webauthn functionality could be taken from webauthn-framework and his great documentation
 
 ## Building the app
 
