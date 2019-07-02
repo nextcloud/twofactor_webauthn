@@ -30,6 +30,7 @@
     "istanbul-instrumenter-loader": "^3.0.1",
     "jsdom": "^14.0.0",
     "jsdom-global": "^3.0.2",
+    "jshint": "^2.10.2",
     "mocha": "^5.2.0",
     "mocha-webpack": "^2.0.0-beta.0",
     "nyc": "^14.1.0",

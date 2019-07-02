@@ -136,6 +136,7 @@ appstore:
 	--exclude="../$(app_name)/*.log" \
 	--exclude="../$(app_name)/phpunit*xml" \
 	--exclude="../$(app_name)/composer.*" \
+	--exclude="../$(app_name)/node_modules" \
 	--exclude="../$(app_name)/js/node_modules" \
 	--exclude="../$(app_name)/js/tests" \
 	--exclude="../$(app_name)/js/test" \
