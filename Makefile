@@ -77,8 +77,8 @@ ifeq (, $(composer))
 	php $(build_tools_directory)/composer.phar install --prefer-dist
 	php $(build_tools_directory)/composer.phar update --prefer-dist
 else
-	composer install --prefer-dist
-	composer update --prefer-dist
+	composer install --prefer-dist --no-dev -o
+	composer update --prefer-dist --no-dev -o
 endif
 
 # Installs npm dependencies
@@ -128,7 +128,7 @@ source:
 appstore:
 	rm -rf $(appstore_build_directory)
 	mkdir -p $(appstore_build_directory)
-	tar cvzf $(appstore_package_name).tar.gz ../$(app_name) \
+	tar cvzf $(appstore_package_name).tar.gz \
 	--exclude-vcs \
 	--exclude="../$(app_name)/build" \
 	--exclude="../$(app_name)/tests" \
@@ -136,6 +136,7 @@ appstore:
 	--exclude="../$(app_name)/*.log" \
 	--exclude="../$(app_name)/phpunit*xml" \
 	--exclude="../$(app_name)/composer.*" \
+	--exclude="../$(app_name)/package*.json" \
 	--exclude="../$(app_name)/node_modules" \
 	--exclude="../$(app_name)/js/node_modules" \
 	--exclude="../$(app_name)/js/tests" \
@@ -151,6 +152,7 @@ appstore:
 	--exclude="../$(app_name)/protractor\.*" \
 	--exclude="../$(app_name)/.*" \
 	--exclude="../$(app_name)/js/.*" \
+	../$(app_name)
 
 .PHONY: test
 test: composer
