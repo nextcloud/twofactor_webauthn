@@ -1,3 +1,7 @@
+<?php
+
+declare(strict_types=1);
+
 /**
  * @author Michael Blumenstein <M.Flower@gmx.de>
  * @copyright Copyright (c) 2019 Michael Blumenstein <M.Flower@gmx.de>
@@ -30,11 +34,37 @@
  * The webauthn-framework provided most of the code and documentation for implementing the webauthn authentication.
  */
 
-/** icons for personal page settings **/
-.nav-icon-webauthn-second-factor-auth, .icon-webauthn-device {
-	background-image: url('../img/app-dark.svg?v=1');
-}
+namespace OCA\TwoFactorWebauthn\Listener;
 
-#webauthn-http-warning {
-	color: var(--color-warning);
+use OCA\TwoFactorWebauthn\Event\DisabledByAdmin;
+use OCA\TwoFactorWebauthn\Event\StateChanged;
+use OCP\Activity\IManager;
+use Symfony\Component\EventDispatcher\Event;
+
+class StateChangeActivity implements IListener {
+
+	/** @var IManager */
+	private $activityManager;
+
+	public function __construct(IManager $activityManager) {
+		$this->activityManager = $activityManager;
+	}
+
+	public function handle(Event $event) {
+		if ($event instanceof StateChanged) {
+			if ($event instanceof DisabledByAdmin) {
+				$subject = 'webauthn_disabled_by_admin';
+			} else {
+				$subject = $event->isEnabled() ? 'webauthn_device_added' : 'webauthn_device_removed';
+			}
+
+			$activity = $this->activityManager->generateEvent();
+			$activity->setApp('twofactor_webauthn')
+				->setType('security')
+				->setAuthor($event->getUser()->getUID())
+				->setAffectedUser($event->getUser()->getUID())
+				->setSubject($subject);
+			$this->activityManager->publish($activity);
+		}
+	}
 }

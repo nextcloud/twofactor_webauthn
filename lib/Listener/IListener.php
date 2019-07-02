@@ -1,3 +1,7 @@
+<?php
+
+declare(strict_types=1);
+
 /**
  * @author Michael Blumenstein <M.Flower@gmx.de>
  * @copyright Copyright (c) 2019 Michael Blumenstein <M.Flower@gmx.de>
@@ -30,11 +34,12 @@
  * The webauthn-framework provided most of the code and documentation for implementing the webauthn authentication.
  */
 
-/** icons for personal page settings **/
-.nav-icon-webauthn-second-factor-auth, .icon-webauthn-device {
-	background-image: url('../img/app-dark.svg?v=1');
-}
+namespace OCA\TwoFactorWebauthn\Listener;
 
-#webauthn-http-warning {
-	color: var(--color-warning);
+use Symfony\Component\EventDispatcher\Event;
+
+interface IListener {
+
+	public function handle(Event $event);
+
 }

@@ -30,11 +30,37 @@
  * The webauthn-framework provided most of the code and documentation for implementing the webauthn authentication.
  */
 
-/** icons for personal page settings **/
-.nav-icon-webauthn-second-factor-auth, .icon-webauthn-device {
-	background-image: url('../img/app-dark.svg?v=1');
+import store from './store'
+import Vue from 'vue'
+
+import Nextcloud from './mixins/Nextcloud'
+
+Vue.mixin(Nextcloud);
+
+const initialStateElement = document.getElementById('twofactor-webauthn-initial-state');
+if (initialStateElement) {
+    const devices = JSON.parse(initialStateElement.value)
+    devices.sort()
+    devices.sort((d1, d2) => {
+        if (!d1.name) {
+            return 1
+        } else if (!d2.name) {
+            return -1
+        } else {
+            return d1.name.localeCompare(d2.name)
+        }
+    })
+    store.replaceState({
+        devices
+    })
 }
 
-#webauthn-http-warning {
-	color: var(--color-warning);
-}
+import PersonalSettings from './components/PersonalSettings';
+
+const View = Vue.extend(PersonalSettings);
+new View({
+    propsData: {
+        httpWarning: document.location.protocol !== 'https:',
+    },
+    store,
+}).$mount('#twofactor-webauthn-settings');

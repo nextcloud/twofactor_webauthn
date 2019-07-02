@@ -1,3 +1,7 @@
+<?php
+
+declare(strict_types=1);
+
 /**
  * @author Michael Blumenstein <M.Flower@gmx.de>
  * @copyright Copyright (c) 2019 Michael Blumenstein <M.Flower@gmx.de>
@@ -30,11 +34,14 @@
  * The webauthn-framework provided most of the code and documentation for implementing the webauthn authentication.
  */
 
-/** icons for personal page settings **/
-.nav-icon-webauthn-second-factor-auth, .icon-webauthn-device {
-	background-image: url('../img/app-dark.svg?v=1');
-}
+namespace OCA\TwoFactorWebauthn\Event;
 
-#webauthn-http-warning {
-	color: var(--color-warning);
+use OCP\IUser;
+
+class DisabledByAdmin extends StateChanged {
+
+	public function __construct(IUser $user) {
+		parent::__construct($user, false);
+	}
+
 }

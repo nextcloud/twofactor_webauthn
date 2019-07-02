@@ -1,3 +1,8 @@
+<?php
+
+declare(strict_types=1);
+
+
 /**
  * @author Michael Blumenstein <M.Flower@gmx.de>
  * @copyright Copyright (c) 2019 Michael Blumenstein <M.Flower@gmx.de>
@@ -30,11 +35,36 @@
  * The webauthn-framework provided most of the code and documentation for implementing the webauthn authentication.
  */
 
-/** icons for personal page settings **/
-.nav-icon-webauthn-second-factor-auth, .icon-webauthn-device {
-	background-image: url('../img/app-dark.svg?v=1');
-}
+namespace OCA\TwoFactorWebauthn\Event;
 
-#webauthn-http-warning {
-	color: var(--color-warning);
+use OCP\IUser;
+use Symfony\Component\EventDispatcher\Event;
+
+class StateChanged extends Event {
+
+	/** @var IUser */
+	private $user;
+
+	/** @var bool */
+	private $enabled;
+
+	public function __construct(IUser $user, bool $enabled) {
+		$this->user = $user;
+		$this->enabled = $enabled;
+	}
+
+	/**
+	 * @return IUser
+	 */
+	public function getUser(): IUser {
+		return $this->user;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function isEnabled(): bool {
+		return $this->enabled;
+	}
+
 }

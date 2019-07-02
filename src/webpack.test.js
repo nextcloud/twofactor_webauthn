@@ -30,11 +30,15 @@
  * The webauthn-framework provided most of the code and documentation for implementing the webauthn authentication.
  */
 
-/** icons for personal page settings **/
-.nav-icon-webauthn-second-factor-auth, .icon-webauthn-device {
-	background-image: url('../img/app-dark.svg?v=1');
-}
+const merge = require('webpack-merge');
+const nodeExternals = require('webpack-node-externals')
+const path = require('path');
 
-#webauthn-http-warning {
-	color: var(--color-warning);
-}
+const common = require('./webpack.common.js');
+
+module.exports = merge(common, {
+	mode: 'development',
+	context: path.resolve(__dirname, 'src'),
+	devtool: 'inline-cheap-module-source-map',
+	externals: [nodeExternals()]
+})

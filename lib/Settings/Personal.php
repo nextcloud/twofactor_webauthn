@@ -1,3 +1,5 @@
+<?php
+
 /**
  * @author Michael Blumenstein <M.Flower@gmx.de>
  * @copyright Copyright (c) 2019 Michael Blumenstein <M.Flower@gmx.de>
@@ -30,11 +32,29 @@
  * The webauthn-framework provided most of the code and documentation for implementing the webauthn authentication.
  */
 
-/** icons for personal page settings **/
-.nav-icon-webauthn-second-factor-auth, .icon-webauthn-device {
-	background-image: url('../img/app-dark.svg?v=1');
-}
+namespace OCA\TwoFactorWebauthn\Settings;
 
-#webauthn-http-warning {
-	color: var(--color-warning);
+use OCP\Authentication\TwoFactorAuth\IPersonalProviderSettings;
+use OCP\Template;
+
+class Personal implements IPersonalProviderSettings
+{
+
+    /** @var array */
+    private $devices;
+
+    public function __construct(array $devices) {
+        $this->devices = $devices;
+    }
+
+    /**
+     * @return Template
+     *
+     * @since 15.0.0
+     */
+    public function getBody(): Template {
+        $template = new Template('twofactor_webauthn', 'personal');
+        $template->assign('state', json_encode($this->devices));
+        return $template;
+    }
 }

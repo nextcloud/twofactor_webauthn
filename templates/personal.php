@@ -1,3 +1,4 @@
+<?php
 /**
  * @author Michael Blumenstein <M.Flower@gmx.de>
  * @copyright Copyright (c) 2019 Michael Blumenstein <M.Flower@gmx.de>
@@ -30,11 +31,10 @@
  * The webauthn-framework provided most of the code and documentation for implementing the webauthn authentication.
  */
 
-/** icons for personal page settings **/
-.nav-icon-webauthn-second-factor-auth, .icon-webauthn-device {
-	background-image: url('../img/app-dark.svg?v=1');
-}
+script('twofactor_webauthn', 'settings');
+style('twofactor_webauthn', 'style');
+?>
 
-#webauthn-http-warning {
-	color: var(--color-warning);
-}
+<input type="hidden" id="twofactor-webauthn-initial-state" value="<?php p($_['state']); ?>">
+
+<div id="twofactor-webauthn-settings"></div>

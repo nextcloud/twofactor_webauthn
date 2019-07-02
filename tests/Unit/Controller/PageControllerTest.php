@@ -6,7 +6,7 @@ use PHPUnit_Framework_TestCase;
 
 use OCP\AppFramework\Http\TemplateResponse;
 
-use OCA\TwoFactorWebauthn\Controller\PageController;
+use OCA\TwoFactorWebauthn\Controller\SettingsController;
 
 
 class PageControllerTest extends PHPUnit_Framework_TestCase {
@@ -16,7 +16,7 @@ class PageControllerTest extends PHPUnit_Framework_TestCase {
 	public function setUp() {
 		$request = $this->getMockBuilder('OCP\IRequest')->getMock();
 
-		$this->controller = new PageController(
+		$this->controller = new SettingsController(
 			'twofactor_webauthn', $request, $this->userId
 		);
 	}

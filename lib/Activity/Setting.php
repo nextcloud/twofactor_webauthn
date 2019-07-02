@@ -1,3 +1,8 @@
+<?php
+
+declare(strict_types = 1);
+
+
 /**
  * @author Michael Blumenstein <M.Flower@gmx.de>
  * @copyright Copyright (c) 2019 Michael Blumenstein <M.Flower@gmx.de>
@@ -30,11 +35,70 @@
  * The webauthn-framework provided most of the code and documentation for implementing the webauthn authentication.
  */
 
-/** icons for personal page settings **/
-.nav-icon-webauthn-second-factor-auth, .icon-webauthn-device {
-	background-image: url('../img/app-dark.svg?v=1');
-}
+namespace OCA\TwoFactorWebauthn\Activity;
 
-#webauthn-http-warning {
-	color: var(--color-warning);
+use OCP\Activity\ISetting;
+use OCP\IL10N;
+
+class Setting implements ISetting {
+
+	/** @var IL10N */
+	private $l10n;
+
+	/**
+	 * @param IL10N $l10n
+	 */
+	public function __construct(IL10N $l10n) {
+		$this->l10n = $l10n;
+	}
+
+	/**
+	 * @return boolean
+	 */
+	public function canChangeMail() {
+		return false;
+	}
+
+	/**
+	 * @return boolean
+	 */
+	public function canChangeStream() {
+		return false;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getIdentifier() {
+		return 'twofactor_webauthn';
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getName() {
+		return $this->l10n->t('webauthn device');
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getPriority() {
+		return 20;
+	}
+
+	/**
+	 * @return boolean
+	 */
+	public function isDefaultEnabledMail() {
+		return true;
+	}
+
+	/**
+	 * @return boolean
+	 */
+	public function isDefaultEnabledStream() {
+		return true;
+	}
+
 }

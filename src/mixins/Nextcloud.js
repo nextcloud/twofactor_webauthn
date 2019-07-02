@@ -30,11 +30,8 @@
  * The webauthn-framework provided most of the code and documentation for implementing the webauthn authentication.
  */
 
-/** icons for personal page settings **/
-.nav-icon-webauthn-second-factor-auth, .icon-webauthn-device {
-	background-image: url('../img/app-dark.svg?v=1');
-}
-
-#webauthn-http-warning {
-	color: var(--color-warning);
+export default {
+	methods: {
+		t,
+	}
 }

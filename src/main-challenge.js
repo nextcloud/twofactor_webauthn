@@ -30,11 +30,25 @@
  * The webauthn-framework provided most of the code and documentation for implementing the webauthn authentication.
  */
 
-/** icons for personal page settings **/
-.nav-icon-webauthn-second-factor-auth, .icon-webauthn-device {
-	background-image: url('../img/app-dark.svg?v=1');
-}
+import store from './store'
+import Vue from 'vue'
 
-#webauthn-http-warning {
-	color: var(--color-warning);
-}
+import Nextcloud from './mixins/Nextcloud'
+
+Vue.mixin(Nextcloud);
+
+const initialStateElement = document.getElementById('twofactor-webauthn-publicKey');
+const publicKey = JSON.parse(initialStateElement.value);
+
+console.debug('Loaded initial state of the webauthn challenge page', publicKey);
+
+import Challenge from './components/Challenge'
+
+const View = Vue.extend(Challenge);
+new View({
+	propsData: {
+		publicKey,
+		httpWarning: document.location.protocol !== 'https:',
+	},
+	store,
+}).$mount('#twofactor-webauthn-challenge');

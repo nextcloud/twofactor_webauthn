@@ -30,11 +30,48 @@
  * The webauthn-framework provided most of the code and documentation for implementing the webauthn authentication.
  */
 
-/** icons for personal page settings **/
-.nav-icon-webauthn-second-factor-auth, .icon-webauthn-device {
-	background-image: url('../img/app-dark.svg?v=1');
+import Vue from 'vue'
+import Vuex from 'vuex'
+
+import {removeRegistration} from './services/RegistrationService'
+
+Vue.use(Vuex)
+
+export const mutations = {
+	addDevice (state, device) {
+		state.devices.push(device)
+		state.devices.sort((d1, d2) => d1.name.localeCompare(d2.name))
+	},
+
+	removeDevice (state, id) {
+		state.devices = state.devices.filter(device => device.id !== id)
+	}
 }
 
-#webauthn-http-warning {
-	color: var(--color-warning);
+export const actions = {
+	removeDevice ({state, commit}, id) {
+		const device = state.devices[id]
+
+		commit('removeDevice', id)
+
+		removeRegistration(id)
+			.catch(err => {
+				// Rollback
+				commit('addDevice', device)
+
+				throw err
+			})
+	}
 }
+
+export const getters = {}
+
+export default new Vuex.Store({
+	strict: process.env.NODE_ENV !== 'production',
+	state: {
+		devices: []
+	},
+	getters,
+	mutations,
+	actions
+})

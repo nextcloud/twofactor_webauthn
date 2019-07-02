@@ -1,3 +1,7 @@
+<?php
+
+declare(strict_types=1);
+
 /**
  * @author Michael Blumenstein <M.Flower@gmx.de>
  * @copyright Copyright (c) 2019 Michael Blumenstein <M.Flower@gmx.de>
@@ -30,11 +34,41 @@
  * The webauthn-framework provided most of the code and documentation for implementing the webauthn authentication.
  */
 
-/** icons for personal page settings **/
-.nav-icon-webauthn-second-factor-auth, .icon-webauthn-device {
-	background-image: url('../img/app-dark.svg?v=1');
-}
+namespace OCA\TwoFactorWebauthn\Listener;
 
-#webauthn-http-warning {
-	color: var(--color-warning);
+use OCA\TwoFactorWebauthn\Event\StateChanged;
+use OCA\TwoFactorWebauthn\Provider\WebauthnProvider;
+use OCA\TwoFactorWebauthn\Service\WebauthnManager;
+use OCP\Authentication\TwoFactorAuth\IRegistry;
+use Symfony\Component\EventDispatcher\Event;
+
+class StateChangeRegistryUpdater implements IListener {
+
+	/** @var IRegistry */
+	private $providerRegistry;
+
+	/** @var U2FManager */
+	private $manager;
+
+	/** @var U2FProvider */
+	private $provider;
+
+	public function __construct(IRegistry $providerRegistry, WebauthnManager $manager, WebauthnProvider $provider) {
+		$this->providerRegistry = $providerRegistry;
+		$this->provider = $provider;
+		$this->manager = $manager;
+	}
+
+	public function handle(Event $event) {
+		if ($event instanceof StateChanged) {
+			$devices = $this->manager->getDevices($event->getUser());
+			if ($event->isEnabled() && count($devices) === 1) {
+				// The first device was enabled -> enable provider for this user
+				$this->providerRegistry->enableProviderFor($this->provider, $event->getUser());
+			} else if (!$event->isEnabled() && empty($devices)) {
+				// The last device was removed -> disable provider for this user
+				$this->providerRegistry->disableProviderFor($this->provider, $event->getUser());
+			}
+		}
+	}
 }
