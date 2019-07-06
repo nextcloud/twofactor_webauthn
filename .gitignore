@@ -11,3 +11,4 @@
 composer.phar
 
 /tests/clover.xml
+.vscode/launch.json
