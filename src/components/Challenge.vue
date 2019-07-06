@@ -79,7 +79,7 @@
 		name: 'Challenge',
 		props: {
 			publicKey: {
-				type: Array,
+				type: Object,
 				required: true,
 			},
 			httpWarning: {
@@ -131,8 +131,6 @@
 									userHandle: data.response.userHandle ? this.arrayToBase64String(new Uint8Array(data.response.userHandle)) : null
 								}
 							};
-						}, error => {
-							console.log(error); // Example: timeout, interaction refused...
 						})
 						.then(challenge => {
 							this.challenge = JSON.stringify(challenge)
@@ -140,6 +138,10 @@
 							return this.$nextTick(() => {
 								this.$refs.challengeForm.submit()
 							})
+						})
+						.catch(error => {
+							console.log(error); // Example: timeout, interaction refused...
+							window.location = window.location.href.replace('challenge/twofactor_webauthn', 'selectchallenge');
 						});
 			}
 		}

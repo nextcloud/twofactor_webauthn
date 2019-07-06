@@ -107,7 +107,10 @@
                     .then(this.getRegistrationData)
                     .then(this.register.bind(this))
                     .then(() => this.step = RegistrationSteps.NAMING)
-                    .catch(console.error.bind(this))
+                    .catch(err => {
+                        console.error(err.name, err.message);
+                        this.step = RegistrationSteps.READY;
+                    })
             },
 
             getRegistrationData() {
