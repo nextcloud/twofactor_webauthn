@@ -48,6 +48,7 @@
         <span class="icon-loading-small webauthn-loading"></span>
         <input type="text"
                :placeholder="t('twofactor_webauthn', 'Name your device')"
+               v-on:keyup.enter="submit"
                v-model="name">
         <button v-on:click="submit">{{ t('twofactor_webauthn', 'Add') }}</button>
     </div>
