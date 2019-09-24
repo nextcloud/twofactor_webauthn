@@ -1,5 +1,5 @@
 {
-    "name": "Twofactor Webauthn",
+    "name": "michib/nextcloud_twofactor_webauthn",
     "description": "Twofactor Webauthn Provider",
     "type": "project",
     "license": "AGPL",
@@ -16,7 +16,7 @@
 ],
     "require": {
         "php": ">=7.1.0",
-        "web-auth/webauthn-lib": "*",
+        "web-auth/webauthn-lib": "^1.0",
         "ext-json": "*",
         "slim/slim": "^3.12"
     },
