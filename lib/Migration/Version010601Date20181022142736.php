@@ -59,7 +59,7 @@ class Version010601Date20181022142736 extends SimpleMigrationStep {
 			$table->addColumn('id', 'integer', [
 				'autoincrement' => true,
 				'notnull' => true,
-				'length' => 4000,
+				'length' => 255,
 			]);
             $table->addColumn('name', 'string', [
                 'notnull' => true,
@@ -68,31 +68,31 @@ class Version010601Date20181022142736 extends SimpleMigrationStep {
             ]);
 			$table->addColumn('public_key_credential_id', 'string', [
 				'notnull' => true,
-				'length' => 4000
+				'length' => 255
 			]);
 			$table->addColumn('type', 'string', [
 				'notnull' => true,
-				'length' => 255,
+				'length' => 30,
 			]);
 			$table->addColumn('transports', 'string', [
 				'notnull' => true,
-				'length' => 255,
+				'length' => 30,
 			]);
 			$table->addColumn('attestation_type', 'string', [
 				'notnull' => true,
-				'length' => 255,
+				'length' => 6,
 			]);
 			$table->addColumn('trust_path', 'string', [
 				'notnull' => true,
-				'length' => 255,
+				'length' => 2500,
 			]);
 			$table->addColumn('aaguid', 'string', [
 				'notnull' => false,
-				'length' => 255,
+				'length' => 36,
 			]);
             $table->addColumn('credential_public_key', 'string', [
                 'notnull' => true,
-                'length' => 4000
+                'length' => 255
             ]);
             $table->addColumn('user_handle', 'string', [
                 'notnull' => true,
@@ -100,7 +100,7 @@ class Version010601Date20181022142736 extends SimpleMigrationStep {
             ]);
             $table->addColumn('counter', 'integer', [
                 'notnull' => true,
-                'length' => 4
+                'length' => 255
             ]);
 			$table->setPrimaryKey(['id']);
 			$table->addIndex(['user_handle'], 'webauthn_registrations_userHandle');
