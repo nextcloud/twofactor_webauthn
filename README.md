@@ -19,40 +19,6 @@ Licensed Under: MIT
 
 The webauthn-framework provided most of the code and documentation for implementing the webauthn authentication.
 
-## Installation
-
-This twofactor providers does not work out of the box with the provided nextcloud docker image. You need to add the gmp php extension.
-
-### Dockerfile
-
-```docker
-FROM nextcloud:16
-
-RUN set -ex; \
-    \
-    savedAptMark="$(apt-mark showmanual)"; \
-    \
-    apt-get update; \
-    apt-get install -y --no-install-recommends \
-        libgmp-dev \
-    ;\
-    docker-php-ext-install gmp;\
-# reset apt-mark's "manual" list so that "purge --auto-remove" will remove all build dependencies
-    apt-mark auto '.*' > /dev/null; \
-    apt-mark manual $savedAptMark; \
-    ldd "$(php -r 'echo ini_get("extension_dir");')"/*.so \
-        | awk '/=>/ { print $3 }' \
-        | sort -u \
-        | xargs -r dpkg-query -S \
-        | cut -d: -f1 \
-        | sort -u \
-        | xargs -rt apt-mark manual; \
-    \
-    apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false; \
-    rm -rf /var/lib/apt/lists/*
-
-```
-
 
  
 
