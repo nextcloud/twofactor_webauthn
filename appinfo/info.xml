@@ -22,6 +22,7 @@
         <database>mysql</database>
         <database>pgsql</database>
         <nextcloud min-version="16" max-version="17" />
+        <lib>gmp</lib>
     </dependencies>
 
     <two-factor-providers>
