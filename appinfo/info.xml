@@ -5,9 +5,8 @@
     <name>Two-Factor Webauthn</name>
     <summary>Webauthn two-factor provider</summary>
     <description>A two-factor provider for webauthn devices</description>
-    <version>0.1.1-alpha</version>
+    <version>0.1.2-alpha</version>
     <licence>agpl</licence>
-
     <author>Michael Blumenstein</author>
     <namespace>TwoFactorWebauthn</namespace>
     <category>security</category>
@@ -15,6 +14,8 @@
     <website>https://github.com/michib/nextcloud_twofactor_webauthn/#readme</website>
     <bugs>https://github.com/michib/nextcloud_twofactor_webauthn/issues</bugs>
     <repository type="git">https://github.com/michib/nextcloud_twofactor_webauthn.git</repository>
+    <screenshot>https://raw.githubusercontent.com/michib/nextcloud_twofactor_webauthn/develop/doc/screenshots/login.jpg</screenshot>
+    <screenshot>https://raw.githubusercontent.com/michib/nextcloud_twofactor_webauthn/develop/doc/screenshots/settings.jpg</screenshot>
 
     <dependencies>
         <php min-version="7.1" max-version="7.4"></php>
