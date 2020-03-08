@@ -37,19 +37,22 @@
         <Device v-for="device in devices"
                 :key="device.id"
                 :id="device.id"
-                :name="device.name"/>
+                :name="device.name"
+                :active="device.active"/>
 
         <AddDeviceDialog :httpWarning="httpWarning"/>
-        <p v-if="notSupported">
+        <p v-if="allDeactivated" class="webauthn-warning">
+		    <span class="icon icon-info" />
+            {{ t('twofactor_webauthn', 'All devices are deactivated.') }}
+        </p>
+        <p v-if="notSupported" class="webauthn-warning">
+		    <span class="icon icon-info" />
             {{ t('twofactor_webauthn', 'Your browser does not support Webauthn.') }}
         </p>
-        <p v-if="httpWarning"
-           id="u2f-http-warning">
+        <p v-if="httpWarning" class="webauthn-warning">
+		    <span class="icon icon-info" />
             {{ t('twofactor_webauthn', 'You are accessing this site via an insecure connection. Browsers might therefore refuse the Webauthn authentication.') }}
         </p>
-<!--        <button id="register-webauthn-device"-->
-<!--                v-on:click="registerWebauthnDevice">Webauthn Device register-->
-<!--        </button>-->
     </div>
 </template>
 
@@ -73,8 +76,11 @@
             Device
         },
         computed: {
-            devices() {
+            devices() { 
                 return this.$store.state.devices
+            },
+            allDeactivated() {
+                return this.$store.state.devices.length > 0 && this.$store.state.devices.every(device => device.active != true);
             }
         }
     }

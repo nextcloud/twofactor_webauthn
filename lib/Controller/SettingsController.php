@@ -43,6 +43,9 @@ use OCP\AppFramework\Http\JSONResponse;
 use OCP\IRequest;
 use OCP\IUserSession;
 
+
+use \OCP\ILogger;
+
 class SettingsController extends Controller
 {
     /**
@@ -54,12 +57,15 @@ class SettingsController extends Controller
      */
     private $userSession;
 
-    public function __construct($AppName, IRequest $request, WebauthnManager $manager, IUserSession $userSession)
+    private $logger;
+
+    public function __construct($AppName, IRequest $request, WebauthnManager $manager, IUserSession $userSession, ILogger $logger)
     {
         parent::__construct($AppName, $request);
         $this->manager = $manager;
         $this->userSession = $userSession;
         $this->request = $request;
+        $this->logger = $logger;
     }
 
     /**
@@ -87,6 +93,15 @@ class SettingsController extends Controller
      */
     public function remove(string $id): JSONResponse {
         return new JSONResponse($this->manager->removeDevice($this->userSession->getUser(), $id));
+    }
+
+    /**
+     * @NoAdminRequired
+     * @PasswordConfirmationRequired
+     */
+    public function changeActivationState(string $id, int $active): JSONResponse {
+        $this->logger->info('changeActivationState id: ' . $id . '; active: ' . $active);
+        return new JSONResponse($this->manager->changeActivationState($this->userSession->getUser(), $id, $active));
     }
 
 }

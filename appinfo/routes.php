@@ -48,5 +48,10 @@ return [
             'url' => '/settings/remove',
             'verb' => 'POST'
         ],
+        [
+            'name' => 'settings#changeActivationState',
+            'url' => '/settings/active',
+            'verb' => 'POST'
+        ]
     ]
 ];

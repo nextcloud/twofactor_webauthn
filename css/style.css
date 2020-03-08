@@ -35,6 +35,10 @@
 	background-image: url('../img/app-dark.svg?v=1');
 }
 
-#webauthn-http-warning {
+.icon-webauthn-device.disabled {
+	background-image: url('../img/device-disabled.svg?v=1');
+}
+
+.webauthn-warning {
 	color: var(--color-warning);
 }

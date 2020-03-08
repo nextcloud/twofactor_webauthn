@@ -65,7 +65,7 @@
 </template>
 
 <script>
-    import confirmPassword from 'nextcloud-password-confirmation'
+    import confirmPassword from '@nextcloud/password-confirmation'
 
     import {
         startRegistration,
