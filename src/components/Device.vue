@@ -32,60 +32,43 @@
 
 <template>
 	<div class="webauthn-device" :data-webauthn-id="id">
-		<span class="icon-webauthn-device"></span>
+		<span class="icon-webauthn-device" v-bind:class="{ disabled: !active }" ></span>
 		{{name || 'Unnamed device' }}
-		<span class="more">
-		    <a class="icon icon-more"
-			   v-on:click.stop="togglePopover"></a>
-		    <div class="popovermenu"
-				 :class="{open: showPopover}"
-				 v-click-outside="hidePopover">
-				<PopoverMenu :menu="menu"/>
-		    </div>
-		</span>
+		<Actions>
+			<ActionButton icon="icon-delete" @click=deleteDevice() :close-after-click="true">Delete</ActionButton>
+			<ActionCheckbox :checked="active" @update:checked=changeActivation($event)>Active</ActionCheckbox>
+		</Actions>
 	</div>
 </template>
 
 <script>
-	import ClickOutside from 'vue-click-outside'
-	import confirmPassword from 'nextcloud-password-confirmation'
-	import {PopoverMenu} from 'nextcloud-vue'
+	import { Actions } from '@nextcloud/vue/dist/Components/Actions';
+	import { ActionButton } from '@nextcloud/vue/dist/Components/ActionButton';
+	import { ActionCheckbox } from '@nextcloud/vue/dist/Components/ActionCheckbox';
+	import confirmPassword from '@nextcloud/password-confirmation';
 
 	export default {
 		name: 'Device',
 		props: {
 			id: String,
 			name: String,
+			active: Boolean
 		},
 		components: {
-			PopoverMenu
-		},
-		directives: {
-			ClickOutside
-		},
-		data () {
-			return {
-				showPopover: false,
-				menu: [
-					{
-						text: 'Remove',
-						icon: 'icon-delete',
-						action: () => {
-							confirmPassword()
-								.then(() => this.$store.dispatch('removeDevice', this.id))
-								.catch(console.error.bind(this))
-						}
-					}
-				]
-			}
+			Actions,
+			ActionButton,
+			ActionCheckbox
 		},
 		methods: {
-			togglePopover () {
-				this.showPopover = !this.showPopover
+			deleteDevice () {
+				confirmPassword()
+					.then(() => this.$store.dispatch('removeDevice', this.id))
+					.catch(console.error.bind(this))
 			},
-
-			hidePopover () {
-				this.showPopover = false
+			changeActivation (active) {
+				confirmPassword()
+					.then(() => this.$store.dispatch('changeActivationState', { id: this.id, active }))
+					.catch(console.error.bind(this))
 			}
 		}
 	}
@@ -95,24 +78,6 @@
 	.webauthn-device {
 		line-height: 300%;
 		display: flex;
-	}
-
-	.webauthn-device .more {
-		position: relative;
-	}
-
-	.webauthn-device .more .icon-more {
-		display: inline-block;
-		width: 16px;
-		height: 16px;
-		padding-left: 20px;
-		vertical-align: middle;
-		opacity: .7;
-	}
-
-	.webauthn-device .popovermenu {
-		right: -12px;
-		top: 42px;
 	}
 
 	.icon-webauthn-device {

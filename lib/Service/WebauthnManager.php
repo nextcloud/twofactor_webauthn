@@ -79,6 +79,8 @@ use Webauthn\PublicKeyCredentialSource;
 use Webauthn\PublicKeyCredentialUserEntity;
 use Webauthn\TokenBinding\TokenBindingNotSupportedHandler;
 
+use \OCP\ILogger;
+
 class WebauthnManager
 {
     const TWOFACTORAUTH_WEBAUTHN_REGISTRATION = 'twofactorauth_webauthn_registration';
@@ -100,6 +102,8 @@ class WebauthnManager
      */
     private $eventDispatcher;
 
+    private $logger;
+
 
     /**
      * WebauthnManager constructor.
@@ -111,13 +115,15 @@ class WebauthnManager
         ISession $session,
         WebauthnPublicKeyCredentialSourceRepository $repository,
         PublicKeyCredentialEntityMapper $mapper,
-        EventDispatcherInterface $eventDispatcher
+        EventDispatcherInterface $eventDispatcher,
+        ILogger $logger
     )
     {
         $this->session = $session;
         $this->repository = $repository;
         $this->mapper = $mapper;
         $this->eventDispatcher = $eventDispatcher;
+        $this->logger = $logger;
     }
 
     public function startRegistration(IUser $user, string $serverHost): PublicKeyCredentialCreationOptions
@@ -266,7 +272,8 @@ class WebauthnManager
 
         return [
             'id' => base64_encode($publicKeyCredentialSource->getPublicKeyCredentialId()),
-            'name' => $name
+            'name' => $name,
+            'active' => true
         ];
     }
 
@@ -277,6 +284,7 @@ class WebauthnManager
             return [
                 'id' => $credential->getPublicKeyCredentialId(),
                 'name' => $credential->getName(),
+                'active' => \boolval($credential->getActive())
             ];
         }, $credentials);
     }
@@ -291,13 +299,17 @@ class WebauthnManager
         $extensions = new AuthenticationExtensionsClientInputs();
         $extensions->add(new AuthenticationExtension('loc', true));
 
+        $activeDevices = array_filter($this->mapper->findPublicKeyCredentials($user->getUID()), 
+           function($device) { return $device->getActive() == 1; }
+        );
+
         // List of registered PublicKeyCredentialDescriptor classes associated to the user
         $registeredPublicKeyCredentialDescriptors = array_map(function (PublicKeyCredentialEntity $credential) {
             return new PublicKeyCredentialDescriptor(
                 $credential->getType(),
                 base64_decode($credential->getPublicKeyCredentialId())
             );
-        }, $this->mapper->findPublicKeyCredentials($user->getUID()));
+        }, $activeDevices);
 
         // Public Key Credential Request Options
         $publicKeyCredentialRequestOptions = new PublicKeyCredentialRequestOptions(
@@ -385,12 +397,25 @@ class WebauthnManager
         $this->eventDispatcher->dispatch(StateChanged::class, new StateChanged($user, false));
     }
 
-    public function removeAllDevices(IUser $user)
+    public function deactivateAllDevices(IUser $user)
     {
         foreach ($this->mapper->findPublicKeyCredentials($user->getUID()) as $credential) {
-            $this->mapper->delete($credential);
+            $credential->setActive(0);
+            $this->mapper->update($credential);
         }
 
         $this->eventDispatcher->dispatch(StateChanged::class, new StateChanged($user, false));
+    }
+
+    public function changeActivationState(IUser $user, string $id, int $active)
+    {
+        $credential = $this->mapper->findPublicKeyCredential($id);
+        Assertion::eq($credential->getUserHandle(), $user->getUID());
+
+        $credential->setActive($active);
+
+        $this->mapper->update($credential);
+
+        $this->eventDispatcher->dispatch(StateChanged::class, new StateChanged($user, \boolval($active)));
     }
 }

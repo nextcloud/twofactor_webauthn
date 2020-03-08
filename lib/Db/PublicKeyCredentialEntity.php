@@ -91,6 +91,11 @@ class PublicKeyCredentialEntity extends Entity
      */
     protected $counter;
 
+    /**
+     * @var bool
+     */
+    protected $active;
+
 
     static function fromPublicKeyCrendentialSource(string $name, PublicKeyCredentialSource $publicKeyCredentialSource): PublicKeyCredentialEntity
     {

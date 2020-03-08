@@ -30,29 +30,33 @@
  * The webauthn-framework provided most of the code and documentation for implementing the webauthn authentication.
  */
 
-import Axios from 'nextcloud-axios'
-import {generateUrl} from 'nextcloud-server/dist/router'
+import Axios from '@nextcloud/axios';
+import {generateUrl} from '@nextcloud/router';
 
-export function startRegistration () {
+export async function startRegistration () {
     const url = generateUrl('/apps/twofactor_webauthn/settings/startregister');
 
     return Axios.post(url)
         .then(resp => resp.data);
 }
 
-export function finishRegistration (name, data) {
+export async function finishRegistration (name, data) {
     const url = generateUrl('/apps/twofactor_webauthn/settings/finishregister');
 
     return Axios.post(url, { name, data })
         .then(resp => resp.data);
 }
 
-export function removeRegistration (id) {
-    const url = generateUrl('/apps/twofactor_webauthn/settings/remove')
-    const data = {
-        id
-    }
+export async function removeRegistration (id) {
+    const url = generateUrl('/apps/twofactor_webauthn/settings/remove');
 
-    return Axios.post(url, data)
-        .then(resp => resp.data)
+    return Axios.post(url, { id })
+        .then(resp => resp.data);
+}
+
+export async function changeActivationState (id, active) {
+    const url = generateUrl('/apps/twofactor_webauthn/settings/active');
+
+    return Axios.post(url, { id, active: active ? 1 : 0 })
+        .then(resp => resp.data);
 }

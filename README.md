@@ -1,6 +1,18 @@
 # Twofactor Webauthn
 Place this app in **nextcloud/apps/**
 
+## Usage
+
+### Activation/Deactivation of devices
+
+To activate or deactivate a device, click on the actions after the device name. There you can toggle the checkbox named _**Active**_. The change will be immediately saved. Per default, a newly added device will be active.
+
+![activate/deactivate a device](docs/../doc/screenshots/active.png "Activate/Deactivate a device")
+
+Deactivated devices can be recognised by the disabled state of the icon.
+
+Only active devices can be used to authenticate. If no device is active, 2 factor authentication with webauthn will be disabled and a warning will be shown.
+
 ## Software Credits
 
 The development of this software was made possible using the following components:

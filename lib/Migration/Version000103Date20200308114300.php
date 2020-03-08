@@ -1,3 +1,6 @@
+<?php
+declare(strict_types=1);
+
 /**
  * @author Michael Blumenstein <M.Flower@gmx.de>
  * @copyright Copyright (c) 2019 Michael Blumenstein <M.Flower@gmx.de>
@@ -30,62 +33,33 @@
  * The webauthn-framework provided most of the code and documentation for implementing the webauthn authentication.
  */
 
-import Vue from 'vue';
-import Vuex from 'vuex';
+namespace OCA\TwoFactorWebauthn\Migration;
 
-import {removeRegistration} from './services/RegistrationService';
-import {changeActivationState} from './services/RegistrationService';
+use Closure;
+use OCP\DB\ISchemaWrapper;
+use OCP\Migration\SimpleMigrationStep;
+use OCP\Migration\IOutput;
 
-Vue.use(Vuex);
+class Version000103Date20200308114300 extends SimpleMigrationStep {
 
-export const mutations = {
-	addDevice (state, device) {
-		state.devices.push(device);
-		state.devices.sort((d1, d2) => d1.name.localeCompare(d2.name));
-	},
+	/**
+	 * @param IOutput $output
+	 * @param Closure $schemaClosure The `\Closure` returns a `ISchemaWrapper`
+	 * @param array $options
+	 * @return null|ISchemaWrapper
+	 */
+	public function changeSchema(IOutput $output, Closure $schemaClosure, array $options) {
+		/** @var ISchemaWrapper $schema */
+		$schema = $schemaClosure();
 
-	removeDevice (state, id) {
-		state.devices = state.devices.filter(device => device.id !== id);
-	},
+		$table = $schema->getTable('twofactor_webauthn_registrations');
 
-	changeActivationState (state, { id, active }) {
-		state.devices.find(device => device.id === id).active = active;
+		$table->addColumn('active', 'boolean', [
+			'notnull' => true,
+			'default' => true,
+		]);
+
+
+		return $schema;
 	}
-};
-
-export const actions = {
-	removeDevice ({state, commit}, id) {
-		const device = state.devices.find(device => device.id === id);
-
-		commit('removeDevice', id);
-
-		removeRegistration(id)
-			.catch(err => {
-				// Rollback
-				commit('addDevice', device);
-
-				throw err;
-			});
-	},
-
-	changeActivationState ({state, commit}, { id, active }) {
-		commit('changeActivationState', { id, active });
-
-		changeActivationState(id, active).catch(err => {
-			commit('changeActivationState', { id, active: !active });
-			throw err;
-		});
-	}
-};
-
-export const getters = {};
-
-export default new Vuex.Store({
-	strict: process.env.NODE_ENV !== 'production',
-	state: {
-		devices: []
-	},
-	getters,
-	mutations,
-	actions
-});
+}
