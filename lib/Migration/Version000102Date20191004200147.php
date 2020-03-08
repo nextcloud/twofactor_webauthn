@@ -40,7 +40,7 @@ use OCP\DB\ISchemaWrapper;
 use OCP\Migration\SimpleMigrationStep;
 use OCP\Migration\IOutput;
 
-class Version010601Date20181022142736 extends SimpleMigrationStep {
+class Version000102Date20191004200147 extends SimpleMigrationStep {
 
 	/**
 	 * @param IOutput $output
@@ -51,8 +51,6 @@ class Version010601Date20181022142736 extends SimpleMigrationStep {
 	public function changeSchema(IOutput $output, Closure $schemaClosure, array $options) {
 		/** @var ISchemaWrapper $schema */
 		$schema = $schemaClosure();
-
-//		$schema->dropTable('twofactor_webauthn_registrations');
 
 		if (!$schema->hasTable('twofactor_webauthn_registrations')) {
 			$table = $schema->createTable('twofactor_webauthn_registrations');
