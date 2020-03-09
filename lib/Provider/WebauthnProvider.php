@@ -85,7 +85,7 @@ class WebauthnProvider implements IProvider, IProvidesPersonalSettings, IProvide
      */
     public function isTwoFactorAuthEnabledForUser(IUser $user): bool
     {
-        $devices = array_filter($this->manager->getDevices($user), function($device) { return $device['active'] == 1; });
+        $devices = array_filter($this->manager->getDevices($user), function($device) { return $device['active'] === 1; });
         return count($devices) > 0;
     }
     

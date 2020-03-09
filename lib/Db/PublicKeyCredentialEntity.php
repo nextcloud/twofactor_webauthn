@@ -35,9 +35,9 @@
 namespace OCA\TwoFactorWebauthn\Db;
 
 use OCP\AppFramework\Db\Entity;
+use Ramsey\Uuid\UuidFactory;
 use Webauthn\PublicKeyCredentialSource;
-use Webauthn\TrustPath\AbstractTrustPath;
-use Webauthn\TrustPath\TrustPath;
+use Webauthn\TrustPath\TrustPathLoader;
 
 class PublicKeyCredentialEntity extends Entity
 {
@@ -117,13 +117,14 @@ class PublicKeyCredentialEntity extends Entity
 
     function toPublicKeyCredentialSource(): PublicKeyCredentialSource
     {
+        $uuidFactory = new UuidFactory();
         return new PublicKeyCredentialSource(
             base64_decode($this->publicKeyCredentialId),
             $this->type,
             json_decode($this->transports),
             $this->attestationType,
-            AbstractTrustPath::createFromArray((array)json_decode($this->trustPath)),
-            $this->aaguid,
+            TrustPathLoader::loadTrustPath((array)json_decode($this->trustPath)),
+            $uuidFactory->fromString($this->aaguid),
             base64_decode($this->credentialPublicKey),
             $this->userHandle,
             $this->counter

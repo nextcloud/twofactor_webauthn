@@ -103,6 +103,23 @@
 				return btoa(String.fromCharCode(...a));
 			},
 
+			base64url2base64(input) {
+				input = input
+					.replace(/=/g, "")
+					.replace(/-/g, '+')
+					.replace(/_/g, '/');
+
+				const pad = input.length % 4;
+				if(pad) {
+					if(pad === 1) {
+						throw new Error('InvalidLengthError: Input base64url string is the wrong length to determine padding');
+					}
+					input += new Array(5-pad).join('=');
+				}
+
+				return input;
+			},
+
 			sign () {
 				console.debug('Starting webauthn authentication', this.req)
 
@@ -110,13 +127,13 @@
 
 				const publicKey = this.publicKey;
 
-				publicKey.challenge = Uint8Array.from(window.atob(publicKey.challenge), c=>c.charCodeAt(0));
-				publicKey.allowCredentials = publicKey.allowCredentials.map(function(data) {
-					return {
-						...data,
-						'id': Uint8Array.from(atob(data.id), c=>c.charCodeAt(0))
-					};
-				});
+				publicKey.challenge = Uint8Array.from(window.atob(this.base64url2base64(publicKey.challenge)), c=>c.charCodeAt(0));
+				if (publicKey.allowCredentials) {
+					publicKey.allowCredentials = publicKey.allowCredentials.map((data) => ({
+							...data,
+							'id': Uint8Array.from(window.atob(this.base64url2base64(data.id)), c=>c.charCodeAt(0))
+					}));
+				}
 
 				return navigator.credentials.get({publicKey})
 						.then(data => {
