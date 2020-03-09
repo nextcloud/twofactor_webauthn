@@ -8,20 +8,14 @@
             "name": "Michael Blumenstein"
         }
     ],
-    "repositories": [
-    {
-        "type": "path",
-        "url": "../../../../webauthn-framework"
-    }
-],
     "require": {
         "php": ">=7.1.0",
-        "web-auth/webauthn-lib": "^1.0",
+        "web-auth/webauthn-lib": "^3.0",
         "ext-json": "*",
         "slim/slim": "^3.12"
     },
     "require-dev": {
-        "christophwurst/nextcloud": "^16.0",
+        "christophwurst/nextcloud": "^18.0",
         "phpunit/phpunit": "^5.4"
     }
 }

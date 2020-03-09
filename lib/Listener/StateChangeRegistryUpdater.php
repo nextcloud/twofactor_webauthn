@@ -61,7 +61,7 @@ class StateChangeRegistryUpdater implements IListener {
 
 	public function handle(Event $event) {
 		if ($event instanceof StateChanged) {
-			$devices = array_filter($this->manager->getDevices($event->getUser()), function($device) { return $device['active'] == 1; });
+			$devices = array_filter($this->manager->getDevices($event->getUser()), function($device) { return $device['active'] === 1; });
 			if ($event->isEnabled() && count($devices) === 1) {
 				// The first device was enabled -> enable provider for this user
 				$this->providerRegistry->enableProviderFor($this->provider, $event->getUser());
