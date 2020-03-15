@@ -1,6 +1,6 @@
 {
   "name": "twofactor_webauthn",
-  "version": "0.2.0-alpha.1",
+  "version": "0.2.0",
   "description": "Webauthn second factor provider for Nextcloud",
   "private": true,
   "dependencies": {
