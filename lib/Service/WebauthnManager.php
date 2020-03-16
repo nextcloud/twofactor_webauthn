@@ -278,7 +278,7 @@ class WebauthnManager
         $extensions->add(new AuthenticationExtension('loc', true));
 
         $activeDevices = array_filter($this->mapper->findPublicKeyCredentials($user->getUID()), 
-           function($device) { return $device->getActive() === 1; }
+           function($device) { return \boolval($device->getActive()) === true; }
         );
 
         // List of registered PublicKeyCredentialDescriptor classes associated to the user
