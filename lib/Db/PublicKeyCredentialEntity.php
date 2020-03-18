@@ -35,7 +35,7 @@
 namespace OCA\TwoFactorWebauthn\Db;
 
 use OCP\AppFramework\Db\Entity;
-use Ramsey\Uuid\UuidFactory;
+use Ramsey\Uuid\Uuid;
 use Webauthn\PublicKeyCredentialSource;
 use Webauthn\TrustPath\TrustPathLoader;
 
@@ -107,7 +107,7 @@ class PublicKeyCredentialEntity extends Entity
         $publicKeyCredentialEntity->setTransports(json_encode($publicKeyCredentialSource->getTransports()));
         $publicKeyCredentialEntity->setAttestationType($publicKeyCredentialSource->getAttestationType());
         $publicKeyCredentialEntity->setTrustPath(json_encode($publicKeyCredentialSource->getTrustPath()->jsonSerialize()));
-        $publicKeyCredentialEntity->setAaguid($publicKeyCredentialSource->getAaguid());
+        $publicKeyCredentialEntity->setAaguid($publicKeyCredentialSource->getAaguid()->getBytes());
         $publicKeyCredentialEntity->setCredentialPublicKey(base64_encode($publicKeyCredentialSource->getCredentialPublicKey()));
         $publicKeyCredentialEntity->setUserHandle($publicKeyCredentialSource->getUserHandle());
         $publicKeyCredentialEntity->setCounter($publicKeyCredentialSource->getCounter());
@@ -117,14 +117,13 @@ class PublicKeyCredentialEntity extends Entity
 
     function toPublicKeyCredentialSource(): PublicKeyCredentialSource
     {
-        $uuidFactory = new UuidFactory();
         return new PublicKeyCredentialSource(
             base64_decode($this->publicKeyCredentialId),
             $this->type,
             json_decode($this->transports),
             $this->attestationType,
             TrustPathLoader::loadTrustPath((array)json_decode($this->trustPath)),
-            $uuidFactory->fromString($this->aaguid),
+            Uuid::fromBytes($this->aaguid),
             base64_decode($this->credentialPublicKey),
             $this->userHandle,
             $this->counter

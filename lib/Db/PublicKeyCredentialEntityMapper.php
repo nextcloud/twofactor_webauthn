@@ -34,7 +34,6 @@
 
 namespace OCA\TwoFactorWebauthn\Db;
 
-use mysql_xdevapi\Exception;
 use OCP\AppFramework\Db\Entity;
 use OCP\AppFramework\Db\QBMapper;
 use OCP\IDBConnection;
