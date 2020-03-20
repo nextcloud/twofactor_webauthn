@@ -139,16 +139,16 @@
         },
         {
             "name": "league/uri",
-            "version": "6.2.0",
+            "version": "6.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/uri.git",
-                "reference": "7b29ca33b287b4277d5ce7c26bc1be5d4118b484"
+                "reference": "6998530902550c6e3fefb5ef98d56fe92ecdb603"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/uri/zipball/7b29ca33b287b4277d5ce7c26bc1be5d4118b484",
-                "reference": "7b29ca33b287b4277d5ce7c26bc1be5d4118b484",
+                "url": "https://api.github.com/repos/thephpleague/uri/zipball/6998530902550c6e3fefb5ef98d56fe92ecdb603",
+                "reference": "6998530902550c6e3fefb5ef98d56fe92ecdb603",
                 "shasum": ""
             },
             "require": {
@@ -165,7 +165,7 @@
                 "phpstan/phpstan": "^0.12",
                 "phpstan/phpstan-phpunit": "^0.12",
                 "phpstan/phpstan-strict-rules": "^0.12",
-                "phpunit/phpunit": "^7.0 | ^8.0"
+                "phpunit/phpunit": "^8.0"
             },
             "suggest": {
                 "ext-fileinfo": "Needed to create Data URI from a filepath",
@@ -217,7 +217,7 @@
                 "url",
                 "ws"
             ],
-            "time": "2020-02-08T16:31:57+00:00"
+            "time": "2020-03-17T14:40:17+00:00"
         },
         {
             "name": "league/uri-components",
