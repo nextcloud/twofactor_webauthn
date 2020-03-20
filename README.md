@@ -1,6 +1,10 @@
 # Twofactor Webauthn
 Place this app in **nextcloud/apps/**
 
+## Warning
+
+This twofactor provider is not ready for production environments. There can be breaking changes which lead to losing all configured webauthn devices for all users. Keep this in mind when using this provider.
+
 ## Usage
 
 ### Activation/Deactivation of devices
