@@ -45,7 +45,7 @@ use OCP\Migration\SimpleMigrationStep;
 use OCP\Migration\IOutput;
 use Ramsey\Uuid;
 
-class Version000201Date20200318191500 extends SimpleMigrationStep {
+class Version000202Date20200320192700 extends SimpleMigrationStep {
 
 	/** @var IDBConnection */
 	protected $connection;
@@ -66,18 +66,29 @@ class Version000201Date20200318191500 extends SimpleMigrationStep {
 	public function preSchemaChange(IOutput $output, \Closure $schemaClosure, array $options) {
 		$qb = $this->connection->getQueryBuilder();
 
-        $cursor = $qb->select(array('id', 'aaguid'))
+        $cursor = $qb->select(array('id', 'name', 'aaguid', 'user_handle'))
            ->from('twofactor_webauthn_registrations')
-		   ->where('LENGTH(aaguid) <> 16')
+		   ->where('LENGTH(aaguid) <> 16 OR aaguid IS NULL')
 		   ->execute();
 
         while($row = $cursor->fetch()){
             $qb->update('twofactor_webauthn_registrations')
-                ->set('aaguid', $qb->createNamedParameter(Uuid\Uuid::fromString($row['aaguid'])->getBytes()))
+                ->set('aaguid', $qb->createNamedParameter($this->getBytes($output, $row)))
                 ->where('id = :id')
 				->setParameter('id', $row['id'])
 				->execute();
         }
+	}
+
+	private function getBytes(IOutput $output, array $row) {
+		try {
+			return Uuid\Uuid::fromString($row['aaguid'])->getBytes();
+		} catch(\Exception $e) {
+			$name = $row['name'];
+			$user_handle = $row['user_handle'];
+			$output->warning("replacing faulty aaguid for device $name from user $user_handle");
+			return "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0";
+		}
 	}
 
 	/**
