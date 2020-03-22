@@ -107,7 +107,7 @@ class PublicKeyCredentialEntity extends Entity
         $publicKeyCredentialEntity->setTransports(json_encode($publicKeyCredentialSource->getTransports()));
         $publicKeyCredentialEntity->setAttestationType($publicKeyCredentialSource->getAttestationType());
         $publicKeyCredentialEntity->setTrustPath(json_encode($publicKeyCredentialSource->getTrustPath()->jsonSerialize()));
-        $publicKeyCredentialEntity->setAaguid($publicKeyCredentialSource->getAaguid()->getBytes());
+        $publicKeyCredentialEntity->setAaguid($publicKeyCredentialSource->getAaguid()->toString());
         $publicKeyCredentialEntity->setCredentialPublicKey(base64_encode($publicKeyCredentialSource->getCredentialPublicKey()));
         $publicKeyCredentialEntity->setUserHandle($publicKeyCredentialSource->getUserHandle());
         $publicKeyCredentialEntity->setCounter($publicKeyCredentialSource->getCounter());
@@ -123,7 +123,7 @@ class PublicKeyCredentialEntity extends Entity
             json_decode($this->transports),
             $this->attestationType,
             TrustPathLoader::loadTrustPath((array)json_decode($this->trustPath)),
-            Uuid::fromBytes($this->aaguid),
+            Uuid::fromString($this->aaguid),
             base64_decode($this->credentialPublicKey),
             $this->userHandle,
             $this->counter
