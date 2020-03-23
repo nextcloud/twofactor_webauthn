@@ -69,9 +69,11 @@ class Version000203Date20200322200200 extends SimpleMigrationStep {
 
 		$table = $schema->getTable('twofactor_webauthn_registrations');
 
-		$table->addColumn('aaguid_transform', 'string', [
-			'notnull' => false
-		]);
+		if (!$table->hasColumn('aaguid_transform')) {
+			$table->addColumn('aaguid_transform', 'string', [
+				'notnull' => false
+			]);
+		}
 
 		return $schema;
 	}
@@ -90,8 +92,9 @@ class Version000203Date20200322200200 extends SimpleMigrationStep {
 		   ->execute();
 
         while($row = $cursor->fetch()){
-            $qb->update('twofactor_webauthn_registrations')
-                ->set('aaguid_transform', $qb->createNamedParameter($this->getUuidString($output, $row)))
+			$updater = $this->connection->getQueryBuilder();
+            $updater->update('twofactor_webauthn_registrations')
+                ->set('aaguid_transform', $updater->createNamedParameter($this->getUuidString($output, $row)))
                 ->where('id = :id')
 				->setParameter('id', $row['id'])
 				->execute();
