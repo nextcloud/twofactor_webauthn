@@ -29,6 +29,7 @@ If applicable, add screenshots to help explain your problem.
  - PHP Version:
  - Database with Version:
  - Browser with Version:
+ - OS:
 
 **Webauthn Devices**
 Please list here your webauthn devices, which relate to the issue, eg:
