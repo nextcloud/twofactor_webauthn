@@ -5,7 +5,7 @@
     <name>Two-Factor Webauthn</name>
     <summary>Webauthn two-factor provider</summary>
     <description>A two-factor provider for webauthn devices</description>
-    <version>0.2.5</version>
+    <version>0.2.6</version>
     <licence>agpl</licence>
     <author>Michael Blumenstein</author>
     <namespace>TwoFactorWebauthn</namespace>
@@ -23,7 +23,7 @@
         <database>mysql</database>
         <database>pgsql</database>
         <lib>gmp</lib>
-        <nextcloud min-version="16" max-version="19" />
+        <nextcloud min-version="16" max-version="20" />
     </dependencies>
 
     <two-factor-providers>
