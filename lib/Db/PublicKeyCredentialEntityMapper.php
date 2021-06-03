@@ -128,12 +128,13 @@ class PublicKeyCredentialEntityMapper extends QBMapper
         return $this->findEntities($qb);
     }
 
-    public function insert(Entity $entity): Entity {
+    public function insertOrUpdate(Entity $entity): Entity {
         $publicKeyCredentialEntity = $this->findPublicKeyCredential($entity->getPublicKeyCredentialId());
         if ($publicKeyCredentialEntity !== null) {
             $entity->setId($publicKeyCredentialEntity->getId());
+            return parent::update($entity);
+        } else {
+            return parent::insert($entity);
         }
-
-        return parent::insert($entity);
     }
 }
