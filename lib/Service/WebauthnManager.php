@@ -283,18 +283,21 @@ class WebauthnManager
 
         // List of registered PublicKeyCredentialDescriptor classes associated to the user
         $registeredPublicKeyCredentialDescriptors = array_map(function (PublicKeyCredentialEntity $credential) {
-            return $credential->toPublicKeyCredentialSource()->getPublicKeyCredentialDescriptor()->jsonSerialize();
+            return $credential->toPublicKeyCredentialSource()->getPublicKeyCredentialDescriptor();
         }, $activeDevices);
 
-        // Public Key Credential Request Options
         $publicKeyCredentialRequestOptions = new PublicKeyCredentialRequestOptions(
             random_bytes(32),                                                    // Challenge
             60000,                                                              // Timeout
-            $this->stripPort($serverHost),                                                                  // Relying Party ID
-            $registeredPublicKeyCredentialDescriptors,                                  // Registered PublicKeyCredentialDescriptor classes
-            PublicKeyCredentialRequestOptions::USER_VERIFICATION_REQUIREMENT_PREFERRED, // User verification requirement
+            null,                                                                  // Relying Party ID
+            [],                                  // Registered PublicKeyCredentialDescriptor classes
+            null, // User verification requirement
             $extensions
         );
+        $publicKeyCredentialRequestOptions
+            ->setRpId($this->stripPort($serverHost))
+            ->allowCredentials($registeredPublicKeyCredentialDescriptors)
+            ->setUserVerification(PublicKeyCredentialRequestOptions::USER_VERIFICATION_REQUIREMENT_PREFERRED);
 
         $this->session->set(self::TWOFACTORAUTH_WEBAUTHN_REQUEST, $publicKeyCredentialRequestOptions->jsonSerialize());
 
