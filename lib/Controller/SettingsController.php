@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @author Michael Blumenstein <M.Flower@gmx.de>
  * @copyright Copyright (c) 2019 Michael Blumenstein <M.Flower@gmx.de>

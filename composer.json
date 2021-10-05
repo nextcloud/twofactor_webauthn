@@ -15,7 +15,7 @@
         "slim/slim": "^3.12"
     },
     "require-dev": {
-        "christophwurst/nextcloud": "^21.0",
+        "christophwurst/nextcloud": "22.0.0-RC1",
         "phpunit/phpunit": "^5.4"
     }
 }
