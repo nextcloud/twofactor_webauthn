@@ -45,15 +45,18 @@
 			<strong>
 				{{ t('twofactor_webauthn', 'An error occurred: {msg}', {msg: this.error}) }}
 			</strong>
-			<br>
-			<button class="btn"
+			<button class="btn sign"
 					@click="sign">
 				{{ t('twofactor_webauthn', 'Retry') }}
 			</button>
 		</p>
 		<p id="webauthn-info"
 		   v-else>
-			{{ t('mail', 'Plug in your Webauthn device and press the device button to authorize.') }}
+			{{ t('mail', 'Plug in your Webauthn device and press the button below to begin authorization.') }}
+			<button class="btn sign"
+					@click="sign">
+				{{ t('twofactor_webauthn', 'Use webauthn device') }}
+			</button>
 		</p>
 		<p id="webauthn-error"
 		   style="display: none">
@@ -75,6 +78,13 @@
 </template>
 
 <script>
+    import { TWOFACTOR_WEBAUTHN } from '../constants';
+
+	const debug = (text) => (data) => {
+        console.debug(TWOFACTOR_WEBAUTHN, text, data)
+        return data
+    }
+
 	export default {
 		name: 'Challenge',
 		props: {
@@ -95,8 +105,8 @@
 			}
 		},
 		mounted () {
-			this.sign()
-				.catch(console.error.bind(this))
+			// this.sign()
+			// 	.catch(console.error.bind(this))
 		},
 		methods: {
 			arrayToBase64String(a) {
@@ -121,8 +131,7 @@
 			},
 
 			sign () {
-				console.debug('Starting webauthn authentication', this.req)
-
+				console.trace('sign');
 				this.error = undefined;
 
 				const publicKey = this.publicKey;
@@ -135,7 +144,11 @@
 					}));
 				}
 
+
+				console.debug(TWOFACTOR_WEBAUTHN, 'Starting webauthn authentication', this.publicKey)
+
 				return navigator.credentials.get({publicKey})
+						.then(debug('got credentials'))
 						.then(data => {
 							return {
 								id: data.id,
@@ -149,6 +162,7 @@
 								}
 							};
 						})
+						.then(debug('mapped credentials'))
 						.then(challenge => {
 							this.challenge = JSON.stringify(challenge)
 
@@ -156,7 +170,9 @@
 								this.$refs.challengeForm.submit()
 							})
 						})
+						.then(debug('submitted challengeForm'))
 						.catch(error => {
+							this.error = error;
 							console.log(error); // Example: timeout, interaction refused...
 							window.location = window.location.href.replace('challenge/twofactor_webauthn', 'selectchallenge');
 						});
@@ -164,3 +180,9 @@
 		}
 	}
 </script>
+
+<style scoped>
+    .sign {
+        margin-top: 1em;
+    }
+</style>

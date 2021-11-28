@@ -77,7 +77,7 @@
         finishRegistration
     } from '../services/RegistrationService'
 
-    const TWOFACTOR_WEBAUTHN = '[twofactor_webauthn]';
+    import { TWOFACTOR_WEBAUTHN } from '../constants';
 
     const debug = (text) => (data) => {
         console.debug(TWOFACTOR_WEBAUTHN, text, data)

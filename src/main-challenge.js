@@ -35,12 +35,14 @@ import Vue from 'vue'
 
 import Nextcloud from './mixins/Nextcloud'
 
+import { TWOFACTOR_WEBAUTHN } from './constants';
+
 Vue.mixin(Nextcloud);
 
 const initialStateElement = document.getElementById('twofactor-webauthn-publicKey');
 const publicKey = JSON.parse(initialStateElement.value);
 
-console.debug('Loaded initial state of the webauthn challenge page', publicKey);
+console.debug(TWOFACTOR_WEBAUTHN, 'Loaded initial state of the webauthn challenge page', publicKey);
 
 import Challenge from './components/Challenge'
 
