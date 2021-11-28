@@ -1,6 +1,10 @@
 # Twofactor Webauthn
 Place this app in **nextcloud/apps/**
 
+## This project is only for the twofactor webauthn provider
+
+As i got some issues related to the passwordless webauthn authentication feature of nextcloud, i have to mention that this project ist not related to this feature. This project only covers the twofactor webauthn provider. If you are interested the passwordless authentication feature, please refer to https://github.com/nextcloud/server
+
 ## Warning
 
 This twofactor provider is not ready for production environments. There can be breaking changes which lead to losing all configured webauthn devices for all users. Keep this in mind when using this provider.
