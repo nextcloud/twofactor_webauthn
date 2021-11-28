@@ -5,7 +5,7 @@
     <name>Two-Factor Webauthn</name>
     <summary>Webauthn two-factor provider</summary>
     <description>A two-factor provider for webauthn devices</description>
-    <version>0.2.11</version>
+    <version>0.2.12</version>
     <licence>agpl</licence>
     <author>Michael Blumenstein</author>
     <namespace>TwoFactorWebauthn</namespace>

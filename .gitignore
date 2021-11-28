@@ -12,3 +12,5 @@ composer.phar
 
 /tests/clover.xml
 .vscode/launch.json
+
+workspace.code-workspace

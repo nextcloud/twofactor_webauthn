@@ -35,6 +35,11 @@
         <button
                 v-on:click="start">{{ t('twofactor_webauthn', 'Add Webauthn device') }}
         </button>
+        <p v-if="errorMessage" class="error-message">
+		    <span class="icon icon-error" />
+            {{ errorMessage }}
+            
+        </p>
     </div>
 
     <div v-else-if="step === RegistrationSteps.REGISTRATION"
@@ -72,8 +77,10 @@
         finishRegistration
     } from '../services/RegistrationService'
 
-    const logAndPass = (text) => (data) => {
-        console.debug(text)
+    const TWOFACTOR_WEBAUTHN = '[twofactor_webauthn]';
+
+    const debug = (text) => (data) => {
+        console.debug(TWOFACTOR_WEBAUTHN, text, data)
         return data
     }
 
@@ -95,6 +102,7 @@
                 credential: {},
                 RegistrationSteps,
                 step: RegistrationSteps.READY,
+                errorMessage: null
             }
         },
         methods: {
@@ -121,6 +129,8 @@
             },
             
             start() {
+                this.errorMessage = null;
+                console.info(TWOFACTOR_WEBAUTHN, 'Starting to add a new twofactor webauthn device');
                 this.step = RegistrationSteps.REGISTRATION
 
                 return confirmPassword()
@@ -128,7 +138,8 @@
                     .then(this.register.bind(this))
                     .then(() => this.step = RegistrationSteps.NAMING)
                     .catch(err => {
-                        console.error(err.name, err.message);
+                        console.error(TWOFACTOR_WEBAUTHN, err.name, err.message);
+                        this.errorMessage = err.message;
                         this.step = RegistrationSteps.READY;
                     })
             },
@@ -147,15 +158,16 @@
                         return publicKey;
                     })
                     .catch(err => {
-                        console.error('Error getting webauthn registration data from server', err)
-                        throw new Error(t('twofactor_webauthn', 'Server error while trying to add webauthn device'))
+                        console.error(TWOFACTOR_WEBAUTHN, 'getRegistrationData', 'Error getting webauthn registration data from server', err);
+                        throw new Error(t(TWOFACTOR_WEBAUTHN, 'Server error while trying to add webauthn device'));
                     })
             },
 
             register(publicKey) {
-                console.debug('starting webauthn registration');
+                console.debug(TWOFACTOR_WEBAUTHN, 'starting webauthn registration');
 
                 return navigator.credentials.create({publicKey})
+                    .then(debug('navigator.credentials.create called'))
                     .then(data => {
                         this.credential = {
                             id: data.id,
@@ -166,6 +178,11 @@
                                 attestationObject: this.arrayToBase64String(new Uint8Array(data.response.attestationObject))
                             }
                         }
+                    })
+                    .then(debug('mapped credentials data'))
+                    .catch(err => {
+                        console.error(TWOFACTOR_WEBAUTHN, 'register', 'Error creating credentials', err);
+                        throw err;
                     });
             },
 
@@ -173,20 +190,23 @@
                 this.step = RegistrationSteps.PERSIST
 
                 return confirmPassword()
-                    .then(logAndPass('confirmed password'))
                     .then(this.saveRegistrationData)
-                    .then(logAndPass('registration data saved'))
+                    .then(debug('registration data saved'))
                     .then(() => this.reset())
-                    .then(logAndPass('app reset'))
-                    .catch(console.error.bind(this))
+                    .then(debug('app reset'))
+                    .catch(err => {
+                        console.error(TWOFACTOR_WEBAUTHN, err);
+                        this.errorMessage = err.message;
+                        this.step = RegistrationSteps.READY;
+                    });
             },
 
             saveRegistrationData() {
                 return finishRegistration(this.name, JSON.stringify(this.credential))
                     .then(device => this.$store.commit('addDevice', device))
-                    .then(logAndPass('new device added to store'))
+                    .then(debug('new device added to store'))
                     .catch(err => {
-                        console.error('Error persisting webauthn registration', err);
+                        console.error(TWOFACTOR_WEBAUTHN, 'Error persisting webauthn registration', err);
                         throw new Error(t('twofactor_webauthn', 'Server error while trying to complete webauthn device registration'))
                     })
             },
@@ -210,5 +230,9 @@
 
     .new-webauthn-device {
         line-height: 300%;
+    }
+
+    .error-message {
+        color: var(--color-error);
     }
 </style>
