@@ -8,8 +8,13 @@
             "name": "Michael Blumenstein"
         }
     ],
+    "config": {
+        "platform": {
+            "php": "7.3.0"
+        }
+    },
     "require": {
-        "php": ">=7.1.0",
+        "php": ">=7.3.0",
         "web-auth/webauthn-lib": "^3.0",
         "ext-json": "*",
         "slim/slim": "^3.12"
