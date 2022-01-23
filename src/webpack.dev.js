@@ -30,10 +30,10 @@
  * The webauthn-framework provided most of the code and documentation for implementing the webauthn authentication.
  */
 
-const merge = require('webpack-merge');
-const common = require('./webpack.common.js');
+const merge = require("webpack-merge").merge;
+const common = require("./webpack.common.js");
 
 module.exports = merge(common, {
-  mode: 'development',
-  devtool: 'source-map',
-})
+  mode: "development",
+  devtool: "source-map",
+});
