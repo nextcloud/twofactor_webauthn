@@ -36,4 +36,8 @@
 			<provider>OCA\TwoFactorWebauthn\Activity\Provider</provider>
 		</providers>
 	</activity>
+
+	<commands>
+		<command>OCA\TwoFactorWebauthn\Command\MigrateU2F</command>
+	</commands>
 </info>
