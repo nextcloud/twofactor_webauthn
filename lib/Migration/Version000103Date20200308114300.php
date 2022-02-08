@@ -1,8 +1,12 @@
+<?php
+
+declare(strict_types=1);
+
 /*
  * @copyright 2022 Christoph Wurst <christoph@winzerhof-wurst.at>
  *
+ * @author Christoph Wurst <christoph@winzerhof-wurst.at>
  * @author Michael Blumenstein <M.Flower@gmx.de>
- * @author 2022 Christoph Wurst <christoph@winzerhof-wurst.at>
  *
  * @license GNU AGPL version 3 or any later version
  *
@@ -20,31 +24,33 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-require('jsdom-global')()
+namespace OCA\TwoFactorWebauthn\Migration;
 
-const t = (app, str) => str
+use Closure;
+use OCP\DB\ISchemaWrapper;
+use OCP\Migration\SimpleMigrationStep;
+use OCP\Migration\IOutput;
 
-require('vue').mixin({
-	methods: {
-		t
-	}
-})
+class Version000103Date20200308114300 extends SimpleMigrationStep {
 
-global.expect = require('chai').expect
-global.OC = {
-	getCurrentUser: () => {
-		return { uid: false }
-	},
-	isUserAdmin() {
-		return false
-	},
-	getLanguage() {
-		return 'en'
+	/**
+	 * @param IOutput $output
+	 * @param Closure $schemaClosure The `\Closure` returns a `ISchemaWrapper`
+	 * @param array $options
+	 * @return null|ISchemaWrapper
+	 */
+	public function changeSchema(IOutput $output, Closure $schemaClosure, array $options) {
+		/** @var ISchemaWrapper $schema */
+		$schema = $schemaClosure();
+
+		$table = $schema->getTable('twofactor_webauthn_registrations');
+
+		$table->addColumn('active', 'boolean', [
+			'notnull' => true,
+			'default' => true,
+		]);
+
+
+		return $schema;
 	}
 }
-global.t = t
-
-// https://github.com/vuejs/vue-test-utils/issues/936
-// better fix for "TypeError: Super expression must either be null or
-// a function" than pinning an old version of prettier.
-window.Date = Date

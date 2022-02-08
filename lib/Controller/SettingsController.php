@@ -2,21 +2,31 @@
 
 declare(strict_types = 1);
 
-/**
- * Nextcloud - U2F 2FA
- *
- * This file is licensed under the Affero General Public License version 3 or
- * later. See the COPYING file.
+/*
+ * @copyright 2022 Christoph Wurst <christoph@winzerhof-wurst.at>
  *
  * @author Christoph Wurst <christoph@winzerhof-wurst.at>
- * @copyright Christoph Wurst 2018
+ * @author Michael Blumenstein <M.Flower@gmx.de>
+ *
+ * @license GNU AGPL version 3 or any later version
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace OCA\TwoFactorU2F\Controller;
+namespace OCA\TwoFactorWebauthn\Controller;
 
-require_once(__DIR__ . '/../../vendor/yubico/u2flib-server/src/u2flib_server/U2F.php');
-
-use OCA\TwoFactorU2F\Service\U2FManager;
+use OCA\TwoFactorWebauthn\Service\WebauthnManager;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\Authentication\TwoFactorAuth\ALoginSetupController;
 use OCP\IRequest;
@@ -24,25 +34,16 @@ use OCP\IUserSession;
 
 class SettingsController extends ALoginSetupController {
 
-	/** @var U2FManager */
+	/** @var WebauthnManager */
 	private $manager;
 
 	/** @var IUserSession */
 	private $userSession;
 
-	public function __construct(string $appName, IRequest $request, U2FManager $manager, IUserSession $userSession) {
+	public function __construct(string $appName, IRequest $request, WebauthnManager $manager, IUserSession $userSession) {
 		parent::__construct($appName, $request);
 		$this->manager = $manager;
 		$this->userSession = $userSession;
-	}
-
-	/**
-	 * @NoAdminRequired
-	 */
-	public function state(): JSONResponse {
-		return new JSONResponse([
-			'devices' => $this->manager->getDevices($this->userSession->getUser())
-		]);
 	}
 
 	/**
@@ -51,28 +52,31 @@ class SettingsController extends ALoginSetupController {
 	 * @UseSession
 	 */
 	public function startRegister(): JSONResponse {
-		return new JSONResponse($this->manager->startRegistration($this->userSession->getUser()));
+		return new JSONResponse($this->manager->startRegistration($this->userSession->getUser(), $this->request->getServerHost()));
 	}
 
 	/**
 	 * @NoAdminRequired
 	 * @PasswordConfirmationRequired
 	 *
-	 * @param string $registrationData
-	 * @param string $clientData
-	 * @param string|null $name device name, given by user
+	 * @param string $name
+	 * @param string $name
 	 */
-	public function finishRegister(string $registrationData, string $clientData, string $name = null): JSONResponse {
-		return new JSONResponse($this->manager->finishRegistration($this->userSession->getUser(), $registrationData, $clientData, $name));
+	public function finishRegister(string $name, string $data): JSONResponse {
+		return new JSONResponse($this->manager->finishRegister($this->userSession->getUser(), $name, $data));
 	}
 
 	/**
 	 * @NoAdminRequired
 	 * @PasswordConfirmationRequired
 	 *
-	 * @param int $id
+	 * @param string $id
 	 */
-	public function remove(int $id): JSONResponse {
+	public function remove(string $id): JSONResponse {
 		return new JSONResponse($this->manager->removeDevice($this->userSession->getUser(), $id));
+	}
+
+	public function changeActivationState(string $id, int $active): JSONResponse {
+		return new JSONResponse($this->manager->changeActivationState($this->userSession->getUser(), $id, $active));
 	}
 }

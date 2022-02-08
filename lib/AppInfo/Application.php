@@ -2,27 +2,41 @@
 
 declare(strict_types=1);
 
-/**
- * Nextcloud - U2F 2FA
- *
- * This file is licensed under the Affero General Public License version 3 or
- * later. See the COPYING file.
+/*
+ * @copyright 2022 Christoph Wurst <christoph@winzerhof-wurst.at>
  *
  * @author Christoph Wurst <christoph@winzerhof-wurst.at>
- * @copyright Christoph Wurst 2018
+ * @author Michael Blumenstein <M.Flower@gmx.de>
+ *
+ * @license GNU AGPL version 3 or any later version
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace OCA\TwoFactorU2F\AppInfo;
+namespace OCA\TwoFactorWebauthn\AppInfo;
 
-use OCA\TwoFactorU2F\Event\DisabledByAdmin;
-use OCA\TwoFactorU2F\Event\StateChanged;
-use OCA\TwoFactorU2F\Listener\StateChangeActivity;
-use OCA\TwoFactorU2F\Listener\StateChangeRegistryUpdater;
+use OCA\TwoFactorWebauthn\Event\DisabledByAdmin;
+use OCA\TwoFactorWebauthn\Event\StateChanged;
+use OCA\TwoFactorWebauthn\Listener\StateChangeActivity;
+use OCA\TwoFactorWebauthn\Listener\StateChangeRegistryUpdater;
 use OCP\AppFramework\App;
 use OCP\EventDispatcher\IEventDispatcher;
 
+require_once __DIR__ . '/../../vendor/autoload.php';
+
 class Application extends App {
-	public const APP_ID = 'twofactor_u2f';
+	public const APP_ID = 'twofactor_webauthn';
 
 	public function __construct(array $urlParams = []) {
 		parent::__construct(self::APP_ID, $urlParams);

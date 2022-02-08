@@ -24,12 +24,39 @@ declare(strict_types=1);
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace OCA\TwoFactorWebauthn\Event;
+namespace OCA\TwoFactorWebauthn\Migration;
 
-use OCP\IUser;
+use Closure;
+use OCP\DB\ISchemaWrapper;
+use OCP\IDBConnection;
+use OCP\Migration\SimpleMigrationStep;
+use OCP\Migration\IOutput;
 
-class DisabledByAdmin extends StateChanged {
-	public function __construct(IUser $user) {
-		parent::__construct($user, false);
+class Version000203Date20200322200700 extends SimpleMigrationStep {
+
+	/** @var IDBConnection */
+	protected $connection;
+
+	/**
+	 * @param IDBConnection $connection
+	 */
+	public function __construct(IDBConnection $connection) {
+		$this->connection = $connection;
+	}
+
+	/**
+	 * @param IOutput $output
+	 * @param Closure $schemaClosure The `\Closure` returns a `ISchemaWrapper`
+	 * @param array $options
+	 * @return null|ISchemaWrapper
+	 */
+	public function changeSchema(IOutput $output, Closure $schemaClosure, array $options) {
+		$schema = $schemaClosure();
+
+		$table = $schema->getTable('twofactor_webauthn_registrations');
+
+		$table->dropColumn('aaguid');
+
+		return $schema;
 	}
 }

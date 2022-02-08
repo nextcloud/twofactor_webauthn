@@ -1,39 +1,39 @@
 <?xml version="1.0"?>
 <info xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://apps.nextcloud.com/schema/apps/info.xsd">
-	<id>twofactor_u2f</id>
-	<name>Two-Factor U2F</name>
-	<summary>U2F two-factor provider</summary>
-	<description>A two-factor provider for U2F devices</description>
-	<version>6.3.0-RC.1</version>
+	<id>twofactor_webauthn</id>
+	<name>Two-Factor Webauthn</name>
+	<summary>Webauthn two-factor provider</summary>
+	<description>A two-factor provider for webauthn devices</description>
+	<version>0.2.15</version>
 	<licence>agpl</licence>
 	<author>Christoph Wurst</author>
-	<namespace>TwoFactorU2F</namespace>
+	<author>Michael Blumenstein</author>
+	<namespace>TwoFactorWebauthn</namespace>
 	<category>security</category>
 
-	<website>https://github.com/nextcloud/twofactor_u2f#readme</website>
-	<bugs>https://github.com/nextcloud/twofactor_u2f/issues</bugs>
-	<repository type="git">https://github.com/nextcloud/twofactor_u2f.git</repository>
-	<screenshot>https://raw.githubusercontent.com/nextcloud/twofactor_u2f/4e0542d888236b7f212bed0b536244d08803466f/screenshots/challenge.png</screenshot>
-	<screenshot>https://raw.githubusercontent.com/nextcloud/twofactor_u2f/4e0542d888236b7f212bed0b536244d08803466f/screenshots/settings.png</screenshot>
+	<website>https://github.com/nextcloud/twofactor_webauthn#readme</website>
+	<bugs>https://github.com/nextcloud/twofactor_webauthn/issues</bugs>
+	<repository>https://github.com/nextcloud/twofactor_webauthn.git</repository>
 
 	<dependencies>
-		<php min-version="7.3" max-version="8.0"/>
+		<php min-version="7.3" max-version="8.1"/>
 		<database>sqlite</database>
 		<database>mysql</database>
 		<database>pgsql</database>
-		<nextcloud min-version="20" max-version="23" />
+		<lib>gmp</lib>
+		<nextcloud min-version="21" max-version="24" />
 	</dependencies>
 
 	<two-factor-providers>
-		<provider>OCA\TwoFactorU2F\Provider\U2FProvider</provider>
+		<provider>OCA\TwoFactorWebauthn\Provider\WebauthnProvider</provider>
 	</two-factor-providers>
 
 	<activity>
 		<settings>
-			<setting>OCA\TwoFactorU2F\Activity\Setting</setting>
+			<setting>OCA\TwoFactorWebauthn\Activity\Setting</setting>
 		</settings>
 		<providers>
-			<provider>OCA\TwoFactorU2F\Activity\Provider</provider>
+			<provider>OCA\TwoFactorWebauthn\Activity\Provider</provider>
 		</providers>
 	</activity>
 </info>

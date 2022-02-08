@@ -1,7 +1,8 @@
 <!--
-  - @copyright 2018 Christoph Wurst <christoph@winzerhof-wurst.at>
+  - @copyright 2022 Christoph Wurst <christoph@winzerhof-wurst.at>
   -
-  - @author 2018 Christoph Wurst <christoph@winzerhof-wurst.at>
+  - @author Michael Blumenstein <M.Flower@gmx.de>
+  - @author 2022 Christoph Wurst <christoph@winzerhof-wurst.at>
   -
   - @license GNU AGPL version 3 or any later version
   -
@@ -20,37 +21,33 @@
   -->
 
 <template>
-	<div class="u2f-device" :data-u2f-id="id">
-		<span class="icon-u2f-device"></span>
-		{{name || t('twofactor_u2f', 'Unnamed device') }}
-		<span class="more">
-			<Actions :forceMenu="true">
-				<ActionButton icon="icon-delete" @click="onDelete">
-					{{ t('twofactor_u2f', 'Remove') }}
-				</ActionButton>
-			</Actions>
-		</span>
+	<div class="webauthn-device" :data-webauthn-id="id">
+		<span class="icon-webauthn-device" v-bind:class="{ disabled: !active }" ></span>
+		{{ name || t('twofactor_webauthn', 'Unnamed device') }}
+		<Actions>
+			<ActionButton icon="icon-delete" @click="onDelete" :close-after-click="true">{{ t('twofactor_webauthn', 'Remove') }}</ActionButton>
+			<ActionCheckbox :checked="active" @update:checked="changeActivation">{{ t('twofactor_webauthn', 'Active') }}</ActionCheckbox>
+		</Actions>
 	</div>
 </template>
 
 <script>
-	import ClickOutside from 'vue-click-outside'
-	import confirmPassword from '@nextcloud/password-confirmation'
-	import Actions from '@nextcloud/vue/dist/Components/Actions'
-	import ActionButton from '@nextcloud/vue/dist/Components/ActionButton'
+	import Actions from '@nextcloud/vue/dist/Components/Actions';
+	import ActionButton from '@nextcloud/vue/dist/Components/ActionButton';
+	import ActionCheckbox from '@nextcloud/vue/dist/Components/ActionCheckbox';
+	import confirmPassword from '@nextcloud/password-confirmation';
 
 	export default {
 		name: 'Device',
 		props: {
-			id: Number,
+			id: String,
 			name: String,
+			active: Boolean
 		},
 		components: {
-			ActionButton,
 			Actions,
-		},
-		directives: {
-			ClickOutside
+			ActionButton,
+			ActionCheckbox
 		},
 		methods: {
 			async onDelete() {
@@ -60,31 +57,26 @@
 				} catch (e) {
 					console.error('could not delete device', e)
 				}
+			},
+			async changeActivation (active) {
+				await confirmPassword()
+				try {
+					this.$store.dispatch('changeActivationState', { id: this.id, active })
+				} catch (e) {
+					console.error('could not change device state', e)
+				}
 			}
 		}
 	}
 </script>
 
 <style scoped>
-	.u2f-device {
+	.webauthn-device {
 		line-height: 300%;
 		display: flex;
 	}
 
-	.u2f-device .more {
-		position: relative;
-	}
-
-	.u2f-device .more .icon-more {
-		display: inline-block;
-		width: 16px;
-		height: 16px;
-		padding-left: 20px;
-		vertical-align: middle;
-		opacity: .7;
-	}
-
-	.icon-u2f-device {
+	.icon-webauthn-device {
 		display: inline-block;
 		background-size: 100%;
 		padding: 3px;

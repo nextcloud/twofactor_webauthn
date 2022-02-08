@@ -1,18 +1,18 @@
 /**
- * Nextcloud - U2F 2FA
+ * Nextcloud - WebAuthn 2FA
  *
  * This file is licensed under the Affero General Public License version 3 or
  * later. See the COPYING file.
  *
  * @author Christoph Wurst <christoph@winzerhof-wurst.at>
- * @copyright Christoph Wurst 2016
+ * @author Michael Blumenstein <M.Flower@gmx.de>
  */
 
 /** icons for personal page settings **/
-.nav-icon-u2f-second-factor-auth, .icon-u2f-device {
+.nav-icon-webauthn-second-factor-auth, .icon-webauthn-device {
 	background-image: url('../img/app-dark.svg?v=1');
 }
 
-#u2f-http-warning {
+#webauthn-http-warning {
 	color: var(--color-warning);
 }

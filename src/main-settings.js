@@ -1,7 +1,8 @@
 /*
- * @copyright 2018 Christoph Wurst <christoph@winzerhof-wurst.at>
+ * @copyright 2022 Christoph Wurst <christoph@winzerhof-wurst.at>
  *
- * @author 2018 Christoph Wurst <christoph@winzerhof-wurst.at>
+ * @author Michael Blumenstein <M.Flower@gmx.de>
+ * @author 2022 Christoph Wurst <christoph@winzerhof-wurst.at>
  *
  * @license GNU AGPL version 3 or any later version
  *
@@ -19,15 +20,16 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import { loadState } from '@nextcloud/initial-state'
 import store from './store'
 import Vue from 'vue'
 
 import Nextcloud from './mixins/Nextcloud'
-import { loadState } from '@nextcloud/initial-state'
+import PersonalSettings from './components/PersonalSettings';
 
-Vue.mixin(Nextcloud)
+Vue.mixin(Nextcloud);
 
-const devices = loadState('twofactor_u2f', 'devices');
+const devices = loadState('twofactor_webauthn', 'devices');
 devices.sort((d1, d2) => {
 	if (!d1.name) {
 		return 1
@@ -41,12 +43,10 @@ store.replaceState({
 	devices
 })
 
-import PersonalSettings from './components/PersonalSettings'
-
-const View = Vue.extend(PersonalSettings)
+const View = Vue.extend(PersonalSettings);
 new View({
-	propsData: {
-		httpWarning: document.location.protocol !== 'https:',
-	},
-	store,
-}).$mount('#twofactor-u2f-settings')
+    propsData: {
+        httpWarning: document.location.protocol !== 'https:',
+    },
+    store,
+}).$mount('#twofactor-webauthn-settings');

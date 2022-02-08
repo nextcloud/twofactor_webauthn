@@ -1,17 +1,21 @@
 {
-	"name": "christophwurst/twofactor_u2f",
-	"description": "A two factor provider for U2F devices for Nextcloud",
+	"name": "nextcloud/twofactor_webauthn",
+	"description": "A two factor provider for WebAuthn devices for Nextcloud",
 	"type": "project",
 	"license": "agplv3",
 	"authors": [
 		{
-			"name": "Christoph Wurst",
-			"email": "christoph@winzerhof-wurst.at"
+			"name": "Christoph Wurst"
+		},
+		{
+			"name": "Michael Blumenstein"
 		}
 	],
 	"require": {
 		"php": ">=7.3.0",
-		"yubico/u2flib-server": "^1.0.1"
+		"ext-json": "*",
+		"slim/slim": "^3.12",
+		"web-auth/webauthn-lib": "^3.3"
 	},
 	"require-dev": {
 		"phpunit/phpunit": "^9.5.0",
