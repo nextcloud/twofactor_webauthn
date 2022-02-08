@@ -28,6 +28,10 @@
 		<provider>OCA\TwoFactorWebauthn\Provider\WebAuthnProvider</provider>
 	</two-factor-providers>
 
+	<commands>
+		<command>OCA\TwoFactorWebauthn\Command\MigrateU2F</command>
+	</commands>
+
 	<activity>
 		<settings>
 			<setting>OCA\TwoFactorWebauthn\Activity\Setting</setting>

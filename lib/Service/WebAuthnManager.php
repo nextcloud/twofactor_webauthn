@@ -252,6 +252,7 @@ class WebAuthnManager {
 		// Extensions
 		$extensions = new AuthenticationExtensionsClientInputs();
 		$extensions->add(new AuthenticationExtension('loc', true));
+		$extensions->add(new AuthenticationExtension('appid', "https://$serverHost"));
 
 		$activeDevices = array_filter(
 			$this->mapper->findPublicKeyCredentials($user->getUID()),
