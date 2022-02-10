@@ -26,8 +26,8 @@ const t = (app, str) => str
 
 require('vue').mixin({
 	methods: {
-		t
-	}
+		t,
+	},
 })
 
 global.expect = require('chai').expect
@@ -40,7 +40,7 @@ global.OC = {
 	},
 	getLanguage() {
 		return 'en'
-	}
+	},
 }
 global.t = t
 

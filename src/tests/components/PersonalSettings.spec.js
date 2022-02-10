@@ -19,36 +19,36 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import {shallowMount, createLocalVue} from '@vue/test-utils'
+import { shallowMount, createLocalVue } from '@vue/test-utils'
 import Vuex from 'vuex'
 
 import Nextcloud from '../../mixins/Nextcloud'
+
+import PersonalSettings from '../../components/PersonalSettings'
 
 const localVue = createLocalVue()
 
 localVue.use(Vuex)
 localVue.mixin(Nextcloud)
 
-import PersonalSettings from '../../components/PersonalSettings'
-
 describe('Device component', () => {
-	var actions
-	var store
+	let actions
+	let store
 
 	beforeEach(() => {
 		actions = {}
 		store = new Vuex.Store({
 			state: {
-				devices: []
+				devices: [],
 			},
-			actions
+			actions,
 		})
 	})
 
 	it('shows text if no devices are configured', () => {
 		const settings = shallowMount(PersonalSettings, {
 			store,
-			localVue
+			localVue,
 		})
 
 		expect(settings.text()).to.contain('No U2F devices configured')
@@ -57,11 +57,11 @@ describe('Device component', () => {
 	it('shows no info text if devices are configured', () => {
 		store.state.devices.push({
 			id: 1,
-			name: 'a'
+			name: 'a',
 		})
 		const settings = shallowMount(PersonalSettings, {
 			store,
-			localVue
+			localVue,
 		})
 
 		expect(settings.text()).to.not.contain('No U2F devices configured')
@@ -72,8 +72,8 @@ describe('Device component', () => {
 			store,
 			localVue,
 			propsData: {
-				httpWarning: true
-			}
+				httpWarning: true,
+			},
 		})
 
 		expect(settings.text()).to.contain('You are accessing this site via an')

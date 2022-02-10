@@ -21,59 +21,63 @@
   -->
 
 <template>
-    <div>
-        <p v-if="devices.length === 0">{{ t('twofactor_webauthn', 'No Webauthn devices configured. You are not using Webauthn as second factor at the moment.') }}</p>
-        <p v-else>{{ t('twofactor_webauthn', 'The following devices are configured for Webauthn second-factor authentication:') }}</p>
-        <Device v-for="device in devices"
-                :key="device.id"
-                :id="device.id"
-                :name="device.name"
-                :active="device.active"/>
+	<div>
+		<p v-if="devices.length === 0">
+			{{ t('twofactor_webauthn', 'No Webauthn devices configured. You are not using Webauthn as second factor at the moment.') }}
+		</p>
+		<p v-else>
+			{{ t('twofactor_webauthn', 'The following devices are configured for Webauthn second-factor authentication:') }}
+		</p>
+		<Device v-for="device in devices"
+			:id="device.id"
+			:key="device.id"
+			:name="device.name"
+			:active="device.active" />
 
-        <AddDeviceDialog :httpWarning="httpWarning"/>
-        <p v-if="allDeactivated" class="webauthn-warning">
-		    <span class="icon icon-info" />
-            {{ t('twofactor_webauthn', 'All devices are deactivated.') }}
-        </p>
-        <p v-if="notSupported" class="webauthn-warning">
-		    <span class="icon icon-info" />
-            {{ t('twofactor_webauthn', 'Your browser does not support Webauthn.') }}
-        </p>
-        <p v-if="httpWarning" class="webauthn-warning">
-		    <span class="icon icon-info" />
-            {{ t('twofactor_webauthn', 'You are accessing this site via an insecure connection. Browsers might therefore refuse the Webauthn authentication.') }}
-        </p>
-    </div>
+		<AddDeviceDialog :http-warning="httpWarning" />
+		<p v-if="allDeactivated" class="webauthn-warning">
+			<span class="icon icon-info" />
+			{{ t('twofactor_webauthn', 'All devices are deactivated.') }}
+		</p>
+		<p v-if="notSupported" class="webauthn-warning">
+			<span class="icon icon-info" />
+			{{ t('twofactor_webauthn', 'Your browser does not support Webauthn.') }}
+		</p>
+		<p v-if="httpWarning" class="webauthn-warning">
+			<span class="icon icon-info" />
+			{{ t('twofactor_webauthn', 'You are accessing this site via an insecure connection. Browsers might therefore refuse the Webauthn authentication.') }}
+		</p>
+	</div>
 </template>
 
 <script>
 
-    import AddDeviceDialog from './AddDeviceDialog'
-    import Device from './Device'
+import AddDeviceDialog from './AddDeviceDialog'
+import Device from './Device'
 
-    export default {
-        name: "PersonalSettings",
-        data() {
-            return {
-                notSupported: typeof(PublicKeyCredential) === 'undefined'
-            }
-        },
-        props: {
-            httpWarning: Boolean
-        },
-        components: {
-            AddDeviceDialog,
-            Device
-        },
-        computed: {
-            devices() {
-                return this.$store.state.devices
-            },
-            allDeactivated() {
-                return this.$store.state.devices.length > 0 && this.$store.state.devices.every(device => device.active != true);
-            }
-        }
-    }
+export default {
+	name: 'PersonalSettings',
+	components: {
+		AddDeviceDialog,
+		Device,
+	},
+	props: {
+		httpWarning: Boolean,
+	},
+	data() {
+		return {
+			notSupported: typeof (PublicKeyCredential) === 'undefined',
+		}
+	},
+	computed: {
+		devices() {
+			return this.$store.state.devices
+		},
+		allDeactivated() {
+			return this.$store.state.devices.length > 0 && this.$store.state.devices.every(device => !device.active)
+		},
+	},
+}
 </script>
 
 <style scoped>

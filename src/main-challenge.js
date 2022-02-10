@@ -25,22 +25,22 @@ import Vue from 'vue'
 
 import Nextcloud from './mixins/Nextcloud'
 
-import { TWOFACTOR_WEBAUTHN } from './constants';
-
-Vue.mixin(Nextcloud);
-
-const initialStateElement = document.getElementById('twofactor-webauthn-publicKey');
-const publicKey = JSON.parse(initialStateElement.value);
-
-console.debug(TWOFACTOR_WEBAUTHN, 'Loaded initial state of the webauthn challenge page', publicKey);
+import { TWOFACTOR_WEBAUTHN } from './constants'
 
 import Challenge from './components/Challenge'
 
-const View = Vue.extend(Challenge);
+Vue.mixin(Nextcloud)
+
+const initialStateElement = document.getElementById('twofactor-webauthn-publicKey')
+const publicKey = JSON.parse(initialStateElement.value)
+
+console.debug(TWOFACTOR_WEBAUTHN, 'Loaded initial state of the webauthn challenge page', publicKey)
+
+const View = Vue.extend(Challenge)
 new View({
 	propsData: {
 		publicKey,
 		httpWarning: document.location.protocol !== 'https:',
 	},
 	store,
-}).$mount('#twofactor-webauthn-challenge');
+}).$mount('#twofactor-webauthn-challenge')
