@@ -7,7 +7,7 @@ jobs:
       runs-on: ubuntu-latest
       strategy:
           matrix:
-              ocp-version: [ 'v20.0.7', 'v21.0.0', 'dev-stable22', 'dev-stable23', 'dev-master' ]
+              ocp-version: [ v21.0.0', 'dev-stable22', 'dev-stable23', 'dev-master' ]
       name: Nextcloud ${{ matrix.ocp-version }}
       steps:
           - name: Checkout
@@ -16,7 +16,6 @@ jobs:
             uses: shivammathur/setup-php@master
             with:
                 php-version: 7.4
-                tools: composer:v1
                 coverage: none
           - name: Install dependencies
             run: composer i
