@@ -27,6 +27,7 @@
 
 namespace OCA\TwoFactorWebauthn\Repository;
 
+use BadMethodCallException;
 use OCA\TwoFactorWebauthn\Db\PublicKeyCredentialEntity;
 use OCA\TwoFactorWebauthn\Db\PublicKeyCredentialEntityMapper;
 use Webauthn\AttestedCredentialData;
@@ -40,7 +41,6 @@ class WebauthnPublicKeyCredentialSourceRepository implements PublicKeyCredential
 	 */
 	private $publicKeyCredentialEntityMapper;
 
-
 	/**
 	 * WebauthnPublicKeyCredentialSourceRepository constructor.
 	 * @param PublicKeyCredentialEntityMapper $publicKeyCredentialEntityMapper
@@ -50,23 +50,23 @@ class WebauthnPublicKeyCredentialSourceRepository implements PublicKeyCredential
 	}
 
 	public function has(string $credentialId): bool {
-		return false;
+		throw new BadMethodCallException('Not implemented');
 	}
 
 	public function get(string $credentialId): AttestedCredentialData {
-		return null;
+		throw new BadMethodCallException('Not implemented');
 	}
 
 	public function getUserHandleFor(string  $credentialId): string {
-		return null;
+		throw new BadMethodCallException('Not implemented');
 	}
 
 	public function getCounterFor(string  $credentialId): int {
-		return null;
+		throw new BadMethodCallException('Not implemented');
 	}
 
 	public function updateCounterFor(string  $credentialId, int $newCounter): void {
-		return;
+		throw new BadMethodCallException('Not implemented');
 	}
 
 	public function findOneByCredentialId(string $publicKeyCredentialId): ?PublicKeyCredentialSource {

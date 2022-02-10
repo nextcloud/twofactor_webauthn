@@ -33,6 +33,9 @@ use OCP\Authentication\TwoFactorAuth\IRegistry;
 use OCP\EventDispatcher\Event;
 use OCP\EventDispatcher\IEventListener;
 
+/**
+ * @template-implements IEventListener<StateChanged>
+ */
 class StateChangeRegistryUpdater implements IEventListener {
 
 	/** @var IRegistry */

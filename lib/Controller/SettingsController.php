@@ -60,7 +60,7 @@ class SettingsController extends ALoginSetupController {
 	 * @PasswordConfirmationRequired
 	 *
 	 * @param string $name
-	 * @param string $name
+	 * @param string $data
 	 */
 	public function finishRegister(string $name, string $data): JSONResponse {
 		return new JSONResponse($this->manager->finishRegister($this->userSession->getUser(), $name, $data));
@@ -76,7 +76,7 @@ class SettingsController extends ALoginSetupController {
 		return new JSONResponse($this->manager->removeDevice($this->userSession->getUser(), $id));
 	}
 
-	public function changeActivationState(string $id, int $active): JSONResponse {
+	public function changeActivationState(string $id, bool $active): JSONResponse {
 		return new JSONResponse($this->manager->changeActivationState($this->userSession->getUser(), $id, $active));
 	}
 }
