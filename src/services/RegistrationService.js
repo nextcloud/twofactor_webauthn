@@ -1,7 +1,8 @@
 /*
- * @copyright 2018 Christoph Wurst <christoph@winzerhof-wurst.at>
+ * @copyright 2022 Christoph Wurst <christoph@winzerhof-wurst.at>
  *
- * @author 2018 Christoph Wurst <christoph@winzerhof-wurst.at>
+ * @author Michael Blumenstein <M.Flower@gmx.de>
+ * @author 2022 Christoph Wurst <christoph@winzerhof-wurst.at>
  *
  * @license GNU AGPL version 3 or any later version
  *
@@ -19,29 +20,33 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import Axios from '@nextcloud/axios'
-import {generateUrl} from '@nextcloud/router'
+import Axios from '@nextcloud/axios';
+import {generateUrl} from '@nextcloud/router';
 
-export function startRegistration () {
-	const url = generateUrl('/apps/twofactor_u2f/settings/startregister')
+export async function startRegistration () {
+    const url = generateUrl('/apps/twofactor_webauthn/settings/startregister');
 
-	return Axios.post(url)
-		.then(resp => resp.data)
+    return Axios.post(url)
+        .then(resp => resp.data);
 }
 
-export function finishRegistration (data) {
-	const url = generateUrl('/apps/twofactor_u2f/settings/finishregister')
+export async function finishRegistration (name, data) {
+    const url = generateUrl('/apps/twofactor_webauthn/settings/finishregister');
 
-	return Axios.post(url, data)
-		.then(resp => resp.data)
+    return Axios.post(url, { name, data })
+        .then(resp => resp.data);
 }
 
-export function removeRegistration (id) {
-	const url = generateUrl('/apps/twofactor_u2f/settings/remove')
-	const data = {
-		id
-	}
+export async function removeRegistration (id) {
+    const url = generateUrl('/apps/twofactor_webauthn/settings/remove');
 
-	return Axios.post(url, data)
-		.then(resp => resp.data)
+    return Axios.post(url, { id })
+        .then(resp => resp.data);
+}
+
+export async function changeActivationState (id, active) {
+    const url = generateUrl('/apps/twofactor_webauthn/settings/active');
+
+    return Axios.post(url, { id, active: active ? 1 : 0 })
+        .then(resp => resp.data);
 }

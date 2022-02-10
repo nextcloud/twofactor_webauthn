@@ -1,7 +1,8 @@
 <!--
-  - @copyright 2018 Christoph Wurst <christoph@winzerhof-wurst.at>
+  - @copyright 2022 Christoph Wurst <christoph@winzerhof-wurst.at>
   -
-  - @author 2018 Christoph Wurst <christoph@winzerhof-wurst.at>
+  - @author Michael Blumenstein <M.Flower@gmx.de>
+  - @author 2022 Christoph Wurst <christoph@winzerhof-wurst.at>
   -
   - @license GNU AGPL version 3 or any later version
   -
@@ -20,194 +21,208 @@
   -->
 
 <template>
-	<div v-if="step === RegistrationSteps.READY">
-		<button
-				v-on:click="start">{{ t('twofactor_u2f', 'Add U2F device') }}
-		</button>
-	</div>
+    <div v-if="step === RegistrationSteps.READY">
+        <button
+                v-on:click="start">{{ t('twofactor_webauthn', 'Add Webauthn device') }}
+        </button>
+        <p v-if="errorMessage" class="error-message">
+		    <span class="icon icon-error" />
+            {{ errorMessage }}
 
-	<div v-else-if="step === RegistrationSteps.U2F_REGISTRATION"
-		 class="new-u2f-device">
-		<span class="icon-loading-small u2f-loading"></span>
-		{{ t('twofactor_u2f', 'Please plug in your U2F device and press the device button to authorize.') }}
-	</div>
+        </p>
+    </div>
 
-	<div v-else-if="step === RegistrationSteps.NAMING"
-		 class="new-u2f-device">
-		<span class="icon-loading-small u2f-loading"></span>
-		<input type="text"
-			   :placeholder="t('twofactor_u2f', 'Name your device')"
-			   v-model="name">
-		<button v-on:click="submit">{{ t('twofactor_u2f', 'Add') }}</button>
-	</div>
+    <div v-else-if="step === RegistrationSteps.REGISTRATION"
+         class="new-webauthn-device">
+        <span class="icon-loading-small webauthn-loading"></span>
+        {{ t('twofactor_webauthn', 'Please plug in your Webauthn device and press the device button to authorize.') }}
+    </div>
 
-	<div v-else-if="step === RegistrationSteps.PERSIST"
-		 class="new-u2f-device">
-		<span class="icon-loading-small u2f-loading"></span>
-		{{ t('twofactor_u2f', 'Adding your device …') }}
-	</div>
+    <div v-else-if="step === RegistrationSteps.NAMING"
+         class="new-webauthn-device">
+        <span class="icon-loading-small webauthn-loading"></span>
+        <input type="text"
+               :placeholder="t('twofactor_webauthn', 'Name your device')"
+               v-on:keyup.enter="submit"
+               v-model="name">
+        <button v-on:click="submit">{{ t('twofactor_webauthn', 'Add') }}</button>
+    </div>
 
-	<div v-else>
-		Invalid registration step. This should not have happened.
-	</div>
+    <div v-else-if="step === RegistrationSteps.PERSIST"
+         class="new-webauthn-device">
+        <span class="icon-loading-small webauthn-loading"></span>
+        {{ t('twofactor_webauthn', 'Adding your device …') }}
+    </div>
+
+    <div v-else>
+        Invalid registration step. This should not have happened.
+    </div>
 </template>
 
 <script>
-	import confirmPassword from '@nextcloud/password-confirmation'
-	import u2f from 'u2f-api'
+    import confirmPassword from '@nextcloud/password-confirmation'
 
-	import logger from '../logger'
+    import {
+        startRegistration,
+        finishRegistration
+    } from '../services/RegistrationService'
 
-	import {
-		startRegistration,
-		finishRegistration
-	} from '../services/RegistrationService'
+    import { TWOFACTOR_WEBAUTHN } from '../constants';
 
-	const logAndPass = (text) => (data) => {
-		logger.debug(text)
-		return data
-	}
+    const debug = (text) => (data) => {
+        console.debug(TWOFACTOR_WEBAUTHN, text, data)
+        return data
+    }
 
-	/**
-	 * Tap into a promise without losing the value
-	 */
-	const tap = cb => val => {
-		cb(val)
-		return val
-	}
+    const RegistrationSteps = Object.freeze({
+        READY: 1,
+        REGISTRATION: 2,
+        NAMING: 3,
+        PERSIST: 4,
+    })
 
-	const RegistrationSteps = Object.freeze({
-		READY: 1,
-		U2F_REGISTRATION: 2,
-		NAMING: 3,
-		PERSIST: 4,
-	})
+    export default {
+        name: 'AddDeviceDialog',
+        props: {
+            httpWarning: Boolean
+        },
+        data() {
+            return {
+                name: '',
+                credential: {},
+                RegistrationSteps,
+                step: RegistrationSteps.READY,
+                errorMessage: null
+            }
+        },
+        methods: {
+            arrayToBase64String(a) {
+                return btoa(String.fromCharCode(...a));
+            },
 
-	export default {
-		name: 'AddDeviceDialog',
-		props: {
-			httpWarning: Boolean
-		},
-		data () {
-			return {
-				name: '',
-				registrationData: {},
-				RegistrationSteps,
-				step: RegistrationSteps.READY,
-			}
-		},
-		methods: {
-			start () {
-				this.step = RegistrationSteps.U2F_REGISTRATION
 
-				return confirmPassword()
-					.then(this.getRegistrationData)
-					.then(this.register)
-					.then(() => this.step = RegistrationSteps.NAMING)
-					.catch(logger.error.bind(logger))
-			},
+			base64url2base64(input) {
+				input = input
+					.replace(/=/g, "")
+					.replace(/-/g, '+')
+					.replace(/_/g, '/');
 
-			getRegistrationData () {
-				return startRegistration()
-					.catch(err => {
-						logger.error('Error getting u2f registration data from server', err)
-						throw new Error(t('twofactor_u2f', 'Server error while trying to add U2F device'))
-					})
-			},
-
-			register ({req, sigs}) {
-				logger.debug('starting registration', {appId: req.appId})
-
-				if (location.protocol === 'https:' && req.appId.startsWith('http:')) {
-					logger.warn('Server generated a U2F App ID that starts with HTTP but you\'re connected via HTTPS. Set your overwrites https://docs.nextcloud.com/server/stable/admin_manual/configuration_server/reverse_proxy_configuration.html#overwrite-parameters')
+				const pad = input.length % 4;
+				if(pad) {
+					if(pad === 1) {
+						throw new Error('InvalidLengthError: Input base64url string is the wrong length to determine padding');
+					}
+					input += new Array(5-pad).join('=');
 				}
 
-				return u2f.register([req], sigs)
-					.then(data => {
-						logger.debug('registration was successful', data)
+				return input;
+            },
 
-						if (data.errorCode && data.errorCode !== 0) {
-							return this.rejectRegistration(data)
-						}
+            start() {
+                this.errorMessage = null;
+                console.info(TWOFACTOR_WEBAUTHN, 'Starting to add a new twofactor webauthn device');
+                this.step = RegistrationSteps.REGISTRATION
 
-						this.registrationData = data
-					})
-					.catch(e => this.rejectRegistration(e))
-			},
+                return confirmPassword()
+                    .then(this.getRegistrationData)
+                    .then(this.register.bind(this))
+                    .then(() => this.step = RegistrationSteps.NAMING)
+                    .catch(err => {
+                        console.error(TWOFACTOR_WEBAUTHN, err.name, err.message);
+                        this.errorMessage = err.message;
+                        this.step = RegistrationSteps.READY;
+                    })
+            },
 
-			rejectRegistration (data) {
-				// https://developers.yubico.com/U2F/Libraries/Client_error_codes.html
-				switch (data.errorCode) {
-					case 4:
-						// 4 - DEVICE_INELIGIBLE
-						Promise.reject(new Error(t('twofactor_u2f', 'U2F device is already registered (error code {errorCode})', {
-							errorCode: data.errorCode
-						})));
-						break;
-					case 5:
-						// 5 - TIMEOUT
-						Promise.reject(new Error(t('twofactor_u2f', 'U2F device registration timeout reached (error code {errorCode})', {
-							errorCode: data.errorCode
-						})));
-						break;
-					default:
-						// 1 - OTHER_ERROR
-						// 2 - BAD_REQUEST
-						// 3 - CONFIGURATION_UNSUPPORTED
-						Promise.reject(new Error(t('twofactor_u2f', 'U2F device registration failed (error code {errorCode})', {
-							errorCode: data.errorCode || 'unknown'
-						})));
-				}
-			},
+            getRegistrationData() {
+                return startRegistration()
+                    .then(publicKey => {
+                        publicKey.challenge = Uint8Array.from(window.atob(this.base64url2base64(publicKey.challenge)), c => c.charCodeAt(0));
+                        publicKey.user.id = Uint8Array.from(window.atob(publicKey.user.id), c => c.charCodeAt(0));
+                        if (publicKey.excludeCredentials) {
+                            publicKey.excludeCredentials = publicKey.excludeCredentials.map(data => {
+                                data.id = Uint8Array.from(window.atob(this.base64url2base64(data.id)), c => c.charCodeAt(0));
+                                return data;
+                            });
+                        }
+                        return publicKey;
+                    })
+                    .catch(err => {
+                        console.error(TWOFACTOR_WEBAUTHN, 'getRegistrationData', 'Error getting webauthn registration data from server', err);
+                        throw new Error(t(TWOFACTOR_WEBAUTHN, 'Server error while trying to add webauthn device'));
+                    })
+            },
 
-			submit () {
-				this.step = RegistrationSteps.PERSIST
+            register(publicKey) {
+                console.debug(TWOFACTOR_WEBAUTHN, 'starting webauthn registration');
 
-				logger.debug('persisting registration on server')
+                return navigator.credentials.create({publicKey})
+                    .then(debug('navigator.credentials.create called'))
+                    .then(data => {
+                        this.credential = {
+                            id: data.id,
+                            type: data.type,
+                            rawId: this.arrayToBase64String(new Uint8Array(data.rawId)),
+                            response: {
+                                clientDataJSON: this.arrayToBase64String(new Uint8Array(data.response.clientDataJSON)),
+                                attestationObject: this.arrayToBase64String(new Uint8Array(data.response.attestationObject))
+                            }
+                        }
+                    })
+                    .then(debug('mapped credentials data'))
+                    .catch(err => {
+                        console.error(TWOFACTOR_WEBAUTHN, 'register', 'Error creating credentials', err);
+                        throw err;
+                    });
+            },
 
-				return confirmPassword()
-					.then(logAndPass('confirmed password'))
-					.then(this.saveRegistrationData)
-					.then(logAndPass('registration data saved'))
-					.then(tap(() => this.$emit('add')))
-					.then(() => this.reset())
-					.then(logAndPass('app reset'))
-					.catch(logger.error.bind(logger))
-			},
+            submit() {
+                this.step = RegistrationSteps.PERSIST
 
-			saveRegistrationData () {
-				const data = this.registrationData
-				data.name = this.name
+                return confirmPassword()
+                    .then(this.saveRegistrationData)
+                    .then(debug('registration data saved'))
+                    .then(() => this.reset())
+                    .then(debug('app reset'))
+                    .catch(err => {
+                        console.error(TWOFACTOR_WEBAUTHN, err);
+                        this.errorMessage = err.message;
+                        this.step = RegistrationSteps.READY;
+                    });
+            },
 
-				logger.debug('saving registration data', {data})
+            saveRegistrationData() {
+                return finishRegistration(this.name, JSON.stringify(this.credential))
+                    .then(device => this.$store.commit('addDevice', device))
+                    .then(debug('new device added to store'))
+                    .catch(err => {
+                        console.error(TWOFACTOR_WEBAUTHN, 'Error persisting webauthn registration', err);
+                        throw new Error(t('twofactor_webauthn', 'Server error while trying to complete webauthn device registration'))
+                    })
+            },
 
-				return finishRegistration(data)
-					.then(device => this.$store.commit('addDevice', device))
-					.then(logAndPass('new device added to store'))
-					.catch(err => {
-						logger.error('Error persisting registration', err)
-						throw new Error(t('twofactor_u2f', 'Server error while trying to complete U2F device registration'))
-					})
-			},
-
-			reset () {
-				this.name = ''
-				this.registrationData = {}
-				this.step = RegistrationSteps.READY
-			}
-		}
-	}
+            reset() {
+                this.name = ''
+                this.registrationData = {}
+                this.step = RegistrationSteps.READY
+            }
+        }
+    }
 </script>
 
 <style scoped>
-	.u2f-loading {
-		display: inline-block;
-		vertical-align: sub;
-		margin-left: 2px;
-		margin-right: 2px;
-	}
+    .webauthn-loading {
+        display: inline-block;
+        vertical-align: sub;
+        margin-left: 2px;
+        margin-right: 2px;
+    }
 
-	.new-u2f-device {
-		line-height: 300%;
-	}
+    .new-webauthn-device {
+        line-height: 300%;
+    }
+
+    .error-message {
+        color: var(--color-error);
+    }
 </style>

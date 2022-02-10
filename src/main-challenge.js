@@ -1,7 +1,8 @@
 /*
- * @copyright 2018 Christoph Wurst <christoph@winzerhof-wurst.at>
+ * @copyright 2022 Christoph Wurst <christoph@winzerhof-wurst.at>
  *
- * @author 2018 Christoph Wurst <christoph@winzerhof-wurst.at>
+ * @author Michael Blumenstein <M.Flower@gmx.de>
+ * @author 2022 Christoph Wurst <christoph@winzerhof-wurst.at>
  *
  * @license GNU AGPL version 3 or any later version
  *
@@ -19,23 +20,27 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import store from './store'
 import Vue from 'vue'
 
 import Nextcloud from './mixins/Nextcloud'
 
-Vue.mixin(Nextcloud)
+import { TWOFACTOR_WEBAUTHN } from './constants';
 
-const initialStateElement = document.getElementById('twofactor-u2f-req')
-const req = JSON.parse(initialStateElement.value)
+Vue.mixin(Nextcloud);
 
-console.debug('Loaded initial state of the u2f challenge page', req)
+const initialStateElement = document.getElementById('twofactor-webauthn-publicKey');
+const publicKey = JSON.parse(initialStateElement.value);
+
+console.debug(TWOFACTOR_WEBAUTHN, 'Loaded initial state of the webauthn challenge page', publicKey);
 
 import Challenge from './components/Challenge'
 
-const View = Vue.extend(Challenge)
+const View = Vue.extend(Challenge);
 new View({
 	propsData: {
-		req,
+		publicKey,
 		httpWarning: document.location.protocol !== 'https:',
-	}
-}).$mount('#twofactor-u2f-challenge')
+	},
+	store,
+}).$mount('#twofactor-webauthn-challenge');

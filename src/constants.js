@@ -1,7 +1,8 @@
 /*
- * @copyright 2019 Christoph Wurst <christoph@winzerhof-wurst.at>
+ * @copyright 2022 Christoph Wurst <christoph@winzerhof-wurst.at>
  *
- * @author 2019 Christoph Wurst <christoph@winzerhof-wurst.at>
+ * @author Michael Blumenstein <M.Flower@gmx.de>
+ * @author 2022 Christoph Wurst <christoph@winzerhof-wurst.at>
  *
  * @license GNU AGPL version 3 or any later version
  *
@@ -19,19 +20,4 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import Vue from 'vue'
-
-import Nextcloud from './mixins/Nextcloud'
-import store from './store'
-
-Vue.mixin(Nextcloud)
-
-import LoginSetup from './components/LoginSetup'
-
-const View = Vue.extend(LoginSetup)
-new View({
-	propsData: {
-		httpWarning: document.location.protocol !== 'https:',
-	},
-	store,
-}).$mount('#twofactor-u2f-login-setup')
+export const TWOFACTOR_WEBAUTHN = '[twofactor_webauthn]';

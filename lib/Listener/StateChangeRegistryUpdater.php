@@ -2,21 +2,33 @@
 
 declare(strict_types=1);
 
-/**
- * Nextcloud - U2F 2FA
- *
- * This file is licensed under the Affero General Public License version 3 or
- * later. See the COPYING file.
+/*
+ * @copyright 2022 Christoph Wurst <christoph@winzerhof-wurst.at>
  *
  * @author Christoph Wurst <christoph@winzerhof-wurst.at>
- * @copyright Christoph Wurst 2018
+ * @author Michael Blumenstein <M.Flower@gmx.de>
+ *
+ * @license GNU AGPL version 3 or any later version
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace OCA\TwoFactorU2F\Listener;
+namespace OCA\TwoFactorWebauthn\Listener;
 
-use OCA\TwoFactorU2F\Event\StateChanged;
-use OCA\TwoFactorU2F\Provider\U2FProvider;
-use OCA\TwoFactorU2F\Service\U2FManager;
+use OCA\TwoFactorWebauthn\Event\StateChanged;
+use OCA\TwoFactorWebauthn\Provider\WebauthnProvider;
+use OCA\TwoFactorWebauthn\Service\WebauthnManager;
 use OCP\Authentication\TwoFactorAuth\IRegistry;
 use OCP\EventDispatcher\Event;
 use OCP\EventDispatcher\IEventListener;
@@ -26,13 +38,13 @@ class StateChangeRegistryUpdater implements IEventListener {
 	/** @var IRegistry */
 	private $providerRegistry;
 
-	/** @var U2FManager */
+	/** @var WebauthnManager */
 	private $manager;
 
-	/** @var U2FProvider */
+	/** @var WebauthnProvider */
 	private $provider;
 
-	public function __construct(IRegistry $providerRegistry, U2FManager $manager, U2FProvider $provider) {
+	public function __construct(IRegistry $providerRegistry, WebauthnManager $manager, WebauthnProvider $provider) {
 		$this->providerRegistry = $providerRegistry;
 		$this->provider = $provider;
 		$this->manager = $manager;
@@ -40,8 +52,8 @@ class StateChangeRegistryUpdater implements IEventListener {
 
 	public function handle(Event $event): void {
 		if ($event instanceof StateChanged) {
-			$devices = $this->manager->getDevices($event->getUser());
-			if ($event->isEnabled() && count($devices) === 1) {
+			$devices = array_filter($this->manager->getDevices($event->getUser()), function($device) { return $device['active'] === true; });
+			if ($event->isEnabled() && count($devices) > 0) {
 				// The first device was enabled -> enable provider for this user
 				$this->providerRegistry->enableProviderFor($this->provider, $event->getUser());
 			} elseif (!$event->isEnabled() && empty($devices)) {

@@ -1,7 +1,8 @@
 <!--
-  - @copyright 2018 Christoph Wurst <christoph@winzerhof-wurst.at>
+  - @copyright 2022 Christoph Wurst <christoph@winzerhof-wurst.at>
   -
-  - @author 2018 Christoph Wurst <christoph@winzerhof-wurst.at>
+  - @author Michael Blumenstein <M.Flower@gmx.de>
+  - @author 2022 Christoph Wurst <christoph@winzerhof-wurst.at>
   -
   - @license GNU AGPL version 3 or any later version
   -
@@ -29,49 +30,56 @@
 				   v-model="challenge">
 		</form>
 
-		<p id="u2f-info"
+		<p id="webauthn-info"
 		   v-if="error">
 			<strong>
-				{{ t('twofactor_u2f', 'An error occurred: {msg}', {msg: this.error}) }}
+				{{ t('twofactor_webauthn', 'An error occurred: {msg}', {msg: this.error}) }}
 			</strong>
-			<br>
-			<button class="btn"
+			<button class="btn sign"
 					@click="sign">
-				{{ t('twofactor_u2f', 'Retry') }}
+				{{ t('twofactor_webauthn', 'Retry') }}
 			</button>
 		</p>
-		<p id="u2f-info"
+		<p id="webauthn-info"
 		   v-else>
-			{{ t('twofactor_u2f', 'Plug in your U2F device and press the device button to authorize.') }}
+			{{ t('mail', 'Plug in your Webauthn device and press the button below to begin authorization.') }}
+			<button class="btn sign"
+					@click="sign">
+				{{ t('twofactor_webauthn', 'Use webauthn device') }}
+			</button>
 		</p>
-		<p id="u2f-error"
+		<p id="webauthn-error"
 		   style="display: none">
-			<strong>{{ t('twofactor_u2f', 'An error occurred. Please try again.')}}</strong>
+			<strong>{{ t('mail', 'An error occurred. Please try again.')}}</strong>
 		</p>
 
 		<p v-if="notSupported">
 			<em>
-			{{ t('twofactor_u2f', 'Your browser does not support U2F.') }}
-			{{ t('twofactor_u2f', 'Please use an up-to-date browser that supports U2F devices, such as Chrome, Edge, Firefox, Opera or Safari.') }}
+			{{ t('twofactor_webauthn', 'Your browser does not support Webauthn.') }}
 			</em>
 		</p>
 		<p v-else-if="httpWarning"
-		   id="u2f-http-warning">
+		   id="webauthn-http-warning">
 			<em>
-			{{ t('twofactor_u2f', 'You are accessing this site via an insecure connection. Browsers might therefore refuse the U2F authentication.') }}
+			{{ t('twofactor_webauthn', 'You are accessing this site via an insecure connection. Browsers might therefore refuse the Webauthn authentication.') }}
 			</em>
 		</p>
 	</div>
 </template>
 
 <script>
-	import u2f from 'u2f-api'
+    import { TWOFACTOR_WEBAUTHN } from '../constants';
+
+	const debug = (text) => (data) => {
+        console.debug(TWOFACTOR_WEBAUTHN, text, data)
+        return data
+    }
 
 	export default {
 		name: 'Challenge',
 		props: {
-			req: {
-				type: Array,
+			publicKey: {
+				type: Object,
 				required: true,
 			},
 			httpWarning: {
@@ -81,37 +89,90 @@
 		},
 		data () {
 			return {
-				notSupported: !u2f.isSupported(),
+				notSupported: typeof(PublicKeyCredential) === "undefined",
 				challenge: '',
 				error: undefined,
 			}
 		},
 		mounted () {
-			this.sign()
-				.catch(console.error.bind(this))
+			// this.sign()
+			// 	.catch(console.error.bind(this))
 		},
 		methods: {
+			arrayToBase64String(a) {
+				return btoa(String.fromCharCode(...a));
+			},
+
+			base64url2base64(input) {
+				input = input
+					.replace(/=/g, "")
+					.replace(/-/g, '+')
+					.replace(/_/g, '/');
+
+				const pad = input.length % 4;
+				if(pad) {
+					if(pad === 1) {
+						throw new Error('InvalidLengthError: Input base64url string is the wrong length to determine padding');
+					}
+					input += new Array(5-pad).join('=');
+				}
+
+				return input;
+			},
+
 			sign () {
-				console.debug('Starting u2f.sign', this.req)
+				console.trace('sign');
+				this.error = undefined;
 
-				this.error = undefined
+				const publicKey = this.publicKey;
 
-				return u2f.sign(this.req)
-					.then(challenge => {
-						this.challenge = JSON.stringify(challenge)
+				publicKey.challenge = Uint8Array.from(window.atob(this.base64url2base64(publicKey.challenge)), c=>c.charCodeAt(0));
+				if (publicKey.allowCredentials) {
+					publicKey.allowCredentials = publicKey.allowCredentials.map((data) => ({
+							...data,
+							'id': Uint8Array.from(window.atob(this.base64url2base64(data.id)), c=>c.charCodeAt(0))
+					}));
+				}
 
-						return this.$nextTick(() => {
-							this.$refs.challengeForm.submit()
+
+				console.debug(TWOFACTOR_WEBAUTHN, 'Starting webauthn authentication', this.publicKey)
+
+				return navigator.credentials.get({publicKey})
+						.then(debug('got credentials'))
+						.then(data => {
+							return {
+								id: data.id,
+								type: data.type,
+								rawId: this.arrayToBase64String(new Uint8Array(data.rawId)),
+								response: {
+									authenticatorData: this.arrayToBase64String(new Uint8Array(data.response.authenticatorData)),
+									clientDataJSON: this.arrayToBase64String(new Uint8Array(data.response.clientDataJSON)),
+									signature: this.arrayToBase64String(new Uint8Array(data.response.signature)),
+									userHandle: data.response.userHandle ? this.arrayToBase64String(new Uint8Array(data.response.userHandle)) : null
+								}
+							};
 						})
-					})
-					.catch(err => {
-						console.error('could not sign u2f challenge', err.metaData)
+						.then(debug('mapped credentials'))
+						.then(challenge => {
+							this.challenge = JSON.stringify(challenge)
 
-						this.error = err.message || 'Unknown error'
-
-						throw err
-					})
+							return this.$nextTick(() => {
+								this.$refs.challengeForm.submit()
+							})
+						})
+						.then(debug('submitted challengeForm'))
+						.catch(error => {
+							this.error = error;
+							console.log(error); // Example: timeout, interaction refused...
+							window.location = window.location.href.replace('challenge/twofactor_webauthn', 'selectchallenge');
+						});
 			}
 		}
 	}
 </script>
+
+<style scoped>
+    .sign {
+        margin-top: 1em;
+    }
+</style>
