@@ -31,94 +31,91 @@ use Ramsey\Uuid\Uuid;
 use Webauthn\PublicKeyCredentialSource;
 use Webauthn\TrustPath\TrustPathLoader;
 
-class PublicKeyCredentialEntity extends Entity
-{
-    /**
-     * @var string
-     */
-    protected $name;
+class PublicKeyCredentialEntity extends Entity {
+	/**
+	 * @var string
+	 */
+	protected $name;
 
-    /**
-     * @var string
-     */
-    protected $publicKeyCredentialId;
+	/**
+	 * @var string
+	 */
+	protected $publicKeyCredentialId;
 
-    /**
-     * @var string
-     */
-    protected $type;
+	/**
+	 * @var string
+	 */
+	protected $type;
 
-    /**
-     * @var string[]
-     */
-    protected $transports;
+	/**
+	 * @var string[]
+	 */
+	protected $transports;
 
-    /**
-     * @var string
-     */
-    protected $attestationType;
+	/**
+	 * @var string
+	 */
+	protected $attestationType;
 
-    /**
-     * @var string
-     */
-    protected $trustPath;
+	/**
+	 * @var string
+	 */
+	protected $trustPath;
 
-    /**
-     * @var string
-     */
-    protected $aaguid;
+	/**
+	 * @var string
+	 */
+	protected $aaguid;
 
-    /**
-     * @var string
-     */
-    protected $credentialPublicKey;
+	/**
+	 * @var string
+	 */
+	protected $credentialPublicKey;
 
-    /**
-     * @var string
-     */
-    protected $userHandle;
+	/**
+	 * @var string
+	 */
+	protected $userHandle;
 
-    /**
-     * @var int
-     */
-    protected $counter;
+	/**
+	 * @var int
+	 */
+	protected $counter;
 
-    /**
-     * @var bool
-     */
-    protected $active;
+	/**
+	 * @var bool
+	 */
+	protected $active;
 
 
-    static function fromPublicKeyCrendentialSource(string $name, PublicKeyCredentialSource $publicKeyCredentialSource): PublicKeyCredentialEntity
-    {
-        $publicKeyCredentialEntity = new self();
+	public static function fromPublicKeyCrendentialSource(string $name, PublicKeyCredentialSource $publicKeyCredentialSource): PublicKeyCredentialEntity {
+		$publicKeyCredentialEntity = new self();
 
-        $publicKeyCredentialEntity->setName($name);
-        $publicKeyCredentialEntity->setPublicKeyCredentialId(base64_encode($publicKeyCredentialSource->getPublicKeyCredentialId()));
-        $publicKeyCredentialEntity->setType($publicKeyCredentialSource->getType());
-        $publicKeyCredentialEntity->setTransports(json_encode($publicKeyCredentialSource->getTransports()));
-        $publicKeyCredentialEntity->setAttestationType($publicKeyCredentialSource->getAttestationType());
-        $publicKeyCredentialEntity->setTrustPath(json_encode($publicKeyCredentialSource->getTrustPath()->jsonSerialize()));
-        $publicKeyCredentialEntity->setAaguid($publicKeyCredentialSource->getAaguid()->toString());
-        $publicKeyCredentialEntity->setCredentialPublicKey(base64_encode($publicKeyCredentialSource->getCredentialPublicKey()));
-        $publicKeyCredentialEntity->setUserHandle($publicKeyCredentialSource->getUserHandle());
-        $publicKeyCredentialEntity->setCounter($publicKeyCredentialSource->getCounter());
+		$publicKeyCredentialEntity->setName($name);
+		$publicKeyCredentialEntity->setPublicKeyCredentialId(base64_encode($publicKeyCredentialSource->getPublicKeyCredentialId()));
+		$publicKeyCredentialEntity->setType($publicKeyCredentialSource->getType());
+		$publicKeyCredentialEntity->setTransports(json_encode($publicKeyCredentialSource->getTransports()));
+		$publicKeyCredentialEntity->setAttestationType($publicKeyCredentialSource->getAttestationType());
+		$publicKeyCredentialEntity->setTrustPath(json_encode($publicKeyCredentialSource->getTrustPath()->jsonSerialize()));
+		$publicKeyCredentialEntity->setAaguid($publicKeyCredentialSource->getAaguid()->toString());
+		$publicKeyCredentialEntity->setCredentialPublicKey(base64_encode($publicKeyCredentialSource->getCredentialPublicKey()));
+		$publicKeyCredentialEntity->setUserHandle($publicKeyCredentialSource->getUserHandle());
+		$publicKeyCredentialEntity->setCounter($publicKeyCredentialSource->getCounter());
 
-        return $publicKeyCredentialEntity;
-    }
+		return $publicKeyCredentialEntity;
+	}
 
-    function toPublicKeyCredentialSource(): PublicKeyCredentialSource
-    {
-        return new PublicKeyCredentialSource(
-            base64_decode($this->publicKeyCredentialId),
-            $this->type,
-            json_decode($this->transports),
-            $this->attestationType,
-            TrustPathLoader::loadTrustPath((array)json_decode($this->trustPath)),
-            Uuid::fromString($this->aaguid),
-            base64_decode($this->credentialPublicKey),
-            $this->userHandle,
-            $this->counter
-        );
-    }
+	public function toPublicKeyCredentialSource(): PublicKeyCredentialSource {
+		return new PublicKeyCredentialSource(
+			base64_decode($this->publicKeyCredentialId),
+			$this->type,
+			json_decode($this->transports),
+			$this->attestationType,
+			TrustPathLoader::loadTrustPath((array)json_decode($this->trustPath)),
+			Uuid::fromString($this->aaguid),
+			base64_decode($this->credentialPublicKey),
+			$this->userHandle,
+			$this->counter
+		);
+	}
 }
