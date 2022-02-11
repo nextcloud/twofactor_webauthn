@@ -74,15 +74,15 @@ class Version000203Date20200322200200 extends SimpleMigrationStep {
 	public function postSchemaChange(IOutput $output, \Closure $schemaClosure, array $options) {
 		$qb = $this->connection->getQueryBuilder();
 
-        $cursor = $qb->select(array('id', 'aaguid'))
-           ->from('twofactor_webauthn_registrations')
+		$cursor = $qb->select(array('id', 'aaguid'))
+		   ->from('twofactor_webauthn_registrations')
 		   ->execute();
 
-        while($row = $cursor->fetch()){
+		while ($row = $cursor->fetch()) {
 			$updater = $this->connection->getQueryBuilder();
-            $updater->update('twofactor_webauthn_registrations')
-                ->set('aaguid_transform', $updater->createNamedParameter($this->getUuidString($output, $row)))
-                ->where('id = :id')
+			$updater->update('twofactor_webauthn_registrations')
+				->set('aaguid_transform', $updater->createNamedParameter($this->getUuidString($output, $row)))
+				->where('id = :id')
 				->setParameter('id', $row['id'])
 				->execute();
 		}
@@ -91,7 +91,7 @@ class Version000203Date20200322200200 extends SimpleMigrationStep {
 	private function getUuidString(IOutput $output, array $row) {
 		try {
 			return Uuid\Uuid::fromBytes($row['aaguid'])->toString();
-		} catch(\Exception $e) {
+		} catch (\Exception $e) {
 			return Uuid\Uuid::fromBytes("\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0")->toString();
 		}
 	}

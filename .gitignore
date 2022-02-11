@@ -8,7 +8,7 @@
 /nbproject/private/
 /vendor
 composer.phar
-/.php_cs.cache
+/.php-cs-fixer.cache
 
 /tests/clover*.xml
 /tests/.phpunit.result.cache

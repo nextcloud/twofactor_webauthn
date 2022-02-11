@@ -75,16 +75,16 @@ class Version000203Date20200322201700 extends SimpleMigrationStep {
 		$qb = $this->connection->getQueryBuilder();
 
 		$cursor = $qb->select(array('id', 'aaguid', 'aaguid_transform'))
-           ->from('twofactor_webauthn_registrations')
+		   ->from('twofactor_webauthn_registrations')
 		   ->execute();
 
-        while($row = $cursor->fetch()){
+		while ($row = $cursor->fetch()) {
 			$updater = $this->connection->getQueryBuilder();
-            $updater->update('twofactor_webauthn_registrations')
-                ->set('aaguid', $updater->createNamedParameter(Uuid::fromString($row['aaguid_transform'])->toString()))
-                ->where('id = :id')
+			$updater->update('twofactor_webauthn_registrations')
+				->set('aaguid', $updater->createNamedParameter(Uuid::fromString($row['aaguid_transform'])->toString()))
+				->where('id = :id')
 				->setParameter('id', $row['id'])
 				->execute();
-        }
+		}
 	}
 }

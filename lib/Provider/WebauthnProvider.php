@@ -119,7 +119,9 @@ class WebauthnProvider implements IProvider, IProvidesIcons, IProvidesPersonalSe
 	 * Decides whether 2FA is enabled for the given user
 	 */
 	public function isTwoFactorAuthEnabledForUser(IUser $user): bool {
-		$devices = array_filter($this->manager->getDevices($user), function($device) { return $device['active'] === true; });
+		$devices = array_filter($this->manager->getDevices($user), function ($device) {
+			return $device['active'] === true;
+		});
 		return count($devices) > 0;
 	}
 

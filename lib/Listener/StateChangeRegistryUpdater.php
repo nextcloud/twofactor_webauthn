@@ -52,7 +52,9 @@ class StateChangeRegistryUpdater implements IEventListener {
 
 	public function handle(Event $event): void {
 		if ($event instanceof StateChanged) {
-			$devices = array_filter($this->manager->getDevices($event->getUser()), function($device) { return $device['active'] === true; });
+			$devices = array_filter($this->manager->getDevices($event->getUser()), function ($device) {
+				return $device['active'] === true;
+			});
 			if ($event->isEnabled() && count($devices) > 0) {
 				// The first device was enabled -> enable provider for this user
 				$this->providerRegistry->enableProviderFor($this->provider, $event->getUser());

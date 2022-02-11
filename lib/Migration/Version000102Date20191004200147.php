@@ -50,11 +50,11 @@ class Version000102Date20191004200147 extends SimpleMigrationStep {
 				'notnull' => true,
 				'length' => 255,
 			]);
-            $table->addColumn('name', 'string', [
-                'notnull' => true,
-                'length' => 64,
-                'default' => 'default'
-            ]);
+			$table->addColumn('name', 'string', [
+				'notnull' => true,
+				'length' => 64,
+				'default' => 'default'
+			]);
 			$table->addColumn('public_key_credential_id', 'string', [
 				'notnull' => true,
 				'length' => 255
@@ -79,18 +79,18 @@ class Version000102Date20191004200147 extends SimpleMigrationStep {
 				'notnull' => false,
 				'length' => 36,
 			]);
-            $table->addColumn('credential_public_key', 'string', [
-                'notnull' => true,
-                'length' => 255
-            ]);
-            $table->addColumn('user_handle', 'string', [
-                'notnull' => true,
-                'length' => 64
-            ]);
-            $table->addColumn('counter', 'integer', [
-                'notnull' => true,
-                'length' => 255
-            ]);
+			$table->addColumn('credential_public_key', 'string', [
+				'notnull' => true,
+				'length' => 255
+			]);
+			$table->addColumn('user_handle', 'string', [
+				'notnull' => true,
+				'length' => 64
+			]);
+			$table->addColumn('counter', 'integer', [
+				'notnull' => true,
+				'length' => 255
+			]);
 			$table->setPrimaryKey(['id']);
 			$table->addIndex(['user_handle'], 'webauthn_registrations_userHandle');
 			$table->addIndex(['public_key_credential_id'], 'webauthn_registrations_publicKeyCredentialId');
