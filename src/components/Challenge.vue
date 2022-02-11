@@ -95,8 +95,8 @@ export default {
 		}
 	},
 	mounted() {
-		// this.sign()
-		// 	.catch(console.error.bind(this))
+		// TODO: wait for the user to click the button or run on load?
+		// this.sign().catch(console.error.bind(this))
 	},
 	methods: {
 		arrayToBase64String(a) {
