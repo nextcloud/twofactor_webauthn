@@ -3,6 +3,7 @@
  *
  * @author Michael Blumenstein <M.Flower@gmx.de>
  * @author 2022 Christoph Wurst <christoph@winzerhof-wurst.at>
+ * @author Richard Steinmetz <richard@steinmetz.cloud>
  *
  * @license GNU AGPL version 3 or any later version
  *
@@ -22,25 +23,17 @@
 
 import store from './store'
 import Vue from 'vue'
-
 import Nextcloud from './mixins/Nextcloud'
-
-import { TWOFACTOR_WEBAUTHN } from './constants'
-
 import Challenge from './components/Challenge'
+import { loadState } from '@nextcloud/initial-state'
 
 Vue.mixin(Nextcloud)
 
-const initialStateElement = document.getElementById('twofactor-webauthn-publicKey')
-const publicKey = JSON.parse(initialStateElement.value)
+const credentialRequestOptions = loadState('twofactor_webauthn', 'credential-request-options')
+store.commit('setCredentialRequestOptions', credentialRequestOptions)
 
-console.debug(TWOFACTOR_WEBAUTHN, 'Loaded initial state of the webauthn challenge page', publicKey)
-
-const View = Vue.extend(Challenge)
-new View({
-	propsData: {
-		publicKey,
-		httpWarning: document.location.protocol !== 'https:',
-	},
+export default new Vue({
+	el: '#twofactor-webauthn-challenge',
 	store,
-}).$mount('#twofactor-webauthn-challenge')
+	render: h => h(Challenge),
+})

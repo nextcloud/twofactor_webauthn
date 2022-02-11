@@ -3,6 +3,7 @@
   -
   - @author Michael Blumenstein <M.Flower@gmx.de>
   - @author 2022 Christoph Wurst <christoph@winzerhof-wurst.at>
+  - @author Richard Steinmetz <richard@steinmetz.cloud>
   -
   - @license GNU AGPL version 3 or any later version
   -
@@ -69,6 +70,7 @@
 
 <script>
 import { TWOFACTOR_WEBAUTHN } from '../constants'
+import { mapGetters } from 'vuex'
 
 const debug = (text) => (data) => {
 	console.debug(TWOFACTOR_WEBAUTHN, text, data)
@@ -77,22 +79,20 @@ const debug = (text) => (data) => {
 
 export default {
 	name: 'Challenge',
-	props: {
-		publicKey: {
-			type: Object,
-			required: true,
-		},
-		httpWarning: {
-			type: Boolean,
-			required: true,
-		},
-	},
 	data() {
 		return {
 			notSupported: typeof (PublicKeyCredential) === 'undefined',
 			challenge: '',
 			error: undefined,
 		}
+	},
+	computed: {
+		...mapGetters({
+			credentialRequestOptions: 'getCredentialRequestOptions',
+		}),
+		httpWarning() {
+			return document.location.protocol !== 'https:'
+		},
 	},
 	mounted() {
 		// TODO: wait for the user to click the button or run on load?
@@ -124,7 +124,9 @@ export default {
 			console.trace('sign')
 			this.error = undefined
 
-			const publicKey = this.publicKey
+			// Clone request options because they are mutated later
+			// TODO: make them immutable
+			const publicKey = JSON.parse(JSON.stringify(this.credentialRequestOptions))
 
 			publicKey.challenge = Uint8Array.from(window.atob(this.base64url2base64(publicKey.challenge)), c => c.charCodeAt(0))
 			if (publicKey.allowCredentials) {

@@ -3,6 +3,7 @@
  *
  * @author Michael Blumenstein <M.Flower@gmx.de>
  * @author 2022 Christoph Wurst <christoph@winzerhof-wurst.at>
+ * @author Richard Steinmetz <richard@steinmetz.cloud>
  *
  * @license GNU AGPL version 3 or any later version
  *
@@ -28,6 +29,10 @@ import { removeRegistration, changeActivationState } from './services/Registrati
 Vue.use(Vuex)
 
 export const mutations = {
+	setCredentialRequestOptions(state, credentialRequestOptions) {
+		state.credentialRequestOptions = credentialRequestOptions
+	},
+
 	addDevice(state, device) {
 		state.devices.push(device)
 		state.devices.sort((d1, d2) => d1.name.localeCompare(d2.name))
@@ -67,11 +72,14 @@ export const actions = {
 	},
 }
 
-export const getters = {}
+export const getters = {
+	getCredentialRequestOptions: state => state.credentialRequestOptions,
+}
 
 export default new Vuex.Store({
 	strict: process.env.NODE_ENV !== 'production',
 	state: {
+		credentialRequestOptions: {},
 		devices: [],
 	},
 	getters,
