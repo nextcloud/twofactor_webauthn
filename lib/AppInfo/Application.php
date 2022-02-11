@@ -31,22 +31,25 @@ use OCA\TwoFactorWebauthn\Event\StateChanged;
 use OCA\TwoFactorWebauthn\Listener\StateChangeActivity;
 use OCA\TwoFactorWebauthn\Listener\StateChangeRegistryUpdater;
 use OCP\AppFramework\App;
-use OCP\EventDispatcher\IEventDispatcher;
+use OCP\AppFramework\Bootstrap\IBootContext;
+use OCP\AppFramework\Bootstrap\IBootstrap;
+use OCP\AppFramework\Bootstrap\IRegistrationContext;
 
 require_once __DIR__ . '/../../vendor/autoload.php';
 
-class Application extends App {
+class Application extends App implements IBootstrap {
 	public const APP_ID = 'twofactor_webauthn';
 
 	public function __construct(array $urlParams = []) {
 		parent::__construct(self::APP_ID, $urlParams);
+	}
 
-		$container = $this->getContainer();
+	public function register(IRegistrationContext $context): void {
+		$context->registerEventListener(StateChanged::class, StateChangeActivity::class);
+		$context->registerEventListener(StateChanged::class, StateChangeRegistryUpdater::class);
+		$context->registerEventListener(DisabledByAdmin::class, StateChangeActivity::class);
+	}
 
-		/** @var IEventDispatcher $eventDispatcher */
-		$eventDispatcher = $container->query(IEventDispatcher::class);
-		$eventDispatcher->addServiceListener(StateChanged::class, StateChangeActivity::class);
-		$eventDispatcher->addServiceListener(StateChanged::class, StateChangeRegistryUpdater::class);
-		$eventDispatcher->addServiceListener(DisabledByAdmin::class, StateChangeActivity::class);
+	public function boot(IBootContext $context): void {
 	}
 }
