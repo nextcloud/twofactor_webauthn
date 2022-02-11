@@ -20,4 +20,4 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-export const TWOFACTOR_WEBAUTHN = '[twofactor_webauthn]';
+export const TWOFACTOR_WEBAUTHN = '[twofactor_webauthn]'

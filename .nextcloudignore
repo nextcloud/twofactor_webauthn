@@ -1,6 +1,7 @@
 /AUTHORS.md
 /build
 /.babelrc
+/.eslintrc.js
 /.jshintrc
 /.git
 /.github
@@ -9,6 +10,7 @@
 /.travis.yml
 /.tx
 /.scrutinizer.yml
+/babel.config.js
 /CONTRIBUTING.md
 /composer.*
 /karma.conf.js

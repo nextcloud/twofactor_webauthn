@@ -23,5 +23,5 @@
 export default {
 	methods: {
 		t,
-	}
+	},
 }

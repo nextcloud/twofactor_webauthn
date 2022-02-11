@@ -20,62 +20,61 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import Vue from 'vue';
-import Vuex from 'vuex';
+import Vue from 'vue'
+import Vuex from 'vuex'
 
-import {removeRegistration} from './services/RegistrationService';
-import {changeActivationState} from './services/RegistrationService';
+import { removeRegistration, changeActivationState } from './services/RegistrationService'
 
-Vue.use(Vuex);
+Vue.use(Vuex)
 
 export const mutations = {
-	addDevice (state, device) {
-		state.devices.push(device);
-		state.devices.sort((d1, d2) => d1.name.localeCompare(d2.name));
+	addDevice(state, device) {
+		state.devices.push(device)
+		state.devices.sort((d1, d2) => d1.name.localeCompare(d2.name))
 	},
 
-	removeDevice (state, id) {
-		state.devices = state.devices.filter(device => device.id !== id);
+	removeDevice(state, id) {
+		state.devices = state.devices.filter(device => device.id !== id)
 	},
 
-	changeActivationState (state, { id, active }) {
-		state.devices.find(device => device.id === id).active = active;
-	}
-};
+	changeActivationState(state, { id, active }) {
+		state.devices.find(device => device.id === id).active = active
+	},
+}
 
 export const actions = {
-	removeDevice ({state, commit}, id) {
-		const device = state.devices.find(device => device.id === id);
+	removeDevice({ state, commit }, id) {
+		const device = state.devices.find(device => device.id === id)
 
-		commit('removeDevice', id);
+		commit('removeDevice', id)
 
 		removeRegistration(id)
 			.catch(err => {
 				// Rollback
-				commit('addDevice', device);
+				commit('addDevice', device)
 
-				throw err;
-			});
+				throw err
+			})
 	},
 
-	changeActivationState ({state, commit}, { id, active }) {
-		commit('changeActivationState', { id, active });
+	changeActivationState({ state, commit }, { id, active }) {
+		commit('changeActivationState', { id, active })
 
 		changeActivationState(id, active).catch(err => {
-			commit('changeActivationState', { id, active: !active });
-			throw err;
-		});
-	}
-};
+			commit('changeActivationState', { id, active: !active })
+			throw err
+		})
+	},
+}
 
-export const getters = {};
+export const getters = {}
 
 export default new Vuex.Store({
 	strict: process.env.NODE_ENV !== 'production',
 	state: {
-		devices: []
+		devices: [],
 	},
 	getters,
 	mutations,
-	actions
-});
+	actions,
+})

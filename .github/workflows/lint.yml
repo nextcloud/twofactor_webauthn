@@ -47,3 +47,19 @@ jobs:
         run: composer i
       - name: Run coding standards check
         run: composer run cs:check
+
+  node-linters:
+    runs-on: ubuntu-latest
+    name: ESLint
+    steps:
+      - uses: actions/checkout@master
+      - name: Set up Node
+        uses: actions/setup-node@v2.5.0
+        with:
+          node-version: 16.x
+      - name: npm install
+        run: npm ci
+      - name: eslint
+        run: npm run lint
+    env:
+      CI: true

@@ -22,153 +22,153 @@
 
 <template>
 	<div>
-		<form method="POST"
-			  ref="challengeForm">
+		<form ref="challengeForm"
+			method="POST">
 			<input id="challenge"
-				   type="hidden"
-				   name="challenge"
-				   v-model="challenge">
+				v-model="challenge"
+				type="hidden"
+				name="challenge">
 		</form>
 
-		<p id="webauthn-info"
-		   v-if="error">
+		<p v-if="error"
+			id="webauthn-info">
 			<strong>
-				{{ t('twofactor_webauthn', 'An error occurred: {msg}', {msg: this.error}) }}
+				{{ t('twofactor_webauthn', 'An error occurred: {msg}', {msg: error}) }}
 			</strong>
 			<button class="btn sign"
-					@click="sign">
+				@click="sign">
 				{{ t('twofactor_webauthn', 'Retry') }}
 			</button>
 		</p>
-		<p id="webauthn-info"
-		   v-else>
+		<p v-else
+			id="webauthn-info">
 			{{ t('mail', 'Plug in your Webauthn device and press the button below to begin authorization.') }}
 			<button class="btn sign"
-					@click="sign">
+				@click="sign">
 				{{ t('twofactor_webauthn', 'Use webauthn device') }}
 			</button>
 		</p>
 		<p id="webauthn-error"
-		   style="display: none">
-			<strong>{{ t('mail', 'An error occurred. Please try again.')}}</strong>
+			style="display: none">
+			<strong>{{ t('mail', 'An error occurred. Please try again.') }}</strong>
 		</p>
 
 		<p v-if="notSupported">
 			<em>
-			{{ t('twofactor_webauthn', 'Your browser does not support Webauthn.') }}
+				{{ t('twofactor_webauthn', 'Your browser does not support Webauthn.') }}
 			</em>
 		</p>
 		<p v-else-if="httpWarning"
-		   id="webauthn-http-warning">
+			id="webauthn-http-warning">
 			<em>
-			{{ t('twofactor_webauthn', 'You are accessing this site via an insecure connection. Browsers might therefore refuse the Webauthn authentication.') }}
+				{{ t('twofactor_webauthn', 'You are accessing this site via an insecure connection. Browsers might therefore refuse the Webauthn authentication.') }}
 			</em>
 		</p>
 	</div>
 </template>
 
 <script>
-    import { TWOFACTOR_WEBAUTHN } from '../constants';
+import { TWOFACTOR_WEBAUTHN } from '../constants'
 
-	const debug = (text) => (data) => {
-        console.debug(TWOFACTOR_WEBAUTHN, text, data)
-        return data
-    }
+const debug = (text) => (data) => {
+	console.debug(TWOFACTOR_WEBAUTHN, text, data)
+	return data
+}
 
-	export default {
-		name: 'Challenge',
-		props: {
-			publicKey: {
-				type: Object,
-				required: true,
-			},
-			httpWarning: {
-				type: Boolean,
-				required: true,
-			}
+export default {
+	name: 'Challenge',
+	props: {
+		publicKey: {
+			type: Object,
+			required: true,
 		},
-		data () {
-			return {
-				notSupported: typeof(PublicKeyCredential) === "undefined",
-				challenge: '',
-				error: undefined,
-			}
+		httpWarning: {
+			type: Boolean,
+			required: true,
 		},
-		mounted () {
-			// this.sign()
-			// 	.catch(console.error.bind(this))
-		},
-		methods: {
-			arrayToBase64String(a) {
-				return btoa(String.fromCharCode(...a));
-			},
-
-			base64url2base64(input) {
-				input = input
-					.replace(/=/g, "")
-					.replace(/-/g, '+')
-					.replace(/_/g, '/');
-
-				const pad = input.length % 4;
-				if(pad) {
-					if(pad === 1) {
-						throw new Error('InvalidLengthError: Input base64url string is the wrong length to determine padding');
-					}
-					input += new Array(5-pad).join('=');
-				}
-
-				return input;
-			},
-
-			sign () {
-				console.trace('sign');
-				this.error = undefined;
-
-				const publicKey = this.publicKey;
-
-				publicKey.challenge = Uint8Array.from(window.atob(this.base64url2base64(publicKey.challenge)), c=>c.charCodeAt(0));
-				if (publicKey.allowCredentials) {
-					publicKey.allowCredentials = publicKey.allowCredentials.map((data) => ({
-							...data,
-							'id': Uint8Array.from(window.atob(this.base64url2base64(data.id)), c=>c.charCodeAt(0))
-					}));
-				}
-
-
-				console.debug(TWOFACTOR_WEBAUTHN, 'Starting webauthn authentication', this.publicKey)
-
-				return navigator.credentials.get({publicKey})
-						.then(debug('got credentials'))
-						.then(data => {
-							return {
-								id: data.id,
-								type: data.type,
-								rawId: this.arrayToBase64String(new Uint8Array(data.rawId)),
-								response: {
-									authenticatorData: this.arrayToBase64String(new Uint8Array(data.response.authenticatorData)),
-									clientDataJSON: this.arrayToBase64String(new Uint8Array(data.response.clientDataJSON)),
-									signature: this.arrayToBase64String(new Uint8Array(data.response.signature)),
-									userHandle: data.response.userHandle ? this.arrayToBase64String(new Uint8Array(data.response.userHandle)) : null
-								}
-							};
-						})
-						.then(debug('mapped credentials'))
-						.then(challenge => {
-							this.challenge = JSON.stringify(challenge)
-
-							return this.$nextTick(() => {
-								this.$refs.challengeForm.submit()
-							})
-						})
-						.then(debug('submitted challengeForm'))
-						.catch(error => {
-							this.error = error;
-							console.log(error); // Example: timeout, interaction refused...
-							window.location = window.location.href.replace('challenge/twofactor_webauthn', 'selectchallenge');
-						});
-			}
+	},
+	data() {
+		return {
+			notSupported: typeof (PublicKeyCredential) === 'undefined',
+			challenge: '',
+			error: undefined,
 		}
-	}
+	},
+	mounted() {
+		// TODO: wait for the user to click the button or run on load?
+		// this.sign().catch(console.error.bind(this))
+	},
+	methods: {
+		arrayToBase64String(a) {
+			return btoa(String.fromCharCode(...a))
+		},
+
+		base64url2base64(input) {
+			input = input
+				.replace(/=/g, '')
+				.replace(/-/g, '+')
+				.replace(/_/g, '/')
+
+			const pad = input.length % 4
+			if (pad) {
+				if (pad === 1) {
+					throw new Error('InvalidLengthError: Input base64url string is the wrong length to determine padding')
+				}
+				input += new Array(5 - pad).join('=')
+			}
+
+			return input
+		},
+
+		sign() {
+			console.trace('sign')
+			this.error = undefined
+
+			const publicKey = this.publicKey
+
+			publicKey.challenge = Uint8Array.from(window.atob(this.base64url2base64(publicKey.challenge)), c => c.charCodeAt(0))
+			if (publicKey.allowCredentials) {
+				publicKey.allowCredentials = publicKey.allowCredentials.map((data) => ({
+					...data,
+					id: Uint8Array.from(window.atob(this.base64url2base64(data.id)), c => c.charCodeAt(0)),
+				}))
+			}
+
+			console.debug(TWOFACTOR_WEBAUTHN, 'Starting webauthn authentication', this.publicKey)
+
+			return navigator.credentials.get({ publicKey })
+				.then(debug('got credentials'))
+				.then(data => {
+					return {
+						id: data.id,
+						type: data.type,
+						rawId: this.arrayToBase64String(new Uint8Array(data.rawId)),
+						response: {
+							authenticatorData: this.arrayToBase64String(new Uint8Array(data.response.authenticatorData)),
+							clientDataJSON: this.arrayToBase64String(new Uint8Array(data.response.clientDataJSON)),
+							signature: this.arrayToBase64String(new Uint8Array(data.response.signature)),
+							userHandle: data.response.userHandle ? this.arrayToBase64String(new Uint8Array(data.response.userHandle)) : null,
+						},
+					}
+				})
+				.then(debug('mapped credentials'))
+				.then(challenge => {
+					this.challenge = JSON.stringify(challenge)
+
+					// eslint-disable-next-line vue/valid-next-tick
+					return this.$nextTick(() => {
+						this.$refs.challengeForm.submit()
+					})
+				})
+				.then(debug('submitted challengeForm'))
+				.catch(error => {
+					this.error = error
+					console.log(error) // Example: timeout, interaction refused...
+					window.location = window.location.href.replace('challenge/twofactor_webauthn', 'selectchallenge')
+				})
+		},
+	},
+}
 </script>
 
 <style scoped>

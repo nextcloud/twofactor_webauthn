@@ -25,11 +25,11 @@ import store from './store'
 import Vue from 'vue'
 
 import Nextcloud from './mixins/Nextcloud'
-import PersonalSettings from './components/PersonalSettings';
+import PersonalSettings from './components/PersonalSettings'
 
-Vue.mixin(Nextcloud);
+Vue.mixin(Nextcloud)
 
-const devices = loadState('twofactor_webauthn', 'devices');
+const devices = loadState('twofactor_webauthn', 'devices')
 devices.sort((d1, d2) => {
 	if (!d1.name) {
 		return 1
@@ -40,13 +40,13 @@ devices.sort((d1, d2) => {
 	}
 })
 store.replaceState({
-	devices
+	devices,
 })
 
-const View = Vue.extend(PersonalSettings);
+const View = Vue.extend(PersonalSettings)
 new View({
-    propsData: {
-        httpWarning: document.location.protocol !== 'https:',
-    },
-    store,
-}).$mount('#twofactor-webauthn-settings');
+	propsData: {
+		httpWarning: document.location.protocol !== 'https:',
+	},
+	store,
+}).$mount('#twofactor-webauthn-settings')

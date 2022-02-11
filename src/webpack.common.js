@@ -20,8 +20,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-const path = require('path');
-const { VueLoaderPlugin } = require('vue-loader');
+const path = require('path')
+const { VueLoaderPlugin } = require('vue-loader')
 
 module.exports = {
 	entry: {
@@ -36,40 +36,40 @@ module.exports = {
 		rules: [
 			{
 				test: /\.css$/,
-				use: ['vue-style-loader', 'css-loader']
+				use: ['vue-style-loader', 'css-loader'],
 			},
 			{
 				test: /\.scss$/,
-				use: ['vue-style-loader', 'css-loader', 'sass-loader']
+				use: ['vue-style-loader', 'css-loader', 'sass-loader'],
 			},
 			{
 				test: /\.vue$/,
-				loader: 'vue-loader'
+				loader: 'vue-loader',
 			},
 			{
 				test: /\.js$/,
 				loader: 'babel-loader',
-				exclude: /node_modules/
+				exclude: /node_modules/,
 			},
 			{
 				test: /\.(png|jpg|gif)$/,
 				loader: 'file-loader',
 				options: {
-					name: '[name].[ext]?[hash]'
-				}
+					name: '[name].[ext]?[hash]',
+				},
 			},
 			{
 				test: /\.(svg)$/i,
 				use: [
 					{
-						loader: 'url-loader'
-					}
-				]
-			}
-		]
+						loader: 'url-loader',
+					},
+				],
+			},
+		],
 	},
 	plugins: [new VueLoaderPlugin()],
 	resolve: {
-		extensions: ['*', '.js', '.vue']
-	}
-};
+		extensions: ['*', '.js', '.vue'],
+	},
+}

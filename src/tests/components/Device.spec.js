@@ -19,40 +19,40 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import {shallowMount, createLocalVue} from '@vue/test-utils'
+import { shallowMount, createLocalVue } from '@vue/test-utils'
 import Vuex from 'vuex'
 
 import Nextcloud from '../../mixins/Nextcloud'
+
+import Device from '../../components/Device'
 
 const localVue = createLocalVue()
 
 localVue.use(Vuex)
 localVue.mixin(Nextcloud)
 
-import Device from '../../components/Device'
-
 describe('Device component', () => {
-	var actions
-	var store
+	let actions
+	let store
 
 	beforeEach(() => {
 		actions = {}
 		store = new Vuex.Store({
 			state: {
-				devices: []
+				devices: [],
 			},
-			actions
+			actions,
 		})
 	})
 
 	it('renders devices without a name', () => {
 		store.state.devices.push({
 			id: 1,
-			name: undefined
+			name: undefined,
 		})
 		const device = shallowMount(Device, {
 			store,
-			localVue
+			localVue,
 		})
 
 		expect(device.text()).to.have.string('Unnamed device')

@@ -22,52 +22,56 @@
 
 <template>
 	<div class="webauthn-device" :data-webauthn-id="id">
-		<span class="icon-webauthn-device" v-bind:class="{ disabled: !active }" ></span>
+		<span class="icon-webauthn-device" :class="{ disabled: !active }" />
 		{{ name || t('twofactor_webauthn', 'Unnamed device') }}
 		<Actions>
-			<ActionButton icon="icon-delete" @click="onDelete" :close-after-click="true">{{ t('twofactor_webauthn', 'Remove') }}</ActionButton>
-			<ActionCheckbox :checked="active" @update:checked="changeActivation">{{ t('twofactor_webauthn', 'Active') }}</ActionCheckbox>
+			<ActionButton icon="icon-delete" :close-after-click="true" @click="onDelete">
+				{{ t('twofactor_webauthn', 'Remove') }}
+			</ActionButton>
+			<ActionCheckbox :checked="active" @update:checked="changeActivation">
+				{{ t('twofactor_webauthn', 'Active') }}
+			</ActionCheckbox>
 		</Actions>
 	</div>
 </template>
 
 <script>
-	import Actions from '@nextcloud/vue/dist/Components/Actions';
-	import ActionButton from '@nextcloud/vue/dist/Components/ActionButton';
-	import ActionCheckbox from '@nextcloud/vue/dist/Components/ActionCheckbox';
-	import confirmPassword from '@nextcloud/password-confirmation';
+import Actions from '@nextcloud/vue/dist/Components/Actions'
+import ActionButton from '@nextcloud/vue/dist/Components/ActionButton'
+import ActionCheckbox from '@nextcloud/vue/dist/Components/ActionCheckbox'
+import confirmPassword from '@nextcloud/password-confirmation'
 
-	export default {
-		name: 'Device',
-		props: {
-			id: String,
-			name: String,
-			active: Boolean
-		},
-		components: {
-			Actions,
-			ActionButton,
-			ActionCheckbox
-		},
-		methods: {
-			async onDelete() {
-				await confirmPassword()
-				try {
-					await this.$store.dispatch('removeDevice', this.id)
-				} catch (e) {
-					console.error('could not delete device', e)
-				}
-			},
-			async changeActivation (active) {
-				await confirmPassword()
-				try {
-					this.$store.dispatch('changeActivationState', { id: this.id, active })
-				} catch (e) {
-					console.error('could not change device state', e)
-				}
+export default {
+	name: 'Device',
+	components: {
+		Actions,
+		ActionButton,
+		ActionCheckbox,
+	},
+	props: {
+		id: String,
+		name: String,
+		active: Boolean,
+	},
+	methods: {
+		async onDelete() {
+			await confirmPassword()
+			try {
+				await this.$store.dispatch('removeDevice', this.id)
+			} catch (e) {
+				console.error('could not delete device', e)
 			}
-		}
-	}
+		},
+		async changeActivation(active) {
+			await confirmPassword()
+			try {
+				this.$store.dispatch('changeActivationState', { id: this.id, active })
+			} catch (e) {
+				console.error('could not change device state', e)
+			}
+		},
+	},
+}
 </script>
 
 <style scoped>
