@@ -7,6 +7,7 @@ declare(strict_types=1);
  *
  * @author Christoph Wurst <christoph@winzerhof-wurst.at>
  * @author Michael Blumenstein <M.Flower@gmx.de>
+ * @author Richard Steinmetz <richard@steinmetz.cloud>
  *
  * @license GNU AGPL version 3 or any later version
  *
@@ -87,6 +88,19 @@ class PublicKeyCredentialEntity extends Entity {
 	 */
 	protected $active;
 
+	public function __construct() {
+		$this->addType('aaguid', 'string');
+		$this->addType('active', 'boolean');
+		$this->addType('attestationType', 'string');
+		$this->addType('counter', 'integer');
+		$this->addType('credentialPublicKey', 'string');
+		$this->addType('name', 'string');
+		$this->addType('publicKeyCredentialId', 'string');
+		$this->addType('transports', 'string');
+		$this->addType('trustPath', 'string');
+		$this->addType('type', 'string');
+		$this->addType('userHandle', 'string');
+	}
 
 	public static function fromPublicKeyCrendentialSource(string $name, PublicKeyCredentialSource $publicKeyCredentialSource): PublicKeyCredentialEntity {
 		$publicKeyCredentialEntity = new self();
