@@ -1,9 +1,0 @@
-{ "translations": {
-    "U2F device" : "U2F seade",
-    "Add U2F device" : "Lisa U2F seade",
-    "Add" : "Lisa",
-    "Retry" : "Proovi uuesti",
-    "Unnamed device" : "Nimetu seade",
-    "Remove" : "Eemalda"
-},"pluralForm" :"nplurals=2; plural=(n != 1);"
-}
