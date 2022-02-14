@@ -7,6 +7,7 @@ declare(strict_types=1);
  *
  * @author Christoph Wurst <christoph@winzerhof-wurst.at>
  * @author Michael Blumenstein <M.Flower@gmx.de>
+ * @author Richard Steinmetz <richard@steinmetz.cloud>
  *
  * @license GNU AGPL version 3 or any later version
  *
@@ -102,10 +103,8 @@ class WebauthnProvider implements IProvider, IProvidesIcons, IProvidesPersonalSe
 	 */
 	public function getTemplate(IUser $user): Template {
 		$publicKey = $this->manager->startAuthenticate($user, $this->request->getServerHost());
-
-		$tmpl = new Template('twofactor_webauthn', 'challenge');
-		$tmpl->assign('publicKey', $publicKey);
-		return $tmpl;
+		$this->initialState->provideInitialState('credential-request-options', $publicKey);
+		return new Template('twofactor_webauthn', 'challenge');
 	}
 
 	/**
