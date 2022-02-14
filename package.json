@@ -44,9 +44,10 @@
 		"webpack-node-externals": "^3.0.0"
 	},
 	"scripts": {
+		"dev": "webpack --progress --config src/webpack.dev.js",
+		"watch": "webpack --progress --watch --config src/webpack.dev.js",
 		"build": "webpack --progress --config src/webpack.prod.js",
 		"coverage": "nyc report --reporter=text-lcov | coveralls",
-		"watch": "webpack --progress --watch --config src/webpack.dev.js",
 		"lint": "eslint --ext .js,.vue src",
 		"lint:fix": "eslint --ext .js,.vue src --fix",
 		"test": "NODE_ENV=test nyc mochapack --webpack-config src/webpack.test.js --require src/tests/setup.js src/tests/**/*.spec.js",
