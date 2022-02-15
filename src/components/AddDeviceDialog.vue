@@ -23,7 +23,7 @@
 <template>
 	<div v-if="step === RegistrationSteps.READY">
 		<button @click="start">
-			{{ t('twofactor_webauthn', 'Add Webauthn device') }}
+			{{ t('twofactor_webauthn', 'Add WebAuthn device') }}
 		</button>
 		<p v-if="errorMessage" class="error-message">
 			<span class="icon icon-error" />
@@ -34,7 +34,7 @@
 	<div v-else-if="step === RegistrationSteps.REGISTRATION"
 		class="new-webauthn-device">
 		<span class="icon-loading-small webauthn-loading" />
-		{{ t('twofactor_webauthn', 'Please plug in your Webauthn device and press the device button to authorize.') }}
+		{{ t('twofactor_webauthn', 'Please plug in your WebAuthn device and press the device button to authorize.') }}
 	</div>
 
 	<div v-else-if="step === RegistrationSteps.NAMING"
@@ -120,7 +120,7 @@ export default {
 
 		start() {
 			this.errorMessage = null
-			console.info(TWOFACTOR_WEBAUTHN, 'Starting to add a new twofactor webauthn device')
+			console.info(TWOFACTOR_WEBAUTHN, 'Starting to add a new two-factor WebAuthn device')
 			this.step = RegistrationSteps.REGISTRATION
 
 			return confirmPassword()
