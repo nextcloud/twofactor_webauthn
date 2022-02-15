@@ -23,10 +23,10 @@
 <template>
 	<div>
 		<p v-if="devices.length === 0">
-			{{ t('twofactor_webauthn', 'No Webauthn devices configured. You are not using Webauthn as second factor at the moment.') }}
+			{{ t('twofactor_webauthn', 'No WebAuthn devices configured. You are not using Webauthn as second factor at the moment.') }}
 		</p>
 		<p v-else>
-			{{ t('twofactor_webauthn', 'The following devices are configured for Webauthn second-factor authentication:') }}
+			{{ t('twofactor_webauthn', 'The following devices are configured for WebAuthn two-factor authentication:') }}
 		</p>
 		<Device v-for="device in devices"
 			:id="device.id"
@@ -45,7 +45,7 @@
 		</p>
 		<p v-if="httpWarning" class="webauthn-warning">
 			<span class="icon icon-info" />
-			{{ t('twofactor_webauthn', 'You are accessing this site via an insecure connection. Browsers might therefore refuse the Webauthn authentication.') }}
+			{{ t('twofactor_webauthn', 'You are accessing this site via an insecure connection. Browsers might therefore refuse the WebAuthn authentication.') }}
 		</p>
 	</div>
 </template>
