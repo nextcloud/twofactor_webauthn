@@ -95,7 +95,7 @@ class WebauthnProvider implements IProvider, IProvidesIcons, IProvidesPersonalSe
 	 * Get the description for selecting the 2FA provider
 	 */
 	public function getDescription(): string {
-		return $this->l10n->t('Use Webauthn for second factor authentication');
+		return $this->l10n->t('Use WebAuthn for second factor authentication');
 	}
 
 	/**
