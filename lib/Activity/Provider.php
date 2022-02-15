@@ -72,13 +72,13 @@ class Provider implements IProvider {
 		$event->setIcon($this->urlGenerator->getAbsoluteURL($this->urlGenerator->imagePath('core', 'actions/password.svg')));
 		switch ($event->getSubject()) {
 			case 'webauthn_device_added':
-				$event->setSubject($l->t('You added an WebAuthn hardware token'));
+				$event->setSubject($l->t('You added WebAuthn hardware token'));
 				break;
 			case 'webauthn_device_removed':
-				$event->setSubject($l->t('You removed an WebAuthn hardware token'));
+				$event->setSubject($l->t('You removed WebAuthn hardware token'));
 				break;
 			case 'webauthn_disabled_by_admin':
-				$event->setSubject($l->t('WebAuthn disabled by an administrator'));
+				$event->setSubject($l->t('WebAuthn disabled by the administration'));
 				break;
 		}
 		return $event;
