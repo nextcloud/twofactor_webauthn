@@ -120,7 +120,7 @@ export default {
 
 		start() {
 			this.errorMessage = null
-			console.info(TWOFACTOR_WEBAUTHN, 'Starting to add a new two-factor WebAuthn device')
+			console.info(TWOFACTOR_WEBAUTHN, 'Starting to add a new twofactor webauthn device')
 			this.step = RegistrationSteps.REGISTRATION
 
 			return confirmPassword()
