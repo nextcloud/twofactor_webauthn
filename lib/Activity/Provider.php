@@ -78,7 +78,7 @@ class Provider implements IProvider {
 				$event->setSubject($l->t('You removed an WebAuthn hardware token'));
 				break;
 			case 'webauthn_disabled_by_admin':
-				$event->setSubject($l->t('WebAuthn disabled by an admin'));
+				$event->setSubject($l->t('WebAuthn disabled by an administrator'));
 				break;
 		}
 		return $event;
