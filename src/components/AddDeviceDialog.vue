@@ -197,7 +197,7 @@ export default {
 				.then(debug('new device added to store'))
 				.catch(err => {
 					console.error(TWOFACTOR_WEBAUTHN, 'Error persisting webauthn registration', err)
-					throw new Error(t('twofactor_webauthn', 'Server error while trying to complete webauthn device registration'))
+					throw new Error(t('twofactor_webauthn', 'Server error while trying to complete WebAuthn device registration'))
 				})
 		},
 
