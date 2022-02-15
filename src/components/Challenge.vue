@@ -43,10 +43,10 @@
 		</p>
 		<p v-else
 			id="webauthn-info">
-			{{ t('mail', 'Plug in your Webauthn device and press the button below to begin authorization.') }}
+			{{ t('twofactor_webauthn', 'Plug in your WebAuthn device and press the button below to begin authorization.') }}
 			<button class="btn sign"
 				@click="sign">
-				{{ t('twofactor_webauthn', 'Use webauthn device') }}
+				{{ t('twofactor_webauthn', 'Use WebAuthn device') }}
 			</button>
 		</p>
 		<p id="webauthn-error"
@@ -56,13 +56,13 @@
 
 		<p v-if="notSupported">
 			<em>
-				{{ t('twofactor_webauthn', 'Your browser does not support Webauthn.') }}
+				{{ t('twofactor_webauthn', 'Your browser does not support WebAuthn.') }}
 			</em>
 		</p>
 		<p v-else-if="httpWarning"
 			id="webauthn-http-warning">
 			<em>
-				{{ t('twofactor_webauthn', 'You are accessing this site via an insecure connection. Browsers might therefore refuse the Webauthn authentication.') }}
+				{{ t('twofactor_webauthn', 'You are accessing this site via an insecure connection. Browsers might therefore refuse the WebAuthn authentication.') }}
 			</em>
 		</p>
 	</div>
