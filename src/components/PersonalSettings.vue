@@ -23,7 +23,7 @@
 <template>
 	<div>
 		<p v-if="devices.length === 0">
-			{{ t('twofactor_webauthn', 'No WebAuthn devices configured. You are not using Webauthn as second factor at the moment.') }}
+			{{ t('twofactor_webauthn', 'No WebAuthn devices configured. You are not using WebAuthn as second factor at the moment.') }}
 		</p>
 		<p v-else>
 			{{ t('twofactor_webauthn', 'The following devices are configured for WebAuthn two-factor authentication:') }}
