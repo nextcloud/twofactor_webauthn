@@ -41,7 +41,7 @@
 		</p>
 		<p v-if="notSupported" class="webauthn-warning">
 			<span class="icon icon-info" />
-			{{ t('twofactor_webauthn', 'Your browser does not support Webauthn.') }}
+			{{ t('twofactor_webauthn', 'Your browser does not support WebAuthn.') }}
 		</p>
 		<p v-if="httpWarning" class="webauthn-warning">
 			<span class="icon icon-info" />
