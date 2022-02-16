@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace OCA\TwoFactorU2F\Tests\Unit\Listener;
 
 use OCA\TwoFactorU2F\Event\DisabledByAdmin;
