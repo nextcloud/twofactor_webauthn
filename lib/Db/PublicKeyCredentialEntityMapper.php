@@ -28,8 +28,13 @@ namespace OCA\TwoFactorWebauthn\Db;
 
 use OCP\AppFramework\Db\Entity;
 use OCP\AppFramework\Db\QBMapper;
+use OCP\DB\QueryBuilder\IQueryBuilder;
 use OCP\IDBConnection;
+use OCP\IUser;
 
+/**
+ * @template-extends QBMapper<PublicKeyCredentialEntity>
+ */
 class PublicKeyCredentialEntityMapper extends QBMapper {
 	public function __construct(IDBConnection $db) {
 		parent::__construct($db, 'twofactor_webauthn_registrations');
@@ -58,7 +63,7 @@ class PublicKeyCredentialEntityMapper extends QBMapper {
 	protected $attestationType;
 
 	/**
-	 * @var TrustPath
+	 * @var string
 	 */
 	protected $trustPath;
 
@@ -107,10 +112,9 @@ class PublicKeyCredentialEntityMapper extends QBMapper {
 
 	/**
 	 * @param IUser $user
-	 * @return Registration[]
+	 * @return PublicKeyCredentialEntity[]
 	 */
 	public function findPublicKeyCredentials(string $userHandle): array {
-		/* @var $qb IQueryBuilder */
 		$qb = $this->db->getQueryBuilder();
 
 		$qb->select('id', 'name', 'public_key_credential_id', 'type', 'transports', 'attestation_type', 'trust_path', 'aaguid', 'credential_public_key', 'user_handle', 'counter', 'active')

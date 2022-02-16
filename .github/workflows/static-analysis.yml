@@ -19,7 +19,11 @@ jobs:
                 coverage: none
           - name: Install dependencies
             run: composer i
-          - name: Install dependencies
+          - name: Install OCP package
+            if: ${{ matrix.nextcloud-versions == 'stable20' }}
             run: composer require --dev christophwurst/nextcloud:${{ matrix.ocp-version }}
+          - name: Install OCP package
+            if: ${{ matrix.nextcloud-versions == 'dev-master' }}
+            run: composer require --dev christophwurst/nextcloud:${{ matrix.ocp-version }} --ignore-platform-req=php
           - name: Run coding standards check
             run: composer run psalm

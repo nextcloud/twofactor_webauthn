@@ -37,11 +37,11 @@ use OCA\TwoFactorWebauthn\Db\PublicKeyCredentialEntity;
 use OCA\TwoFactorWebauthn\Db\PublicKeyCredentialEntityMapper;
 use OCA\TwoFactorWebauthn\Event\StateChanged;
 use OCA\TwoFactorWebauthn\Repository\WebauthnPublicKeyCredentialSourceRepository;
+use OCP\EventDispatcher\IEventDispatcher;
 use OCP\ISession;
 use OCP\IUser;
 use Slim\Http\Environment;
 use Slim\Http\Request;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Webauthn\AttestationStatement\AndroidKeyAttestationStatementSupport;
 use Webauthn\AttestationStatement\AttestationObjectLoader;
 use Webauthn\AttestationStatement\AttestationStatementSupportManager;
@@ -81,21 +81,15 @@ class WebauthnManager {
 	 */
 	private $mapper;
 	/**
-	 * @var EventDispatcherInterface
+	 * @var IEventDispatcher
 	 */
 	private $eventDispatcher;
 
-	/**
-	 * WebauthnManager constructor.
-	 * @param ISession $session
-	 * @param WebauthnPublicKeyCredentialSourceRepository $repository
-	 * @param PublicKeyCredentialEntityMapper $mapper
-	 */
 	public function __construct(
 		ISession $session,
 		WebauthnPublicKeyCredentialSourceRepository $repository,
 		PublicKeyCredentialEntityMapper $mapper,
-		EventDispatcherInterface $eventDispatcher
+		IEventDispatcher $eventDispatcher,
 	) {
 		$this->session = $session;
 		$this->repository = $repository;
@@ -356,14 +350,14 @@ class WebauthnManager {
 
 	public function deactivateAllDevices(IUser $user) {
 		foreach ($this->mapper->findPublicKeyCredentials($user->getUID()) as $credential) {
-			$credential->setActive(0);
+			$credential->setActive(false);
 			$this->mapper->update($credential);
 		}
 
 		$this->eventDispatcher->dispatch(StateChanged::class, new StateChanged($user, false));
 	}
 
-	public function changeActivationState(IUser $user, string $id, int $active) {
+	public function changeActivationState(IUser $user, string $id, bool $active) {
 		$credential = $this->mapper->findPublicKeyCredential($id);
 		Assertion::eq($credential->getUserHandle(), $user->getUID());
 

@@ -32,6 +32,30 @@ use Ramsey\Uuid\Uuid;
 use Webauthn\PublicKeyCredentialSource;
 use Webauthn\TrustPath\TrustPathLoader;
 
+/**
+ * @method string getName()
+ * @method void setName(string $name)
+ * @method string getPublicKeyCredentialId()
+ * @method void setPublicKeyCredentialId(string $id)
+ * @method string getType()
+ * @method void setType(string $type)
+ * @method string getTransports()
+ * @method void setTransports(string $type)
+ * @method string getAttestationType()
+ * @method void setAttestationType(string $type)
+ * @method string getTrustPath()
+ * @method void setTrustPath(string $path)
+ * @method string getAaguid()
+ * @method void setAaguid(string $aaguid)
+ * @method string getCredentialPublicKey()
+ * @method void setCredentialPublicKey(string $key)
+ * @method string getUserHandle()
+ * @method void setUserHandle(string $handle)
+ * @method int getCounter()
+ * @method void setCounter(int $counter)
+ * @method string getActive()
+ * @method void setActive(bool $active)
+ */
 class PublicKeyCredentialEntity extends Entity {
 	/**
 	 * @var string
@@ -49,7 +73,7 @@ class PublicKeyCredentialEntity extends Entity {
 	protected $type;
 
 	/**
-	 * @var string[]
+	 * @var string
 	 */
 	protected $transports;
 
@@ -89,17 +113,8 @@ class PublicKeyCredentialEntity extends Entity {
 	protected $active;
 
 	public function __construct() {
-		$this->addType('aaguid', 'string');
+		$this->addType('counter', 'int');
 		$this->addType('active', 'boolean');
-		$this->addType('attestationType', 'string');
-		$this->addType('counter', 'integer');
-		$this->addType('credentialPublicKey', 'string');
-		$this->addType('name', 'string');
-		$this->addType('publicKeyCredentialId', 'string');
-		$this->addType('transports', 'string');
-		$this->addType('trustPath', 'string');
-		$this->addType('type', 'string');
-		$this->addType('userHandle', 'string');
 	}
 
 	public static function fromPublicKeyCrendentialSource(string $name, PublicKeyCredentialSource $publicKeyCredentialSource): PublicKeyCredentialEntity {
