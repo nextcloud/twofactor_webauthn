@@ -1,20 +1,27 @@
 { "translations": {
     "You added an WebAuthn hardware token" : "WebAuthn aygıtı eklediniz",
     "You removed an WebAuthn hardware token" : "WebAuthn aygıtını sildiniz",
+    "WebAuthn disabled by the administration" : "WebAuthn yönetici tarafından devre dışı bırakılmış",
     "WebAuthn device" : "WebAuthn aygıtı",
-    "Two-Factor Webauthn" : "İki aşamalı WebAuthn",
-    "Webauthn two-factor provider" : "WebAuthn iki aşamalı kimlik doğrulama hizmeti sağlayıcısı",
-    "A two-factor provider for webauthn devices" : "WebAuthn aygıtları için iki aşamalı kimlik doğrulama hizmeti sağlayıcısı",
+    "Use WebAuthn for second factor authentication" : "İki aşamalı kimlik doğrulaması için WebAuthn kullanılsın",
+    "Add WebAuthn device" : "WebAuthn aygıtı ekle",
+    "Please plug in your WebAuthn device and press the device button to authorize." : "Lütfen WebAuthn aygıtınızı takın ve kimliğinizi doğrulamak için aygıt üzerindeki düğmeye basın.",
     "Name your device" : "Aygıtınıza bir ad verin",
     "Add" : "Ekle",
     "Adding your device …" : "Aygıtınız ekleniyor …",
+    "Server error while trying to complete WebAuthn device registration" : "WebAuthn aygıtı kaydedilirken sunucu sorunu çıktı",
     "An error occurred: {msg}" : "Bir sorun çıktı: {message}",
     "Retry" : "Yeniden dene",
+    "Plug in your WebAuthn device and press the button below to begin authorization." : "WebAuthn aygıtınızı takın ve kimliğinizi doğrulamak için aygıt üzerindeki düğmeye basın.",
+    "Use WebAuthn device" : "WebAuthn aygıtı kullanılsın",
     "An error occurred. Please try again." : "Bir sorun çıktı. Lütfen yeniden deneyin.",
+    "Your browser does not support WebAuthn." : "Web tarayıcınız WebAuthn desteklemiyor.",
+    "You are accessing this site via an insecure connection. Browsers might therefore refuse the WebAuthn authentication." : "Bu site ile bağlantınız güvenli değil. Bu nedenle tarayıcılar yeniden WebAuthn kimlik doğrulaması isteyebilir.",
     "Unnamed device" : "Adsız aygıt",
     "Remove" : "Kaldır",
     "Active" : "Etkin",
-    "All devices are deactivated." : "Tüm aygıtlar devre dışı bırakıldı.",
-    "Your browser does not support Webauthn." : "Web tarayıcınız WebAuthn desteklemiyor."
+    "No WebAuthn devices configured. You are not using WebAuthn as second factor at the moment." : "Herhangi bir WebAuthn aygıtı ayarlanmamış. Şu anda iki aşamalı doğrulama için WebAuthn kullanılamaz.",
+    "The following devices are configured for WebAuthn two-factor authentication:" : "İki aşamalı kimlik doğrulaması için ayarlanmış ve kullanılabilecek WebAuthn aygıtları:",
+    "All devices are deactivated." : "Tüm aygıtlar devre dışı bırakıldı."
 },"pluralForm" :"nplurals=2; plural=(n > 1);"
 }

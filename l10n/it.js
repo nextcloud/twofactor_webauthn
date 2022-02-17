@@ -4,9 +4,6 @@ OC.L10N.register(
     "You added an WebAuthn hardware token" : "Hai aggiunto un token hardware WebAuthn",
     "You removed an WebAuthn hardware token" : "Hai rimosso un token hardware WebAuthn",
     "WebAuthn device" : "Dispositivo WebAuthn",
-    "Two-Factor Webauthn" : "Webauthn a due fattori",
-    "Webauthn two-factor provider" : "Fornitore a due fattori Webauthn",
-    "A two-factor provider for webauthn devices" : "Un fornitore a due fattori per dispositivi Webauthn",
     "Name your device" : "Nome del tuo dispositivo",
     "Add" : "Aggiungi",
     "Adding your device …" : "Aggiunta del tuo dispositivo …",
@@ -16,7 +13,6 @@ OC.L10N.register(
     "Unnamed device" : "Dispositivo senza nome",
     "Remove" : "Rimuovi",
     "Active" : "Attivo",
-    "All devices are deactivated." : "Tutti i dispositivi sono disattivati.",
-    "Your browser does not support Webauthn." : "Il tuo browser non supporta Webauthn."
+    "All devices are deactivated." : "Tutti i dispositivi sono disattivati."
 },
 "nplurals=2; plural=(n != 1);");

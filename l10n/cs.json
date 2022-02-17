@@ -1,20 +1,27 @@
 { "translations": {
     "You added an WebAuthn hardware token" : "Přidali jste hardwarový token pro WebAuthn",
     "You removed an WebAuthn hardware token" : "Odebrali jste hardwarový token pro WebAuthn",
+    "WebAuthn disabled by the administration" : "WebAuthn znepřístupněno správcem",
     "WebAuthn device" : "WebAuthn zařízení",
-    "Two-Factor Webauthn" : "Webauthn se dvěma faktory",
-    "Webauthn two-factor provider" : "Poskytovatel dvoufaktorového Webauthn",
-    "A two-factor provider for webauthn devices" : "Poskytovatel dvoufaktoru pro Webauthn zařízení",
+    "Use WebAuthn for second factor authentication" : "Použít WebAuthn jako druhý faktor ověřování",
+    "Add WebAuthn device" : "Přidat WebAuthn zařízení",
+    "Please plug in your WebAuthn device and press the device button to authorize." : "Připojte své WebAuhtn zařízení a proveďte ověření stisknutím tlačítka na zařízení",
     "Name your device" : "Nazvěte své zařízení",
     "Add" : "Přidat",
     "Adding your device …" : "Přidávání vašeho zařízení",
+    "Server error while trying to complete WebAuthn device registration" : "Chyba serveru při pokusu o dokončení registrace WebAuthn zařízení",
     "An error occurred: {msg}" : "Došlo k chybě: {msg}",
     "Retry" : "Zkusit znovu",
+    "Plug in your WebAuthn device and press the button below to begin authorization." : "Připojte své WebAuhtn zařízení a zahajte ověření stisknutím tlačítka níže.",
+    "Use WebAuthn device" : "Použít WebAuthn zařízení",
     "An error occurred. Please try again." : "Došlo k chybě. Zkuste to znovu.",
+    "Your browser does not support WebAuthn." : "Vámi používaný prohlížeč nepodporuje WebAuthn.",
+    "You are accessing this site via an insecure connection. Browsers might therefore refuse the WebAuthn authentication." : "K tomuto webu přistupujete přes nezabezpečené připojení. Prohlížeče proto mohou odmítnout WebAuthn ověřování.",
     "Unnamed device" : "Nepojmenované zařízení",
     "Remove" : "Odebrat",
     "Active" : "Aktivní",
-    "All devices are deactivated." : "Veškerá zařízení jsou deaktivována.",
-    "Your browser does not support Webauthn." : "Vámi používaný prohlížeč nepodporuje WebAuthn."
+    "No WebAuthn devices configured. You are not using WebAuthn as second factor at the moment." : "Nejsou nastavená žádná WebAuthn zařízení. V tuto chvíli nepoužíváte WebAuthn jako druhý faktor.",
+    "The following devices are configured for WebAuthn two-factor authentication:" : "Následující zařízení jsou nastavena pro dvoufaktorové ověřování pomocí WebAuthn:",
+    "All devices are deactivated." : "Veškerá zařízení jsou deaktivována."
 },"pluralForm" :"nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n >= 2 && n <= 4 && n % 1 == 0) ? 1: (n % 1 != 0 ) ? 2 : 3;"
 }
