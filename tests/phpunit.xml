@@ -8,7 +8,7 @@
       <clover outputFile="./clover.unit.xml"/>
     </report>
   </coverage>
-  <testsuite name="U2F app tests">
+  <testsuite name="Two-Factor WebAuthn app tests">
     <directory>.</directory>
   </testsuite>
 </phpunit>

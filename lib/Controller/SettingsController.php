@@ -26,7 +26,7 @@ declare(strict_types = 1);
 
 namespace OCA\TwoFactorWebauthn\Controller;
 
-use OCA\TwoFactorWebauthn\Service\WebauthnManager;
+use OCA\TwoFactorWebauthn\Service\WebAuthnManager;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\Authentication\TwoFactorAuth\ALoginSetupController;
 use OCP\IRequest;
@@ -34,13 +34,13 @@ use OCP\IUserSession;
 
 class SettingsController extends ALoginSetupController {
 
-	/** @var WebauthnManager */
+	/** @var WebAuthnManager */
 	private $manager;
 
 	/** @var IUserSession */
 	private $userSession;
 
-	public function __construct(string $appName, IRequest $request, WebauthnManager $manager, IUserSession $userSession) {
+	public function __construct(string $appName, IRequest $request, WebAuthnManager $manager, IUserSession $userSession) {
 		parent::__construct($appName, $request);
 		$this->manager = $manager;
 		$this->userSession = $userSession;
@@ -63,7 +63,13 @@ class SettingsController extends ALoginSetupController {
 	 * @param string $data
 	 */
 	public function finishRegister(string $name, string $data): JSONResponse {
-		return new JSONResponse($this->manager->finishRegister($this->userSession->getUser(), $name, $data));
+		return new JSONResponse(
+			$this->manager->finishRegister(
+				$this->userSession->getUser(),
+				$name,
+				$data
+			)
+		);
 	}
 
 	/**

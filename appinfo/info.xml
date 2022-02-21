@@ -25,7 +25,7 @@
 	</dependencies>
 
 	<two-factor-providers>
-		<provider>OCA\TwoFactorWebauthn\Provider\WebauthnProvider</provider>
+		<provider>OCA\TwoFactorWebauthn\Provider\WebAuthnProvider</provider>
 	</two-factor-providers>
 
 	<activity>

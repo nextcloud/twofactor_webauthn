@@ -65,7 +65,7 @@ use Webauthn\PublicKeyCredentialRpEntity;
 use Webauthn\PublicKeyCredentialUserEntity;
 use Webauthn\TokenBinding\TokenBindingNotSupportedHandler;
 
-class WebauthnManager {
+class WebAuthnManager {
 	public const TWOFACTORAUTH_WEBAUTHN_REGISTRATION = 'twofactorauth_webauthn_registration';
 	public const TWOFACTORAUTH_WEBAUTHN_REQUEST = 'twofactorauth_webauthn_request';
 	/**
@@ -89,7 +89,7 @@ class WebauthnManager {
 		ISession $session,
 		WebauthnPublicKeyCredentialSourceRepository $repository,
 		PublicKeyCredentialEntityMapper $mapper,
-		IEventDispatcher $eventDispatcher,
+		IEventDispatcher $eventDispatcher
 	) {
 		$this->session = $session;
 		$this->repository = $repository;
@@ -235,7 +235,7 @@ class WebauthnManager {
 			return [
 				'id' => $credential->getPublicKeyCredentialId(),
 				'name' => $credential->getName(),
-				'active' => \boolval($credential->getActive())
+				'active' => $credential->getActive()
 			];
 		}, $credentials);
 	}

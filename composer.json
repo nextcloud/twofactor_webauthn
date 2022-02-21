@@ -19,6 +19,7 @@
 	},
 	"require-dev": {
 		"christophwurst/nextcloud": "^22.1",
+		"christophwurst/nextcloud_testing": "^0.12.4",
 		"nextcloud/coding-standard": "^1.0",
 		"phpunit/phpunit": "^9.5.0",
 		"psalm/phar": "^4.3",
@@ -33,7 +34,7 @@
 		"test:acceptance": "phpunit -c tests/phpunit.xml tests/Acceptance",
 		"test:unit": "phpunit -c tests/phpunit.xml tests/Unit",
 		"test:acceptance:dev": "phpunit -c tests/phpunit.xml tests/Acceptance --no-coverage",
-		"test:unit:dev": "phpunit -c tests/phpunit.xml tests/Unit --no-coverage"
+		"test:unit:dev": "phpunit -c tests/phpunit.xml tests/Unit --no-coverage --order-by=defects --stop-on-defect --fail-on-warning --stop-on-error --stop-on-failure"
 	},
 	"config": {
 		"optimize-autoloader": true,

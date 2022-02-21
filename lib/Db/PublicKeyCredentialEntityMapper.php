@@ -111,15 +111,15 @@ class PublicKeyCredentialEntityMapper extends QBMapper {
 	}
 
 	/**
-	 * @param IUser $user
+	 * @param string $uid
 	 * @return PublicKeyCredentialEntity[]
 	 */
-	public function findPublicKeyCredentials(string $userHandle): array {
+	public function findPublicKeyCredentials(string $uid): array {
 		$qb = $this->db->getQueryBuilder();
 
 		$qb->select('id', 'name', 'public_key_credential_id', 'type', 'transports', 'attestation_type', 'trust_path', 'aaguid', 'credential_public_key', 'user_handle', 'counter', 'active')
 			->from('twofactor_webauthn_registrations')
-			->where($qb->expr()->eq('user_handle', $qb->createNamedParameter($userHandle)));
+			->where($qb->expr()->eq('user_handle', $qb->createNamedParameter($uid)));
 		return $this->findEntities($qb);
 	}
 
