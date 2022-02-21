@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <files psalm-version="4.x-dev@">
   <file src="lib/AppInfo/Application.php">
-    <InvalidArgument occurrences="3">
+    <InvalidArgument occurrences="4">
       <code>registerEventListener</code>
       <code>StateChangeActivity::class</code>
       <code>StateChangeActivity::class</code>
@@ -13,6 +13,12 @@
       <code>Template</code>
       <code>Template</code>
     </MissingDependency>
+  </file>
+  <file src="lib/Service/WebAuthnManager.php">
+    <UndefinedClass occurrences="2">
+      <code>ServerRequest</code>
+      <code>ServerRequest</code>
+    </UndefinedClass>
   </file>
   <file src="lib/Settings/Personal.php">
     <MissingDependency occurrences="2">
