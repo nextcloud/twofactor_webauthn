@@ -66,7 +66,7 @@ class WebAuthnManagerTest extends TestCase {
 			$this->session,
 			$this->repository,
 			$this->mapper,
-			$this->eventDispatcher,
+			$this->eventDispatcher
 		);
 	}
 
