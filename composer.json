@@ -14,7 +14,7 @@
 	"require": {
 		"php": ">=7.3.0",
 		"ext-json": "*",
-		"slim/slim": "^3.12",
+		"slim/slim": "^4.9",
 		"web-auth/webauthn-lib": "^3.3"
 	},
 	"require-dev": {
