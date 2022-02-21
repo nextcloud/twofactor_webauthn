@@ -28,9 +28,8 @@ declare(strict_types=1);
 namespace OCA\TwoFactorWebauthn\Provider;
 
 use OCA\TwoFactorWebauthn\AppInfo\Application;
-use OCA\TwoFactorWebauthn\Service\WebauthnManager;
+use OCA\TwoFactorWebauthn\Service\WebAuthnManager;
 use OCA\TwoFactorWebauthn\Settings\Personal;
-use OCP\AppFramework\IAppContainer;
 use OCP\AppFramework\Services\IInitialState;
 use OCP\Authentication\TwoFactorAuth\IDeactivatableByAdmin;
 use OCP\Authentication\TwoFactorAuth\IPersonalProviderSettings;
@@ -43,16 +42,13 @@ use OCP\IURLGenerator;
 use OCP\IUser;
 use OCP\Template;
 
-class WebauthnProvider implements IProvider, IProvidesIcons, IProvidesPersonalSettings, IDeactivatableByAdmin {
+class WebAuthnProvider implements IProvider, IProvidesIcons, IProvidesPersonalSettings, IDeactivatableByAdmin {
 
 	/** @var IL10N */
 	private $l10n;
 
-	/** @var WebauthnManager */
+	/** @var WebAuthnManager */
 	private $manager;
-
-	/** @var IAppContainer */
-	private $container;
 
 	/** @var IInitialState */
 	private $initialState;
@@ -64,14 +60,12 @@ class WebauthnProvider implements IProvider, IProvidesIcons, IProvidesPersonalSe
 	private $request;
 
 	public function __construct(IL10N $l10n,
-								WebauthnManager $manager,
-								IAppContainer $container,
+								WebAuthnManager $manager,
 								IInitialState $initialState,
 								IURLGenerator $urlGenerator,
 								IRequest $request) {
 		$this->l10n = $l10n;
 		$this->manager = $manager;
-		$this->container = $container;
 		$this->initialState = $initialState;
 		$this->urlGenerator = $urlGenerator;
 		$this->request = $request;

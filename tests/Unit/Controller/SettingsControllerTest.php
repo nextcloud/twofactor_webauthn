@@ -1,33 +1,47 @@
 <?php
 
-/**
- * Nextcloud - U2F 2FA
- *
- * This file is licensed under the Affero General Public License version 3 or
- * later. See the COPYING file.
+declare(strict_types=1);
+
+/*
+ * @copyright 2022 Christoph Wurst <christoph@winzerhof-wurst.at>
  *
  * @author Christoph Wurst <christoph@winzerhof-wurst.at>
- * @copyright Christoph Wurst 2016
+ * @author Michael Blumenstein <M.Flower@gmx.de>
+ *
+ * @license GNU AGPL version 3 or any later version
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+namespace OCA\TwoFactorWebauthn\Tests\Unit\Controller;
 
-namespace OCA\TwoFactorU2F\Tests\Unit\Controller;
-
-use OCA\TwoFactorU2F\Controller\SettingsController;
-use OCA\TwoFactorU2F\Service\U2FManager;
+use ChristophWurst\Nextcloud\Testing\TestCase;
+use OCA\TwoFactorWebauthn\Controller\SettingsController;
+use OCA\TwoFactorWebauthn\Service\WebAuthnManager;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\IRequest;
 use OCP\IUser;
 use OCP\IUserSession;
 use PHPUnit\Framework\MockObject\MockObject;
-use PHPUnit\Framework\TestCase;
+use Webauthn\PublicKeyCredentialCreationOptions;
 
 class SettingsControllerTest extends TestCase {
 
 	/** @var IRequest|MockObject */
 	private $request;
 
-	/** @var U2FManager|MockObject */
-	private $u2fManager;
+	/** @var WebAuthnManager|MockObject */
+	private $webauthnManager;
 
 	/** @var IUserSession|MockObject */
 	private $userSession;
@@ -39,67 +53,45 @@ class SettingsControllerTest extends TestCase {
 		parent::setUp();
 
 		$this->request = $this->createMock(IRequest::class);
-		$this->u2fManager = $this->createMock(U2FManager::class);
+		$this->webauthnManager = $this->createMock(WebAuthnManager::class);
 		$this->userSession = $this->createMock(IUserSession::class);
 
-		$this->controller = new SettingsController('twofactor_u2f', $this->request, $this->u2fManager, $this->userSession);
+		$this->controller = new SettingsController('twofactor_webauthn', $this->request, $this->webauthnManager, $this->userSession);
 	}
 
-	public function testState() {
+	public function testStartRegister(): void {
 		$user = $this->createMock(IUser::class);
-		$devices = [
-			[
-				'id' => 1,
-				'name' => null,
-			],
-			[
-				'id' => 2,
-				'name' => 'Yolokey',
-			],
-		];
-		$this->userSession->expects($this->once())
+		$this->userSession->expects(self::once())
 			->method('getUser')
 			->willReturn($user);
-		$this->u2fManager->expects($this->once())
-			->method('getDevices')
-			->with($this->equalTo($user))
-			->willReturn($devices);
-
-		$expected = new JSONResponse([
-			'devices' => $devices,
-		]);
-		$this->assertEquals($expected, $this->controller->state());
-	}
-
-	public function testStartRegister() {
-		$user = $this->createMock(IUser::class);
-		$this->userSession->expects($this->once())
-			->method('getUser')
-			->willReturn($user);
-
-		$this->u2fManager->expects($this->once())
+		$publicKeyCredentialCreationOptions = $this->createMock(PublicKeyCredentialCreationOptions::class);
+		$this->webauthnManager->expects(self::once())
 			->method('startRegistration')
-			->with($this->equalTo($user))
-			->willReturn([]);
+			->with(self::equalTo($user))
+			->willReturn($publicKeyCredentialCreationOptions);
 
-		$this->assertEquals(new JSONResponse([]), $this->controller->startRegister());
+		$response = $this->controller->startRegister();
+
+		self::assertEquals(new JSONResponse($publicKeyCredentialCreationOptions), $response);
 	}
 
-	public function testFinishRegister() {
+	public function testFinishRegister(): void {
 		$user = $this->createMock(IUser::class);
-		$this->userSession->expects($this->once())
+		$this->userSession->expects(self::once())
 			->method('getUser')
 			->willReturn($user);
-		$registrationData = 'regData';
 		$data = 'some data';
 
-		$this->u2fManager->expects($this->once())
-			->method('finishRegistration')
-			->with($this->equalTo($user), $this->equalTo($registrationData), $this->equalTo($data))
+		$this->webauthnManager->expects(self::once())
+			->method('finishRegister')
+			->with(
+				self::equalTo($user),
+				self::equalTo("my key"),
+				self::equalTo($data))
 			->willReturn([]);
 
-		$resp = $this->controller->finishRegister($registrationData, $data);
+		$resp = $this->controller->finishRegister("my key", $data);
 
-		$this->assertEquals(new JSONResponse([]), $resp);
+		self::assertEquals(new JSONResponse([]), $resp);
 	}
 }

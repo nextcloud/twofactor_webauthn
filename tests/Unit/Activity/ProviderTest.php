@@ -1,35 +1,39 @@
 <?php
 
-/**
+declare(strict_types=1);
+
+/*
+ * @copyright 2022 Christoph Wurst <christoph@winzerhof-wurst.at>
+ *
  * @author Christoph Wurst <christoph@winzerhof-wurst.at>
- * @copyright Copyright (c) 2016 Christoph Wurst <christoph@winzerhof-wurst.at>
+ * @author Michael Blumenstein <M.Flower@gmx.de>
  *
- * Two-factor U2F
+ * @license GNU AGPL version 3 or any later version
  *
- * This code is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License, version 3,
- * as published by the Free Software Foundation.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Affero General Public License for more details.
  *
- * You should have received a copy of the GNU Affero General Public License, version 3,
- * along with this program.  If not, see <http://www.gnu.org/licenses/>
- *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace OCA\TwoFactorU2F\Tests\Unit\Activity;
+namespace OCA\TwoFactorWebauthn\Tests\Unit\Activity;
 
+use ChristophWurst\Nextcloud\Testing\TestCase;
 use InvalidArgumentException;
-use OCA\TwoFactorU2F\Activity\Provider;
+use OCA\TwoFactorWebauthn\Activity\Provider;
 use OCP\Activity\IEvent;
 use OCP\IL10N;
 use OCP\ILogger;
 use OCP\IURLGenerator;
 use OCP\L10N\IFactory;
-use PHPUnit\Framework\TestCase;
 
 class ProviderTest extends TestCase {
 	private $l10n;
@@ -49,10 +53,10 @@ class ProviderTest extends TestCase {
 		$this->provider = new Provider($this->l10n, $this->urlGenerator, $this->logger);
 	}
 
-	public function testParseUnrelated() {
+	public function testParseUnrelated(): void {
 		$lang = 'ru';
 		$event = $this->createMock(IEvent::class);
-		$event->expects($this->once())
+		$event->expects(self::once())
 			->method('getApp')
 			->willReturn('comments');
 		$this->expectException(InvalidArgumentException::class);
@@ -60,44 +64,44 @@ class ProviderTest extends TestCase {
 		$this->provider->parse($lang, $event);
 	}
 
-	public function subjectData() {
+	public function subjectData(): array {
 		return [
-			['u2f_device_added'],
-			['u2f_device_removed'],
-			['u2f_disabled_by_admin'],
+			['webauthn_device_added'],
+			['webauthn_device_removed'],
+			['webauthn_disabled_by_admin'],
 		];
 	}
 
 	/**
 	 * @dataProvider subjectData
 	 */
-	public function testParse($subject) {
+	public function testParse($subject): void {
 		$lang = 'ru';
 		$event = $this->createMock(IEvent::class);
 		$l = $this->createMock(IL10N::class);
 
-		$event->expects($this->once())
+		$event->expects(self::once())
 			->method('getApp')
-			->willReturn('twofactor_u2f');
-		$this->l10n->expects($this->once())
+			->willReturn('twofactor_webauthn');
+		$this->l10n->expects(self::once())
 			->method('get')
-			->with('twofactor_u2f', $lang)
+			->with('twofactor_webauthn', $lang)
 			->willReturn($l);
-		$this->urlGenerator->expects($this->once())
+		$this->urlGenerator->expects(self::once())
 			->method('imagePath')
 			->with('core', 'actions/password.svg')
 			->willReturn('path/to/image');
-		$this->urlGenerator->expects($this->once())
+		$this->urlGenerator->expects(self::once())
 			->method('getAbsoluteURL')
 			->with('path/to/image')
 			->willReturn('absolute/path/to/image');
-		$event->expects($this->once())
+		$event->expects(self::once())
 			->method('setIcon')
 			->with('absolute/path/to/image');
-		$event->expects($this->once())
+		$event->expects(self::once())
 			->method('getSubject')
 			->willReturn($subject);
-		$event->expects($this->once())
+		$event->expects(self::once())
 			->method('setSubject');
 
 		$this->provider->parse($lang, $event);

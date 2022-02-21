@@ -1,30 +1,34 @@
 <?php
 
-/**
+declare(strict_types=1);
+
+/*
+ * @copyright 2022 Christoph Wurst <christoph@winzerhof-wurst.at>
+ *
  * @author Christoph Wurst <christoph@winzerhof-wurst.at>
- * @copyright Copyright (c) 2016 Christoph Wurst <christoph@winzerhof-wurst.at>
+ * @author Michael Blumenstein <M.Flower@gmx.de>
  *
- * Two-factor U2F
+ * @license GNU AGPL version 3 or any later version
  *
- * This code is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License, version 3,
- * as published by the Free Software Foundation.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Affero General Public License for more details.
  *
- * You should have received a copy of the GNU Affero General Public License, version 3,
- * along with this program.  If not, see <http://www.gnu.org/licenses/>
- *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace OCA\TwoFactorU2F\Tests\Unit\Activity;
+namespace OCA\TwoFactorWebauthn\Tests\Unit\Activity;
 
-use OCA\TwoFactorU2F\Activity\Setting;
+use ChristophWurst\Nextcloud\Testing\TestCase;
+use OCA\TwoFactorWebauthn\Activity\Setting;
 use OCP\IL10N;
-use PHPUnit\Framework\TestCase;
 
 class SettingTest extends TestCase {
 	private $l10n;
@@ -40,17 +44,17 @@ class SettingTest extends TestCase {
 		$this->setting = new Setting($this->l10n);
 	}
 
-	public function testAll() {
-		$this->assertEquals(false, $this->setting->canChangeMail());
-		$this->assertEquals(false, $this->setting->canChangeStream());
-		$this->assertEquals('twofactor_u2f', $this->setting->getIdentifier());
-		$this->l10n->expects($this->once())
+	public function testAll(): void {
+		self::assertEquals(false, $this->setting->canChangeMail());
+		self::assertEquals(false, $this->setting->canChangeStream());
+		self::assertEquals('twofactor_webauthn', $this->setting->getIdentifier());
+		$this->l10n->expects(self::once())
 			->method('t')
-			->with('U2F device')
-			->willReturn('U2F Gerät');
-		$this->assertEquals('U2F Gerät', $this->setting->getName());
-		$this->assertEquals(30, $this->setting->getPriority());
-		$this->assertEquals(true, $this->setting->isDefaultEnabledMail());
-		$this->assertEquals(true, $this->setting->isDefaultEnabledStream());
+			->with('WebAuthn device')
+			->willReturn('WebAuthn Gerät');
+		self::assertEquals('WebAuthn Gerät', $this->setting->getName());
+		self::assertEquals(30, $this->setting->getPriority());
+		self::assertEquals(true, $this->setting->isDefaultEnabledMail());
+		self::assertEquals(true, $this->setting->isDefaultEnabledStream());
 	}
 }

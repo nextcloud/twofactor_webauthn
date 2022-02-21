@@ -1,16 +1,31 @@
 <?php
-/**
- * Nextcloud - U2F 2FA
- *
- * This file is licensed under the Affero General Public License version 3 or
- * later. See the COPYING file.
+
+declare(strict_types=1);
+
+/*
+ * @copyright 2022 Christoph Wurst <christoph@winzerhof-wurst.at>
  *
  * @author Christoph Wurst <christoph@winzerhof-wurst.at>
- * @copyright Christoph Wurst 2016
+ * @author Michael Blumenstein <M.Flower@gmx.de>
+ *
+ * @license GNU AGPL version 3 or any later version
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 require_once __DIR__.'/../../../lib/base.php';
 require_once __DIR__.'/../vendor/autoload.php';
 
 OC::$loader->addValidRoot(OC::$SERVERROOT . '/tests');
-OC_App::loadApp('twofactor_u2f');
+OC_App::loadApp('twofactor_webauthn');

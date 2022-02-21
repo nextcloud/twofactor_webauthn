@@ -1,6 +1,11 @@
 name: Test
 
-on: [push, pull_request]
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+      - stable*
 
 jobs:
   unit-tests:
@@ -27,20 +32,13 @@ jobs:
     - name: Checkout app
       uses: actions/checkout@master
       with:
-        path: nextcloud/apps/twofactor_u2f
+        path: nextcloud/apps/twofactor_webauthn
     - name: Install dependencies
-      working-directory: nextcloud/apps/twofactor_u2f
+      working-directory: nextcloud/apps/twofactor_webauthn
       run: composer install
     - name: Run tests
-      working-directory: nextcloud/apps/twofactor_u2f
+      working-directory: nextcloud/apps/twofactor_webauthn
       run: composer run test:unit
-    - name: Report coverage
-      uses: codecov/codecov-action@v1
-      if: ${{ always() }}
-      with:
-        file: ./nextcloud/apps/twofactor_u2f/tests/clover.unit.xml
-        flags: unittests
-        fail_ci_if_error: true
 
   frontend-unit-test:
       runs-on: ubuntu-latest

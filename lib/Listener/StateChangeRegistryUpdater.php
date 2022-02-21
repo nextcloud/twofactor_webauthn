@@ -27,8 +27,8 @@ declare(strict_types=1);
 namespace OCA\TwoFactorWebauthn\Listener;
 
 use OCA\TwoFactorWebauthn\Event\StateChanged;
-use OCA\TwoFactorWebauthn\Provider\WebauthnProvider;
-use OCA\TwoFactorWebauthn\Service\WebauthnManager;
+use OCA\TwoFactorWebauthn\Provider\WebAuthnProvider;
+use OCA\TwoFactorWebauthn\Service\WebAuthnManager;
 use OCP\Authentication\TwoFactorAuth\IRegistry;
 use OCP\EventDispatcher\Event;
 use OCP\EventDispatcher\IEventListener;
@@ -41,13 +41,13 @@ class StateChangeRegistryUpdater implements IEventListener {
 	/** @var IRegistry */
 	private $providerRegistry;
 
-	/** @var WebauthnManager */
+	/** @var WebAuthnManager */
 	private $manager;
 
-	/** @var WebauthnProvider */
+	/** @var WebAuthnProvider */
 	private $provider;
 
-	public function __construct(IRegistry $providerRegistry, WebauthnManager $manager, WebauthnProvider $provider) {
+	public function __construct(IRegistry $providerRegistry, WebAuthnManager $manager, WebAuthnProvider $provider) {
 		$this->providerRegistry = $providerRegistry;
 		$this->provider = $provider;
 		$this->manager = $manager;
