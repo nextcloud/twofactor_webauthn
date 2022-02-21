@@ -33,6 +33,7 @@ use Cose\Algorithm\Signature\EdDSA;
 use Cose\Algorithm\Signature\RSA;
 use Cose\Algorithms;
 use Exception;
+use GuzzleHttp\Psr7\ServerRequest;
 use OCA\TwoFactorWebauthn\Db\PublicKeyCredentialEntity;
 use OCA\TwoFactorWebauthn\Db\PublicKeyCredentialEntityMapper;
 use OCA\TwoFactorWebauthn\Event\DisabledByAdmin;
@@ -41,8 +42,6 @@ use OCA\TwoFactorWebauthn\Repository\WebauthnPublicKeyCredentialSourceRepository
 use OCP\EventDispatcher\IEventDispatcher;
 use OCP\ISession;
 use OCP\IUser;
-use Slim\Http\Environment;
-use Slim\Http\Request;
 use Webauthn\AttestationStatement\AndroidKeyAttestationStatementSupport;
 use Webauthn\AttestationStatement\AttestationObjectLoader;
 use Webauthn\AttestationStatement\AttestationStatementSupportManager;
@@ -215,10 +214,14 @@ class WebAuthnManager {
 			throw new \RuntimeException('Not an authenticator attestation response');
 		}
 
+		// TODO: this is a server dependency
+		$request = ServerRequest::fromGlobals();
 		// Check the response against the request
-		$request = Request::createFromEnvironment(new Environment($_SERVER));
-		$publicKeyCredentialSource = $authenticatorAttestationResponseValidator->check($response, $publicKeyCredentialCreationOptions, $request);
-
+		$publicKeyCredentialSource = $authenticatorAttestationResponseValidator->check(
+			$response,
+			$publicKeyCredentialCreationOptions,
+			$request
+		);
 
 		$this->repository->saveCredentialSource($publicKeyCredentialSource, $name);
 		$this->eventDispatcher->dispatch(StateChanged::class, new StateChanged($user, true));
@@ -324,7 +327,8 @@ class WebAuthnManager {
 				throw new \RuntimeException('Not an authenticator assertion response');
 			}
 
-			$request = Request::createFromEnvironment(new Environment($_SERVER));
+			// TODO: this is a server dependency
+			$request = ServerRequest::fromGlobals();
 
 			// Check the response against the attestation request
 			$authenticatorAssertionResponseValidator->check(
