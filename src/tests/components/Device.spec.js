@@ -31,7 +31,7 @@ const localVue = createLocalVue()
 localVue.use(Vuex)
 localVue.mixin(Nextcloud)
 
-describe('Device component', () => {
+describe('Device', () => {
 	let actions
 	let store
 
@@ -47,7 +47,7 @@ describe('Device component', () => {
 
 	it('renders devices without a name', () => {
 		store.state.devices.push({
-			id: 1,
+			id: 'k1',
 			name: undefined,
 		})
 		const device = shallowMount(Device, {

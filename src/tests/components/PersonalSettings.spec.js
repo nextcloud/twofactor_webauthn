@@ -31,7 +31,7 @@ const localVue = createLocalVue()
 localVue.use(Vuex)
 localVue.mixin(Nextcloud)
 
-describe('Device component', () => {
+describe('PersonalSettings', () => {
 	let actions
 	let store
 
@@ -51,12 +51,12 @@ describe('Device component', () => {
 			localVue,
 		})
 
-		expect(settings.text()).to.contain('No U2F devices configured')
+		expect(settings.text()).to.contain('No WebAuthn devices configured. You are not using WebAuthn as second factor at the moment.')
 	})
 
 	it('shows no info text if devices are configured', () => {
 		store.state.devices.push({
-			id: 1,
+			id: 'k1',
 			name: 'a',
 		})
 		const settings = shallowMount(PersonalSettings, {
@@ -64,7 +64,7 @@ describe('Device component', () => {
 			localVue,
 		})
 
-		expect(settings.text()).to.not.contain('No U2F devices configured')
+		expect(settings.text()).to.not.contain('No WebAuthn devices configured. You are not using WebAuthn as second factor at the moment.')
 	})
 
 	it('shows a HTTP warning', () => {
