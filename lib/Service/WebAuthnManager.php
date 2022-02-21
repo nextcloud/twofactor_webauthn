@@ -35,6 +35,7 @@ use Cose\Algorithms;
 use Exception;
 use OCA\TwoFactorWebauthn\Db\PublicKeyCredentialEntity;
 use OCA\TwoFactorWebauthn\Db\PublicKeyCredentialEntityMapper;
+use OCA\TwoFactorWebauthn\Event\DisabledByAdmin;
 use OCA\TwoFactorWebauthn\Event\StateChanged;
 use OCA\TwoFactorWebauthn\Repository\WebauthnPublicKeyCredentialSourceRepository;
 use OCP\EventDispatcher\IEventDispatcher;
@@ -235,7 +236,7 @@ class WebAuthnManager {
 			return [
 				'id' => $credential->getPublicKeyCredentialId(),
 				'name' => $credential->getName(),
-				'active' => $credential->getActive()
+				'active' => $credential->isActive()
 			];
 		}, $credentials);
 	}
@@ -249,10 +250,11 @@ class WebAuthnManager {
 		$extensions = new AuthenticationExtensionsClientInputs();
 		$extensions->add(new AuthenticationExtension('loc', true));
 
-		$activeDevices = array_filter($this->mapper->findPublicKeyCredentials($user->getUID()),
-		   function ($device) {
-		   	return \boolval($device->getActive()) === true;
-		   }
+		$activeDevices = array_filter(
+			$this->mapper->findPublicKeyCredentials($user->getUID()),
+			function ($device) {
+				return $device->isActive();
+			}
 		);
 
 		// List of registered PublicKeyCredentialDescriptor classes associated to the user
@@ -354,7 +356,7 @@ class WebAuthnManager {
 			$this->mapper->update($credential);
 		}
 
-		$this->eventDispatcher->dispatch(StateChanged::class, new StateChanged($user, false));
+		$this->eventDispatcher->dispatch(StateChanged::class, new DisabledByAdmin($user));
 	}
 
 	public function changeActivationState(IUser $user, string $id, bool $active) {
