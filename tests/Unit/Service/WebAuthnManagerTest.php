@@ -36,6 +36,7 @@ use OCP\ISession;
 use OCP\IUser;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Psr\Log\LoggerInterface;
 
 class WebAuthnManagerTest extends TestCase {
 
@@ -54,6 +55,9 @@ class WebAuthnManagerTest extends TestCase {
 	/** @var WebAuthnManager */
 	private $manager;
 
+	/** @var MockObject|LoggerInterface */
+	private $logger;
+
 	protected function setUp(): void {
 		parent::setUp();
 
@@ -61,12 +65,14 @@ class WebAuthnManagerTest extends TestCase {
 		$this->repository = $this->createMock(WebauthnPublicKeyCredentialSourceRepository::class);
 		$this->mapper = $this->createMock(PublicKeyCredentialEntityMapper::class);
 		$this->eventDispatcher = $this->createMock(IEventDispatcher::class);
+		$this->logger = $this->createMock(LoggerInterface::class);
 
 		$this->manager = new WebAuthnManager(
 			$this->session,
 			$this->repository,
 			$this->mapper,
 			$this->eventDispatcher,
+			$this->logger,
 		);
 	}
 

@@ -42,6 +42,8 @@ use OCA\TwoFactorWebauthn\Repository\WebauthnPublicKeyCredentialSourceRepository
 use OCP\EventDispatcher\IEventDispatcher;
 use OCP\ISession;
 use OCP\IUser;
+use Psr\Log\LoggerInterface;
+use Throwable;
 use Webauthn\AttestationStatement\AndroidKeyAttestationStatementSupport;
 use Webauthn\AttestationStatement\AttestationObjectLoader;
 use Webauthn\AttestationStatement\AttestationStatementSupportManager;
@@ -85,16 +87,21 @@ class WebAuthnManager {
 	 */
 	private $eventDispatcher;
 
+	/** @var LoggerInterface */
+	private $logger;
+
 	public function __construct(
 		ISession $session,
 		WebauthnPublicKeyCredentialSourceRepository $repository,
 		PublicKeyCredentialEntityMapper $mapper,
-		IEventDispatcher $eventDispatcher
+		IEventDispatcher $eventDispatcher,
+		LoggerInterface $logger
 	) {
 		$this->session = $session;
 		$this->repository = $repository;
 		$this->mapper = $mapper;
 		$this->eventDispatcher = $eventDispatcher;
+		$this->logger = $logger;
 	}
 
 	public function startRegistration(IUser $user, string $serverHost): PublicKeyCredentialCreationOptions {
@@ -252,6 +259,7 @@ class WebAuthnManager {
 		// Extensions
 		$extensions = new AuthenticationExtensionsClientInputs();
 		$extensions->add(new AuthenticationExtension('loc', true));
+		$extensions->add(new AuthenticationExtension('appid', "https://$serverHost"));
 
 		$activeDevices = array_filter(
 			$this->mapper->findPublicKeyCredentials($user->getUID()),
@@ -340,7 +348,11 @@ class WebAuthnManager {
 			);
 
 			return true;
-		} catch (Exception $exception) {
+		} catch (Throwable $e) {
+			$this->logger->error('Could not verify WebAuthn: ' . $e->getMessage(), [
+				'exception' => $e,
+			]);
+
 			return false;
 		}
 	}

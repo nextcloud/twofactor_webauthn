@@ -69,11 +69,11 @@
 </template>
 
 <script>
-import { TWOFACTOR_WEBAUTHN } from '../constants'
+import logger from '../logger'
 import { mapGetters } from 'vuex'
 
 const debug = (text) => (data) => {
-	console.debug(TWOFACTOR_WEBAUTHN, text, data)
+	logger.debug({ text, data })
 	return data
 }
 
@@ -93,10 +93,6 @@ export default {
 		httpWarning() {
 			return document.location.protocol !== 'https:'
 		},
-	},
-	mounted() {
-		// TODO: wait for the user to click the button or run on load?
-		// this.sign().catch(console.error.bind(this))
 	},
 	methods: {
 		arrayToBase64String(a) {
@@ -121,7 +117,7 @@ export default {
 		},
 
 		sign() {
-			console.trace('sign')
+			logger.debug('start sign')
 			this.error = undefined
 
 			// Clone request options because they are mutated later
@@ -136,7 +132,7 @@ export default {
 				}))
 			}
 
-			console.debug(TWOFACTOR_WEBAUTHN, 'Starting webauthn authentication', this.publicKey)
+			logger.debug('Starting webauthn authentication', { publicKey })
 
 			return navigator.credentials.get({ publicKey })
 				.then(debug('got credentials'))
@@ -165,7 +161,7 @@ export default {
 				.then(debug('submitted challengeForm'))
 				.catch(error => {
 					this.error = error
-					console.log(error) // Example: timeout, interaction refused...
+					logger.error('Challenge failed', { error }) // Example: timeout, interaction refused...
 					window.location = window.location.href.replace('challenge/twofactor_webauthn', 'selectchallenge')
 				})
 		},
