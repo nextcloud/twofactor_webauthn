@@ -1,0 +1,12 @@
+{
+    "require": {
+        "nextcloud/coding-standard": "^1.0"
+    },
+	"config": {
+		"optimize-autoloader": true,
+		"platform": {
+			"php": "7.3.0"
+		},
+		"sort-packages": true
+	}
+}

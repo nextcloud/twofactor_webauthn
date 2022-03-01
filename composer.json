@@ -18,9 +18,9 @@
 		"web-auth/webauthn-lib": "^3.3"
 	},
 	"require-dev": {
+		"bamarni/composer-bin-plugin": "^1.5",
 		"christophwurst/nextcloud": "^22.1",
 		"christophwurst/nextcloud_testing": "^0.12.4",
-		"nextcloud/coding-standard": "^1.0",
 		"phpunit/phpunit": "^9.5.0",
 		"psalm/phar": "^4.3",
 		"roave/security-advisories": "dev-master"
@@ -34,7 +34,13 @@
 		"test:acceptance": "phpunit -c tests/phpunit.xml tests/Acceptance",
 		"test:unit": "phpunit -c tests/phpunit.xml tests/Unit",
 		"test:acceptance:dev": "phpunit -c tests/phpunit.xml tests/Acceptance --no-coverage",
-		"test:unit:dev": "phpunit -c tests/phpunit.xml tests/Unit --no-coverage --order-by=defects --stop-on-defect --fail-on-warning --stop-on-error --stop-on-failure"
+		"test:unit:dev": "phpunit -c tests/phpunit.xml tests/Unit --no-coverage --order-by=defects --stop-on-defect --fail-on-warning --stop-on-error --stop-on-failure",
+		"post-install-cmd": [
+			"@composer bin all install --ansi"
+		],
+		"post-update-cmd": [
+			"@composer bin all update --ansi"
+		]
 	},
 	"config": {
 		"optimize-autoloader": true,
@@ -42,6 +48,9 @@
 		"platform": {
 			"php": "7.3.0"
 		},
-		"sort-packages": true
+		"sort-packages": true,
+		"allow-plugins": {
+			"bamarni/composer-bin-plugin": true
+		}
 	}
 }
