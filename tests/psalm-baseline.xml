@@ -8,6 +8,11 @@
       <code>StateChangeRegistryUpdater::class</code>
     </InvalidArgument>
   </file>
+  <file src="lib/Command/MigrateU2F.php">
+    <UndefinedClass occurrences="1">
+      <code>Command</code>
+    </UndefinedClass>
+  </file>
   <file src="lib/Provider/WebAuthnProvider.php">
     <MissingDependency occurrences="2">
       <code>Template</code>
