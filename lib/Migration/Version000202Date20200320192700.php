@@ -27,11 +27,13 @@ declare(strict_types=1);
 namespace OCA\TwoFactorWebauthn\Migration;
 
 use Closure;
+use Exception;
 use OCP\DB\ISchemaWrapper;
 use OCP\IDBConnection;
 use OCP\Migration\SimpleMigrationStep;
 use OCP\Migration\IOutput;
 use Ramsey\Uuid;
+use Throwable;
 
 class Version000202Date20200320192700 extends SimpleMigrationStep {
 
@@ -47,31 +49,42 @@ class Version000202Date20200320192700 extends SimpleMigrationStep {
 
 	/**
 	 * @param IOutput $output
-	 * @param \Closure $schemaClosure The `\Closure` returns a `ISchemaWrapper`
+	 * @param Closure $schemaClosure The `\Closure` returns a `ISchemaWrapper`
 	 * @param array $options
-	 * @since 13.0.0
 	 */
-	public function preSchemaChange(IOutput $output, \Closure $schemaClosure, array $options) {
-		$qb = $this->connection->getQueryBuilder();
+	public function preSchemaChange(IOutput $output, Closure $schemaClosure, array $options) {
+		$updateQb = $this->connection->getQueryBuilder();
+		$update = $updateQb->update('twofactor_webauthn_registrations')
+			->set('aaguid', $updateQb->createParameter('aaguid'))
+			->where($updateQb->expr()->eq('id', $updateQb->createParameter('id')));
+		$selectQb = $this->connection->getQueryBuilder();
+		$select = $selectQb->select('id', 'name', 'aaguid', 'user_handle')
+			->from('twofactor_webauthn_registrations')
+			->where($selectQb->expr()->orX(
+				$selectQb->createFunction('LENGTH(aaguid) <> 16'),
+				$selectQb->expr()->isNull('aaguid')
+			));
 
-		$cursor = $qb->select(array('id', 'name', 'aaguid', 'user_handle'))
-		   ->from('twofactor_webauthn_registrations')
-		   ->where('LENGTH(aaguid) <> 16 OR aaguid IS NULL')
-		   ->execute();
-
-		while ($row = $cursor->fetch()) {
-			$qb->update('twofactor_webauthn_registrations')
-				->set('aaguid', $qb->createNamedParameter($this->getBytes($output, $row)))
-				->where('id = :id')
-				->setParameter('id', $row['id'])
-				->execute();
+		$this->connection->beginTransaction();
+		try {
+			$result = $select->execute();
+			while ($row = $result->fetch()) {
+				$update->setParameter('aaguid', $this->getBytes($output, $row));
+				$update->setParameter('id', $row['id']);
+				$update->execute();
+			}
+			$result->closeCursor();
+			$this->connection->commit();
+		} catch (Throwable $e) {
+			$this->connection->rollback();
+			throw $e;
 		}
 	}
 
 	private function getBytes(IOutput $output, array $row) {
 		try {
 			return Uuid\Uuid::fromString($row['aaguid'])->getBytes();
-		} catch (\Exception $e) {
+		} catch (Exception $e) {
 			$name = $row['name'];
 			$user_handle = $row['user_handle'];
 			$output->warning("replacing faulty aaguid for device $name from user $user_handle");
@@ -90,7 +103,6 @@ class Version000202Date20200320192700 extends SimpleMigrationStep {
 		$schema = $schemaClosure();
 
 		$table = $schema->getTable('twofactor_webauthn_registrations');
-
 		$table->getColumn('aaguid')->setOptions(['length' => 16]);
 
 		return $schema;

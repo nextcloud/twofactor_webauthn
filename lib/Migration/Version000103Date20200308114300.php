@@ -44,12 +44,10 @@ class Version000103Date20200308114300 extends SimpleMigrationStep {
 		$schema = $schemaClosure();
 
 		$table = $schema->getTable('twofactor_webauthn_registrations');
-
 		$table->addColumn('active', 'boolean', [
 			'notnull' => true,
 			'default' => true,
 		]);
-
 
 		return $schema;
 	}

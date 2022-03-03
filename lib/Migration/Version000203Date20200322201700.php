@@ -32,6 +32,7 @@ use OCP\IDBConnection;
 use OCP\Migration\SimpleMigrationStep;
 use OCP\Migration\IOutput;
 use Ramsey\Uuid\Uuid;
+use Throwable;
 
 class Version000203Date20200322201700 extends SimpleMigrationStep {
 
@@ -55,7 +56,6 @@ class Version000203Date20200322201700 extends SimpleMigrationStep {
 		$schema = $schemaClosure();
 
 		$table = $schema->getTable('twofactor_webauthn_registrations');
-
 		if (!$table->hasColumn('aaguid')) {
 			$table->addColumn('aaguid', 'guid', [
 				'notnull' => false
@@ -67,24 +67,33 @@ class Version000203Date20200322201700 extends SimpleMigrationStep {
 
 	/**
 	 * @param IOutput $output
-	 * @param \Closure $schemaClosure The `\Closure` returns a `ISchemaWrapper`
+	 * @param Closure $schemaClosure The `\Closure` returns a `ISchemaWrapper`
 	 * @param array $options
+	 *
 	 * @since 13.0.0
 	 */
-	public function postSchemaChange(IOutput $output, \Closure $schemaClosure, array $options) {
-		$qb = $this->connection->getQueryBuilder();
+	public function postSchemaChange(IOutput $output, Closure $schemaClosure, array $options) {
+		$selectQb = $this->connection->getQueryBuilder();
+		$select = $selectQb->select('id', 'aaguid', 'aaguid_transform')
+			->from('twofactor_webauthn_registrations');
+		$updateQb = $this->connection->getQueryBuilder();
+		$update = $updateQb->update('twofactor_webauthn_registrations')
+			->set('aaguid', $updateQb->createParameter('aaguid'))
+			->where($updateQb->expr()->eq('id', $updateQb->createParameter('id')));
 
-		$cursor = $qb->select(array('id', 'aaguid', 'aaguid_transform'))
-		   ->from('twofactor_webauthn_registrations')
-		   ->execute();
-
-		while ($row = $cursor->fetch()) {
-			$updater = $this->connection->getQueryBuilder();
-			$updater->update('twofactor_webauthn_registrations')
-				->set('aaguid', $updater->createNamedParameter(Uuid::fromString($row['aaguid_transform'])->toString()))
-				->where('id = :id')
-				->setParameter('id', $row['id'])
-				->execute();
+		$this->connection->beginTransaction();
+		try {
+			$result = $select->execute();
+			while ($row = $result->fetch()) {
+				$update->setParameter('aaguid', Uuid::fromString($row['aaguid_transform'])->toString());
+				$update->setParameter('id', $row['id']);
+				$update->execute();
+			}
+			$result->closeCursor();
+			$this->connection->commit();
+		} catch (Throwable $e) {
+			$this->connection->rollBack();
+			throw $e;
 		}
 	}
 }
