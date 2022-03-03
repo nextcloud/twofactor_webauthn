@@ -27,12 +27,10 @@
 		"coveralls": "^3.1.1",
 		"css-loader": "^6.6.0",
 		"file-loader": "^6.2.0",
-		"istanbul-instrumenter-loader": "^3.0.1",
 		"jsdom": "^19.0.0",
 		"jsdom-global": "^3.0.2",
 		"mocha": "^9.2.1",
 		"mochapack": "^2.1.4",
-		"nyc": "^15.1.0",
 		"prettier": "^2.5.1",
 		"sinon": "^13.0.1",
 		"url-loader": "^4.1.1",
@@ -47,10 +45,9 @@
 		"dev": "webpack --progress --config src/webpack.dev.js",
 		"watch": "webpack --progress --watch --config src/webpack.dev.js",
 		"build": "webpack --progress --config src/webpack.prod.js",
-		"coverage": "nyc report --reporter=text-lcov | coveralls",
 		"lint": "eslint --ext .js,.vue src",
 		"lint:fix": "eslint --ext .js,.vue src --fix",
-		"test": "NODE_ENV=test nyc mochapack --webpack-config src/webpack.test.js --require src/tests/setup.js src/tests/**/*.spec.js",
+		"test": "NODE_ENV=test mochapack --webpack-config src/webpack.test.js --require src/tests/setup.js src/tests/**/*.spec.js",
 		"test:watch": "mochapack -w --webpack-config src/webpack.test.js --require src/tests/setup.js src/tests/**/*.spec.js"
 	},
 	"browserslist": [
@@ -63,23 +60,6 @@
 	},
 	"jshintConfig": {
 		"esversion": 6
-	},
-	"nyc": {
-		"sourceMap": false,
-		"instrument": false,
-		"reporter": [
-			"lcov",
-			"text-summary"
-		],
-		"extension": [
-			".js",
-			".vue"
-		],
-		"exclude": [
-			"js",
-			"src/tests",
-			"src/webpack.*"
-		]
 	},
 	"repository": {
 		"type": "git",
