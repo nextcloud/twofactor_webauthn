@@ -7,6 +7,7 @@ declare(strict_types=1);
  *
  * @author Christoph Wurst <christoph@winzerhof-wurst.at>
  * @author Michael Blumenstein <M.Flower@gmx.de>
+ * @author Richard Steinmetz <richard@steinmetz.cloud>
  *
  * @license GNU AGPL version 3 or any later version
  *
@@ -43,6 +44,7 @@ class Version000102Date20191004200147 extends SimpleMigrationStep {
 		/** @var ISchemaWrapper $schema */
 		$schema = $schemaClosure();
 
+		/* Replaced by Version000400Date20220524123120
 		if (!$schema->hasTable('twofactor_webauthn_registrations')) {
 			$table = $schema->createTable('twofactor_webauthn_registrations');
 			$table->addColumn('id', 'integer', [
@@ -95,6 +97,8 @@ class Version000102Date20191004200147 extends SimpleMigrationStep {
 			$table->addIndex(['user_handle'], 'webauthn_registrations_userHandle');
 			$table->addIndex(['public_key_credential_id'], 'webauthn_registrations_publicKeyCredentialId');
 		}
+		*/
+
 		return $schema;
 	}
 }

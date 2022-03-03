@@ -37,7 +37,7 @@ use OCP\IUser;
  */
 class PublicKeyCredentialEntityMapper extends QBMapper {
 	public function __construct(IDBConnection $db) {
-		parent::__construct($db, 'twofactor_webauthn_registrations');
+		parent::__construct($db, 'twofactor_webauthn_regs');
 	}
 
 	protected $name;
@@ -101,7 +101,7 @@ class PublicKeyCredentialEntityMapper extends QBMapper {
 		$qb = $this->db->getQueryBuilder();
 
 		$qb->select('id', 'name', 'public_key_credential_id', 'type', 'transports', 'attestation_type', 'trust_path', 'aaguid', 'credential_public_key', 'user_handle', 'counter', 'active')
-			->from('twofactor_webauthn_registrations')
+			->from('twofactor_webauthn_regs')
 			->where($qb->expr()->eq('public_key_credential_id', $qb->createNamedParameter($publicKeyCredentialId)));
 		try {
 			return $this->findEntity($qb);
@@ -118,7 +118,7 @@ class PublicKeyCredentialEntityMapper extends QBMapper {
 		$qb = $this->db->getQueryBuilder();
 
 		$qb->select('id', 'name', 'public_key_credential_id', 'type', 'transports', 'attestation_type', 'trust_path', 'aaguid', 'credential_public_key', 'user_handle', 'counter', 'active')
-			->from('twofactor_webauthn_registrations')
+			->from('twofactor_webauthn_regs')
 			->where($qb->expr()->eq('user_handle', $qb->createNamedParameter($uid)));
 		return $this->findEntities($qb);
 	}

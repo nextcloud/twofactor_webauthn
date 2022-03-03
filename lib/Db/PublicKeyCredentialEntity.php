@@ -53,7 +53,7 @@ use Webauthn\TrustPath\TrustPathLoader;
  * @method void setUserHandle(string $handle)
  * @method int getCounter()
  * @method void setCounter(int $counter)
- * @method bool isActive()
+ * @method bool|null isActive()
  * @method void setActive(bool $active)
  */
 class PublicKeyCredentialEntity extends Entity {
@@ -108,7 +108,7 @@ class PublicKeyCredentialEntity extends Entity {
 	protected $counter;
 
 	/**
-	 * @var bool
+	 * @var bool|null
 	 */
 	protected $active;
 

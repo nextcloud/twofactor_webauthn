@@ -7,6 +7,7 @@ declare(strict_types=1);
  *
  * @author Christoph Wurst <christoph@winzerhof-wurst.at>
  * @author Michael Blumenstein <M.Flower@gmx.de>
+ * @author Richard Steinmetz <richard@steinmetz.cloud>
  *
  * @license GNU AGPL version 3 or any later version
  *
@@ -43,11 +44,13 @@ class Version000103Date20200308114300 extends SimpleMigrationStep {
 		/** @var ISchemaWrapper $schema */
 		$schema = $schemaClosure();
 
-		$table = $schema->getTable('twofactor_webauthn_registrations');
-		$table->addColumn('active', 'boolean', [
-			'notnull' => true,
-			'default' => true,
-		]);
+		if ($schema->hasTable('twofactor_webauthn_registrations')) {
+			$table = $schema->getTable('twofactor_webauthn_registrations');
+			$table->addColumn('active', 'boolean', [
+				'notnull' => true,
+				'default' => true,
+			]);
+		}
 
 		return $schema;
 	}

@@ -46,7 +46,7 @@ jobs:
       matrix:
         php-versions: [ 8.0 ]
         nextcloud-versions: [ 'master' ]
-        db: [ 'sqlite', 'mysql', 'pgsql' ]
+        db: [ 'sqlite', 'mysql', 'pgsql', 'oci' ]
     name: php${{ matrix.php-versions }}-${{ matrix.db }} integration tests
     services:
       mysql-service:
@@ -76,21 +76,29 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
+      oracle:
+        image: deepdiver/docker-oracle-xe-11g
+        ports:
+          - 1521:1521/tcp
     steps:
       - name: Set up php${{ matrix.php-versions }}
         uses: shivammathur/setup-php@master
         with:
           php-version: ${{ matrix.php-versions }}
-          extensions: ctype,curl,dom,gd,iconv,intl,json,mbstring,openssl,posix,sqlite,xml,zip,gmp
+          extensions: ctype,curl,dom,gd,iconv,intl,json,mbstring,openssl,posix,sqlite,xml,zip,gmp,oci8
           coverage: xdebug
       - name: Checkout Nextcloud
         run: git clone https://github.com/nextcloud/server.git --recursive --depth 1 -b ${{ matrix.nextcloud-versions }} nextcloud
-      - name: Install Nextcloud
-        run: php -f nextcloud/occ maintenance:install --database-host 127.0.0.1 --database-name nextcloud --database-user nextcloud --database-pass nextcloud --admin-user admin --admin-pass admin --database ${{ matrix.db }}
       - name: Check out the app
         uses: actions/checkout@master
         with:
           path: nextcloud/apps/twofactor_webauthn
+      - name: Install Nextcloud
+        if: ${{ matrix.db != 'oci' }}
+        run: php -f nextcloud/occ maintenance:install --database ${{ matrix.db }} --database-host 127.0.0.1 --database-name nextcloud --database-user nextcloud --database-pass nextcloud --admin-user admin --admin-pass admin
+      - name: Install Nextcloud
+        if: ${{ matrix.db == 'oci' }}
+        run: php -f nextcloud/occ maintenance:install --database ${{ matrix.db }} --database-host=127.0.0.1 --database-name=XE --database-port=1521 --database-user=autotest --database-pass=owncloud --admin-user admin --admin-pass admin
       - name: Install dependencies
         working-directory: nextcloud/apps/twofactor_webauthn
         run: composer install
