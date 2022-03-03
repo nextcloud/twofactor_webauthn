@@ -81,7 +81,7 @@ class Version000102Date20191004200147 extends SimpleMigrationStep {
 			]);
 			$table->addColumn('credential_public_key', 'string', [
 				'notnull' => true,
-				'length' => 255
+				'length' => 2000,
 			]);
 			$table->addColumn('user_handle', 'string', [
 				'notnull' => true,
