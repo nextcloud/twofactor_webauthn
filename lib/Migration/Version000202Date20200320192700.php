@@ -53,25 +53,25 @@ class Version000202Date20200320192700 extends SimpleMigrationStep {
 	 * @param array $options
 	 */
 	public function preSchemaChange(IOutput $output, Closure $schemaClosure, array $options) {
+		$updateQb = $this->connection->getQueryBuilder();
+		$update = $updateQb->update('twofactor_webauthn_registrations')
+			->set('aaguid', $updateQb->createParameter('aaguid'))
+			->where($updateQb->expr()->eq('id', $updateQb->createParameter('id')));
+		$selectQb = $this->connection->getQueryBuilder();
+		$select = $selectQb->select('id', 'name', 'aaguid', 'user_handle')
+			->from('twofactor_webauthn_registrations')
+			->where($selectQb->expr()->orX(
+				$selectQb->createFunction('LENGTH(aaguid) <> 16'),
+				$selectQb->expr()->isNull('aaguid')
+			));
+
 		$this->connection->beginTransaction();
 		try {
-			$selectQb = $this->connection->getQueryBuilder();
-			$result = $selectQb->select('id', 'name', 'aaguid', 'user_handle')
-				->from('twofactor_webauthn_registrations')
-				->where($selectQb->expr()->orX(
-					$selectQb->createFunction('LENGTH(aaguid) <> 16'),
-					$selectQb->expr()->isNull('aaguid')
-				))
-				->execute();
-			$updateQb = $this->connection->getQueryBuilder();
-			$updateQb->update('twofactor_webauthn_registrations')
-				->set('aaguid', $updateQb->createParameter('aaguid'))
-				->where($selectQb->expr()->eq('id', $updateQb->createParameter('id')))
-				->execute();
+			$result = $select->execute();
 			while ($row = $result->fetch()) {
-				$updateQb->setParameter('aaguid', $this->getBytes($output, $row));
-				$updateQb->setParameter('id', $row['id']);
-				$updateQb->execute();
+				$update->setParameter('aaguid', $this->getBytes($output, $row));
+				$update->setParameter('id', $row['id']);
+				$update->execute();
 			}
 			$result->closeCursor();
 			$this->connection->commit();
