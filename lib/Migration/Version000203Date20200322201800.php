@@ -54,7 +54,6 @@ class Version000203Date20200322201800 extends SimpleMigrationStep {
 		$schema = $schemaClosure();
 
 		$table = $schema->getTable('twofactor_webauthn_registrations');
-
 		$table->dropColumn('aaguid_transform');
 
 		return $schema;
