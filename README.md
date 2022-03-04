@@ -1,7 +1,26 @@
 # WebAuthn second factor provider for Nextcloud
 
-# Requirements
+## Requirements
+
 In order to use this app for authentication, you have to use a browser that supports the WebAuthn standard.
+
+## Migration from Two-Factor U2F
+
+It is possible to migrate U2F device registrations to WebAuthn devices registrations. For the migratation, you need command line access to run [occ](https://docs.nextcloud.com/server/stable/admin_manual/configuration_server/occ_command.html).
+
+```shell
+# View options – you can run this for all or only specific users
+php occ twofactor_webauthn:migrate-u2f --help
+
+# Migrate all users
+php occ twofactor_webauthn:migrate-u2f --all
+
+# Disable the U2F app
+php occ app:disable twofactor_u2f
+
+# Clean up any U2F registrations
+php occ twofactorauth:cleanup u2f
+```
 
 ## Login with external apps
 
