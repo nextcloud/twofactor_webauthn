@@ -13,6 +13,11 @@
 	background-image: url('../img/app-dark.svg?v=1');
 }
 
+body.theme--dark .nav-icon-webauthn-second-factor-auth,
+body.theme--dark .icon-webauthn-device {
+	background-image: url('../img/app.svg?v=1');
+}
+
 #webauthn-http-warning {
 	color: var(--color-warning);
 }
