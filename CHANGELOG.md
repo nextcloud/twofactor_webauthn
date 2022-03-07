@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 0.3.1 – 2022-03-07
+### Fixed
+- Packaging
+
 ## 0.3.0 – 2022-03-07
 ### Added
 - Migration from U2F
