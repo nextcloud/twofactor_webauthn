@@ -24,6 +24,12 @@
 		<nextcloud min-version="21" max-version="24" />
 	</dependencies>
 
+	<repair-steps>
+		<post-migration>
+			<step>OCA\TwoFactorWebauthn\Migration\RepairProviderRegistrations</step>
+		</post-migration>
+	</repair-steps>
+
 	<two-factor-providers>
 		<provider>OCA\TwoFactorWebauthn\Provider\WebAuthnProvider</provider>
 	</two-factor-providers>
