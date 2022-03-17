@@ -32,6 +32,7 @@
 		"psalm": "psalm.phar",
 		"test": "phpunit -c tests/phpunit.xml",
 		"test:acceptance": "phpunit -c tests/phpunit.xml tests/Acceptance",
+		"test:integration": "phpunit -c tests/phpunit.xml tests/Integration",
 		"test:unit": "phpunit -c tests/phpunit.xml tests/Unit",
 		"test:acceptance:dev": "phpunit -c tests/phpunit.xml tests/Acceptance --no-coverage",
 		"test:unit:dev": "phpunit -c tests/phpunit.xml tests/Unit --no-coverage --order-by=defects --stop-on-defect --fail-on-warning --stop-on-error --stop-on-failure",
