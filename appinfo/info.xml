@@ -18,12 +18,12 @@
     <screenshot>https://raw.githubusercontent.com/michib/nextcloud_twofactor_webauthn/develop/doc/screenshots/settings.jpg</screenshot>
 
     <dependencies>
-        <php min-version="7.3" max-version="8"></php>
+        <php min-version="7.3" max-version="8.1"></php>
         <database>sqlite</database>
         <database>mysql</database>
         <database>pgsql</database>
         <lib>gmp</lib>
-        <nextcloud min-version="21" max-version="23" />
+        <nextcloud min-version="21" max-version="24" />
     </dependencies>
 
     <two-factor-providers>
