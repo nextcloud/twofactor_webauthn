@@ -1,0 +1,7 @@
+{ "translations": {
+    "Add" : "افزودن",
+    "Retry" : "تلاش دوباره",
+    "Remove" : "حذف",
+    "Active" : "فعال کردن"
+},"pluralForm" :"nplurals=2; plural=(n > 1);"
+}

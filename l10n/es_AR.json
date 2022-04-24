@@ -1,0 +1,8 @@
+{ "translations": {
+    "Add" : "Añadir",
+    "Retry" : "Reintentar",
+    "An error occurred. Please try again." : "Se presentó un erorr. Favor de volver a intentar. ",
+    "Unnamed device" : "Dispositivo sin nombre",
+    "Remove" : "Borrar"
+},"pluralForm" :"nplurals=2; plural=(n != 1);"
+}
