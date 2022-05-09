@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "38b764eb7e14b662240c77ffa6f6da39",
+    "content-hash": "1ffbfd9bfc0669367c5acff908a29c5d",
     "packages": [
         {
             "name": "bamarni/composer-bin-plugin",
@@ -228,20 +228,20 @@
         },
         {
             "name": "christophwurst/nextcloud-http-client",
-            "version": "v0.1.0",
+            "version": "v0.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ChristophWurst/nextcloud-http-client.git",
-                "reference": "f44948c5cca870907f9efd300ad91a852c7e5eb9"
+                "reference": "79abda558fddd5f7db2d45c44ab6a6718cef8249"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ChristophWurst/nextcloud-http-client/zipball/f44948c5cca870907f9efd300ad91a852c7e5eb9",
-                "reference": "f44948c5cca870907f9efd300ad91a852c7e5eb9",
+                "url": "https://api.github.com/repos/ChristophWurst/nextcloud-http-client/zipball/79abda558fddd5f7db2d45c44ab6a6718cef8249",
+                "reference": "79abda558fddd5f7db2d45c44ab6a6718cef8249",
                 "shasum": ""
             },
             "require": {
-                "christophwurst/nextcloud": ">=19.0.0 <25.0.0"
+                "christophwurst/nextcloud": ">=19.0.0 <26.0.0"
             },
             "provide": {
                 "php-http/async-client-implementation": "1.0",
@@ -262,9 +262,9 @@
             "description": "HTTPlug and PSR7 adapter for Nextcloud",
             "support": {
                 "issues": "https://github.com/ChristophWurst/nextcloud-http-client/issues",
-                "source": "https://github.com/ChristophWurst/nextcloud-http-client/tree/v0.1.0"
+                "source": "https://github.com/ChristophWurst/nextcloud-http-client/tree/v0.2.0"
             },
-            "time": "2022-02-21T15:57:59+00:00"
+            "time": "2022-05-09T14:26:30+00:00"
         },
         {
             "name": "fgrosse/phpasn1",
@@ -4504,5 +4504,5 @@
     "platform-overrides": {
         "php": "7.3.0"
     },
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.3.0"
 }
