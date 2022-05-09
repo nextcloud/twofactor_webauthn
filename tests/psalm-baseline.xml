@@ -1,17 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <files psalm-version="4.x-dev@">
   <file src="lib/AppInfo/Application.php">
-    <InvalidArgument occurrences="4">
+    <InvalidArgument occurrences="6">
+      <code>registerEventListener</code>
+      <code>registerEventListener</code>
       <code>registerEventListener</code>
       <code>StateChangeActivity::class</code>
       <code>StateChangeActivity::class</code>
       <code>StateChangeRegistryUpdater::class</code>
     </InvalidArgument>
+    <MissingDependency occurrences="3">
+      <code>DisabledByAdmin</code>
+      <code>StateChanged</code>
+      <code>StateChanged</code>
+    </MissingDependency>
   </file>
   <file src="lib/Command/MigrateU2F.php">
     <UndefinedClass occurrences="1">
       <code>Command</code>
     </UndefinedClass>
+  </file>
+  <file src="lib/Event/DisabledByAdmin.php">
+    <MissingDependency occurrences="1">
+      <code>StateChanged</code>
+    </MissingDependency>
+  </file>
+  <file src="lib/Event/StateChanged.php">
+    <MissingDependency occurrences="1">
+      <code>Event</code>
+    </MissingDependency>
+  </file>
+  <file src="lib/Listener/StateChangeActivity.php">
+    <MissingDependency occurrences="2">
+      <code>StateChangeActivity</code>
+      <code>StateChanged</code>
+    </MissingDependency>
+  </file>
+  <file src="lib/Listener/StateChangeRegistryUpdater.php">
+    <MissingDependency occurrences="2">
+      <code>StateChangeRegistryUpdater</code>
+      <code>StateChanged</code>
+    </MissingDependency>
   </file>
   <file src="lib/Provider/WebAuthnProvider.php">
     <MissingDependency occurrences="2">
@@ -20,6 +49,14 @@
     </MissingDependency>
   </file>
   <file src="lib/Service/WebAuthnManager.php">
+    <MissingDependency occurrences="6">
+      <code>DisabledByAdmin</code>
+      <code>StateChanged</code>
+      <code>StateChanged</code>
+      <code>StateChanged</code>
+      <code>StateChanged</code>
+      <code>StateChanged</code>
+    </MissingDependency>
     <UndefinedClass occurrences="2">
       <code>ServerRequest</code>
       <code>ServerRequest</code>
