@@ -160,9 +160,8 @@ export default {
 				})
 				.then(debug('submitted challengeForm'))
 				.catch(error => {
-					this.error = error
+					this.error = error.toString()
 					logger.error('Challenge failed', { error }) // Example: timeout, interaction refused...
-					window.location = window.location.href.replace('challenge/twofactor_webauthn', 'selectchallenge')
 				})
 		},
 	},
