@@ -42,7 +42,16 @@
       <code>StateChanged</code>
     </MissingDependency>
   </file>
+  <file src="lib/Provider/WebAuthnLoginProvider.php">
+    <MissingDependency occurrences="1">
+      <code>Template</code>
+    </MissingDependency>
+  </file>
   <file src="lib/Provider/WebAuthnProvider.php">
+    <InvalidThrow occurrences="2">
+      <code>ContainerExceptionInterface</code>
+      <code>NotFoundExceptionInterface</code>
+    </InvalidThrow>
     <MissingDependency occurrences="2">
       <code>Template</code>
       <code>Template</code>

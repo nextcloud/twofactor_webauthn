@@ -184,6 +184,7 @@ export default {
 				.then(debug('registration data saved'))
 				.then(() => this.reset())
 				.then(debug('app reset'))
+				.then(() => this.$emit('add'))
 				.catch(err => {
 					console.error(TWOFACTOR_WEBAUTHN, err)
 					this.errorMessage = err.message
@@ -215,14 +216,21 @@ export default {
         display: inline-block;
         vertical-align: sub;
         margin-left: 2px;
-        margin-right: 2px;
+        margin-right: 5px;
     }
 
     .new-webauthn-device {
+		display: flex;
         line-height: 300%;
     }
 
     .error-message {
         color: var(--color-error);
     }
+
+	input {
+		/* Fix appearance on login setup page */
+		padding: 0;
+		font-size: 15px;
+	}
 </style>
