@@ -7,6 +7,7 @@ declare(strict_types=1);
  *
  * @author Christoph Wurst <christoph@winzerhof-wurst.at>
  * @author Michael Blumenstein <M.Flower@gmx.de>
+ * @author Richard Steinmetz <richard@steinmetz.cloud>
  *
  * @license GNU AGPL version 3 or any later version
  *
@@ -26,6 +27,7 @@ declare(strict_types=1);
 
 namespace OCA\TwoFactorWebauthn\Tests\Unit\Provider;
 
+use OCA\TwoFactorWebauthn\Provider\WebAuthnLoginProvider;
 use OCA\TwoFactorWebauthn\Provider\WebAuthnProvider;
 use OCA\TwoFactorWebauthn\Service\WebAuthnManager;
 use OCA\TwoFactorWebauthn\Settings\Personal;
@@ -37,6 +39,7 @@ use OCP\IUser;
 use OCP\Template;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Psr\Container\ContainerInterface;
 use Webauthn\PublicKeyCredentialRequestOptions;
 
 class WebAuthnProviderTest extends TestCase {
@@ -59,6 +62,9 @@ class WebAuthnProviderTest extends TestCase {
 	/** @var WebAuthnProvider */
 	private $provider;
 
+	/** @var ContainerInterface */
+	private $container;
+
 	protected function setUp(): void {
 		parent::setUp();
 
@@ -67,6 +73,7 @@ class WebAuthnProviderTest extends TestCase {
 		$this->urlGenerator = $this->createMock(IURLGenerator::class);
 		$this->initialState = $this->createMock(IInitialState::class);
 		$this->request = $this->createMock(IRequest::class);
+		$this->container = $this->createMock(ContainerInterface::class);
 
 		$this->provider = new WebAuthnProvider(
 			$this->l10n,
@@ -74,6 +81,7 @@ class WebAuthnProviderTest extends TestCase {
 			$this->initialState,
 			$this->urlGenerator,
 			$this->request,
+			$this->container,
 		);
 	}
 
@@ -221,5 +229,18 @@ class WebAuthnProviderTest extends TestCase {
 			->with($user);
 
 		$this->provider->disableFor($user);
+	}
+
+	public function testGetLoginSetupProvider(): void {
+		$user = $this->createMock(IUser::class);
+		$loginProvider = $this->createMock(WebAuthnLoginProvider::class);
+		$this->container->expects($this->once())
+			->method('get')
+			->with(WebAuthnLoginProvider::class)
+			->willReturn($loginProvider);
+
+		$result = $this->provider->getLoginSetup($user);
+
+		$this->assertSame($loginProvider, $result);
 	}
 }

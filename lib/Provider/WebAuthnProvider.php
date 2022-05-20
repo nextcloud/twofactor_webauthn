@@ -31,7 +31,9 @@ use OCA\TwoFactorWebauthn\AppInfo\Application;
 use OCA\TwoFactorWebauthn\Service\WebAuthnManager;
 use OCA\TwoFactorWebauthn\Settings\Personal;
 use OCP\AppFramework\Services\IInitialState;
+use OCP\Authentication\TwoFactorAuth\IActivatableAtLogin;
 use OCP\Authentication\TwoFactorAuth\IDeactivatableByAdmin;
+use OCP\Authentication\TwoFactorAuth\ILoginSetupProvider;
 use OCP\Authentication\TwoFactorAuth\IPersonalProviderSettings;
 use OCP\Authentication\TwoFactorAuth\IProvider;
 use OCP\Authentication\TwoFactorAuth\IProvidesIcons;
@@ -41,8 +43,11 @@ use OCP\IRequest;
 use OCP\IURLGenerator;
 use OCP\IUser;
 use OCP\Template;
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\ContainerInterface;
+use Psr\Container\NotFoundExceptionInterface;
 
-class WebAuthnProvider implements IProvider, IProvidesIcons, IProvidesPersonalSettings, IDeactivatableByAdmin {
+class WebAuthnProvider implements IProvider, IProvidesIcons, IProvidesPersonalSettings, IDeactivatableByAdmin, IActivatableAtLogin {
 
 	/** @var IL10N */
 	private $l10n;
@@ -59,16 +64,21 @@ class WebAuthnProvider implements IProvider, IProvidesIcons, IProvidesPersonalSe
 	/** @var IRequest */
 	private $request;
 
+	/** @var ContainerInterface  */
+	private $container;
+
 	public function __construct(IL10N $l10n,
 								WebAuthnManager $manager,
 								IInitialState $initialState,
 								IURLGenerator $urlGenerator,
-								IRequest $request) {
+								IRequest $request,
+								ContainerInterface $container) {
 		$this->l10n = $l10n;
 		$this->manager = $manager;
 		$this->initialState = $initialState;
 		$this->urlGenerator = $urlGenerator;
 		$this->request = $request;
+		$this->container = $container;
 	}
 
 	/**
@@ -139,5 +149,18 @@ class WebAuthnProvider implements IProvider, IProvidesIcons, IProvidesPersonalSe
 	 */
 	public function disableFor(IUser $user) {
 		$this->manager->deactivateAllDevices($user);
+	}
+
+	/**
+	 * Enable setup during login.
+	 *
+	 * @param IUser $user
+	 * @return ILoginSetupProvider
+	 *
+	 * @throws ContainerExceptionInterface
+	 * @throws NotFoundExceptionInterface
+	 */
+	public function getLoginSetup(IUser $user): ILoginSetupProvider {
+		return $this->container->get(WebAuthnLoginProvider::class);
 	}
 }
