@@ -23,6 +23,7 @@
     "Unnamed device" : "Unbenanntes Gerät",
     "Remove" : "Entfernen",
     "Active" : "Aktiv",
+    "Your device was added successfully. You are now being redirected to the login page." : "Ihr Gerät wurde erfolgreich hinzugefügt. Sie werden nun auf die Anmeldeseite weitergeleitet.",
     "No WebAuthn devices configured. You are not using WebAuthn as second factor at the moment." : "Es sind keine WebAuthn-Geräte konfiguriert. Momentan verwenden Sie WebAuthn nicht als Zwei-Faktor-Authentifizierungsmethode.",
     "The following devices are configured for WebAuthn two-factor authentication:" : "Die folgenden Geräte sind für WebAuthn Zwei-Faktor-Authentifizierung konfiguriert:",
     "All devices are deactivated." : "Alle Geräte sind deaktiviert."

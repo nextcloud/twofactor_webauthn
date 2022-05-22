@@ -23,6 +23,7 @@
     "Unnamed device" : "Adsız aygıt",
     "Remove" : "Kaldır",
     "Active" : "Etkin",
+    "Your device was added successfully. You are now being redirected to the login page." : "Aygıtınız eklendi. Şimdi oturum açma sayfasına yönlendirileceksiniz.",
     "No WebAuthn devices configured. You are not using WebAuthn as second factor at the moment." : "Herhangi bir WebAuthn aygıtı ayarlanmamış. Şu anda iki aşamalı doğrulama için WebAuthn kullanılamaz.",
     "The following devices are configured for WebAuthn two-factor authentication:" : "İki aşamalı kimlik doğrulaması için ayarlanmış ve kullanılabilecek WebAuthn aygıtları:",
     "All devices are deactivated." : "Tüm aygıtlar devre dışı bırakıldı."
