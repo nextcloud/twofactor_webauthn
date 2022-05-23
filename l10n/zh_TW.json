@@ -23,6 +23,7 @@
     "Unnamed device" : "未命名的裝置",
     "Remove" : "移除",
     "Active" : "作用中",
+    "Your device was added successfully. You are now being redirected to the login page." : "您的裝置已成功新增。您現在會被重新導向到登入頁面。",
     "No WebAuthn devices configured. You are not using WebAuthn as second factor at the moment." : "尚未設定 WebAuthn 裝置。您目前無法使用 WebAuthn 作為第二步驟的驗證方式。",
     "The following devices are configured for WebAuthn two-factor authentication:" : "下列裝置已被設定為 WebAuthn 第二步驟驗證使用：",
     "All devices are deactivated." : "所有裝置均已停用。"

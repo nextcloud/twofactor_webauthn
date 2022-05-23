@@ -25,6 +25,7 @@ OC.L10N.register(
     "Unnamed device" : "Izenik gabeko gailua",
     "Remove" : "Kendu",
     "Active" : "Aktibo",
+    "Your device was added successfully. You are now being redirected to the login page." : "Zure gailua behar bezala gehitu da. Orain saioa hasteko orrira birbideratua izango zara.",
     "No WebAuthn devices configured. You are not using WebAuthn as second factor at the moment." : "Ez dago WebAuthn gailurik konfiguratuta. Une honetan ez zara WebAuthn bigarren faktore gisa erabiltzen ari.",
     "The following devices are configured for WebAuthn two-factor authentication:" : "Gailu hauek WebAuthn bi faktoreko autentifikaziorako konfiguratuta daude:",
     "All devices are deactivated." : "Gailu guztiak desaktibatuta daude."
