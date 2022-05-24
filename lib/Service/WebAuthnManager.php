@@ -68,7 +68,7 @@ use Webauthn\PublicKeyCredentialUserEntity;
 use Webauthn\TokenBinding\TokenBindingNotSupportedHandler;
 
 class WebAuthnManager {
-	public const TWOFACTORAUTH_WEBAUTHN_REGISTRATION = 'twofactorauth_webauthn_registration';
+	public const TWOFACTORAUTH_WEBAUTHN_REGISTRATION = 'twofactorauth_webauthn_regs';
 	public const TWOFACTORAUTH_WEBAUTHN_REQUEST = 'twofactorauth_webauthn_request';
 	/**
 	 * @var ISession
@@ -246,7 +246,7 @@ class WebAuthnManager {
 			return [
 				'id' => $credential->getPublicKeyCredentialId(),
 				'name' => $credential->getName(),
-				'active' => $credential->isActive()
+				'active' => ($credential->isActive() === true)
 			];
 		}, $credentials);
 	}
@@ -264,7 +264,7 @@ class WebAuthnManager {
 		$activeDevices = array_filter(
 			$this->mapper->findPublicKeyCredentials($user->getUID()),
 			function ($device) {
-				return $device->isActive();
+				return ($device->isActive() === true);
 			}
 		);
 

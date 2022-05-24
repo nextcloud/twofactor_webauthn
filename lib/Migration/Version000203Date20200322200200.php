@@ -7,6 +7,7 @@ declare(strict_types=1);
  *
  * @author Christoph Wurst <christoph@winzerhof-wurst.at>
  * @author Michael Blumenstein <M.Flower@gmx.de>
+ * @author Richard Steinmetz <richard@steinmetz.cloud>
  *
  * @license GNU AGPL version 3 or any later version
  *
@@ -54,13 +55,16 @@ class Version000203Date20200322200200 extends SimpleMigrationStep {
 	 * @return null|ISchemaWrapper
 	 */
 	public function changeSchema(IOutput $output, Closure $schemaClosure, array $options) {
+		/** @var ISchemaWrapper $schema */
 		$schema = $schemaClosure();
 
-		$table = $schema->getTable('twofactor_webauthn_registrations');
-		if (!$table->hasColumn('aaguid_transform')) {
-			$table->addColumn('aaguid_transform', 'string', [
-				'notnull' => false
-			]);
+		if ($schema->hasTable('twofactor_webauthn_registrations')) {
+			$table = $schema->getTable('twofactor_webauthn_registrations');
+			if (!$table->hasColumn('aaguid_transform')) {
+				$table->addColumn('aaguid_transform', 'string', [
+					'notnull' => false
+				]);
+			}
 		}
 
 		return $schema;
@@ -74,6 +78,10 @@ class Version000203Date20200322200200 extends SimpleMigrationStep {
 	 * @since 13.0.0
 	 */
 	public function postSchemaChange(IOutput $output, Closure $schemaClosure, array $options) {
+		if (!$this->connection->tableExists('twofactor_webauthn_registrations')) {
+			return;
+		}
+
 		$selectQb = $this->connection->getQueryBuilder();
 		$select = $selectQb->select('id', 'aaguid')
 			->from('twofactor_webauthn_registrations');

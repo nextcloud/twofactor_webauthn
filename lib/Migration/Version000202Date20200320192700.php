@@ -7,6 +7,7 @@ declare(strict_types=1);
  *
  * @author Christoph Wurst <christoph@winzerhof-wurst.at>
  * @author Michael Blumenstein <M.Flower@gmx.de>
+ * @author Richard Steinmetz <richard@steinmetz.cloud>
  *
  * @license GNU AGPL version 3 or any later version
  *
@@ -53,6 +54,10 @@ class Version000202Date20200320192700 extends SimpleMigrationStep {
 	 * @param array $options
 	 */
 	public function preSchemaChange(IOutput $output, Closure $schemaClosure, array $options) {
+		if (!$this->connection->tableExists('twofactor_webauthn_registrations')) {
+			return;
+		}
+
 		$updateQb = $this->connection->getQueryBuilder();
 		$update = $updateQb->update('twofactor_webauthn_registrations')
 			->set('aaguid', $updateQb->createParameter('aaguid'))
@@ -102,8 +107,10 @@ class Version000202Date20200320192700 extends SimpleMigrationStep {
 		/** @var ISchemaWrapper $schema */
 		$schema = $schemaClosure();
 
-		$table = $schema->getTable('twofactor_webauthn_registrations');
-		$table->getColumn('aaguid')->setOptions(['length' => 16]);
+		if ($schema->hasTable('twofactor_webauthn_registrations')) {
+			$table = $schema->getTable('twofactor_webauthn_registrations');
+			$table->getColumn('aaguid')->setOptions(['length' => 16]);
+		}
 
 		return $schema;
 	}
