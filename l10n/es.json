@@ -26,5 +26,5 @@
     "No WebAuthn devices configured. You are not using WebAuthn as second factor at the moment." : "No hay dispositivos WebAuthn configurados. No está usando WebAuthn como segundo factor en este momento.",
     "The following devices are configured for WebAuthn two-factor authentication:" : "Los siguientes dispositivos están configurados para la autenticación de doble factor de WebAuthn:",
     "All devices are deactivated." : "Todos los dispositivos están desactivados."
-},"pluralForm" :"nplurals=2; plural=(n != 1);"
+},"pluralForm" :"nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;"
 }
