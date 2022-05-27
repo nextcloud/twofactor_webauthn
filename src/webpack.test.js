@@ -3,6 +3,7 @@
  *
  * @author Michael Blumenstein <M.Flower@gmx.de>
  * @author 2022 Christoph Wurst <christoph@winzerhof-wurst.at>
+ * @author Richard Steinmetz <richard@steinmetz.cloud>
  *
  * @license GNU AGPL version 3 or any later version
  *
@@ -21,7 +22,6 @@
  */
 
 const { merge } = require('webpack-merge')
-const nodeExternals = require('webpack-node-externals')
 const path = require('path')
 
 const common = require('./webpack.common.js')
@@ -30,5 +30,4 @@ module.exports = merge(common, {
 	mode: 'development',
 	context: path.resolve(__dirname, 'src'),
 	devtool: 'inline-cheap-module-source-map',
-	externals: [nodeExternals()],
 })
