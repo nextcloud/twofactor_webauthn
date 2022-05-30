@@ -15,6 +15,8 @@
 	<bugs>https://github.com/nextcloud/twofactor_webauthn/issues</bugs>
 	<repository>https://github.com/nextcloud/twofactor_webauthn.git</repository>
 
+	<screenshot>https://raw.githubusercontent.com/nextcloud/twofactor_webauthn/main/screenshots/challenge.png</screenshot>
+	
 	<dependencies>
 		<php min-version="7.3" max-version="8.1"/>
 		<lib>gmp</lib>
