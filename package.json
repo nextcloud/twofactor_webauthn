@@ -16,7 +16,7 @@
 		"vuex": "^3.6.2"
 	},
 	"devDependencies": {
-		"@babel/core": "^7.17.10",
+		"@babel/core": "^7.18.2",
 		"@babel/preset-env": "^7.16.11",
 		"@nextcloud/eslint-config": "^8.0.0",
 		"@vue/babel-preset-app": "^5.0.4",
