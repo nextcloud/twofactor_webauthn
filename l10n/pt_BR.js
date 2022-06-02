@@ -25,6 +25,7 @@ OC.L10N.register(
     "Unnamed device" : "Dispositivo sem nome",
     "Remove" : "Remover",
     "Active" : "Ativar",
+    "Your device was added successfully. You are now being redirected to the login page." : "Seu dispositivo foi adicionado com sucesso. Agora você está sendo redirecionado para a página de login.",
     "No WebAuthn devices configured. You are not using WebAuthn as second factor at the moment." : "Nenhum dispositivo WebAuthn configurado. Você não está usando o WebAuthn como segundo fator no momento.",
     "The following devices are configured for WebAuthn two-factor authentication:" : "Os seguintes dispositivos estão configurados para autenticação de dois fatores WebAuthn:",
     "All devices are deactivated." : "Todos os dispositivos estão desativados."
