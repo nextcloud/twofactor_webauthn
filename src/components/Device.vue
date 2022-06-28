@@ -23,7 +23,7 @@
 <template>
 	<div class="webauthn-device" :data-webauthn-id="id">
 		<span class="icon-webauthn-device" :class="{ disabled: !active }" />
-		{{ name || t('twofactor_webauthn', 'Unnamed device') }}
+		{{ name || t('twofactor_webauthn', 'Unnamed key') }}
 		<Actions>
 			<ActionButton icon="icon-delete" :close-after-click="true" @click="onDelete">
 				{{ t('twofactor_webauthn', 'Remove') }}

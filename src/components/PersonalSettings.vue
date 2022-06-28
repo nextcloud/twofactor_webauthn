@@ -23,10 +23,10 @@
 <template>
 	<div>
 		<p v-if="devices.length === 0">
-			{{ t('twofactor_webauthn', 'No WebAuthn devices configured. You are not using WebAuthn as second factor at the moment.') }}
+			{{ t('twofactor_webauthn', 'No security keys configured. You are not using WebAuthn as second factor at the moment.') }}
 		</p>
 		<p v-else>
-			{{ t('twofactor_webauthn', 'The following devices are configured for WebAuthn two-factor authentication:') }}
+			{{ t('twofactor_webauthn', 'The following security keys are configured for WebAuthn two-factor authentication:') }}
 		</p>
 		<Device v-for="device in devices"
 			:id="device.id"
@@ -37,7 +37,7 @@
 		<AddDeviceDialog :http-warning="httpWarning" />
 		<p v-if="allDeactivated" class="webauthn-warning">
 			<span class="icon icon-info" />
-			{{ t('twofactor_webauthn', 'All devices are deactivated.') }}
+			{{ t('twofactor_webauthn', 'All security keys are deactivated.') }}
 		</p>
 		<p v-if="notSupported" class="webauthn-warning">
 			<span class="icon icon-info" />

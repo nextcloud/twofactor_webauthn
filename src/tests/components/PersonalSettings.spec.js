@@ -51,7 +51,7 @@ describe('PersonalSettings', () => {
 			localVue,
 		})
 
-		expect(settings.text()).to.contain('No WebAuthn devices configured. You are not using WebAuthn as second factor at the moment.')
+		expect(settings.text()).to.contain('No security keys configured. You are not using WebAuthn as second factor at the moment.')
 	})
 
 	it('shows no info text if devices are configured', () => {
@@ -64,7 +64,7 @@ describe('PersonalSettings', () => {
 			localVue,
 		})
 
-		expect(settings.text()).to.not.contain('No WebAuthn devices configured. You are not using WebAuthn as second factor at the moment.')
+		expect(settings.text()).to.not.contain('No security keys configured. You are not using WebAuthn as second factor at the moment.')
 	})
 
 	it('shows a HTTP warning', () => {

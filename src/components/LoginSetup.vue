@@ -28,7 +28,7 @@
 				@add="onAdded" />
 		</div>
 		<p v-else>
-			{{ t('twofactor_webauthn', 'Your device was added successfully. You are now being redirected to the login page.') }}
+			{{ t('twofactor_webauthn', 'Your security key was added successfully. You are now being redirected to the login page.') }}
 		</p>
 		<p v-if="notSupported">
 			{{ t('twofactor_webauthn', 'Your browser does not support WebAuthn.') }}

@@ -66,7 +66,7 @@ class Setting implements ISetting {
 	 * @return string
 	 */
 	public function getName() {
-		return $this->l10n->t('WebAuthn device');
+		return $this->l10n->t('Security key');
 	}
 
 	/**

@@ -50,9 +50,9 @@ class SettingTest extends TestCase {
 		self::assertEquals('twofactor_webauthn', $this->setting->getIdentifier());
 		$this->l10n->expects(self::once())
 			->method('t')
-			->with('WebAuthn device')
-			->willReturn('WebAuthn Gerät');
-		self::assertEquals('WebAuthn Gerät', $this->setting->getName());
+			->with('Security key')
+			->willReturn('Sicherheitsschlüssel');
+		self::assertEquals('Sicherheitsschlüssel', $this->setting->getName());
 		self::assertEquals(30, $this->setting->getPriority());
 		self::assertEquals(true, $this->setting->isDefaultEnabledMail());
 		self::assertEquals(true, $this->setting->isDefaultEnabledStream());

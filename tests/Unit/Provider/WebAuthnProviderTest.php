@@ -92,7 +92,7 @@ class WebAuthnProviderTest extends TestCase {
 	public function testGetDisplayName(): void {
 		$this->l10n->expects(self::once())
 			->method('t')
-			->with('WebAuthn device')
+			->with('Security key')
 			->willReturn('translated');
 
 		$displayName = $this->provider->getDisplayName();

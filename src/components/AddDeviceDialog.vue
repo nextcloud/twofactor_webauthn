@@ -23,7 +23,7 @@
 <template>
 	<div v-if="step === RegistrationSteps.READY">
 		<button @click="start">
-			{{ t('twofactor_webauthn', 'Add WebAuthn device') }}
+			{{ t('twofactor_webauthn', 'Add security key') }}
 		</button>
 		<p v-if="errorMessage" class="error-message">
 			<span class="icon icon-error" />
@@ -34,7 +34,7 @@
 	<div v-else-if="step === RegistrationSteps.REGISTRATION"
 		class="new-webauthn-device">
 		<span class="icon-loading-small webauthn-loading" />
-		{{ t('twofactor_webauthn', 'Please plug in your WebAuthn device and press the device button to authorize.') }}
+		{{ t('twofactor_webauthn', 'Please use your security key authorize.') }}
 	</div>
 
 	<div v-else-if="step === RegistrationSteps.NAMING"
@@ -42,7 +42,7 @@
 		<span class="icon-loading-small webauthn-loading" />
 		<input v-model="name"
 			type="text"
-			:placeholder="t('twofactor_webauthn', 'Name your device')"
+			:placeholder="t('twofactor_webauthn', 'Name your security key')"
 			@keyup.enter="submit">
 		<button @click="submit">
 			{{ t('twofactor_webauthn', 'Add') }}
@@ -52,7 +52,7 @@
 	<div v-else-if="step === RegistrationSteps.PERSIST"
 		class="new-webauthn-device">
 		<span class="icon-loading-small webauthn-loading" />
-		{{ t('twofactor_webauthn', 'Adding your device …') }}
+		{{ t('twofactor_webauthn', 'Adding your security key …') }}
 	</div>
 
 	<div v-else>
@@ -198,7 +198,7 @@ export default {
 				.then(debug('new device added to store'))
 				.catch(err => {
 					console.error(TWOFACTOR_WEBAUTHN, 'Error persisting webauthn registration', err)
-					throw new Error(t('twofactor_webauthn', 'Server error while trying to complete WebAuthn device registration'))
+					throw new Error(t('twofactor_webauthn', 'Server error while trying to complete security key registration'))
 				})
 		},
 

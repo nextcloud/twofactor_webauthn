@@ -92,7 +92,7 @@ class WebAuthnProvider implements IProvider, IProvidesIcons, IProvidesPersonalSe
 	 * Get the display name for selecting the 2FA provider
 	 */
 	public function getDisplayName(): string {
-		return $this->l10n->t('WebAuthn device');
+		return $this->l10n->t('Security key');
 	}
 
 	/**
