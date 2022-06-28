@@ -68,10 +68,10 @@ import {
 	finishRegistration,
 } from '../services/RegistrationService'
 
-import { TWOFACTOR_WEBAUTHN } from '../constants'
+import logger from '../logger'
 
 const debug = (text) => (data) => {
-	console.debug(TWOFACTOR_WEBAUTHN, text, data)
+	logger.debug(text, { data })
 	return data
 }
 
@@ -120,16 +120,21 @@ export default {
 
 		start() {
 			this.errorMessage = null
-			console.info(TWOFACTOR_WEBAUTHN, 'Starting to add a new twofactor webauthn device')
+			logger.info('Starting to add a new twofactor webauthn device')
 			this.step = RegistrationSteps.REGISTRATION
 
 			return confirmPassword()
 				.then(this.getRegistrationData)
 				.then(this.register.bind(this))
 				.then(() => (this.step = RegistrationSteps.NAMING))
-				.catch(err => {
-					console.error(TWOFACTOR_WEBAUTHN, err.name, err.message)
-					this.errorMessage = err.message
+				.catch(error => {
+					logger.error(error.name + ': ' + error.message, {
+						error,
+					})
+					// Do not show an error when the user aborts registration
+					if (error.name !== 'AbortError') {
+						this.errorMessage = error.message
+					}
 					this.step = RegistrationSteps.READY
 				})
 		},
@@ -147,14 +152,14 @@ export default {
 					}
 					return publicKey
 				})
-				.catch(err => {
-					console.error(TWOFACTOR_WEBAUTHN, 'getRegistrationData', 'Error getting webauthn registration data from server', err)
-					throw new Error(t(TWOFACTOR_WEBAUTHN, 'Server error while trying to add webauthn device'))
+				.catch(error => {
+					logger.error('getRegistrationData: Error getting webauthn registration data from server', { error })
+					throw new Error(t('twofactor_webauthn', 'Server error while trying to add webauthn device'))
 				})
 		},
 
 		register(publicKey) {
-			console.debug(TWOFACTOR_WEBAUTHN, 'starting webauthn registration')
+			logger.debug('starting webauthn registration')
 
 			return navigator.credentials.create({ publicKey })
 				.then(debug('navigator.credentials.create called'))
@@ -170,9 +175,9 @@ export default {
 					}
 				})
 				.then(debug('mapped credentials data'))
-				.catch(err => {
-					console.error(TWOFACTOR_WEBAUTHN, 'register', 'Error creating credentials', err)
-					throw err
+				.catch(error => {
+					logger.error('register: Error creating credentials', { error })
+					throw error
 				})
 		},
 
@@ -185,9 +190,9 @@ export default {
 				.then(() => this.reset())
 				.then(debug('app reset'))
 				.then(() => this.$emit('add'))
-				.catch(err => {
-					console.error(TWOFACTOR_WEBAUTHN, err)
-					this.errorMessage = err.message
+				.catch(error => {
+					logger.error(error, error.name)
+					this.errorMessage = error.message
 					this.step = RegistrationSteps.READY
 				})
 		},
@@ -196,8 +201,8 @@ export default {
 			return finishRegistration(this.name, JSON.stringify(this.credential))
 				.then(device => this.$store.commit('addDevice', device))
 				.then(debug('new device added to store'))
-				.catch(err => {
-					console.error(TWOFACTOR_WEBAUTHN, 'Error persisting webauthn registration', err)
+				.catch(error => {
+					logger.error('Error persisting webauthn registration', { error })
 					throw new Error(t('twofactor_webauthn', 'Server error while trying to complete security key registration'))
 				})
 		},
