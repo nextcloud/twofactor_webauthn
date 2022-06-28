@@ -25,12 +25,12 @@
 		<span class="icon-webauthn-device" :class="{ disabled: !active }" />
 		{{ name || t('twofactor_webauthn', 'Unnamed key') }}
 		<Actions>
-			<ActionButton icon="icon-delete" :close-after-click="true" @click="onDelete">
-				{{ t('twofactor_webauthn', 'Remove') }}
-			</ActionButton>
 			<ActionCheckbox :checked="active" @update:checked="changeActivation">
 				{{ t('twofactor_webauthn', 'Active') }}
 			</ActionCheckbox>
+			<ActionButton icon="icon-delete" :close-after-click="true" @click="onDelete">
+				{{ t('twofactor_webauthn', 'Remove') }}
+			</ActionButton>
 		</Actions>
 	</div>
 </template>
