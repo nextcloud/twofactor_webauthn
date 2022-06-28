@@ -41,10 +41,11 @@
 		class="new-webauthn-device">
 		<span class="icon-loading-small webauthn-loading" />
 		<input v-model="name"
+			required
 			type="text"
 			:placeholder="t('twofactor_webauthn', 'Name your security key')"
 			@keyup.enter="submit">
-		<button @click="submit">
+		<button :disabled="!name.length" @click="submit">
 			{{ t('twofactor_webauthn', 'Add') }}
 		</button>
 	</div>
