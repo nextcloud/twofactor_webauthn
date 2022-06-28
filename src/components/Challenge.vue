@@ -43,10 +43,10 @@
 		</p>
 		<p v-else
 			id="webauthn-info">
-			{{ t('twofactor_webauthn', 'Plug in your WebAuthn device and press the button below to begin authorization.') }}
+			{{ t('twofactor_webauthn', 'Plug in your security key and press the button below to begin authorization.') }}
 			<button class="btn sign"
 				@click="sign">
-				{{ t('twofactor_webauthn', 'Use WebAuthn device') }}
+				{{ t('twofactor_webauthn', 'Use security key') }}
 			</button>
 		</p>
 		<p id="webauthn-error"

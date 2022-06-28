@@ -55,6 +55,6 @@ describe('Device', () => {
 			localVue,
 		})
 
-		expect(device.text()).to.have.string('Unnamed device')
+		expect(device.text()).to.have.string('Unnamed key')
 	})
 })
