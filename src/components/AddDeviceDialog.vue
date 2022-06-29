@@ -154,7 +154,7 @@ export default {
 				})
 				.catch(error => {
 					logger.error('getRegistrationData: Error getting webauthn registration data from server', { error })
-					throw new Error(t('twofactor_webauthn', 'Server error while trying to add webauthn device'))
+					throw new Error(t('twofactor_webauthn', 'Server error while trying to add WebAuthn device'))
 				})
 		},
 
