@@ -40,14 +40,15 @@
 	<div v-else-if="step === RegistrationSteps.NAMING"
 		class="new-webauthn-device">
 		<span class="icon-loading-small webauthn-loading" />
-		<input v-model="name"
-			required
-			type="text"
-			:placeholder="t('twofactor_webauthn', 'Name your security key')"
-			@keyup.enter="submit">
-		<button :disabled="!name.length" @click="submit">
-			{{ t('twofactor_webauthn', 'Add') }}
-		</button>
+		<form @submit.prevent="submit">
+			<input v-model="name"
+				required
+				type="text"
+				:placeholder="t('twofactor_webauthn', 'Name your security key')">
+			<button :disabled="!name.length" type="submit">
+				{{ t('twofactor_webauthn', 'Add') }}
+			</button>
+		</form>
 	</div>
 
 	<div v-else-if="step === RegistrationSteps.PERSIST"
