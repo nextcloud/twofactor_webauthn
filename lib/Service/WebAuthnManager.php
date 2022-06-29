@@ -231,12 +231,14 @@ class WebAuthnManager {
 		);
 
 		$this->repository->saveCredentialSource($publicKeyCredentialSource, $name);
+		$entity = $this->mapper->findPublicKeyCredential(base64_encode($publicKeyCredentialSource->getPublicKeyCredentialId()));
 		$this->eventDispatcher->dispatch(StateChanged::class, new StateChanged($user, true));
 
 		return [
 			'id' => base64_encode($publicKeyCredentialSource->getPublicKeyCredentialId()),
 			'name' => $name,
-			'active' => true
+			'createdAt' => $entity !== null ? $entity->getCreatedAt() : null,
+			'active' => true,
 		];
 	}
 
@@ -246,6 +248,7 @@ class WebAuthnManager {
 			return [
 				'id' => $credential->getPublicKeyCredentialId(),
 				'name' => $credential->getName(),
+				'createdAt' => $credential->getCreatedAt(),
 				'active' => ($credential->isActive() === true)
 			];
 		}, $credentials);

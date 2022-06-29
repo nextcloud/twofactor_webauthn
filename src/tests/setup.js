@@ -41,6 +41,9 @@ global.OC = {
 	getLanguage() {
 		return 'en'
 	},
+	getLocale() {
+		return 'en'
+	},
 }
 global.t = t
 

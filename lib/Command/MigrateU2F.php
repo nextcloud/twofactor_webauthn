@@ -133,7 +133,7 @@ class MigrateU2F extends Command {
 				}
 
 				$source = $this->migrator->migrateU2FRegistration($registration);
-				$entity = PublicKeyCredentialEntity::fromPublicKeyCrendentialSource($name, $source);
+				$entity = PublicKeyCredentialEntity::fromPublicKeyCrendentialSource($name, $source, null);
 				$this->webauthnMapper->insert($entity);
 
 				if ($deleteU2fRegistrations) {
