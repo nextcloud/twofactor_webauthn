@@ -2,7 +2,6 @@
     "Add" : "Agregar",
     "Retry" : "Reintentar",
     "An error occurred. Please try again." : "Se presentó un error. Por favor vuelve a intentarlo.",
-    "Unnamed device" : "Dispositivo sin nombre",
     "Remove" : "Eliminar"
 },"pluralForm" :"nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;"
 }

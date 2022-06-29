@@ -3,7 +3,7 @@ OC.L10N.register(
     {
     "Add" : "افزودن",
     "Retry" : "تلاش دوباره",
-    "Remove" : "حذف",
-    "Active" : "فعال کردن"
+    "Active" : "فعال کردن",
+    "Remove" : "حذف"
 },
 "nplurals=2; plural=(n > 1);");

@@ -3,7 +3,7 @@ OC.L10N.register(
     {
     "Add" : "Thêm",
     "Retry" : "Thử lại",
-    "Remove" : "Xoá",
-    "Active" : "Hoạt động"
+    "Active" : "Hoạt động",
+    "Remove" : "Xoá"
 },
 "nplurals=1; plural=0;");

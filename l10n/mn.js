@@ -3,7 +3,6 @@ OC.L10N.register(
     {
     "Add" : "нэмэх",
     "Retry" : "Дахин оролдох",
-    "Unnamed device" : "нэргүй төхөөрөммж",
     "Remove" : "Устгах"
 },
 "nplurals=2; plural=(n != 1);");

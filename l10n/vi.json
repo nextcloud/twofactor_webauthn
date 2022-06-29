@@ -1,7 +1,7 @@
 { "translations": {
     "Add" : "Thêm",
     "Retry" : "Thử lại",
-    "Remove" : "Xoá",
-    "Active" : "Hoạt động"
+    "Active" : "Hoạt động",
+    "Remove" : "Xoá"
 },"pluralForm" :"nplurals=1; plural=0;"
 }
