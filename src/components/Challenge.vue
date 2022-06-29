@@ -36,18 +36,18 @@
 			<strong>
 				{{ t('twofactor_webauthn', 'An error occurred: {msg}', {msg: error}) }}
 			</strong>
-			<button class="btn sign"
+			<Button class="btn sign"
 				@click="sign">
 				{{ t('twofactor_webauthn', 'Retry') }}
-			</button>
+			</Button>
 		</p>
 		<p v-else
 			id="webauthn-info">
 			{{ t('twofactor_webauthn', 'Plug in your security key and press the button below to begin authorization.') }}
-			<button class="btn sign"
+			<Button class="btn sign"
 				@click="sign">
 				{{ t('twofactor_webauthn', 'Use security key') }}
-			</button>
+			</Button>
 		</p>
 		<p id="webauthn-error"
 			style="display: none">
@@ -71,6 +71,8 @@
 <script>
 import { mapGetters } from 'vuex'
 
+import Button from '@nextcloud/vue/dist/Components/Button'
+
 import logger from '../logger'
 
 const debug = (text) => (data) => {
@@ -80,6 +82,11 @@ const debug = (text) => (data) => {
 
 export default {
 	name: 'Challenge',
+
+	components: {
+		Button,
+	},
+
 	data() {
 		return {
 			notSupported: typeof (PublicKeyCredential) === 'undefined',
@@ -87,6 +94,7 @@ export default {
 			error: undefined,
 		}
 	},
+
 	computed: {
 		...mapGetters({
 			credentialRequestOptions: 'getCredentialRequestOptions',
@@ -95,6 +103,7 @@ export default {
 			return document.location.protocol !== 'https:'
 		},
 	},
+
 	methods: {
 		arrayToBase64String(a) {
 			return btoa(String.fromCharCode(...a))
