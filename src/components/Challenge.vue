@@ -69,8 +69,9 @@
 </template>
 
 <script>
-import logger from '../logger'
 import { mapGetters } from 'vuex'
+
+import logger from '../logger'
 
 const debug = (text) => (data) => {
 	logger.debug({ text, data })
@@ -160,7 +161,16 @@ export default {
 				})
 				.then(debug('submitted challengeForm'))
 				.catch(error => {
-					this.error = error.toString()
+					switch (error.name) {
+					case 'AbortError':
+						this.error = t('twofactor_webauthn', 'Authentication cancelled')
+						break
+					case 'NotAllowedError':
+						this.error = t('twofactor_webauthn', 'Authentication cancelled')
+						break
+					default:
+						this.error = error.toString()
+					}
 					logger.error('Challenge failed', { error }) // Example: timeout, interaction refused...
 				})
 		},
