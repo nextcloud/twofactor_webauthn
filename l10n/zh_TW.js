@@ -9,6 +9,7 @@ OC.L10N.register(
     "WebAuthn two-factor provider" : "WebAuthn 兩步驟提供者",
     "A two-factor provider for WebAuthn devices" : "WebAuthn 裝置的兩步驟提供者",
     "Add" : "新增",
+    "Server error while trying to add WebAuthn device" : "嘗試新增 WebAuthn 裝置時發生伺服器錯誤",
     "An error occurred: {msg}" : "遇到錯誤：{msg}",
     "Retry" : "重試",
     "An error occurred. Please try again." : "發生錯誤。請再試一次。",

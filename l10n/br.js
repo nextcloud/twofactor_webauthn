@@ -2,6 +2,7 @@ OC.L10N.register(
     "twofactor_webauthn",
     {
     "Add" : "Ouzhpennañ",
+    "Server error while trying to add WebAuthn device" : "Ur fazi servijour a zo bet pa oa ouzhpennet an ardivink WebAuthn",
     "Retry" : "Klaskit en dro",
     "Your browser does not support WebAuthn." : "Ne vez ket douget WebAuthn gant o furcher.",
     "Active" : "O labourat",

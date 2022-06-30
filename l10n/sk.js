@@ -9,6 +9,7 @@ OC.L10N.register(
     "WebAuthn two-factor provider" : "Poskytovateľ dvoj-faktorového WebAuthn",
     "A two-factor provider for WebAuthn devices" : "Poskytovateľ dvojfaktorového overovania pre WebAuthn zariadenia",
     "Add" : "Pridať",
+    "Server error while trying to add WebAuthn device" : "Chyba servera pri pokuse o pridanie zariadenia WebAuthn",
     "An error occurred: {msg}" : "Vyskytla sa chyba: {msg}",
     "Retry" : "Zopakovať",
     "An error occurred. Please try again." : "Nastala chyba. Skúste to prosím znovu.",

@@ -9,6 +9,7 @@ OC.L10N.register(
     "WebAuthn two-factor provider" : "WebAuthn bi faktoreko hornitzailea",
     "A two-factor provider for WebAuthn devices" : "WebAuthn gailuetarako bi faktoreko hornitzailea",
     "Add" : "Gehitu",
+    "Server error while trying to add WebAuthn device" : "Zerbitzariaren errorea WebAuthn gailua gehitzen saiatzean",
     "An error occurred: {msg}" : "Errorea gertatu da: {msg}",
     "Retry" : "saiatu berriro",
     "An error occurred. Please try again." : "Errorea. Saiatu berriro, mesedez.",

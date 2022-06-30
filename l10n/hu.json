@@ -7,6 +7,7 @@
     "WebAuthn two-factor provider" : "WebAuthn kétlépcsős szolgáltató",
     "A two-factor provider for WebAuthn devices" : "Kétlépcsős szolgáltató a WebAuthn-eszközökhöz",
     "Add" : "Hozzáadás",
+    "Server error while trying to add WebAuthn device" : "Kiszolgálóhiba a WebAuthn eszköz hozzáadása során",
     "An error occurred: {msg}" : "Hiba történt: {msg}",
     "Retry" : "Újra",
     "An error occurred. Please try again." : "Hiba történt. Próbálja újra.",

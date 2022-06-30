@@ -9,6 +9,7 @@ OC.L10N.register(
     "WebAuthn two-factor provider" : "Доставчик на двустепенно WebAuthn",
     "A two-factor provider for WebAuthn devices" : "Двустепенен доставчик за WebAuthn устройства",
     "Add" : "Добавяне",
+    "Server error while trying to add WebAuthn device" : "Грешка в сървъра при опит за добавяне на WebAuthn устройство",
     "An error occurred: {msg}" : "Възникна грешка: {msg}",
     "Retry" : "Повторен опит",
     "An error occurred. Please try again." : "Възникна грешка. Моля, опитайте отново.",

@@ -2,7 +2,7 @@ OC.L10N.register(
     "twofactor_webauthn",
     {
     "Add" : "Προσθήκη",
-    "Server error while trying to add webauthn device" : "Σφάλμα διακομιστή κατά την προσπάθεια προσθήκης συσκευής webauthn",
+    "Server error while trying to add WebAuthn device" : "Σφάλμα διακομιστή κατά την προσθήκη συσκευής webAuthn",
     "An error occurred: {msg}" : "Παρουσιάστηκε σφάλμα: {msg}",
     "Retry" : "Δοκιμή ξανά",
     "An error occurred. Please try again." : "Παρουσιάστηκε σφάλμα. Παρακαλώ προσπαθήστε ξανά.",

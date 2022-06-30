@@ -9,6 +9,7 @@ OC.L10N.register(
     "WebAuthn two-factor provider" : "WebAuthn twee-factor provider",
     "A two-factor provider for WebAuthn devices" : "Een twee-factor provider voor WebAuthn-toestellen",
     "Add" : "Toevoegen",
+    "Server error while trying to add WebAuthn device" : "Serverfout tijdens het toevoegen van WebAuthn toestel",
     "An error occurred: {msg}" : "Er is een fout opgetreden: {msg}",
     "Retry" : "Opnieuw",
     "An error occurred. Please try again." : "Er is een fout opgetreden. Opnieuw.",

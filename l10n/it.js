@@ -9,7 +9,7 @@ OC.L10N.register(
     "WebAuthn two-factor provider" : "Fornitore a due fattori WebAuthn ",
     "A two-factor provider for WebAuthn devices" : "Un fornitore a due fattori per dispositivi WebAuthn",
     "Add" : "Aggiungi",
-    "Server error while trying to add webauthn device" : "Errore del server durante il tentativo di aggiungere il dispositivo WebAuthn",
+    "Server error while trying to add WebAuthn device" : "Errore del server durante il tentativo di aggiungere il dispositivo WebAuthn",
     "An error occurred: {msg}" : "Si è verificato un errore: {msg}",
     "Retry" : "Riprova",
     "An error occurred. Please try again." : "Si è verificato un errore. Riprova.",

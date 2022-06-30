@@ -2,6 +2,7 @@ OC.L10N.register(
     "twofactor_webauthn",
     {
     "Add" : "Додај",
+    "Server error while trying to add WebAuthn device" : "Серверска грешка при додавању WebAuthn уређаја",
     "An error occurred: {msg}" : "Догодила се грешка: {msg}",
     "Retry" : "Покушај поново",
     "An error occurred. Please try again." : "Десила се грешка. Покушајте поново.",

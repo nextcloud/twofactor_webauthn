@@ -2,6 +2,7 @@ OC.L10N.register(
     "twofactor_webauthn",
     {
     "Add" : "Добавить",
+    "Server error while trying to add WebAuthn device" : "Ошибка сервера при попытке добавить устройство WebAuthn",
     "An error occurred: {msg}" : "Произошла ошибка: {msg}",
     "Retry" : "Повторить",
     "An error occurred. Please try again." : "Произошла ошибка. Попробуйте ещё раз.",
