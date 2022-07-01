@@ -6,6 +6,7 @@ OC.L10N.register(
     "WebAuthn disabled by the administration" : "WebAuthnは管理者により無効にされています。",
     "Use WebAuthn for second factor authentication" : "WebAuthnを二要素目の認証に利用する",
     "Add" : "追加",
+    "Server error while trying to add WebAuthn device" : "WebAuthn デバイスを追加しようとしたときのサーバーエラー",
     "An error occurred: {msg}" : "エラーが発生しました: {msg}",
     "Retry" : "リトライ",
     "An error occurred. Please try again." : "エラーが発生しました。もう一度試してください。",

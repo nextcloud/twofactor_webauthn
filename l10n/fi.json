@@ -1,11 +1,24 @@
 { "translations": {
+    "WebAuthn disabled by the administration" : "WebAuthn on poistettu käytöstä ylläpitäjän toimesta",
+    "Security key" : "Turva-avain",
+    "Use WebAuthn for second factor authentication" : "Käytä WebAuthnia kaksivaiheiseen todentamiseen",
+    "Add security key" : "Lisää turva-avain",
+    "Name your security key" : "Anna turva-avaimellesi nimi",
     "Add" : "Lisä",
+    "Adding your security key …" : "Lisätään turva-avaimesi…",
     "Server error while trying to add WebAuthn device" : "Palvelinvirhe kun yritettiin lisätä WebAuthn-laitetta",
+    "Server error while trying to complete security key registration" : "Palvelinvirhe turva-avaimen rekisteröinnin aikana",
     "An error occurred: {msg}" : "Tapahtui virhe: {msg}",
     "Retry" : "Yritä uudelleen",
+    "Plug in your security key and press the button below to begin authorization." : "Kiinnitä turva-avaimesi ja paina alla olevaa painiketta aloittaaksesi valtuutuksen. ",
+    "Use security key" : "Käytä turva-avainta",
     "An error occurred. Please try again." : "Tapahtui virhe. Yritä myöhemmin uudelleen.",
     "Your browser does not support WebAuthn." : "Selaimesi ei tue WebAuthn-standardia.",
+    "Unnamed key" : "Nimetön avain",
     "Active" : "Aktiivinen",
-    "Remove" : "Poista"
+    "Remove" : "Poista",
+    "Your security key was added successfully. You are now being redirected to the login page." : "Turva-avaimesi liitettiin onnistuneesti. Sinut uudelleenohjataan nyt kirjautumissivulle.",
+    "No security keys configured. You are not using WebAuthn as second factor at the moment." : "Turva-avaimia ei ole määritetty. Et käytä kaksivaiheista WebAuthn-todennusta tällä hetkellä.",
+    "The following security keys are configured for WebAuthn two-factor authentication:" : "Seuraavat turva-avaimet on määritetty kaksivaiheista WebAuthn-todennusta varten:"
 },"pluralForm" :"nplurals=2; plural=(n != 1);"
 }
