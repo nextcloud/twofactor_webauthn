@@ -27,4 +27,6 @@ script('twofactor_webauthn', 'login-setup');
 
 ?>
 
+<img class="two-factor-icon" src="<?php print_unescaped(image_path('twofactor_webauthn', 'app.svg')); ?>" alt="">
+
 <div id="twofactor-webauthn-login-setup"></div>

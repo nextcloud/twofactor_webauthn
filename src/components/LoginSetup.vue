@@ -22,7 +22,7 @@
 
 <template>
 	<div>
-		<!-- TODO: at some explanatory text about what this page is about -->
+		<p>{{ t('twofactor_webauthn', 'Set up a security key as a second factor.') }}</p>
 		<div v-if="!added" class="add-device">
 			<AddDeviceDialog :http-warning="httpWarning"
 				@add="onAdded" />
