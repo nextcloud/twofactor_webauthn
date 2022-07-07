@@ -14,10 +14,12 @@ OC.L10N.register(
     "Server error while trying to add WebAuthn device" : "Zerbitzariaren errorea WebAuthn gailua gehitzen saiatzean",
     "An error occurred: {msg}" : "Errorea gertatu da: {msg}",
     "Retry" : "saiatu berriro",
+    "Use security key" : "Erabili segurtasun gakoa",
     "An error occurred. Please try again." : "Errorea. Saiatu berriro, mesedez.",
     "Your browser does not support WebAuthn." : "Nabigatzaile honek ez du WebAuthn onartzen.",
     "You are accessing this site via an insecure connection. Browsers might therefore refuse the WebAuthn authentication." : "Gune honetara konexio seguru baten bidez sartzen ari zara. Beraz, nabigatzaileek WebAuthn autentifikazioa uko egin dezakete.",
     "Active" : "Aktibo",
-    "Remove" : "Kendu"
+    "Remove" : "Kendu",
+    "All security keys are deactivated." : "Segurtasun gako guztiak desgaituta daude."
 },
 "nplurals=2; plural=(n != 1);");
