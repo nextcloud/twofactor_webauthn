@@ -21,6 +21,7 @@
     "An error occurred. Please try again." : "Errorea. Saiatu berriro, mesedez.",
     "Your browser does not support WebAuthn." : "Nabigatzaile honek ez du WebAuthn onartzen.",
     "You are accessing this site via an insecure connection. Browsers might therefore refuse the WebAuthn authentication." : "Gune honetara konexio seguru baten bidez sartzen ari zara. Beraz, nabigatzaileek WebAuthn autentifikazioa uko egin dezakete.",
+    "Authentication cancelled" : "Autentifikazio ezeztatuta",
     "Unnamed key" : "Izenik gabeko gakoa",
     "Active" : "Aktibo",
     "Remove" : "Kendu",

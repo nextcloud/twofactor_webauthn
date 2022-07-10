@@ -23,6 +23,7 @@ OC.L10N.register(
     "An error occurred. Please try again." : "Bir sorun çıktı. Lütfen yeniden deneyin.",
     "Your browser does not support WebAuthn." : "Web tarayıcınız WebAuthn desteklemiyor.",
     "You are accessing this site via an insecure connection. Browsers might therefore refuse the WebAuthn authentication." : "Bu site ile bağlantınız güvenli değil. Bu nedenle tarayıcılar yeniden WebAuthn kimlik doğrulaması isteyebilir.",
+    "Authentication cancelled" : "Kimlik doğrulama iptal edildi",
     "Unnamed key" : "Adsız anahtar",
     "Active" : "Etkin",
     "Remove" : "Kaldır",

@@ -15,15 +15,21 @@ OC.L10N.register(
     "Add" : "Hinzufügen",
     "Adding your security key …" : "Deinen Sicherheitsschlüssel hinzufügen …",
     "Server error while trying to add WebAuthn device" : "Server-Fehler beim Versuch ein WebAuthn-Gerät hinzuzufügen",
+    "Server error while trying to complete security key registration" : "Server-Fehler beim Versuch, die Sicherheitsschlüssel zu registrieren.",
     "An error occurred: {msg}" : "Ein Fehler ist aufgetreten: {msg}",
     "Retry" : "Wiederholen",
     "Plug in your security key and press the button below to begin authorization." : "Bitte verbinde Deinen Sicherheitsschlüssel und drücke die Schaltfläche unten, um Dich zu authentifizieren.",
+    "Use security key" : "Sicherheitsschlüssel verwenden",
     "An error occurred. Please try again." : "Es ist ein Fehler aufgetreten. Bitte versuche es noch einmal.",
     "Your browser does not support WebAuthn." : "Dein Browser unterstützt kein WebAuthn.",
     "You are accessing this site via an insecure connection. Browsers might therefore refuse the WebAuthn authentication." : "Du greifst auf diese Seite über eine unsichere Verbindung zu. Einige Browser werden daher die WebAuthn-Authentifizierung verweigern.",
+    "Authentication cancelled" : "Authentifizierung abgebrochen",
+    "Unnamed key" : "Unbenannter Sicherheitsschlüssel",
     "Active" : "Aktiv",
     "Remove" : "Entfernen",
     "Your security key was added successfully. You are now being redirected to the login page." : "Dein Sicherheitsschlüssel wurde erfolgreich hinzugefügt. Du wirst  nun auf die Anmeldeseite weitergeleitet.",
-    "No security keys configured. You are not using WebAuthn as second factor at the moment." : "Es sind keine Sicherheitsschlüssel konfiguriert. Momentan verwendenst Du WebAuthn nicht als Zwei-Faktor-Authentifizierungsmethode."
+    "No security keys configured. You are not using WebAuthn as second factor at the moment." : "Es sind keine Sicherheitsschlüssel konfiguriert. Momentan verwendenst Du WebAuthn nicht als Zwei-Faktor-Authentifizierungsmethode.",
+    "The following security keys are configured for WebAuthn two-factor authentication:" : "Die folgenden Sicherheitsschlüssel sind für WebAuthn Zwei-Faktor-Authentifizierung konfiguriert:",
+    "All security keys are deactivated." : "Alle Sicherheitsschlüssel sind deaktiviert."
 },
 "nplurals=2; plural=(n != 1);");
