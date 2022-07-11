@@ -23,6 +23,7 @@ OC.L10N.register(
     "An error occurred. Please try again." : "發生錯誤。請再試一次。",
     "Your browser does not support WebAuthn." : "您的瀏覽器不支援 WebAuthn。",
     "You are accessing this site via an insecure connection. Browsers might therefore refuse the WebAuthn authentication." : "您正在透過不安全的連線存取此網站。瀏覽器可能會因此拒絕 WebAuthn 驗證。",
+    "Authentication cancelled" : "驗證已取消",
     "Unnamed key" : "未命名的金鑰",
     "Active" : "作用中",
     "Remove" : "移除",
