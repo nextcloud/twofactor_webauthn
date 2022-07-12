@@ -23,6 +23,7 @@ OC.L10N.register(
     "An error occurred. Please try again." : "Wystąpił błąd. Spróbuj ponownie.",
     "Your browser does not support WebAuthn." : "Twoja przeglądarka nie obsługuje WebAuthn.",
     "You are accessing this site via an insecure connection. Browsers might therefore refuse the WebAuthn authentication." : "Uzyskujesz dostęp do tej witryny przez niezabezpieczone połączenie. Przeglądarki mogą zatem odmówić uwierzytelnienia WebAuthn.",
+    "Authentication cancelled" : "Uwierzytelnianie anulowane",
     "Unnamed key" : "Klucz bez nazwy",
     "Active" : "Aktywne",
     "Remove" : "Usuń",
