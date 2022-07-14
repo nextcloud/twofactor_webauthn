@@ -21,6 +21,7 @@
     "An error occurred. Please try again." : "Ha sucedido un error. Por favor, vuelva a intentarlo.",
     "Your browser does not support WebAuthn." : "Su navegador no soporta WebAuthn.",
     "You are accessing this site via an insecure connection. Browsers might therefore refuse the WebAuthn authentication." : "Está accediendo a este sitio a través de una conexión insegura. Por lo tanto, los navegadores podrían rechazar la autenticación WebAuthn.",
+    "Authentication cancelled" : "Autenticación cancelada",
     "Unnamed key" : "Clave sin nombre",
     "Active" : "Activo",
     "Remove" : "Eliminar",
