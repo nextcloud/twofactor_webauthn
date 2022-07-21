@@ -21,6 +21,7 @@
     "An error occurred. Please try again." : "Hiba történt. Próbálja újra.",
     "Your browser does not support WebAuthn." : "A böngészője nem támogatja a WebAuthn szabványt.",
     "You are accessing this site via an insecure connection. Browsers might therefore refuse the WebAuthn authentication." : "Nem biztonságos kapcsolaton keresztül éri el ezt az oldalt. A böngészők ezért megtagadhatják a WebAuthn-hitelesítést.",
+    "Authentication cancelled" : "Hitelesítés megszakítva",
     "Unnamed key" : "Névtelen kulcs",
     "Active" : "Aktív",
     "Remove" : "Eltávolítás",
