@@ -8,7 +8,7 @@
     "WebAuthn two-factor provider" : "WebAuthn Zwei-Faktor-Anbieter",
     "A two-factor provider for WebAuthn devices" : "Ein Zwei-Faktor-Anbieter für WebAuthn-Geräte",
     "Add security key" : "Sicherheitsschlüssel hinzufügen",
-    "Please use your security key authorize." : "Bitte benutze Deinen Sicherheitsschlüssel, um Dich zu autorisieren.",
+    "Please use your security key authorize." : "Bitte benutze deinen Sicherheitsschlüssel, um dich zu autorisieren.",
     "Name your security key" : "Deinen Sicherheitsschlüssel benennen",
     "Add" : "Hinzufügen",
     "Adding your security key …" : "Deinen Sicherheitsschlüssel hinzufügen …",
@@ -16,7 +16,7 @@
     "Server error while trying to complete security key registration" : "Server-Fehler beim Versuch, die Sicherheitsschlüssel zu registrieren.",
     "An error occurred: {msg}" : "Ein Fehler ist aufgetreten: {msg}",
     "Retry" : "Wiederholen",
-    "Plug in your security key and press the button below to begin authorization." : "Bitte verbinde Deinen Sicherheitsschlüssel und drücke die Schaltfläche unten, um Dich zu authentifizieren.",
+    "Plug in your security key and press the button below to begin authorization." : "Bitte verbinde deinen Sicherheitsschlüssel und drücke die Schaltfläche unten, um dich zu authentifizieren.",
     "Use security key" : "Sicherheitsschlüssel verwenden",
     "An error occurred. Please try again." : "Es ist ein Fehler aufgetreten. Bitte versuche es noch einmal.",
     "Your browser does not support WebAuthn." : "Dein Browser unterstützt kein WebAuthn.",
@@ -26,7 +26,7 @@
     "Active" : "Aktiv",
     "Remove" : "Entfernen",
     "Your security key was added successfully. You are now being redirected to the login page." : "Dein Sicherheitsschlüssel wurde erfolgreich hinzugefügt. Du wirst  nun auf die Anmeldeseite weitergeleitet.",
-    "No security keys configured. You are not using WebAuthn as second factor at the moment." : "Es sind keine Sicherheitsschlüssel konfiguriert. Momentan verwendenst Du WebAuthn nicht als Zwei-Faktor-Authentifizierungsmethode.",
+    "No security keys configured. You are not using WebAuthn as second factor at the moment." : "Es sind keine Sicherheitsschlüssel konfiguriert. Momentan verwendenst du WebAuthn nicht als Zwei-Faktor-Authentifizierungsmethode.",
     "The following security keys are configured for WebAuthn two-factor authentication:" : "Die folgenden Sicherheitsschlüssel sind für WebAuthn Zwei-Faktor-Authentifizierung konfiguriert:",
     "All security keys are deactivated." : "Alle Sicherheitsschlüssel sind deaktiviert."
 },"pluralForm" :"nplurals=2; plural=(n != 1);"
