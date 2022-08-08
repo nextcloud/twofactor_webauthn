@@ -22,9 +22,10 @@
 
 <template>
 	<div v-if="step === RegistrationSteps.READY">
-		<button @click="start">
+		<Button class="new-webauthn-device__button"
+			@click="start">
 			{{ t('twofactor_webauthn', 'Add security key') }}
-		</button>
+		</Button>
 		<p v-if="errorMessage" class="error-message">
 			<span class="icon icon-error" />
 			{{ errorMessage }}
@@ -45,9 +46,11 @@
 				required
 				type="text"
 				:placeholder="t('twofactor_webauthn', 'Name your security key')">
-			<button :disabled="!name.length" type="submit">
+			<Button class="new-webauthn-device__button"
+				native-type="submit"
+				:disabled="!name.length">
 				{{ t('twofactor_webauthn', 'Add') }}
-			</button>
+			</Button>
 		</form>
 	</div>
 
@@ -64,6 +67,8 @@
 
 <script>
 import confirmPassword from '@nextcloud/password-confirmation'
+
+import Button from '@nextcloud/vue/dist/Components/Button'
 
 import {
 	startRegistration,
@@ -86,9 +91,15 @@ const RegistrationSteps = Object.freeze({
 
 export default {
 	name: 'AddDeviceDialog',
+
+	components: {
+		Button,
+	},
+
 	props: {
 		httpWarning: Boolean,
 	},
+
 	data() {
 		return {
 			name: '',
@@ -98,6 +109,7 @@ export default {
 			errorMessage: null,
 		}
 	},
+
 	methods: {
 		arrayToBase64String(a) {
 			return btoa(String.fromCharCode(...a))
@@ -229,7 +241,12 @@ export default {
     .new-webauthn-device {
 		display: flex;
         line-height: 300%;
+		align-items: center;
     }
+
+	.new-webauthn-device__button {
+		margin: 10px 6px;
+	}
 
     .error-message {
         color: var(--color-error);
