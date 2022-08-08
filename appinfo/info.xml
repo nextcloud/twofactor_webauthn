@@ -16,11 +16,11 @@
 	<repository>https://github.com/nextcloud/twofactor_webauthn.git</repository>
 
 	<screenshot>https://raw.githubusercontent.com/nextcloud/twofactor_webauthn/main/screenshots/challenge.png</screenshot>
-	
+
 	<dependencies>
 		<php min-version="7.3" max-version="8.1"/>
 		<lib>gmp</lib>
-		<nextcloud min-version="21" max-version="25" />
+		<nextcloud min-version="22" max-version="25" />
 	</dependencies>
 
 	<two-factor-providers>
