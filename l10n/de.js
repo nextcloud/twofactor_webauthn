@@ -16,7 +16,7 @@ OC.L10N.register(
     "Adding your security key …" : "Deinen Sicherheitsschlüssel hinzufügen …",
     "Server error while trying to add WebAuthn device" : "Server-Fehler beim Versuch ein WebAuthn-Gerät hinzuzufügen",
     "Server error while trying to complete security key registration" : "Server-Fehler beim Versuch, die Sicherheitsschlüssel zu registrieren.",
-    "An error occurred: {msg}" : "Ein Fehler ist aufgetreten: {msg}",
+    "An error occurred: {msg}" : "Es ist ein Fehler aufgetreten: {msg}",
     "Retry" : "Wiederholen",
     "Plug in your security key and press the button below to begin authorization." : "Bitte verbinde deinen Sicherheitsschlüssel und drücke die Schaltfläche unten, um dich zu authentifizieren.",
     "Use security key" : "Sicherheitsschlüssel verwenden",
