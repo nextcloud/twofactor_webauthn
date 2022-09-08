@@ -28,6 +28,7 @@ namespace OCA\TwoFactorWebauthn\Db;
 
 use OCP\AppFramework\Db\Entity;
 use OCP\AppFramework\Db\QBMapper;
+use OCP\DB\Exception;
 use OCP\DB\QueryBuilder\IQueryBuilder;
 use OCP\IDBConnection;
 use OCP\IUser;
@@ -131,5 +132,25 @@ class PublicKeyCredentialEntityMapper extends QBMapper {
 		} else {
 			return parent::insert($entity);
 		}
+	}
+
+	/**
+	 * @param IUser $user
+	 * @throws Exception
+	 */
+	public function deletePublicKeyCredentials(IUser $user): void {
+		$this->deletePublicKeyCredentialsByUserId($user->getUID());
+	}
+
+	/**
+	 * @param string $uid
+	 * @throws Exception
+	 */
+	public function deletePublicKeyCredentialsByUserId(string $uid): void {
+		$qb = $this->db->getQueryBuilder();
+
+		$qb->delete('twofactor_webauthn_regs')
+			->where($qb->expr()->eq('user_handle', $qb->createNamedParameter($uid)));
+		$qb->executeStatement();
 	}
 }
