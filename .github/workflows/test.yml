@@ -12,10 +12,10 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        php-version: [7.4, 8.0]
+        php-version: ['7.4', '8.0', '8.1']
         nextcloud-version: ['master']
         include:
-          - php-version: 8.0
+          - php-version: '8.0'
             nextcloud-version: stable22
     name: Nextcloud ${{ matrix.nextcloud-version }} php${{ matrix.php-version }} unit tests
     steps:
@@ -44,10 +44,20 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        php-versions: [ 8.0 ]
-        nextcloud-versions: [ 'master' ]
-        db: [ 'sqlite', 'mysql', 'pgsql', 'oci' ]
-    name: php${{ matrix.php-versions }}-${{ matrix.db }} integration tests
+        php-version: [ '8.1' ]
+        nextcloud-version: [ 'master' ]
+        db: [ 'sqlite' ]
+        include:
+          - php-version: '8.1'
+            nextcloud-version: stable24
+            db: 'oci'
+          - php-version: '8.0'
+            nextcloud-version: stable23
+            db: 'pgsql'
+          - php-version: '7.4'
+            nextcloud-version: stable22
+            db: 'mysql'
+    name: php${{ matrix.php-version }}-${{ matrix.db }} integration tests
     services:
       mysql-service:
         image: mariadb:10.5
@@ -81,14 +91,14 @@ jobs:
         ports:
           - 1521:1521/tcp
     steps:
-      - name: Set up php${{ matrix.php-versions }}
+      - name: Set up php${{ matrix.php-version }}
         uses: shivammathur/setup-php@master
         with:
-          php-version: ${{ matrix.php-versions }}
+          php-version: ${{ matrix.php-version }}
           extensions: ctype,curl,dom,gd,iconv,intl,json,mbstring,openssl,posix,sqlite,xml,zip,gmp,oci8
           coverage: xdebug
       - name: Checkout Nextcloud
-        run: git clone https://github.com/nextcloud/server.git --recursive --depth 1 -b ${{ matrix.nextcloud-versions }} nextcloud
+        run: git clone https://github.com/nextcloud/server.git --recursive --depth 1 -b ${{ matrix.nextcloud-version }} nextcloud
       - name: Check out the app
         uses: actions/checkout@master
         with:
@@ -107,11 +117,11 @@ jobs:
       - name: Configure Nextcloud for testing
         run: |
           php -f nextcloud/occ config:system:set debug --type bool --value true
-      # - name: Run tests
-      #  working-directory: nextcloud/apps/twofactor_webauthn
-      #  run: composer run test:integration
-      #  env:
-      #    XDEBUG_MODE: coverage
+      - name: Run tests
+        working-directory: nextcloud/apps/twofactor_webauthn
+        run: composer run test:integration
+        env:
+          XDEBUG_MODE: coverage
 
   frontend-unit-test:
       runs-on: ubuntu-latest
