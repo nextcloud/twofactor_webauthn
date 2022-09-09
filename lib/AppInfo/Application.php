@@ -30,10 +30,12 @@ use OCA\TwoFactorWebauthn\Event\DisabledByAdmin;
 use OCA\TwoFactorWebauthn\Event\StateChanged;
 use OCA\TwoFactorWebauthn\Listener\StateChangeActivity;
 use OCA\TwoFactorWebauthn\Listener\StateChangeRegistryUpdater;
+use OCA\TwoFactorWebauthn\Listener\UserDeleted;
 use OCP\AppFramework\App;
 use OCP\AppFramework\Bootstrap\IBootContext;
 use OCP\AppFramework\Bootstrap\IBootstrap;
 use OCP\AppFramework\Bootstrap\IRegistrationContext;
+use OCP\User\Events\UserDeletedEvent;
 
 require_once __DIR__ . '/../../vendor/autoload.php';
 
@@ -48,6 +50,7 @@ class Application extends App implements IBootstrap {
 		$context->registerEventListener(StateChanged::class, StateChangeActivity::class);
 		$context->registerEventListener(StateChanged::class, StateChangeRegistryUpdater::class);
 		$context->registerEventListener(DisabledByAdmin::class, StateChangeActivity::class);
+		$context->registerEventListener(UserDeletedEvent::class, UserDeleted::class);
 	}
 
 	public function boot(IBootContext $context): void {
