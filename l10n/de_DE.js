@@ -20,7 +20,7 @@ OC.L10N.register(
     "Retry" : "Wiederholen",
     "Plug in your security key and press the button below to begin authorization." : "Bitte verbinden Sie Ihren Sicherheitsschlüssel und drücken Sie die Schaltfläche unten, um sich zu authentifizieren.",
     "Use security key" : "Sicherheitsschlüssel verwenden",
-    "An error occurred. Please try again." : "Es ist ein Fehler aufgetreten. Bitte versuchen Sie es noch einmal.",
+    "An error occurred. Please try again." : "Es ist ein Fehler aufgetreten. Bitte erneut versuchen.",
     "Your browser does not support WebAuthn." : "Ihr Browser unterstützt kein WebAuthn.",
     "You are accessing this site via an insecure connection. Browsers might therefore refuse the WebAuthn authentication." : "Sie greifen auf diese Seite über eine unsichere Verbindung zu. Einige Browser werden daher die WebAuthn-Authentifizierung verweigern.",
     "Authentication cancelled" : "Authentifizierung abgebrochen ",
