@@ -191,4 +191,8 @@ export default {
     .sign {
         margin-top: 1em;
     }
+    .btn {
+        margin: 0 auto;
+        margin-top: 12px;
+    }
 </style>
