@@ -5,17 +5,20 @@
       <code>registerEventListener</code>
       <code>registerEventListener</code>
       <code>registerEventListener</code>
-      <code>registerEventListener</code>
       <code>StateChangeActivity::class</code>
       <code>StateChangeActivity::class</code>
       <code>StateChangeRegistryUpdater::class</code>
-      <code>UserDeleted::class</code>
     </InvalidArgument>
     <MissingDependency occurrences="3">
       <code>DisabledByAdmin</code>
       <code>StateChanged</code>
       <code>StateChanged</code>
     </MissingDependency>
+  </file>
+  <file src="lib/Command/CleanUp.php">
+	  <UndefinedClass occurrences="1">
+		<code>Command</code>
+	  </UndefinedClass>
   </file>
   <file src="lib/Command/MigrateU2F.php">
     <UndefinedClass occurrences="1">

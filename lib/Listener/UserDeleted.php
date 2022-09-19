@@ -33,9 +33,6 @@ use OCP\EventDispatcher\IEventListener;
 use OCP\User\Events\UserDeletedEvent;
 use Psr\Log\LoggerInterface;
 
-/**
- * @template-implements IEventListener<UserDeletedEvent>
- */
 class UserDeleted implements IEventListener {
 
 	/** @var PublicKeyCredentialEntityMapper */
@@ -52,7 +49,7 @@ class UserDeleted implements IEventListener {
 	public function handle(Event $event): void {
 		if ($event instanceof UserDeletedEvent) {
 			try {
-				$this->publicKeyCredentialEntityMapper->deletePublicKeyCredentials($event->getUser());
+				$this->publicKeyCredentialEntityMapper->deletePublicKeyCredentialsByUserId($event->getUser()->getUID());
 			} catch (Exception $e) {
 				$this->logger->warning($e->getMessage(), ['uid' => $event->getUser()->getUID()]);
 			}

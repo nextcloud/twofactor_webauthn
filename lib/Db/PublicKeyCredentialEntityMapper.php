@@ -135,21 +135,13 @@ class PublicKeyCredentialEntityMapper extends QBMapper {
 	}
 
 	/**
-	 * @param IUser $user
-	 * @throws Exception
-	 */
-	public function deletePublicKeyCredentials(IUser $user): void {
-		$this->deletePublicKeyCredentialsByUserId($user->getUID());
-	}
-
-	/**
 	 * @param string $uid
 	 * @throws Exception
 	 */
 	public function deletePublicKeyCredentialsByUserId(string $uid): void {
 		$qb = $this->db->getQueryBuilder();
 
-		$qb->delete('twofactor_webauthn_regs')
+		$qb->delete($this->getTableName())
 			->where($qb->expr()->eq('user_handle', $qb->createNamedParameter($uid)));
 		$qb->executeStatement();
 	}
