@@ -41,13 +41,8 @@
 				{{ t('twofactor_webauthn', 'Retry') }}
 			</Button>
 		</p>
-		<p v-else
-			id="webauthn-info">
-			{{ t('twofactor_webauthn', 'Plug in your security key and press the button below to begin authorization.') }}
-			<Button class="btn sign"
-				@click="sign">
-				{{ t('twofactor_webauthn', 'Use security key') }}
-			</Button>
+		<p v-else id="webauthn-info">
+			{{ t('twofactor_webauthn', 'Use security key') }}
 		</p>
 		<p id="webauthn-error"
 			style="display: none">
@@ -102,6 +97,9 @@ export default {
 		httpWarning() {
 			return document.location.protocol !== 'https:'
 		},
+	},
+	mounted() {
+		this.sign()
 	},
 
 	methods: {
