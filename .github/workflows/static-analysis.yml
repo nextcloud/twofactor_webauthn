@@ -7,7 +7,7 @@ jobs:
       runs-on: ubuntu-latest
       strategy:
           matrix:
-              ocp-version: [ 'dev-stable22 as 22', 'dev-stable23 as 23', 'dev-stable24 as 24', 'dev-master as 25' ]
+              ocp-version: [ 'dev-master as 25' ]
       name: Nextcloud ${{ matrix.ocp-version }}
       steps:
           - name: Checkout
@@ -20,10 +20,6 @@ jobs:
           - name: Install dependencies
             run: composer i
           - name: Install OCP package
-            if: ${{ contains(matrix.ocp-version, 'dev-stable22') || contains(matrix.ocp-version, 'dev-stable23') }}
-            run: composer require --dev christophwurst/nextcloud:"${{ matrix.ocp-version }}"
-          - name: Install OCP package
-            if: ${{ contains(matrix.ocp-version, 'dev-stable24') || contains(matrix.ocp-version, 'dev-master') }}
             run: composer require --dev christophwurst/nextcloud:"${{ matrix.ocp-version }}" --ignore-platform-req=php
           - name: Run coding standards check
             run: composer run psalm
