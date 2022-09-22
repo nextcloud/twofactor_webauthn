@@ -18,7 +18,6 @@ OC.L10N.register(
     "Server error while trying to complete security key registration" : "Грешка в сървъра при опит за завършване на регистрацията на ключ за защита",
     "An error occurred: {msg}" : "Възникна грешка: {msg}",
     "Retry" : "Повторен опит",
-    "Plug in your security key and press the button below to begin authorization." : "Включете своя ключ за защита и натиснете бутона по-долу, за да започнете упълномощаване.",
     "Use security key" : "Използване на ключ за защита",
     "An error occurred. Please try again." : "Възникна грешка. Моля, опитайте отново.",
     "Your browser does not support WebAuthn." : "Вашият браузър не поддържа WebAuthn.",

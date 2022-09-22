@@ -18,7 +18,6 @@ OC.L10N.register(
     "Server error while trying to complete security key registration" : "Villa á þjóni við að ljúka skráningu öryggislykils",
     "An error occurred: {msg}" : "Villa átti sér stað: {msg}",
     "Retry" : "Reyna aftur",
-    "Plug in your security key and press the button below to begin authorization." : "Stingdu öryggislyklinum þínum í samband og ýttu á hnappinn fyrir neðan til að auðkenna.",
     "Use security key" : "Nota öryggislykil",
     "An error occurred. Please try again." : "Villa kom upp. Endilega reyndu aftur.",
     "Your browser does not support WebAuthn." : "Vafrinn þinn styður ekki WebAuthn.",

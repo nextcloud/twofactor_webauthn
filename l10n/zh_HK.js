@@ -18,7 +18,6 @@ OC.L10N.register(
     "Server error while trying to complete security key registration" : "嘗試完成私密密鑰註冊時發生伺服器錯誤。",
     "An error occurred: {msg}" : "發生錯誤：{msg}",
     "Retry" : "重試",
-    "Plug in your security key and press the button below to begin authorization." : "插入您的私密密鑰，然後按下面的按鈕開始授權。",
     "Use security key" : "使用私密密鑰",
     "An error occurred. Please try again." : "發生錯誤，請再試一次。",
     "Your browser does not support WebAuthn." : "您的瀏覽器不支援 WebAuthn。",

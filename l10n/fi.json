@@ -10,7 +10,6 @@
     "Server error while trying to complete security key registration" : "Palvelinvirhe turva-avaimen rekisteröinnin aikana",
     "An error occurred: {msg}" : "Tapahtui virhe: {msg}",
     "Retry" : "Yritä uudelleen",
-    "Plug in your security key and press the button below to begin authorization." : "Kiinnitä turva-avaimesi ja paina alla olevaa painiketta aloittaaksesi valtuutuksen. ",
     "Use security key" : "Käytä turva-avainta",
     "An error occurred. Please try again." : "Tapahtui virhe. Yritä myöhemmin uudelleen.",
     "Your browser does not support WebAuthn." : "Selaimesi ei tue WebAuthn-standardia.",

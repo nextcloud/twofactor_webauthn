@@ -16,7 +16,6 @@
     "Server error while trying to complete security key registration" : "Server-Fehler beim Versuch, die Sicherheitsschlüssel-Registrierung abzuschließen.",
     "An error occurred: {msg}" : "Es ist ein Fehler aufgetreten: {msg}",
     "Retry" : "Wiederholen",
-    "Plug in your security key and press the button below to begin authorization." : "Bitte verbinden Sie Ihren Sicherheitsschlüssel und drücken Sie die Schaltfläche unten, um sich zu authentifizieren.",
     "Use security key" : "Sicherheitsschlüssel verwenden",
     "An error occurred. Please try again." : "Es ist ein Fehler aufgetreten. Bitte erneut versuchen.",
     "Your browser does not support WebAuthn." : "Ihr Browser unterstützt kein WebAuthn.",

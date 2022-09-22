@@ -16,7 +16,6 @@
     "Server error while trying to complete security key registration" : "Ошибка сервера при попытке завершить регистрацию ключа безопасности",
     "An error occurred: {msg}" : "Произошла ошибка: {msg}",
     "Retry" : "Повторить",
-    "Plug in your security key and press the button below to begin authorization." : "Подключите свой ключ безопасности и нажмите кнопку ниже, чтобы начать авторизацию.",
     "Use security key" : "Использовать ключ безопасности",
     "An error occurred. Please try again." : "Произошла ошибка. Попробуйте ещё раз.",
     "Your browser does not support WebAuthn." : "Ваш браузер не поддерживает WebAuthn.",

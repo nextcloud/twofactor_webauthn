@@ -18,7 +18,6 @@ OC.L10N.register(
     "Server error while trying to complete security key registration" : "Error del servidor en intentar completar el registre de la clau de seguretat",
     "An error occurred: {msg}" : "S'ha produït un error: {msg}",
     "Retry" : "Torna a intentar",
-    "Plug in your security key and press the button below to begin authorization." : "Connecteu la vostra clau de seguretat i premeu el botó següent per iniciar l'autorització.",
     "Use security key" : "Utilitza la clau de seguretat",
     "An error occurred. Please try again." : "S'ha produït un error. Si us plau, torneu-ho a provar.",
     "Your browser does not support WebAuthn." : "El vostre navegador no suporta WebAuthn.",

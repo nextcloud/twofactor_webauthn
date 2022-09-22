@@ -16,7 +16,6 @@
     "Server error while trying to complete security key registration" : "Kiszolgálóhiba a biztonsági kulcs regisztrációjának befejezése során",
     "An error occurred: {msg}" : "Hiba történt: {msg}",
     "Retry" : "Újra",
-    "Plug in your security key and press the button below to begin authorization." : "Csatlakoztassa a biztonsági kulcsát, és nyomja meg a lenti gombot a jogosultság-ellenőrzés elkezdéséhez.",
     "Use security key" : "Biztonsági kulcs használata",
     "An error occurred. Please try again." : "Hiba történt. Próbálja újra.",
     "Your browser does not support WebAuthn." : "A böngészője nem támogatja a WebAuthn szabványt.",

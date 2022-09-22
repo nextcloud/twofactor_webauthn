@@ -18,7 +18,6 @@ OC.L10N.register(
     "Server error while trying to complete security key registration" : "Zerbitzariaren akatsa segurtasun gakoaren erregistroa osatzen saiatzean",
     "An error occurred: {msg}" : "Errorea gertatu da: {msg}",
     "Retry" : "saiatu berriro",
-    "Plug in your security key and press the button below to begin authorization." : "Konektatu zure WebAuthn segurtasun gakoa eta sakatu beheko botoia baimena hasteko.",
     "Use security key" : "Erabili segurtasun gakoa",
     "An error occurred. Please try again." : "Errorea. Saiatu berriro, mesedez.",
     "Your browser does not support WebAuthn." : "Nabigatzaile honek ez du WebAuthn onartzen.",

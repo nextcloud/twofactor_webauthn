@@ -18,7 +18,6 @@ OC.L10N.register(
     "Server error while trying to complete security key registration" : "Güvenlik anahtarı kayıt işlemi tamamlanırken sunucu sorunu çıktı",
     "An error occurred: {msg}" : "Bir sorun çıktı: {message}",
     "Retry" : "Yeniden dene",
-    "Plug in your security key and press the button below to begin authorization." : "Güvenlik anahtarınızı takın ve kimliğinizi doğrulamak için aşağıdaki düğmeye basın.",
     "Use security key" : "Güvenlik anahtarı kullanılsın",
     "An error occurred. Please try again." : "Bir sorun çıktı. Lütfen yeniden deneyin.",
     "Your browser does not support WebAuthn." : "Web tarayıcınız WebAuthn desteklemiyor.",

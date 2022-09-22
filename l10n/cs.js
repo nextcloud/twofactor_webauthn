@@ -18,7 +18,6 @@ OC.L10N.register(
     "Server error while trying to complete security key registration" : "Při pokusu o dokončení registrace klíče zabezpečení došlo k chybě",
     "An error occurred: {msg}" : "Došlo k chybě: {msg}",
     "Retry" : "Zkusit znovu",
-    "Plug in your security key and press the button below to begin authorization." : "Připojte svůj klíč zabezpečení a kliknutím na níže uvedené tlačítko zahajte udělení pověření.",
     "Use security key" : "Použít klíč zabezpečení",
     "An error occurred. Please try again." : "Došlo k chybě. Zkuste to znovu.",
     "Your browser does not support WebAuthn." : "Vámi používaný prohlížeč nepodporuje WebAuthn.",
