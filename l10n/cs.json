@@ -24,6 +24,7 @@
     "Unnamed key" : "Nenazvaný klíč",
     "Active" : "Aktivní",
     "Remove" : "Odebrat",
+    "Set up a security key as a second factor." : "Nastavit klíč zabezpečení jako druhý faktor.",
     "Your security key was added successfully. You are now being redirected to the login page." : "Váš klíč zabezpečení byl úspěšně přidán. Nyní budete přesměrování na přihlašovací stránku.",
     "No security keys configured. You are not using WebAuthn as second factor at the moment." : "Nejsou nastavené žádné klíče zabezpečení. V tuto chvíli nepoužíváte WebAuthn jako druhý faktor.",
     "The following security keys are configured for WebAuthn two-factor authentication:" : "Následující klíče zabezpečení jsou nastavené pro dvoufázové WebAuthn ověřování:",

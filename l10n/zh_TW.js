@@ -26,6 +26,7 @@ OC.L10N.register(
     "Unnamed key" : "未命名的金鑰",
     "Active" : "作用中",
     "Remove" : "移除",
+    "Set up a security key as a second factor." : "設定安全金鑰作為第二步驟。",
     "Your security key was added successfully. You are now being redirected to the login page." : "您的安全金鑰已新增成功。您現在會被重新導向至登入頁面。",
     "No security keys configured. You are not using WebAuthn as second factor at the moment." : "尚未設定安全金鑰。您目前無法使用 WebAuthn 作為第二步驟的驗證方式。",
     "The following security keys are configured for WebAuthn two-factor authentication:" : "下列安全金鑰已被設定為 WebAuthn 第二步驟驗證使用：",

@@ -26,6 +26,7 @@ OC.L10N.register(
     "Unnamed key" : "Klucz bez nazwy",
     "Active" : "Aktywne",
     "Remove" : "Usuń",
+    "Set up a security key as a second factor." : "Skonfiguruj klucz bezpieczeństwa jako drugie uwierzytelnienie.",
     "Your security key was added successfully. You are now being redirected to the login page." : "Twój klucz bezpieczeństwa został pomyślnie dodany. Zostałeś przekierowany na stronę logowania.",
     "No security keys configured. You are not using WebAuthn as second factor at the moment." : "Nie skonfigurowano kluczy bezpieczeństwa. W tej chwili nie używasz WebAuthn jako drugiego składnika.",
     "The following security keys are configured for WebAuthn two-factor authentication:" : "Następujące klucze bezpieczeństwa są skonfigurowane do uwierzytelniania dwuskładnikowego WebAuthn:",
