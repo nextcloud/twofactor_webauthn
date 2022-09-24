@@ -24,6 +24,7 @@
     "Unnamed key" : "Chave sem Nome",
     "Active" : "Ativar",
     "Remove" : "Remover",
+    "Set up a security key as a second factor." : "Configure uma chave de segurança como um segundo fator.",
     "Your security key was added successfully. You are now being redirected to the login page." : "Sua chave de segurança foi adicionada com sucesso. Agora você está sendo redirecionado para a página de login.",
     "No security keys configured. You are not using WebAuthn as second factor at the moment." : "Nenhuma chave de segurança configurada. Você não está usando o WebAuthn como segundo fator no momento.",
     "The following security keys are configured for WebAuthn two-factor authentication:" : "As seguintes chaves de segurança são configuradas para autenticação de dois fatores WebAuthn:",

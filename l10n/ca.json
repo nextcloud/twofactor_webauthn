@@ -24,6 +24,7 @@
     "Unnamed key" : "Clau sense nom",
     "Active" : "Actiu",
     "Remove" : "Elimina",
+    "Set up a security key as a second factor." : "Configureu una clau de seguretat com a segon factor.",
     "Your security key was added successfully. You are now being redirected to the login page." : "La teva clau de seguretat s'ha afegit correctament. Ara se us redirigirà a la pàgina d'inici de sessió.",
     "No security keys configured. You are not using WebAuthn as second factor at the moment." : "No s'ha configurat cap clau de seguretat. En aquests moments no utilitzeu WebAuthn com a segon factor.",
     "The following security keys are configured for WebAuthn two-factor authentication:" : "Les claus de seguretat següents estan configurades per a l'autenticació de dos factors de WebAuthn:",
