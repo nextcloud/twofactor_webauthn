@@ -24,6 +24,7 @@
     "Unnamed key" : "Adsız anahtar",
     "Active" : "Etkin",
     "Remove" : "Kaldır",
+    "Set up a security key as a second factor." : "İkinci aşama olarak bir güvenlik anahtarı ayarlayın.",
     "Your security key was added successfully. You are now being redirected to the login page." : "Güvenlik anahtarınız eklendi. Şimdi oturum açma sayfasına yönlendirileceksiniz.",
     "No security keys configured. You are not using WebAuthn as second factor at the moment." : "Herhangi bir güvenlik anahtarı ayarlanmamış. Şu anda iki aşamalı doğrulama için WebAuthn kullanılamaz.",
     "The following security keys are configured for WebAuthn two-factor authentication:" : "İki aşamalı kimlik doğrulaması için ayarlanmış ve kullanılabilecek güvenlik anahtarları:",
