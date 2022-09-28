@@ -26,6 +26,7 @@ OC.L10N.register(
     "Unnamed key" : "Ключ без име",
     "Active" : "Активен",
     "Remove" : "Премахване",
+    "Set up a security key as a second factor." : "Задайте ключ за сигурност като втори фактор.",
     "Your security key was added successfully. You are now being redirected to the login page." : "Вашият ключ за защита бе добавен успешно. Сега сте пренасочени към страницата за вход.",
     "No security keys configured. You are not using WebAuthn as second factor at the moment." : "Няма конфигурирани ключове за защита. В момента не използвате WebAuthn като втори фактор.",
     "The following security keys are configured for WebAuthn two-factor authentication:" : "Следните ключове за защита са конфигурирани за двустепенно  удостоверяване на WebAuthn:",
