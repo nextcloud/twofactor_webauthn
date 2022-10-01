@@ -7,6 +7,7 @@ OC.L10N.register(
     "Retry" : "Réessayer",
     "An error occurred. Please try again." : "Une erreur est survenue. Veuillez réessayer.",
     "Your browser does not support WebAuthn." : "Votre navigateur ne prend pas en charge WebAuthn.",
+    "Authentication cancelled" : "Authentification annulée",
     "Active" : "Actif",
     "Remove" : "Supprimer"
 },
