@@ -34,7 +34,7 @@
 		"mocha": "^10.0.0",
 		"mochapack": "^2.1.4",
 		"prettier": "^2.7.1",
-		"sinon": "^14.0.0",
+		"sinon": "^14.0.1",
 		"url-loader": "^4.1.1",
 		"vue-loader": "^15.10.0",
 		"vue-template-compiler": "^2.7.10",
