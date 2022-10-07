@@ -13,7 +13,7 @@ jobs:
     strategy:
       matrix:
         php-version: ['7.4', '8.0', '8.1']
-        nextcloud-version: ['master']
+        nextcloud-version: ['stable25']
     name: Nextcloud ${{ matrix.nextcloud-version }} php${{ matrix.php-version }} unit tests
     steps:
     - name: Set up php${{ matrix.php-version }}
@@ -42,17 +42,17 @@ jobs:
     strategy:
       matrix:
         php-version: [ '8.1' ]
-        nextcloud-version: [ 'master' ]
+        nextcloud-version: [ 'stable25' ]
         db: [ 'sqlite' ]
         include:
           - php-version: '8.1'
-            nextcloud-version: master
+            nextcloud-version: stable25
             db: 'oci'
           - php-version: '8.0'
-            nextcloud-version: master
+            nextcloud-version: stable25
             db: 'pgsql'
           - php-version: '7.4'
-            nextcloud-version: master
+            nextcloud-version: stable25
             db: 'mysql'
     name: php${{ matrix.php-version }}-${{ matrix.db }} integration tests
     services:
