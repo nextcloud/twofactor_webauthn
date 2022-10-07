@@ -17,3 +17,20 @@ updates:
     time: "03:00"
     timezone: Europe/Paris
   open-pull-requests-limit: 10
+
+  # Stable1.0
+- package-ecosystem: npm
+  target-branch: stable1.0
+  directory: "/"
+  schedule:
+    interval: daily
+  open-pull-requests-limit: 0
+  reviewers:
+    - "ChristophWurst"
+    - "st3iny "
+- package-ecosystem: composer
+  target-branch: stable1.0
+  directory: "/"
+  schedule:
+    interval: daily
+  open-pull-requests-limit: 0
