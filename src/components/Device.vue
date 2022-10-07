@@ -25,6 +25,12 @@
 		<span class="icon-webauthn-device" :class="{ disabled: !active }" />
 		{{ name || t('twofactor_webauthn', 'Unnamed key') }}
 		<Actions>
+			<ActionText v-if="createdAt" :title="t('twofactor_webauthn', 'Registered')">
+				<template #icon>
+					<InformationOutline :size="20" />
+				</template>
+				{{ createdAtFormatted }}
+			</ActionText>
 			<ActionCheckbox :checked="active" @update:checked="changeActivation">
 				{{ t('twofactor_webauthn', 'Active') }}
 			</ActionCheckbox>
@@ -39,7 +45,10 @@
 import Actions from '@nextcloud/vue/dist/Components/Actions'
 import ActionButton from '@nextcloud/vue/dist/Components/ActionButton'
 import ActionCheckbox from '@nextcloud/vue/dist/Components/ActionCheckbox'
+import ActionText from '@nextcloud/vue/dist/Components/ActionText'
+import InformationOutline from 'vue-material-design-icons/InformationOutline'
 import confirmPassword from '@nextcloud/password-confirmation'
+import moment from '@nextcloud/moment'
 
 export default {
 	name: 'Device',
@@ -47,11 +56,26 @@ export default {
 		Actions,
 		ActionButton,
 		ActionCheckbox,
+		ActionText,
+		InformationOutline,
 	},
 	props: {
 		id: String,
 		name: String,
 		active: Boolean,
+		createdAt: {
+			type: Number,
+			default: undefined,
+		},
+	},
+	computed: {
+		createdAtFormatted() {
+			if (!this.createdAt) {
+				return
+			}
+
+			return moment(this.createdAt * 1000).format('L')
+		},
 	},
 	methods: {
 		async onDelete() {
@@ -78,6 +102,10 @@ export default {
 	.webauthn-device {
 		line-height: 300%;
 		display: flex;
+	}
+
+	.device__created_at {
+		color: var(--color-text-maxcontrast);
 	}
 
 	.icon-webauthn-device {

@@ -55,6 +55,8 @@ use Webauthn\TrustPath\TrustPathLoader;
  * @method void setCounter(int $counter)
  * @method bool|null isActive()
  * @method void setActive(bool $active)
+ * @method int|null getCreatedAt()
+ * @method void setCreatedAt(?int $counter)
  */
 class PublicKeyCredentialEntity extends Entity {
 	/**
@@ -112,12 +114,18 @@ class PublicKeyCredentialEntity extends Entity {
 	 */
 	protected $active;
 
+	/** @var int|null */
+	protected $createdAt;
+
 	public function __construct() {
 		$this->addType('counter', 'int');
 		$this->addType('active', 'boolean');
+		$this->addType('createdAt', 'int');
 	}
 
-	public static function fromPublicKeyCrendentialSource(string $name, PublicKeyCredentialSource $publicKeyCredentialSource): PublicKeyCredentialEntity {
+	public static function fromPublicKeyCrendentialSource(string $name,
+														  PublicKeyCredentialSource $publicKeyCredentialSource,
+														  ?int $ctime): PublicKeyCredentialEntity {
 		$publicKeyCredentialEntity = new self();
 
 		$publicKeyCredentialEntity->setName($name);
@@ -130,6 +138,7 @@ class PublicKeyCredentialEntity extends Entity {
 		$publicKeyCredentialEntity->setCredentialPublicKey(base64_encode($publicKeyCredentialSource->getCredentialPublicKey()));
 		$publicKeyCredentialEntity->setUserHandle($publicKeyCredentialSource->getUserHandle());
 		$publicKeyCredentialEntity->setCounter($publicKeyCredentialSource->getCounter());
+		$publicKeyCredentialEntity->setCreatedAt($ctime);
 
 		return $publicKeyCredentialEntity;
 	}

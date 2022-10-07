@@ -32,7 +32,8 @@
 			:id="device.id"
 			:key="device.id"
 			:name="device.name"
-			:active="device.active" />
+			:active="device.active"
+			:created-at="device.createdAt" />
 
 		<AddDeviceDialog :http-warning="httpWarning" />
 		<p v-if="allDeactivated" class="webauthn-warning">

@@ -1,6 +1,6 @@
 {
 	"name": "twofactor_webauthn",
-	"version": "1.0.0-beta2",
+	"version": "1.0.0-beta.3",
 	"description": "WebAuthn second factor provider for Nextcloud",
 	"private": true,
 	"dependencies": {
@@ -8,11 +8,13 @@
 		"@nextcloud/axios": "^2.0.0",
 		"@nextcloud/initial-state": "^2.0.0",
 		"@nextcloud/logger": "^2.3.0",
+		"@nextcloud/moment": "^1.2.1",
 		"@nextcloud/password-confirmation": "^1.0.1",
 		"@nextcloud/router": "^2.0.0",
 		"@nextcloud/vue": "^5.4.0",
 		"vue": "^2.7.10",
 		"vue-click-outside": "^1.1.0",
+		"vue-material-design-icons": "^5.0.0",
 		"vuex": "^3.6.2"
 	},
 	"devDependencies": {

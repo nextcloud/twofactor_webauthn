@@ -101,7 +101,7 @@ class PublicKeyCredentialEntityMapper extends QBMapper {
 		/* @var $qb IQueryBuilder */
 		$qb = $this->db->getQueryBuilder();
 
-		$qb->select('id', 'name', 'public_key_credential_id', 'type', 'transports', 'attestation_type', 'trust_path', 'aaguid', 'credential_public_key', 'user_handle', 'counter', 'active')
+		$qb->select('id', 'name', 'public_key_credential_id', 'type', 'transports', 'attestation_type', 'trust_path', 'aaguid', 'credential_public_key', 'user_handle', 'counter', 'active', 'created_at')
 			->from('twofactor_webauthn_regs')
 			->where($qb->expr()->eq('public_key_credential_id', $qb->createNamedParameter($publicKeyCredentialId)));
 		try {
@@ -118,7 +118,7 @@ class PublicKeyCredentialEntityMapper extends QBMapper {
 	public function findPublicKeyCredentials(string $uid): array {
 		$qb = $this->db->getQueryBuilder();
 
-		$qb->select('id', 'name', 'public_key_credential_id', 'type', 'transports', 'attestation_type', 'trust_path', 'aaguid', 'credential_public_key', 'user_handle', 'counter', 'active')
+		$qb->select('id', 'name', 'public_key_credential_id', 'type', 'transports', 'attestation_type', 'trust_path', 'aaguid', 'credential_public_key', 'user_handle', 'counter', 'active', 'created_at')
 			->from('twofactor_webauthn_regs')
 			->where($qb->expr()->eq('user_handle', $qb->createNamedParameter($uid)));
 		return $this->findEntities($qb);

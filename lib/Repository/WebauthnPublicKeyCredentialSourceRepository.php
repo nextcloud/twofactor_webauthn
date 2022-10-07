@@ -30,6 +30,7 @@ namespace OCA\TwoFactorWebauthn\Repository;
 use BadMethodCallException;
 use OCA\TwoFactorWebauthn\Db\PublicKeyCredentialEntity;
 use OCA\TwoFactorWebauthn\Db\PublicKeyCredentialEntityMapper;
+use OCP\AppFramework\Utility\ITimeFactory;
 use Webauthn\AttestedCredentialData;
 use Webauthn\PublicKeyCredentialSource;
 use Webauthn\PublicKeyCredentialSourceRepository;
@@ -41,12 +42,16 @@ class WebauthnPublicKeyCredentialSourceRepository implements PublicKeyCredential
 	 */
 	private $publicKeyCredentialEntityMapper;
 
+	/** @var ITimeFactory */
+	private $time;
+
 	/**
-	 * WebauthnPublicKeyCredentialSourceRepository constructor.
 	 * @param PublicKeyCredentialEntityMapper $publicKeyCredentialEntityMapper
 	 */
-	public function __construct(PublicKeyCredentialEntityMapper $publicKeyCredentialEntityMapper) {
+	public function __construct(PublicKeyCredentialEntityMapper $publicKeyCredentialEntityMapper,
+								ITimeFactory $time) {
 		$this->publicKeyCredentialEntityMapper = $publicKeyCredentialEntityMapper;
+		$this->time = $time;
 	}
 
 	public function has(string $credentialId): bool {
@@ -87,7 +92,11 @@ class WebauthnPublicKeyCredentialSourceRepository implements PublicKeyCredential
 
 	public function saveCredentialSource(PublicKeyCredentialSource $publicKeyCredentialSource, string $name = null): void {
 		$name = $this->getName($publicKeyCredentialSource, $name);
-		$entity = PublicKeyCredentialEntity::fromPublicKeyCrendentialSource($name, $publicKeyCredentialSource);
+		$entity = PublicKeyCredentialEntity::fromPublicKeyCrendentialSource(
+			$name,
+			$publicKeyCredentialSource,
+			$this->time->getTime(),
+		);
 		$this->publicKeyCredentialEntityMapper->insertOrUpdate($entity);
 	}
 
