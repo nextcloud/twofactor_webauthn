@@ -24,6 +24,7 @@ OC.L10N.register(
     "You are accessing this site via an insecure connection. Browsers might therefore refuse the WebAuthn authentication." : "Вие осъществявате достъп до този сайт чрез незащитена връзка. Следователно браузърите могат да откажат WebAuthn удостоверяване.",
     "Authentication cancelled" : "Удостоверяването е отказано",
     "Unnamed key" : "Ключ без име",
+    "Registered" : "Регистриран",
     "Active" : "Активен",
     "Remove" : "Премахване",
     "Set up a security key as a second factor." : "Задайте ключ за сигурност като втори фактор.",

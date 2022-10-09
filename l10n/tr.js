@@ -24,6 +24,7 @@ OC.L10N.register(
     "You are accessing this site via an insecure connection. Browsers might therefore refuse the WebAuthn authentication." : "Bu site ile bağlantınız güvenli değil. Bu nedenle tarayıcılar yeniden WebAuthn kimlik doğrulaması isteyebilir.",
     "Authentication cancelled" : "Kimlik doğrulama iptal edildi",
     "Unnamed key" : "Adsız anahtar",
+    "Registered" : "Kayıtlı",
     "Active" : "Etkin",
     "Remove" : "Kaldır",
     "Set up a security key as a second factor." : "İkinci aşama olarak bir güvenlik anahtarı ayarlayın.",

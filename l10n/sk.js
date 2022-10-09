@@ -24,6 +24,7 @@ OC.L10N.register(
     "You are accessing this site via an insecure connection. Browsers might therefore refuse the WebAuthn authentication." : "Prichádzate na túto stránku prostredníctvom nezabezpečeného pripojenia. Prehliadače by preto mohli odmietnuť WebAuhtn overovanie.",
     "Authentication cancelled" : "Overenie bolo prerušené",
     "Unnamed key" : "Nepomenovaný kľúč",
+    "Registered" : "Zaregistrovaný",
     "Active" : "Aktívne",
     "Remove" : "Odobrať",
     "Set up a security key as a second factor." : "Nastaviť bezpečnostný kľúč ako druhý faktor overenia.",
