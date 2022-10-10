@@ -22,6 +22,7 @@
     "You are accessing this site via an insecure connection. Browsers might therefore refuse the WebAuthn authentication." : "您正使用不安全的連線。瀏覽器可能會因此拒絕 WebAuthn 驗證。",
     "Authentication cancelled" : "驗證已取消",
     "Unnamed key" : "未命名的密鑰",
+    "Registered" : "已註冊",
     "Active" : "活動的",
     "Remove" : "移除",
     "Set up a security key as a second factor." : "設置安全密鑰作為第二個因素。",
