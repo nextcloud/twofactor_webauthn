@@ -22,6 +22,7 @@
     "You are accessing this site via an insecure connection. Browsers might therefore refuse the WebAuthn authentication." : "Uzyskujesz dostęp do tej witryny przez niezabezpieczone połączenie. Przeglądarki mogą zatem odmówić uwierzytelnienia WebAuthn.",
     "Authentication cancelled" : "Uwierzytelnianie anulowane",
     "Unnamed key" : "Klucz bez nazwy",
+    "Registered" : "Zarejestrowany",
     "Active" : "Aktywne",
     "Remove" : "Usuń",
     "Set up a security key as a second factor." : "Skonfiguruj klucz bezpieczeństwa jako drugie uwierzytelnienie.",
