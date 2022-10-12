@@ -24,6 +24,7 @@ OC.L10N.register(
     "You are accessing this site via an insecure connection. Browsers might therefore refuse the WebAuthn authentication." : "Gune honetara konexio seguru baten bidez sartzen ari zara. Beraz, nabigatzaileek WebAuthn autentifikazioa uko egin dezakete.",
     "Authentication cancelled" : "Autentifikazio ezeztatuta",
     "Unnamed key" : "Izenik gabeko gakoa",
+    "Registered" : "Erregistratuta",
     "Active" : "Aktibo",
     "Remove" : "Kendu",
     "Set up a security key as a second factor." : "Ezarri segurtasun gakoa bigarren faktore gisa.",
