@@ -24,6 +24,7 @@ OC.L10N.register(
     "You are accessing this site via an insecure connection. Browsers might therefore refuse the WebAuthn authentication." : "Você está acessando este site através de uma conexão insegura. Os navegadores podem, portanto, recusar a autenticação WebAuthn.",
     "Authentication cancelled" : "Autenticação cancelada",
     "Unnamed key" : "Chave sem Nome",
+    "Registered" : "Registrado",
     "Active" : "Ativar",
     "Remove" : "Remover",
     "Set up a security key as a second factor." : "Configure uma chave de segurança como um segundo fator.",
