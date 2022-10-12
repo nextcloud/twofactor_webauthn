@@ -113,5 +113,6 @@ export default {
 		background-size: 100%;
 		padding: 3px;
 		margin: 3px;
+		filter: var(--background-invert-if-dark);
 	}
 </style>
