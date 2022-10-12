@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## 1.0.0 – unreleased
+## 1.0.0 – 2022-10-12
 ### Added
 - Nextcloud 25 support
 ### Fixed
