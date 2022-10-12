@@ -41,7 +41,7 @@
 	<div v-else-if="step === RegistrationSteps.NAMING"
 		class="new-webauthn-device">
 		<span class="icon-loading-small webauthn-loading" />
-		<form @submit.prevent="submit">
+		<form @submit.prevent="submit" class="new-webauthn-device__form">
 			<input v-model="name"
 				required
 				type="text"
@@ -230,7 +230,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
     .webauthn-loading {
         display: inline-block;
         vertical-align: sub;
@@ -242,6 +242,11 @@ export default {
 		display: flex;
         line-height: 300%;
 		align-items: center;
+
+		&__form {
+			display: flex;
+			align-items: center;
+		}
     }
 
 	.new-webauthn-device__button {
