@@ -22,6 +22,7 @@ OC.L10N.register(
     "Authentication cancelled" : "Authentification annulée",
     "Unnamed key" : "Clé sans nom",
     "Active" : "Actif",
-    "Remove" : "Retirer"
+    "Remove" : "Retirer",
+    "All security keys are deactivated." : "Toutes les clés de sécurité sont désactivées."
 },
 "nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;");
