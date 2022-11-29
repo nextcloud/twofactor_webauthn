@@ -19,6 +19,7 @@ OC.L10N.register(
     "Use security key" : "Utiliser la clé de sécurité",
     "An error occurred. Please try again." : "Une erreur est survenue. Veuillez réessayer.",
     "Your browser does not support WebAuthn." : "Votre navigateur ne prend pas en charge WebAuthn.",
+    "You are accessing this site via an insecure connection. Browsers might therefore refuse the WebAuthn authentication." : "Vous êtes en train d’accéder à ce site via une connexion non sécurisée. Les navigateurs devraient donc refuser l'authentification WebAuthn.",
     "Authentication cancelled" : "Authentification annulée",
     "Unnamed key" : "Clé sans nom",
     "Active" : "Actif",
