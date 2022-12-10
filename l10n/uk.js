@@ -1,6 +1,8 @@
 OC.L10N.register(
     "twofactor_webauthn",
     {
+    "Security key" : "Ключ безпеки",
+    "Add security key" : "Додайти ключ безпеки",
     "Add" : "Додати",
     "Server error while trying to add WebAuthn device" : "Помилка сервера під час спроби додати пристрій WebAuthn",
     "An error occurred: {msg}" : "Сталася помилка: {msg}",
