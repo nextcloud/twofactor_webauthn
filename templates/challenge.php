@@ -7,6 +7,7 @@ declare(strict_types=1);
  *
  * @author Christoph Wurst <christoph@winzerhof-wurst.at>
  * @author Michael Blumenstein <M.Flower@gmx.de>
+ * @author Richard Steinmetz <richard@steinmtz.cloud>
  *
  * @license GNU AGPL version 3 or any later version
  *
@@ -25,9 +26,10 @@ declare(strict_types=1);
  */
 
 script('twofactor_webauthn', 'challenge');
+style('twofactor_webauthn', 'challenge');
 
 ?>
 
-<img class="two-factor-icon" src="<?php print_unescaped(image_path('twofactor_webauthn', 'app-dark.svg')); ?>" alt="">
+<img class="two-factor-icon two-factor-webauthn-icon" src="<?php print_unescaped(image_path('twofactor_webauthn', 'app-dark.svg')); ?>" alt="">
 
 <div id="twofactor-webauthn-challenge"></div>
