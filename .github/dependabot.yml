@@ -23,20 +23,3 @@ updates:
   commit-message:
     prefix: chore
     include: scope
-
-  # Stable1.0
-- package-ecosystem: npm
-  target-branch: stable1.0
-  directory: "/"
-  schedule:
-    interval: daily
-  open-pull-requests-limit: 0
-  reviewers:
-    - "ChristophWurst"
-    - "st3iny "
-- package-ecosystem: composer
-  target-branch: stable1.0
-  directory: "/"
-  schedule:
-    interval: daily
-  open-pull-requests-limit: 0
