@@ -10,6 +10,9 @@ updates:
   labels:
   - 3. to review
   - dependencies
+  commit-message:
+    prefix: chore
+    include: scope
 - package-ecosystem: composer
   directory: "/"
   schedule:
@@ -17,6 +20,9 @@ updates:
     time: "03:00"
     timezone: Europe/Paris
   open-pull-requests-limit: 10
+  commit-message:
+    prefix: chore
+    include: scope
 
   # Stable1.0
 - package-ecosystem: npm
