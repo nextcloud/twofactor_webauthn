@@ -5,7 +5,7 @@
 	"private": true,
 	"dependencies": {
 		"@nextcloud/auth": "^2.0.0",
-		"@nextcloud/axios": "^2.1.0",
+		"@nextcloud/axios": "^2.3.0",
 		"@nextcloud/initial-state": "^2.0.0",
 		"@nextcloud/logger": "^2.3.0",
 		"@nextcloud/moment": "^1.2.1",
