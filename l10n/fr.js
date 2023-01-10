@@ -10,10 +10,12 @@ OC.L10N.register(
     "WebAuthn two-factor provider" : "Fournisseur à deux facteurs WebAuthn",
     "A two-factor provider for WebAuthn devices" : "Un fournisseur à deux facteurs pour les périphériques WebAuthn",
     "Add security key" : "Ajouter une clé de sécurité",
+    "Please use your security key authorize." : "Veuillez utiliser votre clé de sécurité",
     "Name your security key" : "Nommez votre clé de sécurité",
     "Add" : "Ajouter",
     "Adding your security key …" : "Ajout de votre clé de sécurité…",
     "Server error while trying to add WebAuthn device" : "Erreur du serveur lors de l'ajout du périphérique WebAuthn ",
+    "Server error while trying to complete security key registration" : "Erreur serveur en essayant d'enregistrer la clé de sécurité",
     "An error occurred: {msg}" : "Une erreur est survenue: {msg}",
     "Retry" : "Réessayer",
     "Use security key" : "Utiliser la clé de sécurité",
@@ -25,6 +27,10 @@ OC.L10N.register(
     "Registered" : "Enregistré",
     "Active" : "Actif",
     "Remove" : "Retirer",
+    "Set up a security key as a second factor." : "Configurer une clé de sécurité comme second facteur",
+    "Your security key was added successfully. You are now being redirected to the login page." : "Votre clé de sécurité a été ajoutée avec succès. Vous allez maintenant être redirigé(e) vers la page de connexion.",
+    "No security keys configured. You are not using WebAuthn as second factor at the moment." : "Pas de clé de sécurité configurée. Vous n'utilisez actuellement pas WebAuthn comme second facteur.",
+    "The following security keys are configured for WebAuthn two-factor authentication:" : "Les clés de sécurité suivantes sont configurées pour l'authentification double facteur WebAuthn :",
     "All security keys are deactivated." : "Toutes les clés de sécurité sont désactivées."
 },
 "nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;");
