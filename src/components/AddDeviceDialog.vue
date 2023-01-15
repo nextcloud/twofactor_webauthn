@@ -35,7 +35,7 @@
 	<div v-else-if="step === RegistrationSteps.REGISTRATION"
 		class="new-webauthn-device">
 		<span class="icon-loading-small webauthn-loading" />
-		{{ t('twofactor_webauthn', 'Please use your security key authorize.') }}
+		{{ t('twofactor_webauthn', 'Please use your security key to authorize.') }}
 	</div>
 
 	<div v-else-if="step === RegistrationSteps.NAMING"
