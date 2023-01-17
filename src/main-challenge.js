@@ -21,10 +21,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import store from './store'
+import store from './store.js'
 import Vue from 'vue'
-import Nextcloud from './mixins/Nextcloud'
-import Challenge from './components/Challenge'
+import Nextcloud from './mixins/Nextcloud.js'
+import Challenge from './components/Challenge.vue'
 import { loadState } from '@nextcloud/initial-state'
 
 Vue.mixin(Nextcloud)

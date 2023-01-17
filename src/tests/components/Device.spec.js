@@ -22,9 +22,9 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils'
 import Vuex from 'vuex'
 
-import Nextcloud from '../../mixins/Nextcloud'
+import Nextcloud from '../../mixins/Nextcloud.js'
 
-import Device from '../../components/Device'
+import Device from '../../components/Device.vue'
 
 const localVue = createLocalVue()
 
