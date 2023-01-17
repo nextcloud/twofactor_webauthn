@@ -24,7 +24,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import { removeRegistration, changeActivationState } from './services/RegistrationService'
+import { removeRegistration, changeActivationState } from './services/RegistrationService.js'
 
 Vue.use(Vuex)
 

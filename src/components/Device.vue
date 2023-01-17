@@ -42,11 +42,11 @@
 </template>
 
 <script>
-import Actions from '@nextcloud/vue/dist/Components/Actions'
-import ActionButton from '@nextcloud/vue/dist/Components/ActionButton'
-import ActionCheckbox from '@nextcloud/vue/dist/Components/ActionCheckbox'
-import ActionText from '@nextcloud/vue/dist/Components/ActionText'
-import InformationOutline from 'vue-material-design-icons/InformationOutline'
+import Actions from '@nextcloud/vue/dist/Components/Actions.js'
+import ActionButton from '@nextcloud/vue/dist/Components/ActionButton.js'
+import ActionCheckbox from '@nextcloud/vue/dist/Components/ActionCheckbox.js'
+import ActionText from '@nextcloud/vue/dist/Components/ActionText.js'
+import InformationOutline from 'vue-material-design-icons/InformationOutline.vue'
 import confirmPassword from '@nextcloud/password-confirmation'
 import moment from '@nextcloud/moment'
 

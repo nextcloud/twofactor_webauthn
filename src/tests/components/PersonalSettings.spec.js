@@ -22,9 +22,9 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils'
 import Vuex from 'vuex'
 
-import Nextcloud from '../../mixins/Nextcloud'
+import Nextcloud from '../../mixins/Nextcloud.js'
 
-import PersonalSettings from '../../components/PersonalSettings'
+import PersonalSettings from '../../components/PersonalSettings.vue'
 
 const localVue = createLocalVue()
 

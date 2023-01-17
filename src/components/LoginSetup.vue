@@ -42,7 +42,7 @@
 </template>
 
 <script>
-import AddDeviceDialog from './AddDeviceDialog'
+import AddDeviceDialog from './AddDeviceDialog.vue'
 
 export default {
 	name: 'LoginSetup',

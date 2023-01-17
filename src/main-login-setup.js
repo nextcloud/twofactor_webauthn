@@ -22,10 +22,10 @@
 
 import Vue from 'vue'
 
-import Nextcloud from './mixins/Nextcloud'
-import store from './store'
+import Nextcloud from './mixins/Nextcloud.js'
+import store from './store.js'
 
-import LoginSetup from './components/LoginSetup'
+import LoginSetup from './components/LoginSetup.vue'
 
 Vue.mixin(Nextcloud)
 

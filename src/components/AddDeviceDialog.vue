@@ -22,10 +22,10 @@
 
 <template>
 	<div v-if="step === RegistrationSteps.READY">
-		<Button class="new-webauthn-device__button"
+		<NcButton class="new-webauthn-device__button"
 			@click="start">
 			{{ t('twofactor_webauthn', 'Add security key') }}
-		</Button>
+		</NcButton>
 		<p v-if="errorMessage" class="error-message">
 			<span class="icon icon-error" />
 			{{ errorMessage }}
@@ -46,11 +46,11 @@
 				required
 				type="text"
 				:placeholder="t('twofactor_webauthn', 'Name your security key')">
-			<Button class="new-webauthn-device__button"
+			<NcButton class="new-webauthn-device__button"
 				native-type="submit"
 				:disabled="!name.length">
 				{{ t('twofactor_webauthn', 'Add') }}
-			</Button>
+			</NcButton>
 		</form>
 	</div>
 
@@ -68,14 +68,14 @@
 <script>
 import confirmPassword from '@nextcloud/password-confirmation'
 
-import Button from '@nextcloud/vue/dist/Components/Button'
+import NcButton from '@nextcloud/vue/dist/Components/Button.js'
 
 import {
 	startRegistration,
 	finishRegistration,
-} from '../services/RegistrationService'
+} from '../services/RegistrationService.js'
 
-import logger from '../logger'
+import logger from '../logger.js'
 
 const debug = (text) => (data) => {
 	logger.debug(text, { data })
@@ -93,7 +93,7 @@ export default {
 	name: 'AddDeviceDialog',
 
 	components: {
-		Button,
+		NcButton,
 	},
 
 	props: {

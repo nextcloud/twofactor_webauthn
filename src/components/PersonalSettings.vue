@@ -53,8 +53,8 @@
 
 <script>
 
-import AddDeviceDialog from './AddDeviceDialog'
-import Device from './Device'
+import AddDeviceDialog from './AddDeviceDialog.vue'
+import Device from './Device.vue'
 
 export default {
 	name: 'PersonalSettings',

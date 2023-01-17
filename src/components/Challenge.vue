@@ -36,10 +36,10 @@
 			<strong>
 				{{ t('twofactor_webauthn', 'An error occurred: {msg}', {msg: error}) }}
 			</strong>
-			<Button class="btn sign"
+			<NcButton class="btn sign"
 				@click="sign">
 				{{ t('twofactor_webauthn', 'Retry') }}
-			</Button>
+			</NcButton>
 		</p>
 		<p v-else id="webauthn-info">
 			{{ t('twofactor_webauthn', 'Use security key') }}
@@ -66,9 +66,9 @@
 <script>
 import { mapGetters } from 'vuex'
 
-import Button from '@nextcloud/vue/dist/Components/Button'
+import NcButton from '@nextcloud/vue/dist/Components/Button.js'
 
-import logger from '../logger'
+import logger from '../logger.js'
 
 const debug = (text) => (data) => {
 	logger.debug({ text, data })
@@ -79,7 +79,7 @@ export default {
 	name: 'Challenge',
 
 	components: {
-		Button,
+		NcButton,
 	},
 
 	data() {
