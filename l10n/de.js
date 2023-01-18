@@ -10,7 +10,6 @@ OC.L10N.register(
     "WebAuthn two-factor provider" : "WebAuthn Zwei-Faktor-Anbieter",
     "A two-factor provider for WebAuthn devices" : "Ein Zwei-Faktor-Anbieter für WebAuthn-Geräte",
     "Add security key" : "Sicherheitsschlüssel hinzufügen",
-    "Please use your security key authorize." : "Bitte benutze deinen Sicherheitsschlüssel, um dich zu autorisieren.",
     "Name your security key" : "Deinen Sicherheitsschlüssel benennen",
     "Add" : "Hinzufügen",
     "Adding your security key …" : "Deinen Sicherheitsschlüssel hinzufügen …",

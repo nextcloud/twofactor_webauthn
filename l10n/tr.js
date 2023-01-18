@@ -10,7 +10,6 @@ OC.L10N.register(
     "WebAuthn two-factor provider" : "WebAuthn iki aşamalı kimlik doğrulama hizmeti sağlayıcısı",
     "A two-factor provider for WebAuthn devices" : "WebAuthn aygıtları için iki aşamalı kimlik doğrulama hizmeti sağlayıcısı",
     "Add security key" : "Güvenlik anahtarı ekle",
-    "Please use your security key authorize." : "Lütfen kimliği doğrulamak için güvenlik anahtarınızı kullanın.",
     "Name your security key" : "Güvenlik anahtarınızın adı",
     "Add" : "Ekle",
     "Adding your security key …" : "Güvenlik anahtarınız ekleniyor…",

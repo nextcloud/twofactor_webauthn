@@ -8,7 +8,6 @@
     "WebAuthn two-factor provider" : "Proveedor de doble factor WebAuthn",
     "A two-factor provider for WebAuthn devices" : "Un proveedor de doble factor para los dispositivos WebAuthn",
     "Add security key" : "Agregar Clave de seguridad",
-    "Please use your security key authorize." : "Por favor, utilice su clave de seguridad",
     "Name your security key" : "Nombre de su clave de seguridad",
     "Add" : "Añadir",
     "Adding your security key …" : "Añadiendo su clave de seguridad ...",

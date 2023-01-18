@@ -10,7 +10,6 @@ OC.L10N.register(
     "WebAuthn two-factor provider" : "Poskytovatel dvoufaktorového WebAuthn",
     "A two-factor provider for WebAuthn devices" : "Poskytovatel druhého faktoru pro WebAuthn zařízení",
     "Add security key" : "Přidat klíč zabezpečení",
-    "Please use your security key authorize." : "Udělte pověření pomocí svého klíče zabezpečení.",
     "Name your security key" : "Nazvěte svůj klíč zabezpečení",
     "Add" : "Přidat",
     "Adding your security key …" : "Přidávání vašeho klíče zabezpečení…",
