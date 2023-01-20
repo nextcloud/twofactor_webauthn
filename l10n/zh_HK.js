@@ -10,6 +10,7 @@ OC.L10N.register(
     "WebAuthn two-factor provider" : "Webauthn 雙步驟認證供應商",
     "A two-factor provider for WebAuthn devices" : "Webauthn 裝置的雙步驟驟驗證供應商",
     "Add security key" : "添加私密密鑰",
+    "Please use your security key to authorize." : "請使用您的私密密鑰授權。",
     "Name your security key" : "命名您的私密密鑰",
     "Add" : "添加",
     "Adding your security key …" : "正在新增你的私密密鑰 …",

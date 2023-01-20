@@ -8,6 +8,7 @@
     "WebAuthn two-factor provider" : "WebAuthn 兩步驟提供者",
     "A two-factor provider for WebAuthn devices" : "WebAuthn 裝置的兩步驟提供者",
     "Add security key" : "新增安全金鑰",
+    "Please use your security key to authorize." : "請使用您的安全金鑰驗證。",
     "Name your security key" : "為您的安全金鑰命名",
     "Add" : "新增",
     "Adding your security key …" : "正在心憎您的安全金鑰……",
