@@ -8,6 +8,7 @@
     "WebAuthn two-factor provider" : "Доставчик на двустепенно WebAuthn",
     "A two-factor provider for WebAuthn devices" : "Двустепенен доставчик за WebAuthn устройства",
     "Add security key" : "Добавяне на ключ за защита",
+    "Please use your security key to authorize." : "Моля, използвайте вашия ключ за защита за упълномощаване.",
     "Name your security key" : "Наименовайте вашия ключ за защита",
     "Add" : "Добавяне",
     "Adding your security key …" : "Добавяне на вашия ключ за защита ...",
