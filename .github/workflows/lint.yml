@@ -74,7 +74,7 @@ jobs:
       - php-cs-fixer
       - node-linters
     if: always()
-    name: php-lint-summary
+    name: lint-summary
     steps:
       - name: XML linter summary
         run: if ${{ needs.xml-linters.result != 'success' && needs.xml-linters.result != 'skipped' }}; then exit 1; fi
