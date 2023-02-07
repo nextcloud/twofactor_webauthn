@@ -12,20 +12,23 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        php-version: ['7.4', '8.0', '8.1']
-        nextcloud-version: ['master', 'stable25']
+        php-version: ['8.0', '8.1', '8.2']
+        nextcloud-version: ['master']
+        include:
+          - php-version: '8.0'
+            nextcloud-version: stable25
+          - php-version: '8.1'
+            nextcloud-version: stable25
     name: Nextcloud ${{ matrix.nextcloud-version }} php${{ matrix.php-version }} unit tests
     steps:
-    - name: Set up php${{ matrix.php-version }}
-      uses: shivammathur/setup-php@master
+    - name: Set up Nextcloud env
+      uses: ChristophWurst/setup-nextcloud@v0.3.1
       with:
+        nextcloud-version: ${{ matrix.nextcloud-version }}
         php-version: ${{ matrix.php-version }}
-        extensions: ctype,curl,dom,gd,iconv,intl,json,mbstring,openssl,posix,sqlite,xml,zip
-        coverage: xdebug
-    - name: Checkout Nextcloud
-      run: git clone https://github.com/nextcloud/server.git --recursive --depth 1 -b ${{ matrix.nextcloud-version }} nextcloud
-    - name: Install Nextcloud
-      run: php -f nextcloud/occ maintenance:install --database-name oc_autotest --database-user oc_autotest --admin-user admin --admin-pass admin --database sqlite --database-pass=''
+        php-coverage: 'xdebug'
+        node-version: 'false'
+        install: true
     - name: Checkout app
       uses: actions/checkout@master
       with:
@@ -51,7 +54,7 @@ jobs:
           - php-version: '8.0'
             nextcloud-version: master
             db: 'pgsql'
-          - php-version: '7.4'
+          - php-version: '8.2'
             nextcloud-version: master
             db: 'mysql'
     name: php${{ matrix.php-version }}-${{ matrix.db }} integration tests
