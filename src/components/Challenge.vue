@@ -26,7 +26,7 @@
 		<form ref="challengeForm"
 			method="POST">
 			<input id="challenge"
-				v-model="challenge"
+				:value="challenge"
 				type="hidden"
 				name="challenge">
 		</form>
@@ -65,15 +65,9 @@
 
 <script>
 import { mapGetters } from 'vuex'
-
 import NcButton from '@nextcloud/vue/dist/Components/Button.js'
-
 import logger from '../logger.js'
-
-const debug = (text) => (data) => {
-	logger.debug({ text, data })
-	return data
-}
+import { arrayToBase64String, base64StringToArray, base64url2base64 } from '../utils/base64.js'
 
 export default {
 	name: 'Challenge',
@@ -98,33 +92,13 @@ export default {
 			return document.location.protocol !== 'https:'
 		},
 	},
+
 	mounted() {
 		this.sign()
 	},
 
 	methods: {
-		arrayToBase64String(a) {
-			return btoa(String.fromCharCode(...a))
-		},
-
-		base64url2base64(input) {
-			input = input
-				.replace(/=/g, '')
-				.replace(/-/g, '+')
-				.replace(/_/g, '/')
-
-			const pad = input.length % 4
-			if (pad) {
-				if (pad === 1) {
-					throw new Error('InvalidLengthError: Input base64url string is the wrong length to determine padding')
-				}
-				input += new Array(5 - pad).join('=')
-			}
-
-			return input
-		},
-
-		sign() {
+		async sign() {
 			logger.debug('start sign')
 			this.error = undefined
 
@@ -132,54 +106,54 @@ export default {
 			// TODO: make them immutable
 			const publicKey = JSON.parse(JSON.stringify(this.credentialRequestOptions))
 
-			publicKey.challenge = Uint8Array.from(window.atob(this.base64url2base64(publicKey.challenge)), c => c.charCodeAt(0))
+			publicKey.challenge = base64StringToArray(base64url2base64(publicKey.challenge))
 			if (publicKey.allowCredentials) {
 				publicKey.allowCredentials = publicKey.allowCredentials.map((data) => ({
 					...data,
-					id: Uint8Array.from(window.atob(this.base64url2base64(data.id)), c => c.charCodeAt(0)),
+					id: base64StringToArray(base64url2base64(data.id)),
 				}))
 			}
 
 			logger.debug('Starting webauthn authentication', { publicKey })
 
-			return navigator.credentials.get({ publicKey })
-				.then(debug('got credentials'))
-				.then(data => {
-					return {
-						id: data.id,
-						type: data.type,
-						rawId: this.arrayToBase64String(new Uint8Array(data.rawId)),
-						response: {
-							authenticatorData: this.arrayToBase64String(new Uint8Array(data.response.authenticatorData)),
-							clientDataJSON: this.arrayToBase64String(new Uint8Array(data.response.clientDataJSON)),
-							signature: this.arrayToBase64String(new Uint8Array(data.response.signature)),
-							userHandle: data.response.userHandle ? this.arrayToBase64String(new Uint8Array(data.response.userHandle)) : null,
-						},
-					}
-				})
-				.then(debug('mapped credentials'))
-				.then(challenge => {
-					this.challenge = JSON.stringify(challenge)
+			let data
+			try {
+				data = await navigator.credentials.get({ publicKey })
+			} catch (error) {
+				switch (error.name) {
+				case 'AbortError':
+					this.error = t('twofactor_webauthn', 'Authentication cancelled')
+					break
+				case 'NotAllowedError':
+					this.error = t('twofactor_webauthn', 'Authentication cancelled')
+					break
+				default:
+					this.error = error.toString()
+				}
+				logger.error('challenge failed', { error })
+				return
+			}
+			logger.debug('got credentials', { data })
 
-					// eslint-disable-next-line vue/valid-next-tick
-					return this.$nextTick(() => {
-						this.$refs.challengeForm.submit()
-					})
-				})
-				.then(debug('submitted challengeForm'))
-				.catch(error => {
-					switch (error.name) {
-					case 'AbortError':
-						this.error = t('twofactor_webauthn', 'Authentication cancelled')
-						break
-					case 'NotAllowedError':
-						this.error = t('twofactor_webauthn', 'Authentication cancelled')
-						break
-					default:
-						this.error = error.toString()
-					}
-					logger.error('Challenge failed', { error }) // Example: timeout, interaction refused...
-				})
+			const challenge = {
+				id: data.id,
+				type: data.type,
+				rawId: arrayToBase64String(new Uint8Array(data.rawId)),
+				response: {
+					authenticatorData: arrayToBase64String(new Uint8Array(data.response.authenticatorData)),
+					clientDataJSON: arrayToBase64String(new Uint8Array(data.response.clientDataJSON)),
+					signature: arrayToBase64String(new Uint8Array(data.response.signature)),
+					userHandle: data.response.userHandle ? arrayToBase64String(new Uint8Array(data.response.userHandle)) : null,
+				},
+			}
+			logger.debug('mapped credentials', { challenge })
+			this.challenge = JSON.stringify(challenge)
+
+			// Wait for challenge to propagate to the template
+			await this.$nextTick()
+
+			this.$refs.challengeForm.submit()
+			logger.debug('submitted challengeForm')
 		},
 	},
 }
