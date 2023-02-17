@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.1.0 - 2023-02-23
+### Added
+- Nextcloud 26 support
+- PHP 8.2 support
+### Fixed
+- Device icon with dark theme
+- Invert icon based on theme
+- Improved grammar
+### Removed
+- PHP 7.4 support (EOL)
+
 ## 1.0.0 – 2022-10-12
 ### Added
 - Nextcloud 25 support
