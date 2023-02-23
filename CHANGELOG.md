@@ -2,7 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
-## 1.1.0 - 2023-02-23
+## 1.1.1 - 2023-02-23
+### Fixed
+- Increase public key column size
+- Form element alignment of new device dialog
+
+## 1.1.0 - 2023-02-17
 ### Added
 - Nextcloud 26 support
 - PHP 8.2 support
