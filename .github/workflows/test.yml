@@ -12,13 +12,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        php-version: ['8.0', '8.1', '8.2']
-        nextcloud-version: ['master']
-        include:
-          - php-version: '8.0'
-            nextcloud-version: stable25
-          - php-version: '8.1'
-            nextcloud-version: stable25
+        php-version: ['7.4', '8.0', '8.1']
+        nextcloud-version: ['master', 'stable25']
     name: Nextcloud ${{ matrix.nextcloud-version }} php${{ matrix.php-version }} unit tests
     steps:
     - name: Set up Nextcloud env
@@ -56,6 +51,9 @@ jobs:
             db: 'pgsql'
           - php-version: '8.2'
             nextcloud-version: master
+            db: 'mysql'
+          - php-version: '7.4'
+            nextcloud-version: stable25
             db: 'mysql'
     name: php${{ matrix.php-version }}-${{ matrix.db }} integration tests
     services:
