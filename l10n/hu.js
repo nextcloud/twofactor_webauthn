@@ -10,7 +10,7 @@ OC.L10N.register(
     "WebAuthn two-factor provider" : "WebAuthn kétlépcsős szolgáltató",
     "A two-factor provider for WebAuthn devices" : "Kétlépcsős szolgáltató a WebAuthn-eszközökhöz",
     "Add security key" : "Biztonsági kulcs hozzáadása",
-    "Please use your security key to authorize." : "Kérjük használja a biztonsági kulcsát a hitelesítéshez.",
+    "Please use your security key to authorize." : "Használja a biztonsági kulcsát a jogosultság-ellenőrzéshez.",
     "Name your security key" : "Nevezze el a biztonsági kulcsot",
     "Add" : "Hozzáadás",
     "Adding your security key …" : "Biztonsági kulcs hozzáadása…",
