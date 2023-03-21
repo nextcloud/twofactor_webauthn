@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.1.2 - 2023-03-06
+### Added
+- PHP 7.4 support
+
 ## 1.1.1 - 2023-02-23
 ### Fixed
 - Increase public key column size
