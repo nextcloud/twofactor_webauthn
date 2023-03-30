@@ -26,7 +26,7 @@ declare(strict_types=1);
  */
 
 script('twofactor_webauthn', 'challenge');
-style('twofactor_webauthn', 'challenge');
+style('twofactor_webauthn', 'auth');
 
 ?>
 
