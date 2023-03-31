@@ -24,9 +24,10 @@ declare(strict_types=1);
  */
 
 script('twofactor_webauthn', 'login-setup');
+style('twofactor_webauthn', 'auth');
 
 ?>
 
-<img class="two-factor-icon" src="<?php print_unescaped(image_path('twofactor_webauthn', 'app.svg')); ?>" alt="">
+<img class="two-factor-icon two-factor-webauthn-icon" src="<?php print_unescaped(image_path('twofactor_webauthn', 'app-dark.svg')); ?>" alt="">
 
 <div id="twofactor-webauthn-login-setup"></div>
