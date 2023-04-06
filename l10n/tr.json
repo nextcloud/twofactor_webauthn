@@ -3,10 +3,10 @@
     "You removed an WebAuthn hardware token" : "WebAuthn aygıtını sildiniz",
     "WebAuthn disabled by the administration" : "WebAuthn yönetici tarafından devre dışı bırakılmış",
     "Security key" : "Güvenlik anahtarı",
-    "Use WebAuthn for second factor authentication" : "İki aşamalı kimlik doğrulaması için WebAuthn kullanılsın",
-    "Two-Factor WebAuthn" : "İki aşamalı WebAuthn",
-    "WebAuthn two-factor provider" : "WebAuthn iki aşamalı kimlik doğrulama hizmeti sağlayıcısı",
-    "A two-factor provider for WebAuthn devices" : "WebAuthn aygıtları için iki aşamalı kimlik doğrulama hizmeti sağlayıcısı",
+    "Use WebAuthn for second factor authentication" : "İki adımlı doğrulama için WebAuthn kullanılsın",
+    "Two-Factor WebAuthn" : "İki adımlı WebAuthn",
+    "WebAuthn two-factor provider" : "WebAuthn iki adımlı doğrulama hizmeti sağlayıcısı",
+    "A two-factor provider for WebAuthn devices" : "WebAuthn aygıtları için iki adımlı doğrulama hizmeti sağlayıcısı",
     "Add security key" : "Güvenlik anahtarı ekle",
     "Please use your security key to authorize." : "Lütfen kimliğinizi doğrulamak için güvenlik anahtarınızı kullanın.",
     "Name your security key" : "Güvenlik anahtarınızın adı",
@@ -27,8 +27,8 @@
     "Remove" : "Kaldır",
     "Set up a security key as a second factor." : "İkinci aşama olarak bir güvenlik anahtarı ayarlayın.",
     "Your security key was added successfully. You are now being redirected to the login page." : "Güvenlik anahtarınız eklendi. Şimdi oturum açma sayfasına yönlendirileceksiniz.",
-    "No security keys configured. You are not using WebAuthn as second factor at the moment." : "Herhangi bir güvenlik anahtarı ayarlanmamış. Şu anda iki aşamalı doğrulama için WebAuthn kullanılamaz.",
-    "The following security keys are configured for WebAuthn two-factor authentication:" : "İki aşamalı kimlik doğrulaması için ayarlanmış ve kullanılabilecek güvenlik anahtarları:",
+    "No security keys configured. You are not using WebAuthn as second factor at the moment." : "Herhangi bir güvenlik anahtarı ayarlanmamış. Şu anda iki adımlı doğrulama için WebAuthn kullanılamaz.",
+    "The following security keys are configured for WebAuthn two-factor authentication:" : "İki adımlı doğrulama için ayarlanmış ve kullanılabilecek güvenlik anahtarları:",
     "All security keys are deactivated." : "Tüm güvenlik anahtarları devre dışı bırakıldı."
 },"pluralForm" :"nplurals=2; plural=(n > 1);"
 }
