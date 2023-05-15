@@ -19,6 +19,9 @@ use OCP\DB\QueryBuilder\IQueryBuilder;
 use OCP\IDBConnection;
 use OCP\IUser;
 
+/**
+ * @extends QBMapper<Registration>
+ */
 class RegistrationMapper extends QBMapper {
 	public function __construct(IDBConnection $db) {
 		parent::__construct($db, 'twofactor_u2f_registrations');
