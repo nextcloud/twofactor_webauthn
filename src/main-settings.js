@@ -3,6 +3,7 @@
  *
  * @author Michael Blumenstein <M.Flower@gmx.de>
  * @author 2022 Christoph Wurst <christoph@winzerhof-wurst.at>
+ * @author 2023 Richard Steinmetz <richard@steinmetz.cloud>
  *
  * @license GNU AGPL version 3 or any later version
  *
@@ -26,6 +27,8 @@ import Vue from 'vue'
 
 import Nextcloud from './mixins/Nextcloud.js'
 import PersonalSettings from './components/PersonalSettings.vue'
+
+import '@nextcloud/password-confirmation/dist/style.css'
 
 Vue.mixin(Nextcloud)
 

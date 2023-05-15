@@ -3,6 +3,7 @@
   -
   - @author Michael Blumenstein <M.Flower@gmx.de>
   - @author 2022 Christoph Wurst <christoph@winzerhof-wurst.at>
+  - @author 2023 Richard Steinmetz <richard@steinmetz.cloud>
   -
   - @license GNU AGPL version 3 or any later version
   -
@@ -66,7 +67,7 @@
 </template>
 
 <script>
-import confirmPassword from '@nextcloud/password-confirmation'
+import { confirmPassword } from '@nextcloud/password-confirmation'
 
 import NcButton from '@nextcloud/vue/dist/Components/Button.js'
 
@@ -142,13 +143,17 @@ export default {
 				.then(this.register.bind(this))
 				.then(() => (this.step = RegistrationSteps.NAMING))
 				.catch(error => {
-					logger.error(error.name + ': ' + error.message, {
-						error,
-					})
-					// Do not show an error when the user aborts registration
-					if (error.name !== 'AbortError') {
-						this.errorMessage = error.message
+					if (error && error.name && error.message) {
+						logger.error(error.name + ': ' + error.message, {
+							error,
+						})
+
+						// Do not show an error when the user aborts registration
+						if (error.name !== 'AbortError') {
+							this.errorMessage = error.message
+						}
 					}
+
 					this.step = RegistrationSteps.READY
 				})
 		},

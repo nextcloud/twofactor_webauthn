@@ -3,6 +3,7 @@
   -
   - @author Michael Blumenstein <M.Flower@gmx.de>
   - @author 2022 Christoph Wurst <christoph@winzerhof-wurst.at>
+  - @author 2023 Richard Steinmetz <richard@steinmetz.cloud>
   -
   - @license GNU AGPL version 3 or any later version
   -
@@ -47,7 +48,7 @@ import ActionButton from '@nextcloud/vue/dist/Components/ActionButton.js'
 import ActionCheckbox from '@nextcloud/vue/dist/Components/ActionCheckbox.js'
 import ActionText from '@nextcloud/vue/dist/Components/ActionText.js'
 import InformationOutline from 'vue-material-design-icons/InformationOutline.vue'
-import confirmPassword from '@nextcloud/password-confirmation'
+import { confirmPassword } from '@nextcloud/password-confirmation'
 import moment from '@nextcloud/moment'
 
 export default {
@@ -79,17 +80,17 @@ export default {
 	},
 	methods: {
 		async onDelete() {
-			await confirmPassword()
 			try {
+				await confirmPassword()
 				await this.$store.dispatch('removeDevice', this.id)
 			} catch (e) {
 				console.error('could not delete device', e)
 			}
 		},
 		async changeActivation(active) {
-			await confirmPassword()
 			try {
-				this.$store.dispatch('changeActivationState', { id: this.id, active })
+				await confirmPassword()
+				await this.$store.dispatch('changeActivationState', { id: this.id, active })
 			} catch (e) {
 				console.error('could not change device state', e)
 			}
