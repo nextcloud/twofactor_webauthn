@@ -65,7 +65,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import NcButton from '@nextcloud/vue/dist/Components/Button.js'
+import { NcButton } from '@nextcloud/vue'
 import logger from '../logger.js'
 import { arrayToBase64String, base64StringToArray, base64url2base64 } from '../utils/base64.js'
 

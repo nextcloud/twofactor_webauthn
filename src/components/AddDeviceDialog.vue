@@ -69,7 +69,7 @@
 <script>
 import { confirmPassword } from '@nextcloud/password-confirmation'
 
-import NcButton from '@nextcloud/vue/dist/Components/Button.js'
+import { NcButton } from '@nextcloud/vue'
 
 import {
 	startRegistration,
