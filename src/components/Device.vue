@@ -43,10 +43,12 @@
 </template>
 
 <script>
-import Actions from '@nextcloud/vue/dist/Components/Actions.js'
-import ActionButton from '@nextcloud/vue/dist/Components/ActionButton.js'
-import ActionCheckbox from '@nextcloud/vue/dist/Components/ActionCheckbox.js'
-import ActionText from '@nextcloud/vue/dist/Components/ActionText.js'
+import {
+	NcActions as Actions,
+	NcActionButton as ActionButton,
+	NcActionCheckbox as ActionCheckbox,
+	NcActionText as ActionText,
+} from '@nextcloud/vue'
 import InformationOutline from 'vue-material-design-icons/InformationOutline.vue'
 import { confirmPassword } from '@nextcloud/password-confirmation'
 import moment from '@nextcloud/moment'
