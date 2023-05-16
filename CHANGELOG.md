@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.2.0 - 2023-05-16
+### Added
+- Nextcloud 27 support
+### Fixed
+- Invert icon on setup page when using dark mode
+
 ## 1.1.2 - 2023-03-06
 ### Added
 - PHP 7.4 support
