@@ -65,7 +65,7 @@ jobs:
     name: php${{ matrix.php-version }}-${{ matrix.db }} integration tests
     services:
       mysql-service:
-        image: mariadb:10.5
+        image: ghcr.io/nextcloud/continuous-integration-mariadb-10.6:latest
         env:
           MYSQL_ROOT_PASSWORD: my-secret-pw
           MYSQL_DATABASE: nextcloud
