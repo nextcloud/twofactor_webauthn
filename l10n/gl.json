@@ -1,7 +1,7 @@
 { "translations": {
-    "Two-Factor WebAuthn" : "WebAuthn de dous-factores",
-    "WebAuthn two-factor provider" : "Provedor WebAuthn de dous-factores",
-    "A two-factor provider for WebAuthn devices" : "Un provedor de dous-factores para dispositivos WebAuthn",
+    "Two-Factor WebAuthn" : "WebAuthn de dous factores",
+    "WebAuthn two-factor provider" : "Provedor WebAuthn de dous factores",
+    "A two-factor provider for WebAuthn devices" : "Un provedor de dous factores para dispositivos WebAuthn",
     "Add" : "Engadir",
     "Server error while trying to add WebAuthn device" : "Produciuse un erro do servidor cando se tentaba engadir un dispositivo WebAuthn",
     "An error occurred: {msg}" : "Produciuse un erro: {msg}",
