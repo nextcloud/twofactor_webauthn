@@ -12,6 +12,6 @@ OC.L10N.register(
     "Your browser does not support WebAuthn." : "O seu navegador non é compatíbel co WebAuthn.",
     "Active" : "Activo",
     "Remove" : "Retirar",
-    "The following security keys are configured for WebAuthn two-factor authentication:" : "As seguintes chaves de seguridade están configuradas para a autenticación de dous factores WebAuthn:"
+    "The following security keys are configured for WebAuthn two-factor authentication:" : "As seguintes chaves de seguranza están configuradas para a autenticación de dous factores WebAuthn:"
 },
 "nplurals=2; plural=(n != 1);");
