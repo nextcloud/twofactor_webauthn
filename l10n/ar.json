@@ -1,5 +1,6 @@
 { "translations": {
     "Add" : "إضافة",
+    "Server error while trying to add WebAuthn device" : "حدث خطأ في الخادم أثناء محاولة إضافة جهاز ويب أوثن ",
     "Retry" : "أعد المحاولة",
     "An error occurred. Please try again." : "طرأ هناك خطأ. الرجاء إعادة المحاولة.",
     "Your browser does not support WebAuthn." : "متصفحك لا يدعم WebAuthn.",
