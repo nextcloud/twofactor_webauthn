@@ -1,8 +1,8 @@
 OC.L10N.register(
     "twofactor_webauthn",
     {
-    "You added an WebAuthn hardware token" : "Vostede engadiu un testemuño WebAuthn de hardware",
-    "You removed an WebAuthn hardware token" : "Vostede retirou un testemuño WebAuthn de hardware",
+    "You added an WebAuthn hardware token" : "Vde. engadiu un testemuño WebAuthn de hardware",
+    "You removed an WebAuthn hardware token" : "Vde. retirou un testemuño WebAuthn de hardware",
     "WebAuthn disabled by the administration" : "WebAuthn foi desactivado pola administración",
     "Security key" : "Chave de seguranza",
     "Use WebAuthn for second factor authentication" : "Usar WebAuthn para a autenticación de segundo factor",
@@ -29,7 +29,7 @@ OC.L10N.register(
     "Remove" : "Retirar",
     "Set up a security key as a second factor." : "Estabelecer unha chave de seguranza como segundo factor.",
     "Your security key was added successfully. You are now being redirected to the login page." : "A súa chave de seguranza foi engadida correctamente. Agora está a ser redirixido á páxina de acceso.",
-    "No security keys configured. You are not using WebAuthn as second factor at the moment." : "Non hai ningunha chave de seguranza configurada. Vostede, de momento, non está a usar WebAuthn como un segundo factor.",
+    "No security keys configured. You are not using WebAuthn as second factor at the moment." : "Non hai ningunha chave de seguranza configurada. Vde. de momento, non está a usar WebAuthn como un segundo factor.",
     "The following security keys are configured for WebAuthn two-factor authentication:" : "As seguintes chaves de seguranza están configuradas para a autenticación de dous factores WebAuthn:",
     "All security keys are deactivated." : "Todas as chaves de seguranza están desactivadas."
 },
