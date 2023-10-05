@@ -37,7 +37,7 @@
     "sass-loader": "^13.2.0",
     "sinon": "^14.0.1",
     "url-loader": "^4.1.1",
-    "vue-loader": "^15.10.1",
+    "vue-loader": "^17.2.2",
     "vue-template-compiler": "^2.7.14",
     "webpack": "^5.82.1",
     "webpack-cli": "^5.1.1",
