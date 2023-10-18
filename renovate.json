@@ -1,0 +1,107 @@
+{
+	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
+	"extends": [
+		"config:base",
+		"helpers:pinGitHubActionDigests",
+		":dependencyDashboard",
+		":semanticCommits",
+		":gitSignOff"
+	],
+	"timezone": "Europe/Berlin",
+	"schedule": [
+		"before 5am on monday"
+	],
+	"labels": [
+		"dependencies",
+		"3. to review"
+	],
+	"commitMessageAction": "Bump",
+	"commitMessageTopic": "{{depName}}",
+	"commitMessageExtra": "from {{currentVersion}} to {{#if isPinDigest}}{{{newDigestShort}}}{{else}}{{#if isMajor}}{{prettyNewMajor}}{{else}}{{#if isSingleVersion}}{{prettyNewVersion}}{{else}}{{#if newValue}}{{{newValue}}}{{else}}{{{newDigestShort}}}{{/if}}{{/if}}{{/if}}{{/if}}",
+	"rangeStrategy": "bump",
+	"rebaseWhen": "conflicted",
+	"ignoreUnstable": false,
+	"baseBranches": [
+		"main"
+	],
+	"enabledManagers": [
+		"composer",
+		"github-actions",
+		"npm"
+	],
+	"ignoreDeps": [
+		"node",
+		"npm",
+		"php",
+		"postcss-loader"
+	],
+	"packageRules": [
+		{
+			"description": "Request JavaScript reviews",
+			"matchManagers": ["npm"],
+			"reviewers": [
+				"st3iny",
+				"ChristophWurst"
+			]
+		},
+		{
+			"description": "Request PHP reviews",
+			"matchManagers": ["composer"],
+			"reviewers": [
+				"st3iny",
+				"ChristophWurst"
+			]
+		},
+		{
+			"description": "Bump Github actions monthly and request reviews",
+			"matchManagers": ["github-actions"],
+			"extends": ["schedule:monthly"],
+			"reviewers": [
+				"st3iny",
+				"ChristophWurst"
+			]
+		},
+		{
+			"matchUpdateTypes": ["minor", "patch"],
+			"matchCurrentVersion": "!/^0/",
+			"automerge": true,
+			"automergeType": "pr",
+			"platformAutomerge": true,
+			"labels": [
+				"dependencies",
+				"4. to release"
+			],
+			"reviewers": []
+		},
+		{
+			"description": "Only automerge packages that follow semver",
+			"matchPackageNames": ["@nextcloud/vue", "friendsofphp/php-cs-fixer"],
+			"automerge": false,
+			"labels": [
+				"dependencies",
+				"3. to review"
+			],
+			"reviewers": [
+				"st3iny",
+				"ChristophWurst"
+			]
+		},
+		{
+			"enabled": false,
+			"matchBaseBranches": "/^stable(.)+/"
+		},
+		{
+			"matchBaseBranches": ["main"],
+			"matchDepTypes": ["devDependencies"],
+			"extends": ["schedule:monthly"]
+		}
+	],
+	"vulnerabilityAlerts": {
+		"enabled": true,
+		"semanticCommitType": "fix",
+		"schedule": "before 7am every weekday",
+		"dependencyDashboardApproval": false,
+		"commitMessageSuffix": ""
+	},
+	"osvVulnerabilityAlerts": true
+}
