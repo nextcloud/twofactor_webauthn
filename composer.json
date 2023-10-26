@@ -20,7 +20,7 @@
 	"require-dev": {
 		"christophwurst/nextcloud_testing": "^0.12.4",
 		"phpunit/phpunit": "^9.5.0",
-		"psalm/phar": "^5.9",
+		"psalm/phar": "^5.15.0",
 		"roave/security-advisories": "dev-master"
 	},
 	"scripts": {
