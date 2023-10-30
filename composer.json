@@ -15,7 +15,7 @@
 		"php": ">=7.4.0",
 		"ext-json": "*",
 		"bamarni/composer-bin-plugin": "^1.8.2",
-		"web-auth/webauthn-lib": "^3.3"
+		"web-auth/webauthn-lib": "^3.3.12"
 	},
 	"require-dev": {
 		"christophwurst/nextcloud_testing": "^0.12.4",
