@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <files psalm-version="4.x-dev@">
   <file src="lib/AppInfo/Application.php">
-    <InvalidArgument occurrences="6">
+    <InvalidArgument occurrences="7">
       <code>registerEventListener</code>
       <code>registerEventListener</code>
       <code>registerEventListener</code>
       <code>StateChangeActivity::class</code>
       <code>StateChangeActivity::class</code>
       <code>StateChangeRegistryUpdater::class</code>
+	  <code>UserDeleted::class</code>
     </InvalidArgument>
     <MissingDependency occurrences="3">
       <code>DisabledByAdmin</code>
