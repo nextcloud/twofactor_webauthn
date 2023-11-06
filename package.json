@@ -7,7 +7,7 @@
     "@nextcloud/auth": "^2.2.1",
     "@nextcloud/axios": "^2.4.0",
     "@nextcloud/initial-state": "^2.1.0",
-    "@nextcloud/logger": "^2.5.0",
+    "@nextcloud/logger": "^2.7.0",
     "@nextcloud/moment": "^1.2.2",
     "@nextcloud/password-confirmation": "^4.0.4",
     "@nextcloud/router": "^2.1.1",
