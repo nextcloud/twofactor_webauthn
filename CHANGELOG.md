@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.3.0 - unreleased
+### Added
+- Nextcloud 28 support
+### Changed
+- New and updated translations
+
 ## 1.2.0 - 2023-05-16
 ### Added
 - Nextcloud 27 support
