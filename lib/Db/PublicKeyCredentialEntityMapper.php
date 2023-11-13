@@ -26,6 +26,7 @@ declare(strict_types=1);
 
 namespace OCA\TwoFactorWebauthn\Db;
 
+use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Db\Entity;
 use OCP\AppFramework\Db\QBMapper;
 use OCP\DB\Exception;
@@ -92,6 +93,26 @@ class PublicKeyCredentialEntityMapper extends QBMapper {
 	 * @var bool
 	 */
 	protected $active;
+
+	/**
+	 * @throws Exception
+	 */
+	public function findById(int $id): ?PublicKeyCredentialEntity {
+		$qb = $this->db->getQueryBuilder();
+
+		$qb->select('*')
+			->from($this->getTableName())
+			->where($qb->expr()->eq(
+				'id',
+				$qb->createNamedParameter($id, IQueryBuilder::PARAM_INT),
+				IQueryBuilder::PARAM_INT
+			));
+		try {
+			return $this->findEntity($qb);
+		} catch (DoesNotExistException $e) {
+			return null;
+		}
+	}
 
 	/**
 	 * @param IUser $user

@@ -63,6 +63,7 @@ export default {
 		InformationOutline,
 	},
 	props: {
+		entityId: Number,
 		id: String,
 		name: String,
 		active: Boolean,
@@ -84,7 +85,7 @@ export default {
 		async onDelete() {
 			try {
 				await confirmPassword()
-				await this.$store.dispatch('removeDevice', this.id)
+				await this.$store.dispatch('removeDevice', this.entityId)
 			} catch (e) {
 				console.error('could not delete device', e)
 			}
@@ -92,7 +93,10 @@ export default {
 		async changeActivation(active) {
 			try {
 				await confirmPassword()
-				await this.$store.dispatch('changeActivationState', { id: this.id, active })
+				await this.$store.dispatch('changeActivationState', {
+					entityId: this.entityId,
+					active,
+				})
 			} catch (e) {
 				console.error('could not change device state', e)
 			}

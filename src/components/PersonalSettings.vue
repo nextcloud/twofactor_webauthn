@@ -30,7 +30,8 @@
 		</p>
 		<Device v-for="device in devices"
 			:id="device.id"
-			:key="device.id"
+			:key="device.entityId"
+			:entity-id="device.entityId"
 			:name="device.name"
 			:active="device.active"
 			:created-at="device.createdAt" />

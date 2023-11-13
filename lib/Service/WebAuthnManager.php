@@ -246,6 +246,7 @@ class WebAuthnManager {
 		$credentials = $this->mapper->findPublicKeyCredentials($user->getUID());
 		return array_map(function (PublicKeyCredentialEntity $credential) {
 			return [
+				'entityId' => $credential->getId(),
 				'id' => $credential->getPublicKeyCredentialId(),
 				'name' => $credential->getName(),
 				'createdAt' => $credential->getCreatedAt(),
@@ -360,8 +361,8 @@ class WebAuthnManager {
 		}
 	}
 
-	public function removeDevice(IUser $user, string $id) {
-		$credential = $this->mapper->findPublicKeyCredential($id);
+	public function removeDevice(IUser $user, int $id) {
+		$credential = $this->mapper->findById($id);
 		Assertion::eq($credential->getUserHandle(), $user->getUID());
 
 		$this->mapper->delete($credential);
@@ -378,8 +379,8 @@ class WebAuthnManager {
 		$this->eventDispatcher->dispatch(StateChanged::class, new DisabledByAdmin($user));
 	}
 
-	public function changeActivationState(IUser $user, string $id, bool $active) {
-		$credential = $this->mapper->findPublicKeyCredential($id);
+	public function changeActivationState(IUser $user, int $id, bool $active) {
+		$credential = $this->mapper->findById($id);
 		Assertion::eq($credential->getUserHandle(), $user->getUID());
 
 		$credential->setActive($active);
