@@ -38,22 +38,22 @@ export const mutations = {
 		state.devices.sort((d1, d2) => d1.name.localeCompare(d2.name))
 	},
 
-	removeDevice(state, id) {
-		state.devices = state.devices.filter(device => device.id !== id)
+	removeDevice(state, entityId) {
+		state.devices = state.devices.filter(device => device.entityId !== entityId)
 	},
 
-	changeActivationState(state, { id, active }) {
-		state.devices.find(device => device.id === id).active = active
+	changeActivationState(state, { entityId, active }) {
+		state.devices.find(device => device.entityId === entityId).active = active
 	},
 }
 
 export const actions = {
-	removeDevice({ state, commit }, id) {
-		const device = state.devices.find(device => device.id === id)
+	removeDevice({ state, commit }, entityId) {
+		const device = state.devices.find(device => device.entityId === entityId)
 
-		commit('removeDevice', id)
+		commit('removeDevice', entityId)
 
-		removeRegistration(id)
+		removeRegistration(entityId)
 			.catch(err => {
 				// Rollback
 				commit('addDevice', device)
@@ -62,11 +62,11 @@ export const actions = {
 			})
 	},
 
-	changeActivationState({ state, commit }, { id, active }) {
-		commit('changeActivationState', { id, active })
+	changeActivationState({ state, commit }, { entityId, active }) {
+		commit('changeActivationState', { entityId, active })
 
-		changeActivationState(id, active).catch(err => {
-			commit('changeActivationState', { id, active: !active })
+		changeActivationState(entityId, active).catch(err => {
+			commit('changeActivationState', { entityId, active: !active })
 			throw err
 		})
 	},

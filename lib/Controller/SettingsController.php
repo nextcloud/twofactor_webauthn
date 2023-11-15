@@ -75,18 +75,18 @@ class SettingsController extends ALoginSetupController {
 	/**
 	 * @NoAdminRequired
 	 * @PasswordConfirmationRequired
-	 *
-	 * @param string $id
 	 */
-	public function remove(string $id): JSONResponse {
-		return new JSONResponse($this->manager->removeDevice($this->userSession->getUser(), $id));
+	public function remove(int $id): JSONResponse {
+		$this->manager->removeDevice($this->userSession->getUser(), $id);
+		return new JSONResponse([]);
 	}
 
 	/**
 	 * @NoAdminRequired
 	 * @PasswordConfirmationRequired
 	 */
-	public function changeActivationState(string $id, bool $active): JSONResponse {
-		return new JSONResponse($this->manager->changeActivationState($this->userSession->getUser(), $id, $active));
+	public function changeActivationState(int $id, bool $active): JSONResponse {
+		$this->manager->changeActivationState($this->userSession->getUser(), $id, $active);
+		return new JSONResponse([]);
 	}
 }

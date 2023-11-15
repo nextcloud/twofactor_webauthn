@@ -110,10 +110,11 @@ class WebAuthnManagerTest extends TestCase {
 
 	public function testDisableWebAuthn(): void {
 		$user = $this->createMock(IUser::class);
-		$reg = $this->createMock(PublicKeyCredentialEntity::class);
+		$reg = new PublicKeyCredentialEntity();
+		$reg->setId(420);
 		$this->mapper->expects(self::once())
-			->method('findPublicKeyCredential')
-			->with('k1')
+			->method('findById')
+			->with(420)
 			->willReturn($reg);
 		$this->mapper->expects(self::once())
 			->method('delete')
@@ -125,7 +126,7 @@ class WebAuthnManagerTest extends TestCase {
 				self::equalTo(new StateChanged($user, false))
 			);
 
-		$this->manager->removeDevice($user, 'k1');
+		$this->manager->removeDevice($user, 420);
 	}
 
 	public function testStartRegistrationFirstDevice(): void {
