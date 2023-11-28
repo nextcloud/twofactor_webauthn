@@ -4,7 +4,7 @@
 	<name>Two-Factor WebAuthn</name>
 	<summary>WebAuthn two-factor provider</summary>
 	<description>A two-factor provider for WebAuthn devices</description>
-	<version>1.3.1</version>
+	<version>1.3.2</version>
 	<licence>agpl</licence>
 	<author>Christoph Wurst</author>
 	<author>Michael Blumenstein</author>

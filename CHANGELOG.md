@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.3.2 - 2023-11-28
+### Fixed
+- Password confirmation not showing when unified search is disabled
+
 ## 1.3.1 - 2023-11-28
 ### Added
 - PHP 8.3 support
