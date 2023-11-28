@@ -66,11 +66,11 @@ class MigrateU2F extends Command {
 	private $u2fMapper;
 
 	public function __construct(U2FMigrator $migrator,
-								IDBConnection $db,
-								IUserManager $userManager,
-								IEventDispatcher $eventDispatcher,
-								PublicKeyCredentialEntityMapper $webauthnMapper,
-								RegistrationMapper $u2fMapper) {
+		IDBConnection $db,
+		IUserManager $userManager,
+		IEventDispatcher $eventDispatcher,
+		PublicKeyCredentialEntityMapper $webauthnMapper,
+		RegistrationMapper $u2fMapper) {
 		parent::__construct();
 
 		$this->migrator = $migrator;

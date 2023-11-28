@@ -49,7 +49,7 @@ class WebauthnPublicKeyCredentialSourceRepository implements PublicKeyCredential
 	 * @param PublicKeyCredentialEntityMapper $publicKeyCredentialEntityMapper
 	 */
 	public function __construct(PublicKeyCredentialEntityMapper $publicKeyCredentialEntityMapper,
-								ITimeFactory $time) {
+		ITimeFactory $time) {
 		$this->publicKeyCredentialEntityMapper = $publicKeyCredentialEntityMapper;
 		$this->time = $time;
 	}

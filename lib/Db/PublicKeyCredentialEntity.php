@@ -124,8 +124,8 @@ class PublicKeyCredentialEntity extends Entity {
 	}
 
 	public static function fromPublicKeyCrendentialSource(string $name,
-														  PublicKeyCredentialSource $publicKeyCredentialSource,
-														  ?int $ctime): PublicKeyCredentialEntity {
+		PublicKeyCredentialSource $publicKeyCredentialSource,
+		?int $ctime): PublicKeyCredentialEntity {
 		$publicKeyCredentialEntity = new self();
 
 		$publicKeyCredentialEntity->setName($name);
