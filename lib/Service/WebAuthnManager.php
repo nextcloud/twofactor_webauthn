@@ -235,6 +235,7 @@ class WebAuthnManager {
 		$this->eventDispatcher->dispatch(StateChanged::class, new StateChanged($user, true));
 
 		return [
+			'entityId' => $entity->getId(),
 			'id' => base64_encode($publicKeyCredentialSource->getPublicKeyCredentialId()),
 			'name' => $name,
 			'createdAt' => $entity !== null ? $entity->getCreatedAt() : null,
