@@ -30,8 +30,8 @@ namespace OCA\TwoFactorWebauthn\Migration;
 use Closure;
 use OCP\DB\ISchemaWrapper;
 use OCP\IDBConnection;
-use OCP\Migration\SimpleMigrationStep;
 use OCP\Migration\IOutput;
+use OCP\Migration\SimpleMigrationStep;
 use Ramsey\Uuid\Uuid;
 use Throwable;
 

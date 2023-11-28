@@ -68,11 +68,11 @@ class WebAuthnProvider implements IProvider, IProvidesIcons, IProvidesPersonalSe
 	private $container;
 
 	public function __construct(IL10N $l10n,
-								WebAuthnManager $manager,
-								IInitialState $initialState,
-								IURLGenerator $urlGenerator,
-								IRequest $request,
-								ContainerInterface $container) {
+		WebAuthnManager $manager,
+		IInitialState $initialState,
+		IURLGenerator $urlGenerator,
+		IRequest $request,
+		ContainerInterface $container) {
 		$this->l10n = $l10n;
 		$this->manager = $manager;
 		$this->initialState = $initialState;
