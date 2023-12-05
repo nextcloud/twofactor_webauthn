@@ -19,7 +19,7 @@
 	},
 	"require-dev": {
 		"christophwurst/nextcloud_testing": "^1.0.0",
-		"phpunit/phpunit": "^9.6.15",
+		"phpunit/phpunit": "^10.5.2",
 		"psalm/phar": "^5.16.0",
 		"roave/security-advisories": "dev-master"
 	},
