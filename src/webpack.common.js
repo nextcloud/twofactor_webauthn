@@ -3,6 +3,7 @@
  *
  * @author Michael Blumenstein <M.Flower@gmx.de>
  * @author 2022 Christoph Wurst <christoph@winzerhof-wurst.at>
+ * @author Richard Steinmetz <richard@steinmetz.cloud>
  *
  * @license GNU AGPL version 3 or any later version
  *
@@ -20,6 +21,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+const webpack = require('webpack')
 const path = require('path')
 const { VueLoaderPlugin } = require('vue-loader')
 
@@ -69,7 +71,18 @@ module.exports = {
 			},
 		],
 	},
-	plugins: [new VueLoaderPlugin()],
+	plugins: [
+		new VueLoaderPlugin(),
+
+		// @nextcloud/moment since v1.3.0 uses `moment/min/moment-with-locales.js`
+		// Which works only in Node.js and is not compatible with Webpack bundling
+		// It has an unused function `localLocale` that requires locales by invalid relative path `./locale`
+		// Though it is not used, Webpack tries to resolve it with `require.context` and fails
+		new webpack.IgnorePlugin({
+			resourceRegExp: /^\.\/locale$/,
+			contextRegExp: /moment\/min$/,
+		}),
+	],
 	resolve: {
 		extensions: ['*', '.js', '.vue'],
 	},
