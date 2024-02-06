@@ -90,7 +90,7 @@ class WebauthnPublicKeyCredentialSourceRepository implements PublicKeyCredential
 		}, $credentials);
 	}
 
-	public function saveCredentialSource(PublicKeyCredentialSource $publicKeyCredentialSource, string $name = null): void {
+	public function saveCredentialSource(PublicKeyCredentialSource $publicKeyCredentialSource, ?string $name = null): void {
 		$name = $this->getName($publicKeyCredentialSource, $name);
 		$entity = PublicKeyCredentialEntity::fromPublicKeyCrendentialSource(
 			$name,
@@ -100,7 +100,7 @@ class WebauthnPublicKeyCredentialSourceRepository implements PublicKeyCredential
 		$this->publicKeyCredentialEntityMapper->insertOrUpdate($entity);
 	}
 
-	private function getName(PublicKeyCredentialSource $publicKeyCredentialSource, string $name = null): string {
+	private function getName(PublicKeyCredentialSource $publicKeyCredentialSource, ?string $name = null): string {
 		if ($name !== null) {
 			return $name;
 		}

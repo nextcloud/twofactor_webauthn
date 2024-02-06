@@ -62,7 +62,7 @@ class Provider implements IProvider {
 	 * @return IEvent
 	 * @throws InvalidArgumentException
 	 */
-	public function parse($language, IEvent $event, IEvent $previousEvent = null) {
+	public function parse($language, IEvent $event, ?IEvent $previousEvent = null) {
 		if ($event->getApp() !== 'twofactor_webauthn') {
 			throw new InvalidArgumentException();
 		}
