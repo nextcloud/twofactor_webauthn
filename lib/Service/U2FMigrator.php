@@ -40,7 +40,7 @@ class U2FMigrator {
 	 * @return false|string
 	 */
 	private function base64_urlsafe_decode(string $data) {
-		return base64_decode(str_replace(array('-', '_'), array('+', '/'), $data));
+		return base64_decode(str_replace(['-', '_'], ['+', '/'], $data));
 	}
 
 	private function zeroUuid(): UuidInterface {
