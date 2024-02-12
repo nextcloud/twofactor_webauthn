@@ -22,16 +22,16 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils'
 import Vuex from 'vuex'
 
-import Nextcloud from '../../mixins/Nextcloud.js'
+import Nextcloud from '../../../mixins/Nextcloud.js'
 
-import PersonalSettings from '../../components/PersonalSettings.vue'
+import Device from '../../../components/Device.vue'
 
 const localVue = createLocalVue()
 
 localVue.use(Vuex)
 localVue.mixin(Nextcloud)
 
-describe('PersonalSettings', () => {
+describe('Device', () => {
 	let actions
 	let store
 
@@ -45,37 +45,16 @@ describe('PersonalSettings', () => {
 		})
 	})
 
-	it('shows text if no devices are configured', () => {
-		const settings = shallowMount(PersonalSettings, {
-			store,
-			localVue,
-		})
-
-		expect(settings.text()).to.contain('No security keys configured. You are not using WebAuthn as second factor at the moment.')
-	})
-
-	it('shows no info text if devices are configured', () => {
+	it('renders devices without a name', () => {
 		store.state.devices.push({
 			id: 'k1',
-			name: 'a',
+			name: undefined,
 		})
-		const settings = shallowMount(PersonalSettings, {
+		const device = shallowMount(Device, {
 			store,
 			localVue,
 		})
 
-		expect(settings.text()).to.not.contain('No security keys configured. You are not using WebAuthn as second factor at the moment.')
-	})
-
-	it('shows a HTTP warning', () => {
-		const settings = shallowMount(PersonalSettings, {
-			store,
-			localVue,
-			propsData: {
-				httpWarning: true,
-			},
-		})
-
-		expect(settings.text()).to.contain('You are accessing this site via an')
+		expect(device.text()).to.have.string('Unnamed key')
 	})
 })

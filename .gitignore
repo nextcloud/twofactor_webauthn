@@ -13,3 +13,7 @@ composer.phar
 
 /tests/clover*.xml
 /tests/.phpunit.result.cache
+
+/playwright
+/playwright-report
+/test-results
