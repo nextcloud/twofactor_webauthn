@@ -138,6 +138,72 @@ jobs:
           - name: npm install
             run: npm install
           - name: run tests
-            run: npm run test
+            run: npm run test:unit
       env:
           CI: true
+
+  frontend-e2e-tests:
+    runs-on: ubuntu-latest
+    name: Front-end E2E tests
+    strategy:
+      matrix:
+        php-version: [ '8.1' ]
+        nextcloud-version: [ 'master', 'stable28', 'stable27', 'stable26' ]
+        node-version: [ '20' ]
+    steps:
+      - name: Set up Nextcloud env
+        uses: ChristophWurst/setup-nextcloud@v0.3.2
+        with:
+          nextcloud-version: ${{ matrix.nextcloud-version }}
+          php-version: ${{ matrix.php-version }}
+          node-version: ${{ matrix.node-version }}
+          install: true
+      - name: Configure Nextcloud for testing
+        run: |
+          php -f nextcloud/occ config:system:set debug --type=bool --value=true
+          php -f nextcloud/occ config:system:set overwriteprotocol --value=https
+          php -f nextcloud/occ config:system:set overwritehost --value=localhost
+          php -f nextcloud/occ config:system:set overwrite.cli.url --value=https://localhost
+      - name: Check out the app
+        uses: actions/checkout@v3
+        with:
+          path: nextcloud/apps/twofactor_webauthn
+      - name: Install php dependencies
+        working-directory: nextcloud/apps/twofactor_webauthn
+        run: composer install
+      - name: Install the app
+        run: php -f nextcloud/occ app:enable twofactor_webauthn
+      - name: Set up node ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install npm dependencies
+        working-directory: nextcloud/apps/twofactor_webauthn
+        run: npm ci
+      - name: Build frontend
+        working-directory: nextcloud/apps/twofactor_webauthn
+        run: npm run dev
+      - name: Install stunnel (tiny https proxy)
+        run: sudo apt-get install -y stunnel
+      - name: Start php server and https proxy
+        working-directory: nextcloud
+        run: |
+          openssl req -new -x509 -days 365 -nodes -subj "/C=US/ST=Denial/L=Springfield/O=Dis/CN=localhost" -out stunnel.pem -keyout stunnel.pem
+          php -S 127.0.0.1:8080 &
+          sudo stunnel3 -p stunnel.pem -d 443 -r 8080
+      - name: Test https access
+        run: curl --insecure -Li https://localhost
+      - name: Install Playwright browsers
+        working-directory: nextcloud/apps/twofactor_webauthn
+        run: npx playwright install --with-deps chromium
+      - name: Run Playwright tests
+        working-directory: nextcloud/apps/twofactor_webauthn
+        run: npx playwright test
+      - uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: playwright-report
+          path: nextcloud/apps/twofactor_webauthn/playwright-report/
+          retention-days: 30
+    env:
+      CI: true

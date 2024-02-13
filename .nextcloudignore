@@ -21,8 +21,10 @@
 /nbproject
 /node_modules
 /package*
+/playwright*
 /psalm.xml
 /screenshots
 /src
 /tests
+/test-results
 /vendor/bin

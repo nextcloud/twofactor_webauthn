@@ -20,7 +20,7 @@
  *
  */
 
-import { arrayToBase64String, base64StringToArray, base64url2base64 } from '../../utils/base64.js'
+import { arrayToBase64String, base64StringToArray, base64url2base64 } from '../../../utils/base64.js'
 
 describe('utils/base64', () => {
 	it('should convert byte arrays to base64 strings', () => {
