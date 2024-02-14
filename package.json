@@ -36,7 +36,7 @@
     "prettier": "^2.8.4",
     "sass": "^1.68.0",
     "sass-loader": "^13.2.0",
-    "sinon": "^14.0.1",
+    "sinon": "^17.0.1",
     "url-loader": "^4.1.1",
     "vue-loader": "^15.10.1",
     "vue-template-compiler": "^2.7.16",
