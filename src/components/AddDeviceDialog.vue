@@ -68,7 +68,6 @@
 
 <script>
 import { confirmPassword } from '@nextcloud/password-confirmation'
-
 import { NcButton } from '@nextcloud/vue'
 
 import {
@@ -77,11 +76,6 @@ import {
 } from '../services/RegistrationService.js'
 
 import logger from '../logger.js'
-
-const debug = (text) => (data) => {
-	logger.debug(text, { data })
-	return data
-}
 
 const RegistrationSteps = Object.freeze({
 	READY: 1,
@@ -133,97 +127,97 @@ export default {
 			return input
 		},
 
-		start() {
+		async start() {
 			this.errorMessage = null
 			logger.info('Starting to add a new twofactor webauthn device')
 			this.step = RegistrationSteps.REGISTRATION
 
-			return confirmPassword()
-				.then(this.getRegistrationData)
-				.then(this.register.bind(this))
-				.then(() => (this.step = RegistrationSteps.NAMING))
-				.catch(error => {
-					if (error && error.name && error.message) {
-						logger.error(error.name + ': ' + error.message, {
-							error,
-						})
+			try {
+				await confirmPassword()
+				const registrationData = await this.getRegistrationData()
+				await this.register(registrationData)
+				this.step = RegistrationSteps.NAMING
+			} catch (error) {
+				if (error?.name && error?.message) {
+					logger.error(error.name + ': ' + error.message, {
+						error,
+					})
 
-						// Do not show an error when the user aborts registration
-						if (error.name !== 'AbortError') {
-							this.errorMessage = error.message
-						}
+					// Do not show an error when the user aborts registration
+					if (error.name !== 'AbortError') {
+						this.errorMessage = error.message
 					}
+				}
 
-					this.step = RegistrationSteps.READY
-				})
+				this.step = RegistrationSteps.READY
+			}
 		},
 
-		getRegistrationData() {
-			return startRegistration()
-				.then(publicKey => {
-					publicKey.challenge = Uint8Array.from(window.atob(this.base64url2base64(publicKey.challenge)), c => c.charCodeAt(0))
-					publicKey.user.id = Uint8Array.from(window.atob(publicKey.user.id), c => c.charCodeAt(0))
-					if (publicKey.excludeCredentials) {
-						publicKey.excludeCredentials = publicKey.excludeCredentials.map(data => {
-							data.id = Uint8Array.from(window.atob(this.base64url2base64(data.id)), c => c.charCodeAt(0))
-							return data
-						})
-					}
-					return publicKey
-				})
-				.catch(error => {
-					logger.error('getRegistrationData: Error getting webauthn registration data from server', { error })
-					throw new Error(t('twofactor_webauthn', 'Server error while trying to add WebAuthn device'))
-				})
+		async getRegistrationData() {
+			try {
+				const publicKey = await startRegistration()
+				publicKey.challenge = Uint8Array.from(window.atob(this.base64url2base64(publicKey.challenge)), c => c.charCodeAt(0))
+				publicKey.user.id = Uint8Array.from(window.atob(publicKey.user.id), c => c.charCodeAt(0))
+				if (publicKey.excludeCredentials) {
+					publicKey.excludeCredentials = publicKey.excludeCredentials.map(data => {
+						data.id = Uint8Array.from(window.atob(this.base64url2base64(data.id)), c => c.charCodeAt(0))
+						return data
+					})
+				}
+				return publicKey
+			} catch (error) {
+				logger.error('getRegistrationData: Error getting webauthn registration data from server', { error })
+				throw new Error(t('twofactor_webauthn', 'Server error while trying to add WebAuthn device'))
+			}
 		},
 
-		register(publicKey) {
+		async register(publicKey) {
 			logger.debug('starting webauthn registration')
 
-			return navigator.credentials.create({ publicKey })
-				.then(debug('navigator.credentials.create called'))
-				.then(data => {
-					this.credential = {
-						id: data.id,
-						type: data.type,
-						rawId: this.arrayToBase64String(new Uint8Array(data.rawId)),
-						response: {
-							clientDataJSON: this.arrayToBase64String(new Uint8Array(data.response.clientDataJSON)),
-							attestationObject: this.arrayToBase64String(new Uint8Array(data.response.attestationObject)),
-						},
-					}
-				})
-				.then(debug('mapped credentials data'))
-				.catch(error => {
-					logger.error('register: Error creating credentials', { error })
-					throw error
-				})
+			try {
+				const data = await navigator.credentials.create({ publicKey })
+				logger.debug('navigator.credentials.create called', { data })
+				this.credential = {
+					id: data.id,
+					type: data.type,
+					rawId: this.arrayToBase64String(new Uint8Array(data.rawId)),
+					response: {
+						clientDataJSON: this.arrayToBase64String(new Uint8Array(data.response.clientDataJSON)),
+						attestationObject: this.arrayToBase64String(new Uint8Array(data.response.attestationObject)),
+					},
+				}
+				logger.debug('mapped credentials data')
+			} catch (error) {
+				logger.error('register: Error creating credentials', { error })
+				throw error
+			}
 		},
 
-		submit() {
+		async submit() {
 			this.step = RegistrationSteps.PERSIST
 
-			return confirmPassword()
-				.then(this.saveRegistrationData)
-				.then(debug('registration data saved'))
-				.then(() => this.reset())
-				.then(debug('app reset'))
-				.then(() => this.$emit('add'))
-				.catch(error => {
-					logger.error(error, error.name)
-					this.errorMessage = error.message
-					this.step = RegistrationSteps.READY
-				})
+			try {
+				await confirmPassword()
+				await this.saveRegistrationData()
+				logger.debug('registration data saved')
+				this.reset()
+				this.$emit('add')
+			} catch (error) {
+				logger.error(error, { error })
+				this.errorMessage = error.message
+				this.step = RegistrationSteps.READY
+			}
 		},
 
-		saveRegistrationData() {
-			return finishRegistration(this.name, JSON.stringify(this.credential))
-				.then(device => this.$store.commit('addDevice', device))
-				.then(debug('new device added to store'))
-				.catch(error => {
-					logger.error('Error persisting webauthn registration', { error })
-					throw new Error(t('twofactor_webauthn', 'Server error while trying to complete security key registration'))
-				})
+		async saveRegistrationData() {
+			try {
+				const device = await finishRegistration(this.name, JSON.stringify(this.credential))
+				this.$store.commit('addDevice', device)
+				logger.debug('new device added to store', { device })
+			} catch (error) {
+				logger.error('Error persisting webauthn registration', { error })
+				throw new Error(t('twofactor_webauthn', 'Server error while trying to complete security key registration'))
+			}
 		},
 
 		reset() {
