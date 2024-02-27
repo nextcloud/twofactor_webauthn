@@ -24,7 +24,7 @@ declare(strict_types=1);
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-script('twofactor_webauthn', 'settings');
+script('twofactor_webauthn', 'twofactor_webauthn-settings');
 style('twofactor_webauthn', 'style');
 ?>
 

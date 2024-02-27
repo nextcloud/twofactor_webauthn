@@ -23,7 +23,7 @@ declare(strict_types=1);
  *
  */
 
-script('twofactor_webauthn', 'login-setup');
+script('twofactor_webauthn', 'twofactor_webauthn-login-setup');
 style('twofactor_webauthn', 'auth');
 
 ?>
