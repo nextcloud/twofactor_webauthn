@@ -152,7 +152,7 @@ jobs:
         node-version: [ '20' ]
     steps:
       - name: Set up Nextcloud env
-        uses: ChristophWurst/setup-nextcloud@v0.3.2
+        uses: ChristophWurst/setup-nextcloud@fc0790385c175d97e88a7cb0933490de6e990374 # v0.3.2
         with:
           nextcloud-version: ${{ matrix.nextcloud-version }}
           php-version: ${{ matrix.php-version }}
@@ -165,7 +165,7 @@ jobs:
           php -f nextcloud/occ config:system:set overwritehost --value=localhost
           php -f nextcloud/occ config:system:set overwrite.cli.url --value=https://localhost
       - name: Check out the app
-        uses: actions/checkout@v3
+        uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3
         with:
           path: nextcloud/apps/twofactor_webauthn
       - name: Install php dependencies
@@ -174,7 +174,7 @@ jobs:
       - name: Install the app
         run: php -f nextcloud/occ app:enable twofactor_webauthn
       - name: Set up node ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@1a4442cacd436585916779262731d5b162bc6ec7 # v3
         with:
           node-version: ${{ matrix.node-version }}
       - name: Install npm dependencies
@@ -199,7 +199,7 @@ jobs:
       - name: Run Playwright tests
         working-directory: nextcloud/apps/twofactor_webauthn
         run: npx playwright test
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@a8a3f3ad30e3422c9c7b888a15615d19a852ae32 # v3
         if: always()
         with:
           name: playwright-report
