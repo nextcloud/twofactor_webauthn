@@ -5,6 +5,7 @@ OC.L10N.register(
     "An error occurred: {msg}" : "Prodúxose un error: {msg}",
     "Retry" : "Retentar",
     "An error occurred. Please try again." : "Prodúxose un error. Volvi tentalo.",
-    "Your browser does not support WebAuthn." : "El restolador nun ye compatible con WebAuthn."
+    "Your browser does not support WebAuthn." : "El restolador nun ye compatible con WebAuthn.",
+    "Remove" : "Quitar"
 },
 "nplurals=2; plural=(n != 1);");
