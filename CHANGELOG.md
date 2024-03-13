@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.4.0 - unreleased
+### Added
+- Nextcloud 29 support
+### Removed
+- Nextcloud 25 support
+- PHP 7.4 support
+
 ## 1.3.2 - 2023-11-28
 ### Fixed
 - Password confirmation not showing when unified search is disabled
