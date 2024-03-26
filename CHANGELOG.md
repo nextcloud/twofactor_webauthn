@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## 1.4.0 - unreleased
+## 1.4.0 - 2024-26-03
 ### Added
 - Nextcloud 29 support
 ### Removed
