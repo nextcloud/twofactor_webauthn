@@ -4,7 +4,7 @@
 	<name>Two-Factor WebAuthn</name>
 	<summary>WebAuthn two-factor provider</summary>
 	<description>A two-factor provider for WebAuthn devices</description>
-	<version>1.5.0-alpha.1</version>
+	<version>1.6.0-alpha.1</version>
 	<licence>agpl</licence>
 	<author>Christoph Wurst</author>
 	<author>Michael Blumenstein</author>
@@ -20,7 +20,7 @@
 	<dependencies>
 		<php min-version="8.0" max-version="8.3"/>
 		<lib>gmp</lib>
-		<nextcloud min-version="26" max-version="29" />
+		<nextcloud min-version="27" max-version="30" />
 	</dependencies>
 
 	<repair-steps>
