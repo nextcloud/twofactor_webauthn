@@ -13,10 +13,12 @@ jobs:
     strategy:
       matrix:
         php-version: ['8.0', '8.1', '8.2']
-        nextcloud-version: ['master', 'stable28', 'stable27', 'stable26']
+        nextcloud-version: ['master', 'stable29', 'stable28', 'stable27', 'stable26']
         include:
           - php-version: '8.3'
             nextcloud-version: stable28
+          - php-version: '8.3'
+            nextcloud-version: stable29
           - php-version: '8.3'
             nextcloud-version: master
     name: Nextcloud ${{ matrix.nextcloud-version }} php${{ matrix.php-version }} unit tests
@@ -60,6 +62,9 @@ jobs:
           - php-version: '8.2'
             nextcloud-version: stable28
             db: 'mysql'
+          - php-version: '8.2'
+            nextcloud-version: stable29
+            db: 'pgsql'
     name: Nextcloud ${{ matrix.nextcloud-version }} php${{ matrix.php-version }}-${{ matrix.db }} integration tests
     services:
       mysql-service:
@@ -148,7 +153,7 @@ jobs:
     strategy:
       matrix:
         php-version: [ '8.1' ]
-        nextcloud-version: [ 'master', 'stable28', 'stable27', 'stable26' ]
+        nextcloud-version: [ 'master', 'stable29', 'stable28', 'stable27', 'stable26' ]
         node-version: [ '20' ]
     steps:
       - name: Set up Nextcloud env
