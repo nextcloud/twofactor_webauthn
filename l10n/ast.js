@@ -1,11 +1,22 @@
 OC.L10N.register(
     "twofactor_webauthn",
     {
+    "WebAuthn disabled by the administration" : "L'alministración desactivó WebAuthn",
+    "Security key" : "Llave de seguranza",
+    "WebAuthn two-factor provider" : "Fornidor de l'autenticación en dos pasos WebAuthn",
+    "A two-factor provider for WebAuthn devices" : "Un fornidor d'autenticación en dos paasos pa preseos WebAuthn",
+    "Add security key" : "Amestar una llave de seguranza",
+    "Please use your security key to authorize." : "Usa la to llave de seguranza p'autorizar.",
     "Add" : "Amestar",
     "An error occurred: {msg}" : "Prodúxose un error: {msg}",
     "Retry" : "Retentar",
     "An error occurred. Please try again." : "Prodúxose un error. Volvi tentalo.",
     "Your browser does not support WebAuthn." : "El restolador nun ye compatible con WebAuthn.",
-    "Remove" : "Quitar"
+    "Unnamed key" : "Llave ensin nome",
+    "Registered" : "Rexistróse",
+    "Active" : "Activa",
+    "Remove" : "Quitar",
+    "No security keys configured. You are not using WebAuthn as second factor at the moment." : "Nun se configuró nenguna llave de seguranza. Pel momentu, nun tas usando WebAuthn como autenticación de dos pasos",
+    "All security keys are deactivated." : "Toles llaves de seguranza tán desactivaes."
 },
 "nplurals=2; plural=(n != 1);");
