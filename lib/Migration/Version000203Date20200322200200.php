@@ -33,7 +33,7 @@ use OCP\DB\ISchemaWrapper;
 use OCP\IDBConnection;
 use OCP\Migration\IOutput;
 use OCP\Migration\SimpleMigrationStep;
-use Ramsey\Uuid;
+use Symfony\Component\Uid\Uuid;
 use Throwable;
 
 class Version000203Date20200322200200 extends SimpleMigrationStep {
@@ -108,9 +108,9 @@ class Version000203Date20200322200200 extends SimpleMigrationStep {
 
 	private function getUuidString(IOutput $output, array $row) {
 		try {
-			return Uuid\Uuid::fromBytes($row['aaguid'])->toString();
+			return Uuid::fromBinary($row['aaguid'])->toRfc4122();
 		} catch (Exception $e) {
-			return Uuid\Uuid::fromBytes("\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0")->toString();
+			return Uuid::fromBinary("\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0")->toRfc4122();
 		}
 	}
 }

@@ -32,7 +32,7 @@ use OCP\DB\ISchemaWrapper;
 use OCP\IDBConnection;
 use OCP\Migration\IOutput;
 use OCP\Migration\SimpleMigrationStep;
-use Ramsey\Uuid\Uuid;
+use Symfony\Component\Uid\Uuid;
 use Throwable;
 
 class Version000203Date20200322201700 extends SimpleMigrationStep {
@@ -92,7 +92,7 @@ class Version000203Date20200322201700 extends SimpleMigrationStep {
 		try {
 			$result = $select->execute();
 			while ($row = $result->fetch()) {
-				$update->setParameter('aaguid', Uuid::fromString($row['aaguid_transform'])->toString());
+				$update->setParameter('aaguid', Uuid::fromString($row['aaguid_transform'])->toRfc4122());
 				$update->setParameter('id', $row['id']);
 				$update->execute();
 			}

@@ -111,7 +111,7 @@ class WebAuthnProviderTest extends TestCase {
 
 	public function testGetTemplate(): void {
 		$user = $this->createMock(IUser::class);
-		$key = $this->createMock(PublicKeyCredentialRequestOptions::class);
+		$key = new PublicKeyCredentialRequestOptions('challenge');
 		$serverHost = 'my.next.cloud';
 		$this->request->expects(self::once())
 			->method('getServerHost')

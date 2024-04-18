@@ -66,8 +66,8 @@
 <script>
 import { mapGetters } from 'vuex'
 import { NcButton } from '@nextcloud/vue'
+import { browserSupportsWebAuthn, startAuthentication } from '@simplewebauthn/browser'
 import logger from '../logger.js'
-import { arrayToBase64String, base64StringToArray, base64url2base64 } from '../utils/base64.js'
 
 export default {
 	name: 'Challenge',
@@ -78,7 +78,6 @@ export default {
 
 	data() {
 		return {
-			notSupported: typeof (PublicKeyCredential) === 'undefined',
 			challenge: '',
 			error: undefined,
 		}
@@ -91,6 +90,12 @@ export default {
 		httpWarning() {
 			return document.location.protocol !== 'https:'
 		},
+		/**
+		 * @return {boolean} True, if WebAuthn is not supported by the browser
+		 */
+		notSupported() {
+			return !browserSupportsWebAuthn()
+		},
 	},
 
 	mounted() {
@@ -99,26 +104,15 @@ export default {
 
 	methods: {
 		async sign() {
-			logger.debug('start sign')
 			this.error = undefined
 
-			// Clone request options because they are mutated later
-			// TODO: make them immutable
-			const publicKey = JSON.parse(JSON.stringify(this.credentialRequestOptions))
+			logger.debug('Starting webauthn authentication', {
+				credentialOptions: this.credentialRequestOptions,
+			})
 
-			publicKey.challenge = base64StringToArray(base64url2base64(publicKey.challenge))
-			if (publicKey.allowCredentials) {
-				publicKey.allowCredentials = publicKey.allowCredentials.map((data) => ({
-					...data,
-					id: base64StringToArray(base64url2base64(data.id)),
-				}))
-			}
-
-			logger.debug('Starting webauthn authentication', { publicKey })
-
-			let data
+			let authResponse
 			try {
-				data = await navigator.credentials.get({ publicKey })
+				authResponse = await startAuthentication(this.credentialRequestOptions)
 			} catch (error) {
 				switch (error.name) {
 				case 'AbortError':
@@ -133,23 +127,10 @@ export default {
 				logger.error('challenge failed', { error })
 				return
 			}
-			logger.debug('got credentials', { data })
-
-			const challenge = {
-				id: data.id,
-				type: data.type,
-				rawId: arrayToBase64String(new Uint8Array(data.rawId)),
-				response: {
-					authenticatorData: arrayToBase64String(new Uint8Array(data.response.authenticatorData)),
-					clientDataJSON: arrayToBase64String(new Uint8Array(data.response.clientDataJSON)),
-					signature: arrayToBase64String(new Uint8Array(data.response.signature)),
-					userHandle: data.response.userHandle ? arrayToBase64String(new Uint8Array(data.response.userHandle)) : null,
-				},
-			}
-			logger.debug('mapped credentials', { challenge })
-			this.challenge = JSON.stringify(challenge)
+			logger.debug('got credentials', { authResponse })
 
 			// Wait for challenge to propagate to the template
+			this.challenge = JSON.stringify(authResponse)
 			await this.$nextTick()
 
 			this.$refs.challengeForm.submit()

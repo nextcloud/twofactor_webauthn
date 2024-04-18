@@ -34,6 +34,8 @@ use OCP\IUser;
 use OCP\IUserSession;
 use PHPUnit\Framework\MockObject\MockObject;
 use Webauthn\PublicKeyCredentialCreationOptions;
+use Webauthn\PublicKeyCredentialRpEntity;
+use Webauthn\PublicKeyCredentialUserEntity;
 
 class SettingsControllerTest extends TestCase {
 
@@ -64,7 +66,11 @@ class SettingsControllerTest extends TestCase {
 		$this->userSession->expects(self::once())
 			->method('getUser')
 			->willReturn($user);
-		$publicKeyCredentialCreationOptions = $this->createMock(PublicKeyCredentialCreationOptions::class);
+		$publicKeyCredentialCreationOptions = new PublicKeyCredentialCreationOptions(
+			new PublicKeyCredentialRpEntity('relying_party'),
+			new PublicKeyCredentialUserEntity('user', 'user_id', 'User'),
+			'challenge',
+		);
 		$this->webauthnManager->expects(self::once())
 			->method('startRegistration')
 			->with(self::equalTo($user))

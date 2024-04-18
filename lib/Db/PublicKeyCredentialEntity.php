@@ -28,7 +28,7 @@ declare(strict_types=1);
 namespace OCA\TwoFactorWebauthn\Db;
 
 use OCP\AppFramework\Db\Entity;
-use Ramsey\Uuid\Uuid;
+use Symfony\Component\Uid\Uuid;
 use Webauthn\PublicKeyCredentialSource;
 use Webauthn\TrustPath\TrustPathLoader;
 
@@ -134,7 +134,7 @@ class PublicKeyCredentialEntity extends Entity {
 		$publicKeyCredentialEntity->setTransports(json_encode($publicKeyCredentialSource->getTransports()));
 		$publicKeyCredentialEntity->setAttestationType($publicKeyCredentialSource->getAttestationType());
 		$publicKeyCredentialEntity->setTrustPath(json_encode($publicKeyCredentialSource->getTrustPath()->jsonSerialize()));
-		$publicKeyCredentialEntity->setAaguid($publicKeyCredentialSource->getAaguid()->toString());
+		$publicKeyCredentialEntity->setAaguid($publicKeyCredentialSource->getAaguid()->toRfc4122());
 		$publicKeyCredentialEntity->setCredentialPublicKey(base64_encode($publicKeyCredentialSource->getCredentialPublicKey()));
 		$publicKeyCredentialEntity->setUserHandle($publicKeyCredentialSource->getUserHandle());
 		$publicKeyCredentialEntity->setCounter($publicKeyCredentialSource->getCounter());

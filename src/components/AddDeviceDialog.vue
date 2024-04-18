@@ -69,12 +69,8 @@
 <script>
 import { confirmPassword } from '@nextcloud/password-confirmation'
 import { NcButton } from '@nextcloud/vue'
-
-import {
-	startRegistration,
-	finishRegistration,
-} from '../services/RegistrationService.js'
-
+import { startRegistration } from '@simplewebauthn/browser'
+import * as RegistrationService from '../services/RegistrationService.js'
 import logger from '../logger.js'
 
 const RegistrationSteps = Object.freeze({
@@ -98,7 +94,7 @@ export default {
 	data() {
 		return {
 			name: '',
-			credential: {},
+			registrationResponse: null,
 			RegistrationSteps,
 			step: RegistrationSteps.READY,
 			errorMessage: null,
@@ -106,27 +102,6 @@ export default {
 	},
 
 	methods: {
-		arrayToBase64String(a) {
-			return btoa(String.fromCharCode(...a))
-		},
-
-		base64url2base64(input) {
-			input = input
-				.replace(/=/g, '')
-				.replace(/-/g, '+')
-				.replace(/_/g, '/')
-
-			const pad = input.length % 4
-			if (pad) {
-				if (pad === 1) {
-					throw new Error('InvalidLengthError: Input base64url string is the wrong length to determine padding')
-				}
-				input += new Array(5 - pad).join('=')
-			}
-
-			return input
-		},
-
 		async start() {
 			this.errorMessage = null
 			logger.info('Starting to add a new twofactor webauthn device')
@@ -134,8 +109,8 @@ export default {
 
 			try {
 				await confirmPassword()
-				const registrationData = await this.getRegistrationData()
-				await this.register(registrationData)
+				const registrationData = await RegistrationService.startRegistration()
+				this.registrationResponse = await startRegistration(registrationData)
 				this.step = RegistrationSteps.NAMING
 			} catch (error) {
 				if (error?.name && error?.message) {
@@ -150,46 +125,6 @@ export default {
 				}
 
 				this.step = RegistrationSteps.READY
-			}
-		},
-
-		async getRegistrationData() {
-			try {
-				const publicKey = await startRegistration()
-				publicKey.challenge = Uint8Array.from(window.atob(this.base64url2base64(publicKey.challenge)), c => c.charCodeAt(0))
-				publicKey.user.id = Uint8Array.from(window.atob(publicKey.user.id), c => c.charCodeAt(0))
-				if (publicKey.excludeCredentials) {
-					publicKey.excludeCredentials = publicKey.excludeCredentials.map(data => {
-						data.id = Uint8Array.from(window.atob(this.base64url2base64(data.id)), c => c.charCodeAt(0))
-						return data
-					})
-				}
-				return publicKey
-			} catch (error) {
-				logger.error('getRegistrationData: Error getting webauthn registration data from server', { error })
-				throw new Error(t('twofactor_webauthn', 'Server error while trying to add WebAuthn device'))
-			}
-		},
-
-		async register(publicKey) {
-			logger.debug('starting webauthn registration')
-
-			try {
-				const data = await navigator.credentials.create({ publicKey })
-				logger.debug('navigator.credentials.create called', { data })
-				this.credential = {
-					id: data.id,
-					type: data.type,
-					rawId: this.arrayToBase64String(new Uint8Array(data.rawId)),
-					response: {
-						clientDataJSON: this.arrayToBase64String(new Uint8Array(data.response.clientDataJSON)),
-						attestationObject: this.arrayToBase64String(new Uint8Array(data.response.attestationObject)),
-					},
-				}
-				logger.debug('mapped credentials data')
-			} catch (error) {
-				logger.error('register: Error creating credentials', { error })
-				throw error
 			}
 		},
 
@@ -211,7 +146,10 @@ export default {
 
 		async saveRegistrationData() {
 			try {
-				const device = await finishRegistration(this.name, JSON.stringify(this.credential))
+				const device = await RegistrationService.finishRegistration(
+					this.name,
+					JSON.stringify(this.registrationResponse),
+				)
 				this.$store.commit('addDevice', device)
 				logger.debug('new device added to store', { device })
 			} catch (error) {
@@ -222,7 +160,7 @@ export default {
 
 		reset() {
 			this.name = ''
-			this.registrationData = {}
+			this.registrationResponse = null
 			this.step = RegistrationSteps.READY
 		},
 	},
