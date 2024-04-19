@@ -197,5 +197,8 @@ jobs:
           name: playwright-report
           path: nextcloud/apps/twofactor_webauthn/playwright-report/
           retention-days: 30
+      - name: Print server logs
+        if: always()
+        run: cat nextcloud/data/nextcloud.log*
     env:
       CI: true
