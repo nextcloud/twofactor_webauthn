@@ -26,7 +26,6 @@ declare(strict_types=1);
 
 namespace OCA\TwoFactorWebauthn\Service;
 
-use Assert\Assertion;
 use Cose\Algorithm\Manager;
 use Cose\Algorithm\Signature\ECDSA;
 use Cose\Algorithm\Signature\EdDSA;
@@ -132,8 +131,9 @@ class WebAuthnManager {
 
 		$authenticatorSelectionCriteria = new AuthenticatorSelectionCriteria(
 			AuthenticatorSelectionCriteria::AUTHENTICATOR_ATTACHMENT_NO_PREFERENCE,
+			AuthenticatorSelectionCriteria::USER_VERIFICATION_REQUIREMENT_DISCOURAGED,
+			AuthenticatorSelectionCriteria::RESIDENT_KEY_REQUIREMENT_NO_PREFERENCE,
 			false,
-			AuthenticatorSelectionCriteria::USER_VERIFICATION_REQUIREMENT_DISCOURAGED
 		);
 
 		$publicKeyCredentialCreationOptions = new PublicKeyCredentialCreationOptions(
@@ -141,11 +141,10 @@ class WebAuthnManager {
 			$userEntity,
 			$challenge,
 			$publicKeyCredentialParametersList,
-			$timeout,
-			$excludedPublicKeyDescriptors,
 			$authenticatorSelectionCriteria,
 			PublicKeyCredentialCreationOptions::ATTESTATION_CONVEYANCE_PREFERENCE_NONE,
-			null
+			$excludedPublicKeyDescriptors,
+			$timeout,
 		);
 
 		$this->session->set(self::TWOFACTORAUTH_WEBAUTHN_REGISTRATION, $publicKeyCredentialCreationOptions->jsonSerialize());
@@ -280,15 +279,15 @@ class WebAuthnManager {
 
 		$publicKeyCredentialRequestOptions = new PublicKeyCredentialRequestOptions(
 			random_bytes(32),                                                    // Challenge
-			60000,                                                              // Timeout
 			null,                                                                  // Relying Party ID
 			[],                                  // Registered PublicKeyCredentialDescriptor classes
 			null, // User verification requirement
+			60000,                                                              // Timeout
 			$extensions
 		);
 		$publicKeyCredentialRequestOptions
 			->setRpId($this->stripPort($serverHost))
-			->allowCredentials($registeredPublicKeyCredentialDescriptors)
+			->allowCredentials(...$registeredPublicKeyCredentialDescriptors)
 			->setUserVerification(PublicKeyCredentialRequestOptions::USER_VERIFICATION_REQUIREMENT_DISCOURAGED);
 
 		$this->session->set(self::TWOFACTORAUTH_WEBAUTHN_REQUEST, $publicKeyCredentialRequestOptions->jsonSerialize());
@@ -364,7 +363,6 @@ class WebAuthnManager {
 
 	public function removeDevice(IUser $user, int $id) {
 		$credential = $this->mapper->findById($id);
-		Assertion::eq($credential->getUserHandle(), $user->getUID());
 
 		$this->mapper->delete($credential);
 
@@ -382,7 +380,6 @@ class WebAuthnManager {
 
 	public function changeActivationState(IUser $user, int $id, bool $active) {
 		$credential = $this->mapper->findById($id);
-		Assertion::eq($credential->getUserHandle(), $user->getUID());
 
 		$credential->setActive($active);
 

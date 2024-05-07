@@ -26,8 +26,7 @@ declare(strict_types=1);
 namespace OCA\TwoFactorWebauthn\Service;
 
 use OCA\TwoFactorWebauthn\Db\Registration;
-use Ramsey\Uuid\Uuid;
-use Ramsey\Uuid\UuidInterface;
+use Symfony\Component\Uid\Uuid;
 use Webauthn\AttestationStatement\AttestationStatement;
 use Webauthn\PublicKeyCredentialDescriptor;
 use Webauthn\PublicKeyCredentialSource;
@@ -43,7 +42,7 @@ class U2FMigrator {
 		return base64_decode(str_replace(['-', '_'], ['+', '/'], $data));
 	}
 
-	private function zeroUuid(): UuidInterface {
+	private function zeroUuid(): Uuid {
 		return Uuid::fromString('00000000-0000-0000-0000-000000000000');
 	}
 

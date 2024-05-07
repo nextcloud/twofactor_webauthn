@@ -33,7 +33,7 @@ use OCP\DB\ISchemaWrapper;
 use OCP\IDBConnection;
 use OCP\Migration\IOutput;
 use OCP\Migration\SimpleMigrationStep;
-use Ramsey\Uuid;
+use Symfony\Component\Uid\Uuid;
 use Throwable;
 
 class Version000202Date20200320192700 extends SimpleMigrationStep {
@@ -88,7 +88,7 @@ class Version000202Date20200320192700 extends SimpleMigrationStep {
 
 	private function getBytes(IOutput $output, array $row) {
 		try {
-			return Uuid\Uuid::fromString($row['aaguid'])->getBytes();
+			return Uuid::fromString($row['aaguid'])->toBinary();
 		} catch (Exception $e) {
 			$name = $row['name'];
 			$user_handle = $row['user_handle'];

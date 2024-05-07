@@ -12,19 +12,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        php-version: ['8.1', '8.2']
-        nextcloud-version: ['master', 'stable29', 'stable28', 'stable27']
-        include:
-          - php-version: '8.0'
-            nextcloud-version: stable27
-          - php-version: '8.0'
-            nextcloud-version: stable28
-          - php-version: '8.0'
-            nextcloud-version: stable29
-          - php-version: '8.3'
-            nextcloud-version: stable29
-          - php-version: '8.3'
-            nextcloud-version: master
+        php-version: ['8.1', '8.2', '8.3']
+        nextcloud-version: ['master']
     name: Nextcloud ${{ matrix.nextcloud-version }} php${{ matrix.php-version }} unit tests
     steps:
     - name: Set up Nextcloud env
@@ -57,14 +46,11 @@ jobs:
           - php-version: '8.1'
             nextcloud-version: master
             db: 'oci'
-          - php-version: '8.0'
-            nextcloud-version: stable27
-            db: 'pgsql'
-          - php-version: '8.0'
-            nextcloud-version: stable28
+          - php-version: '8.1'
+            nextcloud-version: master
             db: 'pgsql'
           - php-version: '8.2'
-            nextcloud-version: stable29
+            nextcloud-version: master
             db: 'mysql'
     name: Nextcloud ${{ matrix.nextcloud-version }} php${{ matrix.php-version }}-${{ matrix.db }} integration tests
     services:
@@ -153,8 +139,8 @@ jobs:
     name: Front-end E2E tests
     strategy:
       matrix:
-        php-version: [ '8.1' ]
-        nextcloud-version: [ 'master', 'stable29', 'stable28', 'stable27' ]
+        php-version: [ '8.1', '8.2', '8.3' ]
+        nextcloud-version: [ 'master']
         node-version: [ '20' ]
     steps:
       - name: Set up Nextcloud env
@@ -211,5 +197,8 @@ jobs:
           name: playwright-report
           path: nextcloud/apps/twofactor_webauthn/playwright-report/
           retention-days: 30
+      - name: Print server logs
+        if: always()
+        run: cat nextcloud/data/nextcloud.log*
     env:
       CI: true
