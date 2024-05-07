@@ -4,7 +4,7 @@
   "description": "WebAuthn second factor provider for Nextcloud",
   "private": true,
   "dependencies": {
-    "@nextcloud/auth": "^2.2.1",
+    "@nextcloud/auth": "^2.3.0",
     "@nextcloud/axios": "^2.4.0",
     "@nextcloud/initial-state": "^2.1.0",
     "@nextcloud/logger": "^2.7.0",
