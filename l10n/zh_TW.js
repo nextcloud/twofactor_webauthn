@@ -14,7 +14,6 @@ OC.L10N.register(
     "Name your security key" : "為您的安全金鑰命名",
     "Add" : "新增",
     "Adding your security key …" : "正在心憎您的安全金鑰……",
-    "Server error while trying to add WebAuthn device" : "嘗試新增 WebAuthn 裝置時發生伺服器錯誤",
     "Server error while trying to complete security key registration" : "嘗試完成安全金鑰註冊時發生伺服器錯誤。",
     "An error occurred: {msg}" : "遇到錯誤：{msg}",
     "Retry" : "重試",

@@ -12,7 +12,6 @@
     "Name your security key" : "Nevezze el a biztonsági kulcsot",
     "Add" : "Hozzáadás",
     "Adding your security key …" : "Biztonsági kulcs hozzáadása…",
-    "Server error while trying to add WebAuthn device" : "Kiszolgálóhiba a WebAuthn eszköz hozzáadása során",
     "Server error while trying to complete security key registration" : "Kiszolgálóhiba a biztonsági kulcs regisztrációjának befejezése során",
     "An error occurred: {msg}" : "Hiba történt: {msg}",
     "Retry" : "Újra",

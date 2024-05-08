@@ -12,7 +12,6 @@
     "Name your security key" : "Pomenujte svoj bezpečnostný kľúč",
     "Add" : "Pridať",
     "Adding your security key …" : "Pridávam váš bezpečnostný kľúč ...",
-    "Server error while trying to add WebAuthn device" : "Chyba servera pri pokuse o pridanie zariadenia WebAuthn",
     "Server error while trying to complete security key registration" : "Počas dokončovania registrácie bezpečnostného kľúča nastala chyba servera.",
     "An error occurred: {msg}" : "Vyskytla sa chyba: {msg}",
     "Retry" : "Zopakovať",

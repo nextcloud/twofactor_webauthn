@@ -14,7 +14,6 @@ OC.L10N.register(
     "Name your security key" : "Дајте назив свом безбедносном кључу",
     "Add" : "Додај",
     "Adding your security key …" : "Ваш безбедносни кључ се додајте...",
-    "Server error while trying to add WebAuthn device" : "Серверска грешка при додавању WebAuthn уређаја",
     "Server error while trying to complete security key registration" : "Серверска грешка приликом покушаја довршавања регистрације безбедносног кључа",
     "An error occurred: {msg}" : "Догодила се грешка: {msg}",
     "Retry" : "Покушај поново",

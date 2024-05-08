@@ -12,7 +12,6 @@
     "Name your security key" : "Eman izena zure segurtasun gakoari",
     "Add" : "Gehitu",
     "Adding your security key …" : "Zure segurtasun gakoa gehitzen ...",
-    "Server error while trying to add WebAuthn device" : "Zerbitzariaren errorea WebAuthn gailua gehitzen saiatzean",
     "Server error while trying to complete security key registration" : "Zerbitzariaren akatsa segurtasun gakoaren erregistroa osatzen saiatzean",
     "An error occurred: {msg}" : "Errorea gertatu da: {msg}",
     "Retry" : "saiatu berriro",

@@ -14,7 +14,6 @@ OC.L10N.register(
     "Name your security key" : "أعطِ اسمَ مفتاح أمانك",
     "Add" : "إضافة",
     "Adding your security key …" : "إضافة مفتاح أمانك جاريةٌ ...",
-    "Server error while trying to add WebAuthn device" : "حدث خطأ في الخادوم أثناء محاولة إضافة جهاز WebAuthn",
     "Server error while trying to complete security key registration" : "حدث خطأ في الخادوم أثناء محاولة إكمال تسجيل مفتاح  الأمان",
     "An error occurred: {msg}" : "حَدَثَ خطأٌ: {msg}",
     "Retry" : "أعِدِ المحاولة",

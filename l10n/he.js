@@ -2,7 +2,6 @@ OC.L10N.register(
     "twofactor_webauthn",
     {
     "Add" : "הוספה",
-    "Server error while trying to add WebAuthn device" : "אירעה שגיאת שרת בעת הניסיון להוספת התקן WebAuthn",
     "An error occurred: {msg}" : "אירעה שגיאה: {msg}",
     "Retry" : "ניסיון חוזר",
     "An error occurred. Please try again." : "אירעה שגיאה. נא לנסות שוב.",

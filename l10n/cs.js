@@ -14,7 +14,6 @@ OC.L10N.register(
     "Name your security key" : "Nazvěte svůj klíč zabezpečení",
     "Add" : "Přidat",
     "Adding your security key …" : "Přidávání vašeho klíče zabezpečení…",
-    "Server error while trying to add WebAuthn device" : "Chyba serveru při pokusu o přidání WebAuthn zařízení",
     "Server error while trying to complete security key registration" : "Při pokusu o dokončení registrace klíče zabezpečení došlo k chybě",
     "An error occurred: {msg}" : "Došlo k chybě: {msg}",
     "Retry" : "Zkusit znovu",

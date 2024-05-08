@@ -14,7 +14,6 @@ OC.L10N.register(
     "Name your security key" : "Name your security key",
     "Add" : "Add",
     "Adding your security key …" : "Adding your security key …",
-    "Server error while trying to add WebAuthn device" : "Server error while trying to add WebAuthn device",
     "Server error while trying to complete security key registration" : "Server error while trying to complete security key registration",
     "An error occurred: {msg}" : "An error occurred: {msg}",
     "Retry" : "Retry",

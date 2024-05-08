@@ -5,7 +5,6 @@ OC.L10N.register(
     "Add security key" : "Pridėti saugumo raktą",
     "Add" : "Pridėti",
     "Adding your security key …" : "Pridedamas jūsų saugumo raktas…",
-    "Server error while trying to add WebAuthn device" : "Serverio klaida, bandant pridėti WbAuthn įrenginį",
     "An error occurred: {msg}" : "Įvyko klaida: {msg}",
     "Retry" : "Bandyti dar kartą",
     "Use security key" : "Naudoti saugumo raktą",

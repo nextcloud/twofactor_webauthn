@@ -13,7 +13,6 @@ OC.L10N.register(
     "Name your security key" : "Anomena la teva clau de seguretat",
     "Add" : "Afegeix",
     "Adding your security key …" : "S'està afegint la teva clau de seguretat …",
-    "Server error while trying to add WebAuthn device" : "Error del servidor mentre s'intentava afegir un dispositiu WebAuthn",
     "Server error while trying to complete security key registration" : "Error del servidor en intentar completar el registre de la clau de seguretat",
     "An error occurred: {msg}" : "S'ha produït un error: {msg}",
     "Retry" : "Torna a intentar",

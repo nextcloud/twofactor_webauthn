@@ -2,7 +2,6 @@ OC.L10N.register(
     "twofactor_webauthn",
     {
     "Add" : "Додади",
-    "Server error while trying to add WebAuthn device" : "Грешка на серверот при обид за додавање на WEBAuthn уред",
     "Retry" : "Обидете се повторно",
     "Your browser does not support WebAuthn." : "Вашиот прелистувач не поддржува WebAuthn.",
     "Active" : "Активно",

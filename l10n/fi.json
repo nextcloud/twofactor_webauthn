@@ -6,7 +6,6 @@
     "Name your security key" : "Anna turva-avaimellesi nimi",
     "Add" : "Lisä",
     "Adding your security key …" : "Lisätään turva-avaimesi…",
-    "Server error while trying to add WebAuthn device" : "Palvelinvirhe kun yritettiin lisätä WebAuthn-laitetta",
     "Server error while trying to complete security key registration" : "Palvelinvirhe turva-avaimen rekisteröinnin aikana",
     "An error occurred: {msg}" : "Tapahtui virhe: {msg}",
     "Retry" : "Yritä uudelleen",

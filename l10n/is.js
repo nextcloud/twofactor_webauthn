@@ -14,7 +14,6 @@ OC.L10N.register(
     "Name your security key" : "Gefðu öryggislyklinum þinum nafn",
     "Add" : "Bæta við",
     "Adding your security key …" : "Bæti við öryggislyklinum þínum …",
-    "Server error while trying to add WebAuthn device" : "Villa á þjóni við að bæta við WebAuthn-tæki",
     "Server error while trying to complete security key registration" : "Villa á þjóni við að ljúka skráningu öryggislykils",
     "An error occurred: {msg}" : "Villa átti sér stað: {msg}",
     "Retry" : "Reyna aftur",

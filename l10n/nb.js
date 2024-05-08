@@ -14,7 +14,6 @@ OC.L10N.register(
     "Name your security key" : "Navngi sikkerhetsnøkkelen din",
     "Add" : "Legg til",
     "Adding your security key …" : "Legger til sikkerhetsnøkkelen din...",
-    "Server error while trying to add WebAuthn device" : "Serverfeil under forsøk på å legge til WebAuthn-enhet",
     "Server error while trying to complete security key registration" : "Serverfeil under forsøk på å fullføre registrering av sikkerhetsnøkkel",
     "An error occurred: {msg}" : "En feil oppsto: {msg}",
     "Retry" : "Prøv igjen",

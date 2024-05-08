@@ -8,7 +8,6 @@ OC.L10N.register(
     "Add security key" : "Amestar una llave de seguranza",
     "Please use your security key to authorize." : "Usa la to llave de seguranza p'autorizar.",
     "Add" : "Amestar",
-    "Server error while trying to add WebAuthn device" : "Error del sirvidor mentanto s'amestaba'l preséu WebAuthn",
     "An error occurred: {msg}" : "Prodúxose un error: {msg}",
     "Retry" : "Retentar",
     "An error occurred. Please try again." : "Prodúxose un error. Volvi tentalo.",

@@ -12,7 +12,6 @@
     "Name your security key" : "Nombra tu llave de seguridad",
     "Add" : "Agregar",
     "Adding your security key …" : "Agregando tu llave de seguridad ...",
-    "Server error while trying to add WebAuthn device" : "Error del servidor al intentar agregar el dispositivo WebAuthn",
     "Server error while trying to complete security key registration" : "Error del servidor al intentar completar el registro de la llave de seguridad",
     "An error occurred: {msg}" : "Ocurrió un error: {msg}",
     "Retry" : "Reintentar",

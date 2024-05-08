@@ -14,7 +14,6 @@ OC.L10N.register(
     "Name your security key" : "Güvenlik anahtarınızın adı",
     "Add" : "Ekle",
     "Adding your security key …" : "Güvenlik anahtarınız ekleniyor…",
-    "Server error while trying to add WebAuthn device" : "WebAuthn aygıtı eklenirken sunucu sorunu çıktı",
     "Server error while trying to complete security key registration" : "Güvenlik anahtarı kayıt işlemi tamamlanırken sunucu sorunu çıktı",
     "An error occurred: {msg}" : "Bir sorun çıktı: {message}",
     "Retry" : "Yeniden dene",

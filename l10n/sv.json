@@ -12,7 +12,6 @@
     "Name your security key" : "Namnge din säkerhetsnyckel",
     "Add" : "Lägg till",
     "Adding your security key …" : "Lägger till din säkerhetsnyckel ...",
-    "Server error while trying to add WebAuthn device" : "Serverfel när du försökte lägga till en WebAuthn-enhet",
     "Server error while trying to complete security key registration" : "Serverfel vid försök att slutföra registreringen av säkerhetsnyckel",
     "An error occurred: {msg}" : "Ett fel uppstod: {msg}",
     "Retry" : "Försök igen",
