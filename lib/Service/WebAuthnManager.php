@@ -133,7 +133,7 @@ class WebAuthnManager {
 		$authenticatorSelectionCriteria = new AuthenticatorSelectionCriteria(
 			AuthenticatorSelectionCriteria::AUTHENTICATOR_ATTACHMENT_NO_PREFERENCE,
 			false,
-			AuthenticatorSelectionCriteria::USER_VERIFICATION_REQUIREMENT_DISCOURAGED
+			AuthenticatorSelectionCriteria::USER_VERIFICATION_REQUIREMENT_PREFERRED,
 		);
 
 		$publicKeyCredentialCreationOptions = new PublicKeyCredentialCreationOptions(
@@ -289,7 +289,7 @@ class WebAuthnManager {
 		$publicKeyCredentialRequestOptions
 			->setRpId($this->stripPort($serverHost))
 			->allowCredentials($registeredPublicKeyCredentialDescriptors)
-			->setUserVerification(PublicKeyCredentialRequestOptions::USER_VERIFICATION_REQUIREMENT_DISCOURAGED);
+			->setUserVerification(PublicKeyCredentialRequestOptions::USER_VERIFICATION_REQUIREMENT_PREFERRED);
 
 		$this->session->set(self::TWOFACTORAUTH_WEBAUTHN_REQUEST, $publicKeyCredentialRequestOptions->jsonSerialize());
 
