@@ -26,7 +26,7 @@ OC.L10N.register(
     "Registered" : "Rexistrada",
     "Active" : "Activa",
     "Remove" : "Retirar",
-    "Set up a security key as a second factor." : "Estabelecer unha chave de seguranza como segundo factor.",
+    "Set up a security key as a second factor." : "Definir unha chave de seguranza como segundo factor.",
     "Your security key was added successfully. You are now being redirected to the login page." : "A súa chave de seguranza foi engadida correctamente. Agora está a ser redirixido á páxina de acceso.",
     "No security keys configured. You are not using WebAuthn as second factor at the moment." : "Non hai ningunha chave de seguranza configurada. Vde. de momento, non está a usar WebAuthn como un segundo factor.",
     "The following security keys are configured for WebAuthn two-factor authentication:" : "As seguintes chaves de seguranza están configuradas para a autenticación de dous factores WebAuthn:",
