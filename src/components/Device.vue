@@ -25,7 +25,7 @@
 	<div class="webauthn-device" :data-webauthn-id="id">
 		<span class="icon-webauthn-device" :class="{ disabled: !active }" />
 		{{ name || t('twofactor_webauthn', 'Unnamed key') }}
-		<Actions>
+		<Actions class="webauthn-device__actions">
 			<ActionText v-if="createdAt" :title="t('twofactor_webauthn', 'Registered')">
 				<template #icon>
 					<InformationOutline :size="20" />
@@ -105,10 +105,14 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 	.webauthn-device {
-		line-height: 300%;
+		line-height: var(--default-clickable-area);
 		display: flex;
+
+		&__actions {
+			margin-left: var(--default-grid-baseline);
+		}
 	}
 
 	.device__created_at {
