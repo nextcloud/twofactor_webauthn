@@ -82,7 +82,11 @@ jobs:
           --health-timeout 5s
           --health-retries 5
       oracle:
-        image: deepdiver/docker-oracle-xe-11g
+        image: ghcr.io/gvenzl/oracle-xe:11
+        env:
+          ORACLE_RANDOM_PASSWORD: true
+          APP_USER: autotest
+          APP_USER_PASSWORD: owncloud
         ports:
           - 1521:1521/tcp
     steps:
