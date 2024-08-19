@@ -2,14 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
-## 2.0.0 - unreleased
+## 2.0.0 - 2024-08-19
 ### Added
 - Nextcloud 30 support
+### Fixed
+- Adjust UI to compact design
+- Bump vulnerable dependencies
 ### Removed
-- Nextcloud 27 - 29 support
+- Nextcloud 26 - 29 support
 - PHP 8.0 support
 
-## 1.4.0 - 2024-26-03
+## 1.4.0 - 2024-03-26
 ### Added
 - Nextcloud 29 support
 ### Removed
