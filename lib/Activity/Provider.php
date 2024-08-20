@@ -29,30 +29,19 @@ namespace OCA\TwoFactorWebauthn\Activity;
 use InvalidArgumentException;
 use OCP\Activity\IEvent;
 use OCP\Activity\IProvider;
-use OCP\ILogger;
 use OCP\IURLGenerator;
 use OCP\L10N\IFactory as L10nFactory;
 
 class Provider implements IProvider {
 
-	/** @var L10nFactory */
-	private $l10n;
-
-	/** @var IURLGenerator */
-	private $urlGenerator;
-
-	/** @var ILogger */
-	private $logger;
-
 	/**
 	 * @param L10nFactory $l10n
 	 * @param IURLGenerator $urlGenerator
-	 * @param ILogger $logger
 	 */
-	public function __construct(L10nFactory $l10n, IURLGenerator $urlGenerator, ILogger $logger) {
-		$this->logger = $logger;
-		$this->urlGenerator = $urlGenerator;
-		$this->l10n = $l10n;
+	public function __construct(
+		private L10nFactory $l10n,
+		private IURLGenerator $urlGenerator,
+	) {
 	}
 
 	/**
