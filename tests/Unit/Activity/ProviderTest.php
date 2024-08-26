@@ -31,14 +31,13 @@ use InvalidArgumentException;
 use OCA\TwoFactorWebauthn\Activity\Provider;
 use OCP\Activity\IEvent;
 use OCP\IL10N;
-use OCP\ILogger;
 use OCP\IURLGenerator;
 use OCP\L10N\IFactory;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class ProviderTest extends TestCase {
-	private $l10n;
-	private $urlGenerator;
-	private $logger;
+	private IFactory&MockObject $l10n;
+	private IURLGenerator&MockObject $urlGenerator;
 
 	/** @var Provider */
 	private $provider;
@@ -48,9 +47,8 @@ class ProviderTest extends TestCase {
 
 		$this->l10n = $this->createMock(IFactory::class);
 		$this->urlGenerator = $this->createMock(IURLGenerator::class);
-		$this->logger = $this->createMock(ILogger::class);
 
-		$this->provider = new Provider($this->l10n, $this->urlGenerator, $this->logger);
+		$this->provider = new Provider($this->l10n, $this->urlGenerator);
 	}
 
 	public function testParseUnrelated(): void {
