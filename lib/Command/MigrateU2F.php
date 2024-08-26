@@ -82,7 +82,7 @@ class MigrateU2F extends Command {
 	}
 
 	protected function configure(): void {
-		$this->setName("twofactor_webauthn:migrate-u2f");
+		$this->setName('twofactor_webauthn:migrate-u2f');
 		$this->addOption(self::OPTION_ALL);
 		$this->addOption(self::OPTION_DELETE_U2F_REGISTRATIONS);
 		$this->addArgument(self::ARGUMENT_USER_ID, InputArgument::OPTIONAL | InputArgument::IS_ARRAY);

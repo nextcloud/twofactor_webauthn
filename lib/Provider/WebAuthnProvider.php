@@ -64,7 +64,7 @@ class WebAuthnProvider implements IProvider, IProvidesIcons, IProvidesPersonalSe
 	/** @var IRequest */
 	private $request;
 
-	/** @var ContainerInterface  */
+	/** @var ContainerInterface */
 	private $container;
 
 	public function __construct(IL10N $l10n,
