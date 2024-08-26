@@ -11,6 +11,7 @@
 /.travis.yml
 /.tx
 /.scrutinizer.yml
+/.git-blame-ignore-revs
 /babel.config.js
 /CONTRIBUTING.md
 /composer.*
