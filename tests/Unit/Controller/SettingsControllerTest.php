@@ -92,11 +92,11 @@ class SettingsControllerTest extends TestCase {
 			->method('finishRegister')
 			->with(
 				self::equalTo($user),
-				self::equalTo("my key"),
+				self::equalTo('my key'),
 				self::equalTo($data))
 			->willReturn([]);
 
-		$resp = $this->controller->finishRegister("my key", $data);
+		$resp = $this->controller->finishRegister('my key', $data);
 
 		self::assertEquals(new JSONResponse([]), $resp);
 	}
