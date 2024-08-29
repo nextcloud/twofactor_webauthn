@@ -14,7 +14,7 @@
     "Adding your security key …" : "Engadindo á súa chave de seguranza…",
     "Server error while trying to complete security key registration" : "Produciuse un erro do servidor ao tentar completar o rexistro da chave de seguranza",
     "An error occurred: {msg}" : "Produciuse un erro: {msg}",
-    "Retry" : "Tentar de novo",
+    "Retry" : "Volver tentar",
     "Use security key" : "Usar chave de seguranza",
     "An error occurred. Please try again." : "Produciuse un erro. Ténteo de novo.",
     "Your browser does not support WebAuthn." : "O seu navegador non é compatíbel co WebAuthn.",
