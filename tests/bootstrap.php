@@ -24,8 +24,8 @@ declare(strict_types=1);
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-require_once __DIR__.'/../../../lib/base.php';
-require_once __DIR__.'/../vendor/autoload.php';
+require_once __DIR__ . '/../../../lib/base.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 
 OC::$loader->addValidRoot(OC::$SERVERROOT . '/tests');
 OC_App::loadApp('twofactor_webauthn');
