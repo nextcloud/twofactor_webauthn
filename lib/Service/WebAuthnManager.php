@@ -94,7 +94,7 @@ class WebAuthnManager {
 		WebauthnPublicKeyCredentialSourceRepository $repository,
 		PublicKeyCredentialEntityMapper $mapper,
 		IEventDispatcher $eventDispatcher,
-		LoggerInterface $logger
+		LoggerInterface $logger,
 	) {
 		$this->session = $session;
 		$this->repository = $repository;

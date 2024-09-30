@@ -47,7 +47,7 @@ class CleanUp extends Command {
 	public function __construct(
 		IDBConnection $db,
 		IUserManager $userManager,
-		PublicKeyCredentialEntityMapper $webauthnMapper
+		PublicKeyCredentialEntityMapper $webauthnMapper,
 	) {
 		parent::__construct();
 
