@@ -112,7 +112,9 @@ export default {
 
 			let authResponse
 			try {
-				authResponse = await startAuthentication(this.credentialRequestOptions)
+				authResponse = await startAuthentication({
+					optionsJSON: this.credentialRequestOptions,
+				})
 			} catch (error) {
 				switch (error.name) {
 				case 'AbortError':

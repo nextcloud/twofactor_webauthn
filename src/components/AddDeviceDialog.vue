@@ -110,7 +110,9 @@ export default {
 			try {
 				await confirmPassword()
 				const registrationData = await RegistrationService.startRegistration()
-				this.registrationResponse = await startRegistration(registrationData)
+				this.registrationResponse = await startRegistration({
+					optionsJSON: registrationData,
+				})
 				this.step = RegistrationSteps.NAMING
 			} catch (error) {
 				if (error?.name && error?.message) {
