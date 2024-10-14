@@ -53,7 +53,7 @@ jobs:
         run: composer i
 
       - name: Install dependencies
-        run: composer require --dev 'nextcloud/ocp:${{ matrix.ocp-version }}' --ignore-platform-reqs --with-dependencies
+        run: composer require --dev 'nextcloud/ocp:${{ matrix.ocp-version }}' --ignore-platform-reqs --with-all-dependencies
 
       - name: Run coding standards check
         run: composer run psalm
