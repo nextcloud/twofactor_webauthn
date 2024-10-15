@@ -26,7 +26,7 @@ OC.L10N.register(
     "Registered" : "مُسجَّل",
     "Active" : "نَشِط",
     "Remove" : "حذف",
-    "Set up a security key as a second factor." : "عيّن مفتاح الأمان كعامل ثانٍ في المصادقة",
+    "Set up a security key as a second factor." : "تعيين مفتاح الأمان كعامل ثانٍ في المصادقة",
     "Your security key was added successfully. You are now being redirected to the login page." : "تم إضافة مفتاح الأمان الخاص بك بنجاح. يتم الآن إعادة توجيهك إلى صفحة تسجيل الدخول.",
     "No security keys configured. You are not using WebAuthn as second factor at the moment." : "لم يتم تكوين مفاتيح أمان. أنت لا تستخدم WebAuthn كعامل ثانٍ في الوقت الحالي.",
     "The following security keys are configured for WebAuthn two-factor authentication:" : "تمّ تكوين مفاتيح الأمان التالية للمُصادقة الثنائية WebAuthn:",
