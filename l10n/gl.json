@@ -3,7 +3,7 @@
     "You removed an WebAuthn hardware token" : "Vde. retirou un testemuño WebAuthn de hardware",
     "WebAuthn disabled by the administration" : "WebAuthn foi desactivado pola administración",
     "Security key" : "Chave de seguranza",
-    "Use WebAuthn for second factor authentication" : "Usar WebAuthn para a autenticación de segundo factor",
+    "Use WebAuthn for second factor authentication" : "Usar WebAuthn para o segundo factor de autenticación",
     "Two-Factor WebAuthn" : "WebAuthn de dous factores",
     "WebAuthn two-factor provider" : "Provedor WebAuthn de dous factores",
     "A two-factor provider for WebAuthn devices" : "Un provedor de dous factores para dispositivos WebAuthn",
