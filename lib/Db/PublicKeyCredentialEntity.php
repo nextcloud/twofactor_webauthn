@@ -118,9 +118,9 @@ class PublicKeyCredentialEntity extends Entity {
 	protected $createdAt;
 
 	public function __construct() {
-		$this->addType('counter', 'int');
+		$this->addType('counter', 'integer');
 		$this->addType('active', 'boolean');
-		$this->addType('createdAt', 'int');
+		$this->addType('createdAt', 'integer');
 	}
 
 	public static function fromPublicKeyCrendentialSource(string $name,

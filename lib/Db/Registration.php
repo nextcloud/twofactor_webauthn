@@ -40,7 +40,7 @@ class Registration extends Entity implements JsonSerializable {
 	protected $name;
 
 	public function __construct() {
-		$this->addType('counter', 'int');
+		$this->addType('counter', 'integer');
 	}
 
 	public function jsonSerialize(): array {
