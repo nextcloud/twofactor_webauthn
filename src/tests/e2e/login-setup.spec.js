@@ -24,10 +24,6 @@ import { test } from '@playwright/test'
 import { createVirtualAuthenticator } from './virtualAuthenticator.js'
 import { disableTwofactorAuth, enforceTwofactorAuth } from './occ.js'
 
-test.use({
-	ignoreHTTPSErrors: true,
-})
-
 test.beforeAll(async () => {
 	await enforceTwofactorAuth(true)
 })
