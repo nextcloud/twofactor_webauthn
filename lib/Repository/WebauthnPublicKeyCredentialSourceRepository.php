@@ -62,15 +62,15 @@ class WebauthnPublicKeyCredentialSourceRepository implements PublicKeyCredential
 		throw new BadMethodCallException('Not implemented');
 	}
 
-	public function getUserHandleFor(string  $credentialId): string {
+	public function getUserHandleFor(string $credentialId): string {
 		throw new BadMethodCallException('Not implemented');
 	}
 
-	public function getCounterFor(string  $credentialId): int {
+	public function getCounterFor(string $credentialId): int {
 		throw new BadMethodCallException('Not implemented');
 	}
 
-	public function updateCounterFor(string  $credentialId, int $newCounter): void {
+	public function updateCounterFor(string $credentialId, int $newCounter): void {
 		throw new BadMethodCallException('Not implemented');
 	}
 
