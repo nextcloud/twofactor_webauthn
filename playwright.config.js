@@ -23,8 +23,6 @@
 const { defineConfig, devices } = require('@playwright/test')
 const path = require('path')
 
-export const STORAGE_STATE = path.join(__dirname, 'playwright/.auth/user.json')
-
 /**
  * @see https://playwright.dev/docs/test-configuration
  */
@@ -39,24 +37,13 @@ export default defineConfig({
 		baseURL: 'https://localhost',
 		trace: 'on-first-retry',
 	},
-
 	projects: [
 		{
-			name: 'log in',
-			testMatch: /loggedin\.setup\.js/,
-		},
-		{
-			name: 'logged out chromium',
-			testIgnore: ['**/*.loggedin.spec.js'],
-			use: { ...devices['Desktop Chrome'] },
-		},
-		{
-			name: 'logged in chromium',
-			testMatch: '**/*.loggedin.spec.js',
-			dependencies: ['log in'],
+			name: 'chromium',
+			testMatch: '**/*.spec.js',
 			use: {
 				...devices['Desktop Chrome'],
-				storageState: STORAGE_STATE,
+				ignoreHTTPSErrors: true,
 			},
 		},
 	],
