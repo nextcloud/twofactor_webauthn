@@ -58,7 +58,7 @@
     "url": "git+https://github.com/nextcloud/twofactor_webauthn.git"
   },
   "author": "Christoph Wurst",
-  "license": "AGPL-3.0",
+  "license": "AGPL-3.0-or-later",
   "bugs": {
     "url": "https://github.com/nextcloud/twofactor_webauthn/issues"
   },

@@ -1,3 +1,53 @@
+<!--
+  - SPDX-FileCopyrightText: 2016 Nextcloud GmbH and Nextcloud contributors
+  - SPDX-License-Identifier: AGPL-3.0-or-later
+-->
 # Authors
 
-* Christoph Wurst: <christoph@winzerhof-wurst.at>
+- Alexander Paetzelt <36155797+alex-nitrokey@users.noreply.github.com>
+- Andy Scherzinger <info@andy-scherzinger.de>
+- Ashutosh Verma <81686677+ashuio@users.noreply.github.com>
+- Austin Bohannon <github@alphahotelbravo.io>
+- Ben Schumacher <hanzei@mailbox.org>
+- Christoph Wurst <christoph@winzerhof-wurst.at>
+- Christopher Ng <chrng8@gmail.com>
+- comradekingu <epost@anotheragency.no>
+- Daniel Kesselberg <mail@danielkesselberg.de>
+- danielkr123 <daniel.krampe@gmx.de>
+- Ferdinand Thiessen <opensource@fthiessen.de>
+- j-ed <juergen@eisfair.org>
+- Jan-Christoph Borchardt <hey@jancborchardt.net>
+- Joas Schilling <coding@schilljs.com>
+- John Molakvoæ <skjnldsv@protonmail.com>
+- Lukas Reschke <lukas@statuscode.ch>
+- Michael Blumenstein <M.Flower@gmx.de>
+- mjanssens <24758392+mjanssens@users.noreply.github.com>
+- Morris Jobke <hey@morrisjobke.de>
+- Oliv4945 <oliv4945@gmail.com>
+- Pablo Hinojosa <pablohn6@gmail.com>
+- rakekniven <mark.ziegler@rakekniven.de>
+- Richard Steinmetz <richard@steinmetz.cloud>
+- Robin Appelman <robin@icewind.nl>
+- Roeland Jago Douma <roeland@famdouma.nl>
+- Simon Dellenbach <sdellenb@gmail.com>
+- Simon Spannagel <simon.spannagel@cern.ch>
+- Somebodyisnobody <35230554+Somebodyisnobody@users.noreply.github.com>
+- Valdnet <47037905+Valdnet@users.noreply.github.com>
+- Vincent Petry <vincent@nextcloud.com>
+- Xaver Maierhofer <xaver.maierhofer@xwissen.info>
+- Zev Lee <60147316+zevlee@users.noreply.github.com>
+# Authors
+
+- 2018 Christoph Wurst <christoph@winzerhof-wurst.at>
+- 2022 Christoph Wurst <christoph@winzerhof-wurst.at>
+- 2023 Richard Steinmetz <richard@steinmetz.cloud>
+- Christoph Wurst <christoph@winzerhof-wurst.at>
+- Christoph Wurst <christoph@winzerhof-wurst.at>
+- Daniel Kesselberg <mail@danielkesselberg.de>
+- Daniel Kesselberg <mail@danielkesselberg.de>
+- Michael Blumenstein <M.Flower@gmx.de>
+- Richard Steinmetz <richard@steinmetz.cloud>
+- Richard Steinmetz <richard@steinmetz.cloud>
+- Richard Steinmetz <richard@steinmtz.cloud>
+- Zev Lee <60147316+zevlee@users.noreply.github.com>
+- Zev Lee <60147316+zevlee@users.noreply.github.com>
