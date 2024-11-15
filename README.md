@@ -4,6 +4,8 @@
 -->
 # WebAuthn second factor provider for Nextcloud
 
+[![REUSE status](https://api.reuse.software/badge/github.com/nextcloud/twofactor_webauthn)](https://api.reuse.software/info/github.com/nextcloud/twofactor_webauthn)
+
 ## Requirements
 
 In order to use this app for authentication, you have to use a browser that supports the WebAuthn standard.
