@@ -1,4 +1,10 @@
+<!--
+  - SPDX-FileCopyrightText: 2016 Nextcloud GmbH and Nextcloud contributors
+  - SPDX-License-Identifier: AGPL-3.0-or-later
+-->
 # WebAuthn second factor provider for Nextcloud
+
+[![REUSE status](https://api.reuse.software/badge/github.com/nextcloud/twofactor_webauthn)](https://api.reuse.software/info/github.com/nextcloud/twofactor_webauthn)
 
 ## Requirements
 
