@@ -6,6 +6,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.1.0-beta.1 - 2025-01-09
+### Added
+- Nextcloud 31 support
+### Fixed
+- Bump vulnerable dependencies
+
 ## 2.0.0 - 2024-08-19
 ### Added
 - Nextcloud 30 support
