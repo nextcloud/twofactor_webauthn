@@ -6,9 +6,10 @@
 
 All notable changes to this project will be documented in this file.
 
-## 2.1.0-beta.1 - 2025-01-09
+## 2.1.0 - 2025-01-24
 ### Added
 - Nextcloud 31 support
+- PHP 8.4 support
 ### Fixed
 - Bump vulnerable dependencies
 
