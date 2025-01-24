@@ -14,8 +14,11 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        php-version: ['8.1', '8.2', '8.3']
-        nextcloud-version: ['master', 'stable30']
+        php-version: ['8.1', '8.2', '8.3', '8.4']
+        nextcloud-version: ['master', 'stable31', 'stable30']
+        exclude:
+          - php-version: '8.4'
+            nextcloud-version: 'stable30'
     name: Nextcloud ${{ matrix.nextcloud-version }} php${{ matrix.php-version }} unit tests
     steps:
     - name: Set up Nextcloud env
@@ -41,7 +44,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        php-version: [ '8.3' ]
+        php-version: [ '8.4' ]
         nextcloud-version: [ 'master' ]
         db: [ 'sqlite' ]
         include:
@@ -51,8 +54,8 @@ jobs:
           - php-version: '8.1'
             nextcloud-version: master
             db: 'pgsql'
-          - php-version: '8.2'
-            nextcloud-version: master
+          - php-version: '8.3'
+            nextcloud-version: stable31
             db: 'mysql'
           - php-version: '8.2'
             nextcloud-version: stable30
@@ -148,9 +151,12 @@ jobs:
     name: Front-end E2E tests
     strategy:
       matrix:
-        php-version: [ '8.1', '8.2', '8.3' ]
-        nextcloud-version: [ 'master', 'stable30' ]
+        php-version: [ '8.1', '8.2', '8.3', '8.4' ]
+        nextcloud-version: [ 'master', 'stable31', 'stable30' ]
         node-version: [ '20' ]
+        exclude:
+          - php-version: '8.4'
+            nextcloud-version: 'stable30'
     steps:
       - name: Set up Nextcloud env
         uses: ChristophWurst/setup-nextcloud@fc0790385c175d97e88a7cb0933490de6e990374 # v0.3.2
