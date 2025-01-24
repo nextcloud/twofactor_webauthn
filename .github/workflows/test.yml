@@ -15,7 +15,10 @@ jobs:
     strategy:
       matrix:
         php-version: ['8.1', '8.2', '8.3']
-        nextcloud-version: ['master', 'stable30']
+        nextcloud-version: ['stable31', 'stable30']
+        include:
+          - php-version: '8.4'
+            nextcloud-version: stable31
     name: Nextcloud ${{ matrix.nextcloud-version }} php${{ matrix.php-version }} unit tests
     steps:
     - name: Set up Nextcloud env
@@ -42,17 +45,17 @@ jobs:
     strategy:
       matrix:
         php-version: [ '8.3' ]
-        nextcloud-version: [ 'master' ]
+        nextcloud-version: [ 'stable31' ]
         db: [ 'sqlite' ]
         include:
           - php-version: '8.1'
-            nextcloud-version: master
+            nextcloud-version: stable31
             db: 'oci'
           - php-version: '8.1'
-            nextcloud-version: master
+            nextcloud-version: stable31
             db: 'pgsql'
-          - php-version: '8.2'
-            nextcloud-version: master
+          - php-version: '8.4'
+            nextcloud-version: stable31
             db: 'mysql'
           - php-version: '8.2'
             nextcloud-version: stable30
@@ -149,8 +152,12 @@ jobs:
     strategy:
       matrix:
         php-version: [ '8.1', '8.2', '8.3' ]
-        nextcloud-version: [ 'master', 'stable30' ]
+        nextcloud-version: [ 'stable31', 'stable30' ]
         node-version: [ '20' ]
+        include:
+          - php-version: '8.4'
+            nextcloud-version: stable31
+            node-version: '20'
     steps:
       - name: Set up Nextcloud env
         uses: ChristophWurst/setup-nextcloud@fc0790385c175d97e88a7cb0933490de6e990374 # v0.3.2
