@@ -239,7 +239,13 @@ class WebAuthnManager {
 	}
 
 	private function stripPort(string $serverHost): string {
-		return preg_replace('/(:\d+$)/', '', $serverHost);
+		/** @var ?string $serverHostWithoutPort */
+		$serverHostWithoutPort = preg_replace('/(:\d+$)/', '', $serverHost);
+		if ($serverHostWithoutPort === null) {
+			throw new \RuntimeException("Failed to strip port from server host: preg_replace returned null (serverHost=$serverHost)");
+		}
+
+		return $serverHostWithoutPort;
 	}
 
 	public function startAuthenticate(IUser $user, string $serverHost): PublicKeyCredentialRequestOptions {
