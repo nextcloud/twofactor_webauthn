@@ -12,6 +12,7 @@
 	findUnusedCode="false"
 	findUnusedBaselineEntry="false"
 	findUnusedIssueHandlerSuppression="false"
+	ensureOverrideAttribute="false"
 >
     <projectFiles>
         <directory name="lib" />

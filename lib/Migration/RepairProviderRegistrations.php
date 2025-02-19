@@ -65,8 +65,8 @@ class RepairProviderRegistrations implements IRepairStep {
 					$deleteQb->execute();
 				} else {
 					$output->warning(sprintf(
-						$e->getCode() .
-						'Could not migrate %s:%s',
+						'%s Could not migrate %s:%s',
+						(string)$e->getCode(),
 						$row['provider_id'],
 						$row['uid'],
 					));
