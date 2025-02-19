@@ -203,10 +203,10 @@ jobs:
       - name: Run Playwright tests
         working-directory: nextcloud/apps/twofactor_webauthn
         run: npx playwright test
-      - uses: actions/upload-artifact@a8a3f3ad30e3422c9c7b888a15615d19a852ae32 # v3
+      - uses: actions/upload-artifact@65c4c4a1ddee5b72f698fdd19549f0f0fb45cf08 # v4
         if: always()
         with:
-          name: playwright-report
+          name: playwright-report-${{ github.event.number }}-nc${{ matrix.nextcloud-version }}-php${{ matrix.php-version }}-node${{ matrix.node-version }}
           path: nextcloud/apps/twofactor_webauthn/playwright-report/
           retention-days: 30
     env:
