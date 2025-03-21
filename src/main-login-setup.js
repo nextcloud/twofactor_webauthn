@@ -4,13 +4,16 @@
  */
 
 import Vue from 'vue'
+import { createPinia, PiniaVuePlugin } from 'pinia'
 
 import Nextcloud from './mixins/Nextcloud.js'
-import store from './store.js'
 
 import LoginSetup from './components/LoginSetup.vue'
 
 Vue.mixin(Nextcloud)
 
+Vue.use(PiniaVuePlugin)
+const pinia = createPinia()
+
 const View = Vue.extend(LoginSetup)
-new View({ store }).$mount('#twofactor-webauthn-login-setup')
+new View({ pinia }).$mount('#twofactor-webauthn-login-setup')

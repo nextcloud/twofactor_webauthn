@@ -4,15 +4,19 @@
  */
 
 import { loadState } from '@nextcloud/initial-state'
-import store from './store.js'
 import Vue from 'vue'
+import { createPinia, PiniaVuePlugin } from 'pinia'
 
 import Nextcloud from './mixins/Nextcloud.js'
 import PersonalSettings from './components/PersonalSettings.vue'
+import { useMainStore } from './store.js'
 
 import '@nextcloud/password-confirmation/dist/style.css'
 
 Vue.mixin(Nextcloud)
+
+Vue.use(PiniaVuePlugin)
+const pinia = createPinia()
 
 const devices = loadState('twofactor_webauthn', 'devices')
 devices.sort((d1, d2) => {
@@ -24,7 +28,8 @@ devices.sort((d1, d2) => {
 		return d1.name.localeCompare(d2.name)
 	}
 })
-store.replaceState({
+const mainStore = useMainStore(pinia)
+mainStore.$patch({
 	devices,
 })
 
@@ -33,5 +38,5 @@ new View({
 	propsData: {
 		httpWarning: document.location.protocol !== 'https:',
 	},
-	store,
+	pinia,
 }).$mount('#twofactor-webauthn-settings')

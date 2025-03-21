@@ -34,6 +34,8 @@ import {
 import InformationOutline from 'vue-material-design-icons/InformationOutline.vue'
 import { confirmPassword } from '@nextcloud/password-confirmation'
 import moment from '@nextcloud/moment'
+import { mapStores } from 'pinia'
+import { useMainStore } from '../store.js'
 
 export default {
 	name: 'Device',
@@ -55,6 +57,7 @@ export default {
 		},
 	},
 	computed: {
+		...mapStores(useMainStore),
 		createdAtFormatted() {
 			if (!this.createdAt) {
 				return
@@ -67,7 +70,7 @@ export default {
 		async onDelete() {
 			try {
 				await confirmPassword()
-				await this.$store.dispatch('removeDevice', this.entityId)
+				await this.mainStore.removeDevice(this.entityId)
 			} catch (e) {
 				console.error('could not delete device', e)
 			}
@@ -75,7 +78,7 @@ export default {
 		async changeActivation(active) {
 			try {
 				await confirmPassword()
-				await this.$store.dispatch('changeActivationState', {
+				await this.mainStore.changeActivationState({
 					entityId: this.entityId,
 					active,
 				})
