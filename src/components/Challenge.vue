@@ -46,10 +46,11 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 import { NcButton } from '@nextcloud/vue'
 import { browserSupportsWebAuthn, startAuthentication } from '@simplewebauthn/browser'
 import logger from '../logger.js'
+import { mapState } from 'pinia'
+import { useMainStore } from '../store.js'
 
 export default {
 	name: 'Challenge',
@@ -66,9 +67,7 @@ export default {
 	},
 
 	computed: {
-		...mapGetters({
-			credentialRequestOptions: 'getCredentialRequestOptions',
-		}),
+		...mapState(useMainStore, ['credentialRequestOptions']),
 		httpWarning() {
 			return document.location.protocol !== 'https:'
 		},

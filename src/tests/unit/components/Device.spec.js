@@ -4,38 +4,35 @@
  */
 
 import { shallowMount, createLocalVue } from '@vue/test-utils'
-import Vuex from 'vuex'
-
 import Nextcloud from '../../../mixins/Nextcloud.js'
-
 import Device from '../../../components/Device.vue'
+import { createPinia, PiniaVuePlugin, setActivePinia } from 'pinia'
+import { useMainStore } from '../../../store.js'
 
 const localVue = createLocalVue()
 
-localVue.use(Vuex)
 localVue.mixin(Nextcloud)
+localVue.use(PiniaVuePlugin)
 
 describe('Device', () => {
-	let actions
-	let store
+	let pinia
 
 	beforeEach(() => {
-		actions = {}
-		store = new Vuex.Store({
-			state: {
-				devices: [],
-			},
-			actions,
-		})
+		pinia = createPinia()
+		setActivePinia(pinia)
 	})
 
 	it('renders devices without a name', () => {
-		store.state.devices.push({
-			id: 'k1',
-			name: undefined,
+		const mainStore = useMainStore()
+		mainStore.$patch({
+			devices: [{
+				id: 'k1',
+				name: undefined,
+			}],
 		})
+
 		const device = shallowMount(Device, {
-			store,
+			pinia,
 			localVue,
 		})
 
