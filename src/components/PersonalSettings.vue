@@ -36,9 +36,10 @@
 </template>
 
 <script>
-
 import AddDeviceDialog from './AddDeviceDialog.vue'
 import Device from './Device.vue'
+import { mapState } from 'pinia'
+import { useMainStore } from '../store.js'
 
 export default {
 	name: 'PersonalSettings',
@@ -55,11 +56,9 @@ export default {
 		}
 	},
 	computed: {
-		devices() {
-			return this.$store.state.devices
-		},
+		...mapState(useMainStore, ['devices']),
 		allDeactivated() {
-			return this.$store.state.devices.length > 0 && this.$store.state.devices.every(device => !device.active)
+			return this.devices.length > 0 && this.devices.every(device => !device.active)
 		},
 	},
 }
