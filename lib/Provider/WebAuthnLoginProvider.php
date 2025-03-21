@@ -12,13 +12,10 @@ namespace OCA\TwoFactorWebauthn\Provider;
 use OCA\TwoFactorWebauthn\AppInfo\Application;
 use OCP\Authentication\TwoFactorAuth\ILoginSetupProvider;
 use OCP\Template;
+use OCP\Template\ITemplate;
 
 class WebAuthnLoginProvider implements ILoginSetupProvider {
-
-	/**
-	 * @return Template
-	 */
-	public function getBody(): Template {
+	public function getBody(): ITemplate {
 		return new Template(Application::APP_ID, 'login-setup');
 	}
 }
