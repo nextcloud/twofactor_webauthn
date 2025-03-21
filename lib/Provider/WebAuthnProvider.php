@@ -25,6 +25,7 @@ use OCP\IRequest;
 use OCP\IURLGenerator;
 use OCP\IUser;
 use OCP\Template;
+use OCP\Template\ITemplate;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Container\NotFoundExceptionInterface;
@@ -87,7 +88,7 @@ class WebAuthnProvider implements IProvider, IProvidesIcons, IProvidesPersonalSe
 	/**
 	 * Get the template for rending the 2FA provider view
 	 */
-	public function getTemplate(IUser $user): Template {
+	public function getTemplate(IUser $user): ITemplate {
 		$publicKey = $this->manager->startAuthenticate($user, $this->request->getServerHost());
 		$this->initialState->provideInitialState('credential-request-options', $publicKey);
 		return new Template('twofactor_webauthn', 'challenge');

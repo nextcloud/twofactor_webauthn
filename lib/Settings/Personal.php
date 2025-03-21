@@ -11,9 +11,10 @@ namespace OCA\TwoFactorWebauthn\Settings;
 
 use OCP\Authentication\TwoFactorAuth\IPersonalProviderSettings;
 use OCP\Template;
+use OCP\Template\ITemplate;
 
 class Personal implements IPersonalProviderSettings {
-	public function getBody(): Template {
+	public function getBody(): ITemplate {
 		return new Template('twofactor_webauthn', 'personal');
 	}
 }
