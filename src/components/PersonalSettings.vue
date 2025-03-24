@@ -58,7 +58,6 @@ export default {
 	computed: {
 		...mapState(useMainStore, ['devices']),
 		allDeactivated() {
-			console.log('this.devices', this.devices)
 			return this.devices.length > 0 && this.devices.every(device => !device.active)
 		},
 	},
