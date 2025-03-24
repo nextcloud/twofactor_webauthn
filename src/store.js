@@ -3,68 +3,46 @@
  * SPDX-License-Identifier: AGPL-3.0-or-later
  */
 
-import Vue from 'vue'
-import Vuex from 'vuex'
+import { defineStore } from 'pinia'
+import * as RegistrationService from './services/RegistrationService.js'
 
-import { removeRegistration, changeActivationState } from './services/RegistrationService.js'
-
-Vue.use(Vuex)
-
-export const mutations = {
-	setCredentialRequestOptions(state, credentialRequestOptions) {
-		state.credentialRequestOptions = credentialRequestOptions
-	},
-
-	addDevice(state, device) {
-		state.devices.push(device)
-		state.devices.sort((d1, d2) => d1.name.localeCompare(d2.name))
-	},
-
-	removeDevice(state, entityId) {
-		state.devices = state.devices.filter(device => device.entityId !== entityId)
-	},
-
-	changeActivationState(state, { entityId, active }) {
-		state.devices.find(device => device.entityId === entityId).active = active
-	},
-}
-
-export const actions = {
-	removeDevice({ state, commit }, entityId) {
-		const device = state.devices.find(device => device.entityId === entityId)
-
-		commit('removeDevice', entityId)
-
-		removeRegistration(entityId)
-			.catch(err => {
-				// Rollback
-				commit('addDevice', device)
-
-				throw err
-			})
-	},
-
-	changeActivationState({ state, commit }, { entityId, active }) {
-		commit('changeActivationState', { entityId, active })
-
-		changeActivationState(entityId, active).catch(err => {
-			commit('changeActivationState', { entityId, active: !active })
-			throw err
-		})
-	},
-}
-
-export const getters = {
-	getCredentialRequestOptions: state => state.credentialRequestOptions,
-}
-
-export default new Vuex.Store({
-	strict: process.env.NODE_ENV !== 'production',
-	state: {
+export const useMainStore = defineStore('main', {
+	state: () => ({
 		credentialRequestOptions: {},
 		devices: [],
+	}),
+	actions: {
+		addDevice(device) {
+			this.devices.push(device)
+			this.devices.sort((d1, d2) => d1.name.localeCompare(d2.name))
+		},
+
+		async removeDevice(entityId) {
+			const device = this.devices.find(device => device.entityId === entityId)
+
+			this.devices = this.devices.filter(device => device.entityId !== entityId)
+
+			try {
+				await RegistrationService.removeRegistration(entityId)
+			} catch (err) {
+				// Rollback
+				this.addDevice(device)
+
+				throw err
+			}
+		},
+
+		async changeActivationState({ entityId, active }) {
+			this.devices.find(device => device.entityId === entityId).active = active
+
+			try {
+				await RegistrationService.changeActivationState(entityId, active)
+			} catch (err) {
+				// Rollback
+				this.changeActivationState({ entityId, active: !active })
+
+				throw err
+			}
+		},
 	},
-	getters,
-	mutations,
-	actions,
 })

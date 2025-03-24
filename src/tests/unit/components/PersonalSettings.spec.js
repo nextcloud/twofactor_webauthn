@@ -4,34 +4,27 @@
  */
 
 import { shallowMount, createLocalVue } from '@vue/test-utils'
-import Vuex from 'vuex'
-
+import { createPinia, PiniaVuePlugin, setActivePinia } from 'pinia'
 import Nextcloud from '../../../mixins/Nextcloud.js'
-
 import PersonalSettings from '../../../components/PersonalSettings.vue'
+import { useMainStore } from '../../../store.js'
 
 const localVue = createLocalVue()
 
-localVue.use(Vuex)
 localVue.mixin(Nextcloud)
+localVue.use(PiniaVuePlugin)
 
 describe('PersonalSettings', () => {
-	let actions
-	let store
+	let pinia
 
 	beforeEach(() => {
-		actions = {}
-		store = new Vuex.Store({
-			state: {
-				devices: [],
-			},
-			actions,
-		})
+		pinia = createPinia()
+		setActivePinia(pinia)
 	})
 
 	it('shows text if no devices are configured', () => {
 		const settings = shallowMount(PersonalSettings, {
-			store,
+			pinia,
 			localVue,
 		})
 
@@ -39,12 +32,16 @@ describe('PersonalSettings', () => {
 	})
 
 	it('shows no info text if devices are configured', () => {
-		store.state.devices.push({
-			id: 'k1',
-			name: 'a',
+		const mainStore = useMainStore()
+		mainStore.$patch({
+			devices: [{
+				id: 'k1',
+				name: 'a',
+			}],
 		})
+
 		const settings = shallowMount(PersonalSettings, {
-			store,
+			pinia,
 			localVue,
 		})
 
@@ -53,7 +50,7 @@ describe('PersonalSettings', () => {
 
 	it('shows a HTTP warning', () => {
 		const settings = shallowMount(PersonalSettings, {
-			store,
+			pinia,
 			localVue,
 			propsData: {
 				httpWarning: true,
