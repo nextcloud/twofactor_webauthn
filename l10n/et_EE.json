@@ -1,6 +1,7 @@
 { "translations": {
     "Add" : "Lisa",
     "Retry" : "Proovi uuesti",
+    "Active" : "Aktiivne",
     "Remove" : "Eemalda"
 },"pluralForm" :"nplurals=2; plural=(n != 1);"
 }

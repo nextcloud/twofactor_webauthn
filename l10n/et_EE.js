@@ -3,6 +3,7 @@ OC.L10N.register(
     {
     "Add" : "Lisa",
     "Retry" : "Proovi uuesti",
+    "Active" : "Aktiivne",
     "Remove" : "Eemalda"
 },
 "nplurals=2; plural=(n != 1);");
