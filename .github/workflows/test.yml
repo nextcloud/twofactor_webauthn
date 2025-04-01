@@ -218,3 +218,19 @@ jobs:
         run: cat nextcloud/data/nextcloud.log*
     env:
       CI: true
+
+  summary:
+    runs-on: ubuntu-latest-low
+    needs:
+      - unit-tests
+      - integration-tests
+      - frontend-unit-test
+      - frontend-e2e-tests
+
+    if: always()
+
+    name: test-summary
+
+    steps:
+      - name: Summary status
+        run: if ${{ needs.unit-tests.result != 'success' || needs.integration-tests.result != 'success' || needs.frontend-unit-test.result != 'success' || needs.frontend-e2e-tests.result != 'success' }}; then exit 1; fi
