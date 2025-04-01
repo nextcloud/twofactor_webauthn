@@ -28,7 +28,7 @@
     "jsdom": "^21.1.2",
     "jsdom-global": "^3.0.2",
     "mocha": "^10.8.2",
-    "mochapack": "^2.1.4",
+    "mochapack": "^2.1.5",
     "vue-template-compiler": "^2.7.16"
   },
   "scripts": {
