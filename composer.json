@@ -21,14 +21,13 @@
 	"require-dev": {
 		"christophwurst/nextcloud_testing": "^1.0.0",
 		"phpunit/phpunit": "^9.6.22",
-		"psalm/phar": "^6.7.1",
 		"roave/security-advisories": "dev-master"
 	},
 	"scripts": {
 		"lint": "find . -name \\*.php -not -path './vendor/*' -print0 | xargs -0 -n1 php -l",
 		"cs:check": "php-cs-fixer fix --dry-run --diff",
 		"cs:fix": "php-cs-fixer fix",
-		"psalm": "psalm.phar",
+		"psalm": "psalm",
 		"test": "phpunit -c tests/phpunit.xml",
 		"test:acceptance": "phpunit -c tests/phpunit.xml tests/Acceptance",
 		"test:integration": "phpunit -c tests/phpunit.xml tests/Integration",
