@@ -3,16 +3,11 @@
  * SPDX-License-Identifier: AGPL-3.0-or-later
  */
 
-import { shallowMount, createLocalVue } from '@vue/test-utils'
-import { createPinia, PiniaVuePlugin, setActivePinia } from 'pinia'
+import { shallowMount } from '@vue/test-utils'
+import { createPinia, setActivePinia } from 'pinia'
 import Nextcloud from '../../../mixins/Nextcloud.js'
 import PersonalSettings from '../../../components/PersonalSettings.vue'
 import { useMainStore } from '../../../store.js'
-
-const localVue = createLocalVue()
-
-localVue.mixin(Nextcloud)
-localVue.use(PiniaVuePlugin)
 
 describe('PersonalSettings', () => {
 	let pinia
@@ -24,8 +19,10 @@ describe('PersonalSettings', () => {
 
 	it('shows text if no devices are configured', () => {
 		const settings = shallowMount(PersonalSettings, {
-			pinia,
-			localVue,
+			global: {
+				plugins: [pinia],
+				mixins: [Nextcloud],
+			},
 		})
 
 		expect(settings.text()).to.contain('No security keys configured. You are not using WebAuthn as second factor at the moment.')
@@ -41,8 +38,10 @@ describe('PersonalSettings', () => {
 		})
 
 		const settings = shallowMount(PersonalSettings, {
-			pinia,
-			localVue,
+			global: {
+				plugins: [pinia],
+				mixins: [Nextcloud],
+			},
 		})
 
 		expect(settings.text()).to.not.contain('No security keys configured. You are not using WebAuthn as second factor at the moment.')
@@ -50,8 +49,10 @@ describe('PersonalSettings', () => {
 
 	it('shows a HTTP warning', () => {
 		const settings = shallowMount(PersonalSettings, {
-			pinia,
-			localVue,
+			global: {
+				plugins: [pinia],
+				mixins: [Nextcloud],
+			},
 			propsData: {
 				httpWarning: true,
 			},

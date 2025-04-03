@@ -30,7 +30,7 @@
 				type="text"
 				:placeholder="t('twofactor_webauthn', 'Name your security key')">
 			<NcButton class="new-webauthn-device__button"
-				native-type="submit"
+				type="submit"
 				:disabled="!name.length">
 				{{ t('twofactor_webauthn', 'Add') }}
 			</NcButton>
