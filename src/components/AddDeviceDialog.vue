@@ -54,6 +54,8 @@ import { NcButton } from '@nextcloud/vue'
 import { startRegistration } from '@simplewebauthn/browser'
 import * as RegistrationService from '../services/RegistrationService.js'
 import logger from '../logger.js'
+import { mapStores } from 'pinia'
+import { useMainStore } from '../store.js'
 
 const RegistrationSteps = Object.freeze({
 	READY: 1,
@@ -81,6 +83,10 @@ export default {
 			step: RegistrationSteps.READY,
 			errorMessage: null,
 		}
+	},
+
+	computed: {
+		...mapStores(useMainStore),
 	},
 
 	methods: {
@@ -134,7 +140,7 @@ export default {
 					this.name,
 					JSON.stringify(this.registrationResponse),
 				)
-				this.$store.commit('addDevice', device)
+				this.mainStore.addDevice(device)
 				logger.debug('new device added to store', { device })
 			} catch (error) {
 				logger.error('Error persisting webauthn registration', { error })
