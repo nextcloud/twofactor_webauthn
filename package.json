@@ -9,7 +9,7 @@
     "@nextcloud/initial-state": "^2.2.0",
     "@nextcloud/logger": "^3.0.2",
     "@nextcloud/moment": "^1.3.2",
-    "@nextcloud/password-confirmation": "file:../../../../nextcloud-password-confirmation",
+    "@nextcloud/password-confirmation": "file:../../../../nextcloud-password-confirmation/nextcloud-password-confirmation-5.3.1.tgz",
     "@nextcloud/router": "^3.0.1",
     "@nextcloud/vue": "^9.0.0-alpha.7",
     "@simplewebauthn/browser": "^13.1.0",
