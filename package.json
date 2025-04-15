@@ -11,7 +11,7 @@
     "@nextcloud/moment": "^1.3.2",
     "@nextcloud/password-confirmation": "file:../../../../nextcloud-password-confirmation/nextcloud-password-confirmation-5.3.1.tgz",
     "@nextcloud/router": "^3.0.1",
-    "@nextcloud/vue": "^9.0.0-alpha.7",
+    "@nextcloud/vue": "^9.0.0-alpha.8",
     "@simplewebauthn/browser": "^13.1.0",
     "pinia": "^3.0.1",
     "vue": "^3.5.13",
@@ -20,7 +20,7 @@
   "devDependencies": {
     "@nextcloud/babel-config": "^1.2.0",
     "@nextcloud/eslint-config": "^8.4.2",
-    "@nextcloud/webpack-vue-config": "github:nextcloud-libraries/webpack-vue-config#vue3",
+    "@nextcloud/webpack-vue-config": "^6.3.0",
     "@playwright/test": "^1.50.1",
     "chai": "^4.5.0",
     "jsdom": "^21.1.2",
