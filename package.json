@@ -11,7 +11,7 @@
     "@nextcloud/moment": "^1.3.2",
     "@nextcloud/password-confirmation": "file:../../../../nextcloud-password-confirmation/nextcloud-password-confirmation-5.3.1.tgz",
     "@nextcloud/router": "^3.0.1",
-    "@nextcloud/vue": "^9.0.0-alpha.8",
+    "@nextcloud/vue": "^9.0.0-rc.0",
     "@simplewebauthn/browser": "^13.1.0",
     "pinia": "^3.0.1",
     "vue": "^3.5.13",
