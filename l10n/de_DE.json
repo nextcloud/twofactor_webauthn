@@ -25,7 +25,7 @@
     "Active" : "Aktiv",
     "Remove" : "Entfernen",
     "Set up a security key as a second factor." : "Einen Sicherheitsschlüssel als zweiten Faktor einrichten.",
-    "Your security key was added successfully. You are now being redirected to the login page." : "Ihr Sicherheitsschlüssel wurde erfolgreich hinzugefügt. Sie werden nun auf die Anmeldeseite weitergeleitet.",
+    "Your security key was added successfully. You are now being redirected to the login page." : "Ihr Sicherheitsschlüssel wurde hinzugefügt. Sie werden nun auf die Anmeldeseite weitergeleitet.",
     "No security keys configured. You are not using WebAuthn as second factor at the moment." : "Es sind keine Sicherheitsschlüssel konfiguriert. Momentan verwenden Sie WebAuthn nicht als Zwei-Faktor-Authentifizierungsmethode.",
     "The following security keys are configured for WebAuthn two-factor authentication:" : "Die folgenden Sicherheitsschlüssel sind für WebAuthn Zwei-Faktor-Authentifizierung konfiguriert:",
     "All security keys are deactivated." : "Alle Sicherheitsschlüssel sind deaktiviert."
