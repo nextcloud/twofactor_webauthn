@@ -11,14 +11,6 @@ require('jsdom-global')('', {
 })
 global.SVGElement = window.SVGElement
 
-const t = (app, str) => str
-
-require('vue').mixin({
-	methods: {
-		t,
-	},
-})
-
 global.expect = require('chai').expect
 global.OC = {
 	getCurrentUser: () => {
@@ -34,7 +26,7 @@ global.OC = {
 		return 'en'
 	},
 }
-global.t = t
+global.t = (app, str) => str
 
 // https://github.com/vuejs/vue-test-utils/issues/936
 // better fix for "TypeError: Super expression must either be null or
