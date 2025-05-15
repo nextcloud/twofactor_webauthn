@@ -14,7 +14,9 @@
 				</template>
 				{{ createdAtFormatted }}
 			</ActionText>
-			<ActionCheckbox :checked="active" @update:checked="changeActivation">
+			<ActionCheckbox data-testid="device-active"
+				:model-value="active"
+				@update:modelValue="changeActivation">
 				{{ t('twofactor_webauthn', 'Active') }}
 			</ActionCheckbox>
 			<ActionButton icon="icon-delete" :close-after-click="true" @click="onDelete">
