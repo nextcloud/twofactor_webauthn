@@ -3,6 +3,7 @@ OC.L10N.register(
     {
     "Add" : "Lisa",
     "Retry" : "Proovi uuesti",
+    "Your browser does not support WebAuthn." : "Sinu veebibrauseril puudub WebAuthni tugi.",
     "Active" : "Aktiivne",
     "Remove" : "Eemalda"
 },
