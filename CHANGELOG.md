@@ -6,6 +6,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.2.0-rc.1 - 2025-05-19
+### Added
+- Migrate frontend to Vue 3
+
 ## 2.1.0 - 2025-01-24
 ### Added
 - Nextcloud 31 support
