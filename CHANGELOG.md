@@ -6,7 +6,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## 2.2.0-rc.1 - 2025-05-19
+## 2.2.0 - 2025-05-27
 ### Added
 - Migrate frontend to Vue 3
 
