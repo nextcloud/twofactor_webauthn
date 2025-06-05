@@ -19,7 +19,7 @@
 		"web-auth/webauthn-lib": "^4.9.2"
 	},
 	"require-dev": {
-		"christophwurst/nextcloud_testing": "^1.0.0",
+		"christophwurst/nextcloud_testing": "^1.0.1",
 		"phpunit/phpunit": "^9.6.23",
 		"roave/security-advisories": "dev-master"
 	},
