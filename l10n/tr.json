@@ -1,7 +1,7 @@
 { "translations": {
     "You added an WebAuthn hardware token" : "WebAuthn aygıtı eklediniz",
     "You removed an WebAuthn hardware token" : "WebAuthn aygıtını sildiniz",
-    "WebAuthn disabled by the administration" : "WebAuthn yönetici tarafından kullanımdan kaldırılmış",
+    "WebAuthn disabled by the administration" : "WebAuthn yönetici tarafından devre dışı bırakılmış",
     "Security key" : "Güvenlik anahtarı",
     "Use WebAuthn for second factor authentication" : "İki adımlı doğrulama için WebAuthn kullanılsın",
     "Two-Factor WebAuthn" : "İki adımlı WebAuthn",
@@ -28,6 +28,6 @@
     "Your security key was added successfully. You are now being redirected to the login page." : "Güvenlik anahtarınız eklendi. Şimdi oturum açma sayfasına yönlendirileceksiniz.",
     "No security keys configured. You are not using WebAuthn as second factor at the moment." : "Herhangi bir güvenlik anahtarı ayarlanmamış. Şu anda iki adımlı doğrulama için WebAuthn kullanılamaz.",
     "The following security keys are configured for WebAuthn two-factor authentication:" : "İki adımlı doğrulama için ayarlanmış ve kullanılabilecek güvenlik anahtarları:",
-    "All security keys are deactivated." : "Tüm güvenlik anahtarları kullanımdan kaldırıldı."
+    "All security keys are deactivated." : "Tüm güvenlik anahtarları devre dışı bırakıldı."
 },"pluralForm" :"nplurals=2; plural=(n > 1);"
 }
