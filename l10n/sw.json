@@ -1,5 +1,6 @@
 { "translations": {
     "Add" : "Ongeza",
-    "Retry" : "Jaribu tene"
+    "Retry" : "Jaribu tene",
+    "Remove" : "Ondoa"
 },"pluralForm" :"nplurals=2; plural=(n != 1);"
 }
