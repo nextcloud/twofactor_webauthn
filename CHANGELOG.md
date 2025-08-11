@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.4.1 - 2025-08-11
+### Fixed
+- Match ID and user handle
+- Fix npm audit
+
 ## 1.4.0 - 2024-26-03
 ### Added
 - Nextcloud 29 support
