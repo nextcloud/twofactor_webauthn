@@ -363,7 +363,7 @@ class WebAuthnManager {
 	}
 
 	public function removeDevice(IUser $user, int $id) {
-		$credential = $this->mapper->findById($id);
+		$credential = $this->mapper->findById($id, $user->getUID());
 		Assertion::eq($credential->getUserHandle(), $user->getUID());
 
 		$this->mapper->delete($credential);
@@ -381,7 +381,7 @@ class WebAuthnManager {
 	}
 
 	public function changeActivationState(IUser $user, int $id, bool $active) {
-		$credential = $this->mapper->findById($id);
+		$credential = $this->mapper->findById($id, $user->getUID());
 		Assertion::eq($credential->getUserHandle(), $user->getUID());
 
 		$credential->setActive($active);
