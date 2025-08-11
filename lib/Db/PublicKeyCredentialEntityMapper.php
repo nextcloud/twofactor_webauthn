@@ -80,16 +80,23 @@ class PublicKeyCredentialEntityMapper extends QBMapper {
 	/**
 	 * @throws Exception
 	 */
-	public function findById(int $id): ?PublicKeyCredentialEntity {
+	public function findById(int $id, string $userId): ?PublicKeyCredentialEntity {
 		$qb = $this->db->getQueryBuilder();
 
 		$qb->select('*')
 			->from($this->getTableName())
-			->where($qb->expr()->eq(
-				'id',
-				$qb->createNamedParameter($id, IQueryBuilder::PARAM_INT),
-				IQueryBuilder::PARAM_INT
-			));
+			->where(
+				$qb->expr()->eq(
+					'id',
+					$qb->createNamedParameter($id, IQueryBuilder::PARAM_INT),
+					IQueryBuilder::PARAM_INT
+				),
+				$qb->expr()->eq(
+					'user_handle',
+					$qb->createNamedParameter($userId, IQueryBuilder::PARAM_STR),
+					IQueryBuilder::PARAM_STR,
+				),
+			);
 		try {
 			return $this->findEntity($qb);
 		} catch (DoesNotExistException $e) {

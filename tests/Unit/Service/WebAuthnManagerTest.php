@@ -93,11 +93,12 @@ class WebAuthnManagerTest extends TestCase {
 
 	public function testDisableWebAuthn(): void {
 		$user = $this->createMock(IUser::class);
+		$user->method('getUID')->willReturn('user123');
 		$reg = new PublicKeyCredentialEntity();
 		$reg->setId(420);
 		$this->mapper->expects(self::once())
 			->method('findById')
-			->with(420)
+			->with(420, 'user123')
 			->willReturn($reg);
 		$this->mapper->expects(self::once())
 			->method('delete')
