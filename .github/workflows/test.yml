@@ -15,7 +15,7 @@ jobs:
     strategy:
       matrix:
         php-version: ['8.1', '8.2', '8.3', '8.4']
-        nextcloud-version: ['master', 'stable31', 'stable30']
+        nextcloud-version: ['master', 'stable32', 'stable31', 'stable30']
         exclude:
           - php-version: '8.4'
             nextcloud-version: 'stable30'
@@ -52,7 +52,7 @@ jobs:
             nextcloud-version: master
             db: 'oci'
           - php-version: '8.1'
-            nextcloud-version: master
+            nextcloud-version: stable32
             db: 'pgsql'
           - php-version: '8.3'
             nextcloud-version: stable31
@@ -152,7 +152,7 @@ jobs:
     strategy:
       matrix:
         php-version: [ '8.1', '8.2', '8.3', '8.4' ]
-        nextcloud-version: [ 'master', 'stable31', 'stable30' ]
+        nextcloud-version: [ 'master', 'stable32', 'stable31', 'stable30' ]
         node-version: [ '20' ]
         exclude:
           - php-version: '8.4'
