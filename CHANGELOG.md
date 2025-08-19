@@ -6,6 +6,19 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.3.0 - 2025-08-19
+### Added
+- Support for Nextcloud 32
+
+## 2.2.1 - 2025-08-11
+### Fixed
+- Match ID and user handle
+- Fix npm audit
+
+## 2.2.0 - 2025-05-27
+### Added
+- Migrate frontend to Vue 3
+
 ## 2.1.0 - 2025-01-24
 ### Added
 - Nextcloud 31 support
