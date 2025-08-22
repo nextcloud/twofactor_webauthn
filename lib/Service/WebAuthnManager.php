@@ -21,6 +21,7 @@ use OCA\TwoFactorWebauthn\Event\DisabledByAdmin;
 use OCA\TwoFactorWebauthn\Event\StateChanged;
 use OCA\TwoFactorWebauthn\Repository\WebauthnPublicKeyCredentialSourceRepository;
 use OCP\EventDispatcher\IEventDispatcher;
+use OCP\IRequest;
 use OCP\ISession;
 use OCP\IUser;
 use Psr\Log\LoggerInterface;
