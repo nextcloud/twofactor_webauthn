@@ -219,7 +219,7 @@ class WebAuthnManager {
 			'entityId' => $entity->getId(),
 			'id' => base64_encode($publicKeyCredentialSource->getPublicKeyCredentialId()),
 			'name' => $name,
-			'createdAt' => $entity !== null ? $entity->getCreatedAt() : null,
+			'createdAt' => $entity->getCreatedAt(),
 			'active' => true,
 		];
 	}
