@@ -15,7 +15,6 @@ use Cose\Algorithm\Signature\EdDSA;
 use Cose\Algorithm\Signature\RSA;
 use Cose\Algorithms;
 use Exception;
-use GuzzleHttp\Psr7\ServerRequest;
 use OCA\TwoFactorWebauthn\Db\PublicKeyCredentialEntity;
 use OCA\TwoFactorWebauthn\Db\PublicKeyCredentialEntityMapper;
 use OCA\TwoFactorWebauthn\Event\DisabledByAdmin;
@@ -78,6 +77,7 @@ class WebAuthnManager {
 		PublicKeyCredentialEntityMapper $mapper,
 		IEventDispatcher $eventDispatcher,
 		LoggerInterface $logger,
+		private readonly IRequest $request,
 	) {
 		$this->session = $session;
 		$this->repository = $repository;
@@ -203,13 +203,11 @@ class WebAuthnManager {
 			throw new \RuntimeException('Not an authenticator attestation response');
 		}
 
-		// TODO: this is a server dependency
-		$request = ServerRequest::fromGlobals();
 		// Check the response against the request
 		$publicKeyCredentialSource = $authenticatorAttestationResponseValidator->check(
 			$response,
 			$publicKeyCredentialCreationOptions,
-			$request
+			$this->stripPort($this->request->getServerHost()),
 		);
 
 		$this->repository->saveCredentialSource($publicKeyCredentialSource, $name);
@@ -328,15 +326,12 @@ class WebAuthnManager {
 				throw new \RuntimeException('Not an authenticator assertion response');
 			}
 
-			// TODO: this is a server dependency
-			$request = ServerRequest::fromGlobals();
-
 			// Check the response against the attestation request
 			$authenticatorAssertionResponseValidator->check(
 				$publicKeyCredential->getRawId(),
 				$publicKeyCredential->getResponse(),
 				$publicKeyCredentialRequestOptions,
-				$request,
+				$this->stripPort($this->request->getServerHost()),
 				$user->getUID() // User handle
 			);
 
