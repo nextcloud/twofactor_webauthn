@@ -15,6 +15,7 @@ use OCA\TwoFactorWebauthn\Event\StateChanged;
 use OCA\TwoFactorWebauthn\Repository\WebauthnPublicKeyCredentialSourceRepository;
 use OCA\TwoFactorWebauthn\Service\WebAuthnManager;
 use OCP\EventDispatcher\IEventDispatcher;
+use OCP\IRequest;
 use OCP\ISession;
 use OCP\IUser;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -41,6 +42,8 @@ class WebAuthnManagerTest extends TestCase {
 	/** @var MockObject|LoggerInterface */
 	private $logger;
 
+	private IRequest&MockObject $request;
+
 	protected function setUp(): void {
 		parent::setUp();
 
@@ -49,6 +52,7 @@ class WebAuthnManagerTest extends TestCase {
 		$this->mapper = $this->createMock(PublicKeyCredentialEntityMapper::class);
 		$this->eventDispatcher = $this->createMock(IEventDispatcher::class);
 		$this->logger = $this->createMock(LoggerInterface::class);
+		$this->request = $this->createMock(IRequest::class);
 
 		$this->manager = new WebAuthnManager(
 			$this->session,
@@ -56,6 +60,7 @@ class WebAuthnManagerTest extends TestCase {
 			$this->mapper,
 			$this->eventDispatcher,
 			$this->logger,
+			$this->request,
 		);
 	}
 
