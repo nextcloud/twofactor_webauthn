@@ -20,7 +20,7 @@ export default defineConfig({
 		['html'],
 	],
 	use: {
-		baseURL: 'https://localhost',
+		baseURL: process.env.PLAYWRIGHT_BASE_URL ?? 'https://localhost',
 		trace: 'on-first-retry',
 	},
 	projects: [
