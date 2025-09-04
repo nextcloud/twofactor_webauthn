@@ -9,7 +9,6 @@ declare(strict_types=1);
 
 namespace OCA\TwoFactorWebauthn\Listener;
 
-use OCA\TwoFactorWebauthn\Event\DisabledByAdmin;
 use OCA\TwoFactorWebauthn\Event\StateChanged;
 use OCP\Activity\IManager;
 use OCP\EventDispatcher\Event;
@@ -29,7 +28,7 @@ class StateChangeActivity implements IEventListener {
 
 	public function handle(Event $event): void {
 		if ($event instanceof StateChanged) {
-			if ($event instanceof DisabledByAdmin) {
+			if ($event->isByAdmin()) {
 				$subject = 'webauthn_disabled_by_admin';
 			} else {
 				$subject = $event->isEnabled() ? 'webauthn_device_added' : 'webauthn_device_removed';

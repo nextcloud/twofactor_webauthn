@@ -17,7 +17,6 @@ use Cose\Algorithms;
 use Exception;
 use OCA\TwoFactorWebauthn\Db\PublicKeyCredentialEntity;
 use OCA\TwoFactorWebauthn\Db\PublicKeyCredentialEntityMapper;
-use OCA\TwoFactorWebauthn\Event\DisabledByAdmin;
 use OCA\TwoFactorWebauthn\Event\StateChanged;
 use OCA\TwoFactorWebauthn\Repository\WebauthnPublicKeyCredentialSourceRepository;
 use OCP\EventDispatcher\IEventDispatcher;
@@ -351,7 +350,7 @@ class WebAuthnManager {
 
 		$this->mapper->delete($credential);
 
-		$this->eventDispatcher->dispatch(StateChanged::class, new StateChanged($user, false));
+		$this->eventDispatcher->dispatchTyped(new StateChanged($user, false));
 	}
 
 	public function deactivateAllDevices(IUser $user) {
@@ -360,7 +359,7 @@ class WebAuthnManager {
 			$this->mapper->update($credential);
 		}
 
-		$this->eventDispatcher->dispatch(StateChanged::class, new DisabledByAdmin($user));
+		$this->eventDispatcher->dispatchTyped(new StateChanged($user, false, true));
 	}
 
 	public function changeActivationState(IUser $user, int $id, bool $active) {
@@ -370,6 +369,6 @@ class WebAuthnManager {
 
 		$this->mapper->update($credential);
 
-		$this->eventDispatcher->dispatch(StateChanged::class, new StateChanged($user, \boolval($active)));
+		$this->eventDispatcher->dispatchTyped(new StateChanged($user, $active));
 	}
 }

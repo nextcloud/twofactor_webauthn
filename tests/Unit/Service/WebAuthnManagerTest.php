@@ -109,9 +109,8 @@ class WebAuthnManagerTest extends TestCase {
 			->method('delete')
 			->with($reg);
 		$this->eventDispatcher->expects(self::once())
-			->method('dispatch')
+			->method('dispatchTyped')
 			->with(
-				self::equalTo(StateChanged::class),
 				self::equalTo(new StateChanged($user, false))
 			);
 
