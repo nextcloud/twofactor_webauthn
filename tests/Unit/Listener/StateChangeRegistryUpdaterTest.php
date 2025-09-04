@@ -11,6 +11,7 @@ namespace OCA\TwoFactorWebauthn\Tests\Unit\Listener;
 
 use OCA\TwoFactorWebauthn\Event\StateChanged;
 use OCA\TwoFactorWebauthn\Listener\StateChangeRegistryUpdater;
+use OCA\TwoFactorWebauthn\Model\Device;
 use OCA\TwoFactorWebauthn\Provider\WebAuthnProvider;
 use OCA\TwoFactorWebauthn\Service\WebAuthnManager;
 use OCP\Authentication\TwoFactorAuth\IRegistry;
@@ -59,11 +60,7 @@ class StateChangeRegistryUpdaterTest extends TestCase {
 		$this->manager->expects(self::once())
 			->method('getDevices')
 			->willReturn([
-				[
-					'id' => 1,
-					'name' => 'utf1',
-					'active' => true,
-				],
+				new Device(1, 'credential-id-1', 'utf2', null, true),
 			]);
 		$this->providerRegistry->expects(self::once())
 			->method('enableProviderFor')
@@ -97,11 +94,7 @@ class StateChangeRegistryUpdaterTest extends TestCase {
 		$this->manager->expects(self::once())
 			->method('getDevices')
 			->willReturn([
-				[
-					'id' => 2,
-					'name' => 'utf2',
-					'active' => true,
-				],
+				new Device(2, 'credential-id-2', 'utf2', null, true),
 			]);
 		$this->providerRegistry->expects(self::never())
 			->method('disableProviderFor')
