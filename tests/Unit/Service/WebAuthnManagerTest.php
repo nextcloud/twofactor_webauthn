@@ -14,6 +14,7 @@ use OCA\TwoFactorWebauthn\Db\PublicKeyCredentialEntityMapper;
 use OCA\TwoFactorWebauthn\Event\StateChanged;
 use OCA\TwoFactorWebauthn\Repository\WebauthnPublicKeyCredentialSourceRepository;
 use OCA\TwoFactorWebauthn\Service\WebAuthnManager;
+use OCP\AppFramework\Utility\ITimeFactory;
 use OCP\EventDispatcher\IEventDispatcher;
 use OCP\IRequest;
 use OCP\ISession;
@@ -45,6 +46,7 @@ class WebAuthnManagerTest extends TestCase {
 
 	private IRequest&MockObject $request;
 	private ISecureRandom&MockObject $random;
+	private ITimeFactory&MockObject $time;
 
 	protected function setUp(): void {
 		parent::setUp();
@@ -56,6 +58,7 @@ class WebAuthnManagerTest extends TestCase {
 		$this->logger = $this->createMock(LoggerInterface::class);
 		$this->request = $this->createMock(IRequest::class);
 		$this->random = $this->createMock(ISecureRandom::class);
+		$this->time = $this->createMock(ITimeFactory::class);
 
 		$this->manager = new WebAuthnManager(
 			$this->session,
@@ -65,17 +68,20 @@ class WebAuthnManagerTest extends TestCase {
 			$this->logger,
 			$this->request,
 			$this->random,
+			$this->time,
 		);
 	}
 
-	/**
-	 * @param IUser $user
-	 * @param int $nr
-	 */
-	private function mockRegistrations(IUser $user, $nr): void {
+	private function mockRegistrations(IUser $user, int $nr): void {
 		$regs = [];
 		for ($i = 0; $i < $nr; $i++) {
 			$reg = new PublicKeyCredentialEntity();
+			$reg->setId($i);
+			$reg->setPublicKeyCredentialId("credential-id-$i");
+			$reg->setName("key-$i");
+			$reg->setUserHandle($user->getUID());
+			$reg->setActive(true);
+			$reg->setCreatedAt(null);
 			$regs[] = $reg;
 		}
 		$this->mapper->expects(self::once())

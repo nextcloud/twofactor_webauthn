@@ -121,6 +121,7 @@ class PublicKeyCredentialEntity extends Entity {
 		$publicKeyCredentialEntity->setUserHandle($publicKeyCredentialSource->getUserHandle());
 		$publicKeyCredentialEntity->setCounter($publicKeyCredentialSource->getCounter());
 		$publicKeyCredentialEntity->setCreatedAt($ctime);
+		$publicKeyCredentialEntity->setActive(true);
 
 		return $publicKeyCredentialEntity;
 	}

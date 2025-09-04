@@ -10,6 +10,7 @@ declare(strict_types=1);
 namespace OCA\TwoFactorWebauthn\Provider;
 
 use OCA\TwoFactorWebauthn\AppInfo\Application;
+use OCA\TwoFactorWebauthn\Model\Device;
 use OCA\TwoFactorWebauthn\Service\WebAuthnManager;
 use OCA\TwoFactorWebauthn\Settings\Personal;
 use OCP\AppFramework\Services\IInitialState;
@@ -104,9 +105,10 @@ class WebAuthnProvider implements IProvider, IProvidesIcons, IProvidesPersonalSe
 	 * Decides whether 2FA is enabled for the given user
 	 */
 	public function isTwoFactorAuthEnabledForUser(IUser $user): bool {
-		$devices = array_filter($this->manager->getDevices($user), function ($device) {
-			return $device['active'] === true;
-		});
+		$devices = array_filter(
+			$this->manager->getDevices($user),
+			static fn (Device $device) => $device->isActive(),
+		);
 		return count($devices) > 0;
 	}
 

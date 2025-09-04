@@ -10,6 +10,7 @@ namespace OCA\TwoFactorWebauthn\Tests\Unit\Controller;
 
 use ChristophWurst\Nextcloud\Testing\TestCase;
 use OCA\TwoFactorWebauthn\Controller\SettingsController;
+use OCA\TwoFactorWebauthn\Model\Device;
 use OCA\TwoFactorWebauthn\Service\WebAuthnManager;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\IRequest;
@@ -71,16 +72,17 @@ class SettingsControllerTest extends TestCase {
 			->willReturn($user);
 		$data = 'some data';
 
+		$device = new Device(1, 'key-1', 'my key', null, true);
 		$this->webauthnManager->expects(self::once())
 			->method('finishRegister')
 			->with(
 				self::equalTo($user),
 				self::equalTo('my key'),
 				self::equalTo($data))
-			->willReturn([]);
+			->willReturn($device);
 
 		$resp = $this->controller->finishRegister('my key', $data);
 
-		self::assertEquals(new JSONResponse([]), $resp);
+		self::assertEquals(new JSONResponse($device), $resp);
 	}
 }
