@@ -10,7 +10,6 @@ declare(strict_types=1);
 namespace OCA\TwoFactorWebauthn\Tests\Unit\Listener;
 
 use ChristophWurst\Nextcloud\Testing\TestCase;
-use OCA\TwoFactorWebauthn\Event\DisabledByAdmin;
 use OCA\TwoFactorWebauthn\Event\StateChanged;
 use OCA\TwoFactorWebauthn\Listener\StateChangeActivity;
 use OCP\Activity\IEvent;
@@ -121,7 +120,7 @@ class StateChangeActivityTest extends TestCase {
 		$uid = 'user234';
 		$user = $this->createMock(IUser::class);
 		$user->method('getUID')->willReturn($uid);
-		$event = new DisabledByAdmin($user);
+		$event = new StateChanged($user, false, true);
 		$activityEvent = $this->createMock(IEvent::class);
 		$this->activityManager->expects(self::once())
 			->method('generateEvent')

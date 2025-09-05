@@ -9,7 +9,6 @@ declare(strict_types=1);
 
 namespace OCA\TwoFactorWebauthn\AppInfo;
 
-use OCA\TwoFactorWebauthn\Event\DisabledByAdmin;
 use OCA\TwoFactorWebauthn\Event\StateChanged;
 use OCA\TwoFactorWebauthn\Listener\StateChangeActivity;
 use OCA\TwoFactorWebauthn\Listener\StateChangeRegistryUpdater;
@@ -32,7 +31,6 @@ class Application extends App implements IBootstrap {
 	public function register(IRegistrationContext $context): void {
 		$context->registerEventListener(StateChanged::class, StateChangeActivity::class);
 		$context->registerEventListener(StateChanged::class, StateChangeRegistryUpdater::class);
-		$context->registerEventListener(DisabledByAdmin::class, StateChangeActivity::class);
 		$context->registerEventListener(UserDeletedEvent::class, UserDeleted::class);
 	}
 

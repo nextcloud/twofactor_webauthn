@@ -12,32 +12,25 @@ namespace OCA\TwoFactorWebauthn\Event;
 use OCP\EventDispatcher\Event;
 use OCP\IUser;
 
-class StateChanged extends Event {
+final class StateChanged extends Event {
 
-	/** @var IUser */
-	private $user;
-
-	/** @var bool */
-	private $enabled;
-
-	public function __construct(IUser $user, bool $enabled) {
+	public function __construct(
+		private readonly IUser $user,
+		private readonly bool $enabled,
+		private readonly bool $byAdmin = false,
+	) {
 		parent::__construct();
-
-		$this->user = $user;
-		$this->enabled = $enabled;
 	}
 
-	/**
-	 * @return IUser
-	 */
 	public function getUser(): IUser {
 		return $this->user;
 	}
 
-	/**
-	 * @return bool
-	 */
 	public function isEnabled(): bool {
 		return $this->enabled;
+	}
+
+	public function isByAdmin(): bool {
+		return $this->byAdmin;
 	}
 }
