@@ -10,6 +10,20 @@ on:
       - stable*
 
 jobs:
+  node-version:
+    runs-on: ubuntu-latest
+    outputs:
+      node-version: ${{ steps.versions.outputs.nodeVersion }}
+      npm-version: ${{ steps.versions.outputs.npmVersion }}
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+      - name: Read package.json node and npm engines version
+        uses: skjnldsv/read-package-engines-version-actions@8205673bab74a63eb9b8093402fd9e0e018663a1 # v2.2
+        id: versions
+        with:
+          fallbackNode: '^22.0.0'
+          fallbackNpm: '^10.5.0'
+
   unit-tests:
     runs-on: ubuntu-latest
     strategy:
@@ -133,12 +147,15 @@ jobs:
   frontend-unit-test:
       runs-on: ubuntu-latest
       name: Front-end unit tests
+      needs: node-version
       steps:
           - uses: actions/checkout@master
-          - name: Set up Node
+          - name: Set up Node ${{ needs.node-version.outputs.node-version }}
             uses: actions/setup-node@f1f314fca9dfce2769ece7d933488f076716723e # v1
             with:
-                node-version: 16.x
+                node-version: ${{ needs.node-version.outputs.node-version }}
+          - name: Set up NPM ${{ needs.node-version.outputs.npm-version }}
+            run: npm install -g npm@${{ needs.node-version.outputs.npm-version }}
           - name: npm install
             run: npm install
           - name: run tests
@@ -149,11 +166,11 @@ jobs:
   frontend-e2e-tests:
     runs-on: ubuntu-latest
     name: Front-end E2E tests
+    needs: node-version
     strategy:
       matrix:
         php-version: [ '8.1', '8.2', '8.3', '8.4' ]
         nextcloud-version: [ 'master', 'stable32', 'stable31', 'stable30' ]
-        node-version: [ '22' ]
         exclude:
           - php-version: '8.4'
             nextcloud-version: 'stable30'
@@ -163,7 +180,7 @@ jobs:
         with:
           nextcloud-version: ${{ matrix.nextcloud-version }}
           php-version: ${{ matrix.php-version }}
-          node-version: ${{ matrix.node-version }}
+          node-version: ${{ needs.node-version.outputs.node-version }}
           install: true
       - name: Configure Nextcloud for testing
         run: |
@@ -180,10 +197,12 @@ jobs:
         run: composer install
       - name: Install the app
         run: php -f nextcloud/occ app:enable twofactor_webauthn
-      - name: Set up node ${{ matrix.node-version }}
+      - name: Set up node ${{ needs.node-version.outputs.node-version }}
         uses: actions/setup-node@3235b876344d2a9aa001b8d1453c930bba69e610 # v3
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: ${{ needs.node-version.outputs.node-version }}
+      - name: Set up NPM ${{ needs.node-version.outputs.npm-version }}
+        run: npm install -g npm@${{ needs.node-version.outputs.npm-version }}
       - name: Install npm dependencies
         working-directory: nextcloud/apps/twofactor_webauthn
         run: npm ci
@@ -209,7 +228,7 @@ jobs:
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         if: always()
         with:
-          name: playwright-report-${{ github.event.number }}-nc${{ matrix.nextcloud-version }}-php${{ matrix.php-version }}-node${{ matrix.node-version }}
+          name: playwright-report-${{ github.event.number }}-nc${{ matrix.nextcloud-version }}-php${{ matrix.php-version }}-node${{ needs.node-version.outputs.node-version }}
           path: nextcloud/apps/twofactor_webauthn/playwright-report/
           retention-days: 14
       - name: Print server logs
