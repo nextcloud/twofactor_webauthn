@@ -23,6 +23,7 @@ use OCP\EventDispatcher\IEventDispatcher;
 use OCP\IRequest;
 use OCP\ISession;
 use OCP\IUser;
+use OCP\Security\ISecureRandom;
 use Psr\Log\LoggerInterface;
 use Throwable;
 use Webauthn\AttestationStatement\AndroidKeyAttestationStatementSupport;
@@ -78,6 +79,7 @@ class WebAuthnManager {
 		IEventDispatcher $eventDispatcher,
 		LoggerInterface $logger,
 		private readonly IRequest $request,
+		private readonly ISecureRandom $random,
 	) {
 		$this->session = $session;
 		$this->repository = $repository;
@@ -100,7 +102,7 @@ class WebAuthnManager {
 			null //Icon
 		);
 
-		$challenge = random_bytes(32); // 32 bytes challenge
+		$challenge = $this->random->generate(32);
 
 		$timeout = 60000;
 
@@ -265,7 +267,7 @@ class WebAuthnManager {
 		}, $activeDevices);
 
 		$publicKeyCredentialRequestOptions = new PublicKeyCredentialRequestOptions(
-			random_bytes(32),                                                    // Challenge
+			$this->random->generate(32),
 			null,                                                                  // Relying Party ID
 			[],                                  // Registered PublicKeyCredentialDescriptor classes
 			null, // User verification requirement
