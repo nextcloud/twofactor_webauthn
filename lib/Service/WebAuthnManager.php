@@ -90,16 +90,16 @@ class WebAuthnManager {
 
 	public function startRegistration(IUser $user, string $serverHost): PublicKeyCredentialCreationOptions {
 		$rpEntity = new PublicKeyCredentialRpEntity(
-			'Nextcloud', //Name
-			$this->stripPort($serverHost),           //ID
-			null                            //Icon
+			'Nextcloud',
+			$this->stripPort($serverHost),
+			null,
 		);
 
 		$userEntity = new PublicKeyCredentialUserEntity(
-			$user->getUID(),                                                //Name
-			$user->getUID(),                              //ID
-			$user->getDisplayName(),                                                       //Display name
-			null //Icon
+			$user->getUID(),
+			$user->getUID(),
+			$user->getDisplayName(),
+			null,
 		);
 
 		$challenge = $this->random->generate(32);
@@ -268,11 +268,11 @@ class WebAuthnManager {
 
 		$publicKeyCredentialRequestOptions = new PublicKeyCredentialRequestOptions(
 			$this->random->generate(32),
-			null,                                                                  // Relying Party ID
-			[],                                  // Registered PublicKeyCredentialDescriptor classes
-			null, // User verification requirement
-			60000,                                                              // Timeout
-			$extensions
+			null,
+			[],
+			null,
+			60000,
+			$extensions,
 		);
 		$publicKeyCredentialRequestOptions
 			->setRpId($this->stripPort($serverHost))
