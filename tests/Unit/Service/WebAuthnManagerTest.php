@@ -18,6 +18,7 @@ use OCP\EventDispatcher\IEventDispatcher;
 use OCP\IRequest;
 use OCP\ISession;
 use OCP\IUser;
+use OCP\Security\ISecureRandom;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
@@ -43,6 +44,7 @@ class WebAuthnManagerTest extends TestCase {
 	private $logger;
 
 	private IRequest&MockObject $request;
+	private ISecureRandom&MockObject $random;
 
 	protected function setUp(): void {
 		parent::setUp();
@@ -53,6 +55,7 @@ class WebAuthnManagerTest extends TestCase {
 		$this->eventDispatcher = $this->createMock(IEventDispatcher::class);
 		$this->logger = $this->createMock(LoggerInterface::class);
 		$this->request = $this->createMock(IRequest::class);
+		$this->random = $this->createMock(ISecureRandom::class);
 
 		$this->manager = new WebAuthnManager(
 			$this->session,
@@ -61,6 +64,7 @@ class WebAuthnManagerTest extends TestCase {
 			$this->eventDispatcher,
 			$this->logger,
 			$this->request,
+			$this->random,
 		);
 	}
 
