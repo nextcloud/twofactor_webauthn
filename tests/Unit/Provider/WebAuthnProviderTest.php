@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace OCA\TwoFactorWebauthn\Tests\Unit\Provider;
 
+use OCA\TwoFactorWebauthn\Model\Device;
 use OCA\TwoFactorWebauthn\Provider\WebAuthnLoginProvider;
 use OCA\TwoFactorWebauthn\Provider\WebAuthnProvider;
 use OCA\TwoFactorWebauthn\Service\WebAuthnManager;
@@ -129,11 +130,7 @@ class WebAuthnProviderTest extends TestCase {
 		$this->manager->expects(self::once())
 			->method('getDevices')
 			->willReturn([
-				[
-					'id' => 'k1',
-					'name' => 'n1',
-					'active' => true,
-				],
+				new Device(1, 'k1', 'n1', null, true),
 			]);
 
 		self::assertTrue($this->provider->isTwoFactorAuthEnabledForUser($user));
@@ -144,11 +141,7 @@ class WebAuthnProviderTest extends TestCase {
 		$this->manager->expects(self::once())
 			->method('getDevices')
 			->willReturn([
-				[
-					'id' => 'k1',
-					'name' => 'n1',
-					'active' => false,
-				],
+				new Device(1, 'k1', 'n1', null, false),
 			]);
 
 		self::assertFalse($this->provider->isTwoFactorAuthEnabledForUser($user));

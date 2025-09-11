@@ -18,7 +18,9 @@ use Exception;
 use OCA\TwoFactorWebauthn\Db\PublicKeyCredentialEntity;
 use OCA\TwoFactorWebauthn\Db\PublicKeyCredentialEntityMapper;
 use OCA\TwoFactorWebauthn\Event\StateChanged;
+use OCA\TwoFactorWebauthn\Model\Device;
 use OCA\TwoFactorWebauthn\Repository\WebauthnPublicKeyCredentialSourceRepository;
+use OCP\AppFramework\Utility\ITimeFactory;
 use OCP\EventDispatcher\IEventDispatcher;
 use OCP\IRequest;
 use OCP\ISession;
@@ -80,6 +82,7 @@ class WebAuthnManager {
 		LoggerInterface $logger,
 		private readonly IRequest $request,
 		private readonly ISecureRandom $random,
+		private readonly ITimeFactory $time,
 	) {
 		$this->session = $session;
 		$this->repository = $repository;
@@ -171,7 +174,7 @@ class WebAuthnManager {
 		return $publicKeyCredentialLoader;
 	}
 
-	public function finishRegister(IUser $user, string $name, $data): array {
+	public function finishRegister(IUser $user, string $name, $data): Device {
 		if (!$this->session->exists(self::TWOFACTORAUTH_WEBAUTHN_REGISTRATION)) {
 			throw new Exception('Twofactor Webauthn registration process was not properly initialized');
 		}
@@ -212,30 +215,23 @@ class WebAuthnManager {
 			$this->stripPort($this->request->getServerHost()),
 		);
 
-		$this->repository->saveCredentialSource($publicKeyCredentialSource, $name);
-		$entity = $this->mapper->findPublicKeyCredential(base64_encode($publicKeyCredentialSource->getPublicKeyCredentialId()));
+		$entity = PublicKeyCredentialEntity::fromPublicKeyCrendentialSource(
+			$name,
+			$publicKeyCredentialSource,
+			$this->time->getTime(),
+		);
+		$entity = $this->mapper->insert($entity);
 		$this->eventDispatcher->dispatch(StateChanged::class, new StateChanged($user, true));
-
-		return [
-			'entityId' => $entity->getId(),
-			'id' => base64_encode($publicKeyCredentialSource->getPublicKeyCredentialId()),
-			'name' => $name,
-			'createdAt' => $entity->getCreatedAt(),
-			'active' => true,
-		];
+		return Device::fromPublicKeyCredentialEntity($entity);
 	}
 
+	/**
+	 * @param IUser $user
+	 * @return Device[]
+	 */
 	public function getDevices(IUser $user): array {
 		$credentials = $this->mapper->findPublicKeyCredentials($user->getUID());
-		return array_map(function (PublicKeyCredentialEntity $credential) {
-			return [
-				'entityId' => $credential->getId(),
-				'id' => $credential->getPublicKeyCredentialId(),
-				'name' => $credential->getName(),
-				'createdAt' => $credential->getCreatedAt(),
-				'active' => ($credential->isActive() === true)
-			];
-		}, $credentials);
+		return array_map(Device::fromPublicKeyCredentialEntity(...), $credentials);
 	}
 
 	private function stripPort(string $serverHost): string {
