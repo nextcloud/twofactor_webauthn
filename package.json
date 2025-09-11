@@ -21,7 +21,7 @@
     "@nextcloud/babel-config": "^1.2.0",
     "@nextcloud/eslint-config": "^8.4.2",
     "@nextcloud/webpack-vue-config": "^6.3.0",
-    "@playwright/test": "^1.52.0",
+    "@playwright/test": "^1.55.0",
     "@vue/test-utils": "^2.4.6",
     "chai": "^4.5.0",
     "jsdom": "^21.1.2",
