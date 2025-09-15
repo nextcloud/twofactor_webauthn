@@ -6,6 +6,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.4.0 - 2025-09-15
+### Changed
+- Code refactoring under the hood
+### Fixed
+- Fix npm audit
+
 ## 2.3.0 - 2025-08-19
 ### Added
 - Support for Nextcloud 32
