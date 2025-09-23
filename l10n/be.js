@@ -1,6 +1,8 @@
 OC.L10N.register(
     "twofactor_webauthn",
     {
+    "You added an WebAuthn hardware token" : "Вы дадалі апаратны токен WebAuthn",
+    "You removed an WebAuthn hardware token" : "Вы выдалілі апаратны токен WebAuthn",
     "Add" : "Дадаць",
     "Retry" : "Паўтарыць спробу",
     "Your browser does not support WebAuthn." : "Ваш браўзер не падтрымлівае WebAuthn.",
