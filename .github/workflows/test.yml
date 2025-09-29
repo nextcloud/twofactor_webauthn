@@ -210,7 +210,7 @@ jobs:
         working-directory: nextcloud/apps/twofactor_webauthn
         run: npm run dev
       - name: Install stunnel (tiny https proxy)
-        run: sudo apt-get install -y stunnel
+        run: sudo apt-get update && sudo apt-get install -y stunnel
       - name: Start php server and https proxy
         working-directory: nextcloud
         run: |
