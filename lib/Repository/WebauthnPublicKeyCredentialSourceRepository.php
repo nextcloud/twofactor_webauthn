@@ -28,13 +28,17 @@ class WebauthnPublicKeyCredentialSourceRepository implements PublicKeyCredential
 	/** @var ITimeFactory */
 	private $time;
 
+	private ?string $userId;
+
 	/**
 	 * @param PublicKeyCredentialEntityMapper $publicKeyCredentialEntityMapper
 	 */
 	public function __construct(PublicKeyCredentialEntityMapper $publicKeyCredentialEntityMapper,
-		ITimeFactory $time) {
+		ITimeFactory $time,
+		?string $userId) {
 		$this->publicKeyCredentialEntityMapper = $publicKeyCredentialEntityMapper;
 		$this->time = $time;
+		$this->userId = $userId;
 	}
 
 	public function has(string $credentialId): bool {
@@ -58,7 +62,11 @@ class WebauthnPublicKeyCredentialSourceRepository implements PublicKeyCredential
 	}
 
 	public function findOneByCredentialId(string $publicKeyCredentialId): ?PublicKeyCredentialSource {
-		$entity = $this->publicKeyCredentialEntityMapper->findPublicKeyCredential(base64_encode($publicKeyCredentialId));
+		if ($this->userId === null) {
+			return null;
+		}
+
+		$entity = $this->publicKeyCredentialEntityMapper->findPublicKeyCredential(base64_encode($publicKeyCredentialId), $this->userId);
 		return $entity === null ? null : $entity->toPublicKeyCredentialSource();
 	}
 
@@ -88,7 +96,7 @@ class WebauthnPublicKeyCredentialSourceRepository implements PublicKeyCredential
 			return $name;
 		}
 
-		$entity = $this->publicKeyCredentialEntityMapper->findPublicKeyCredential(base64_encode($publicKeyCredentialSource->getPublicKeyCredentialId()));
+		$entity = $this->publicKeyCredentialEntityMapper->findPublicKeyCredential(base64_encode($publicKeyCredentialSource->publicKeyCredentialId), $publicKeyCredentialSource->userHandle);
 		return $entity === null ? 'default' : $entity->getName();
 	}
 }
