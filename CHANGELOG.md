@@ -6,6 +6,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.4.1 - 2025-10-01
+### Fixed
+- Refactor credential mapper
+
 ## 2.4.0 - 2025-09-15
 ### Changed
 - Code refactoring under the hood
