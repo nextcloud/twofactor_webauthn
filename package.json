@@ -12,7 +12,7 @@
     "@nextcloud/password-confirmation": "^6.0.0",
     "@nextcloud/router": "^3.0.1",
     "@nextcloud/vue": "^9.0.0-rc.9",
-    "@simplewebauthn/browser": "^13.2.0",
+    "@simplewebauthn/browser": "^13.2.2",
     "pinia": "^3.0.3",
     "vue": "^3.5.21",
     "vue-material-design-icons": "^5.3.1"
