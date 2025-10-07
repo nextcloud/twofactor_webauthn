@@ -32,7 +32,6 @@ use OCP\AppFramework\Db\QBMapper;
 use OCP\DB\Exception;
 use OCP\DB\QueryBuilder\IQueryBuilder;
 use OCP\IDBConnection;
-use OCP\IUser;
 
 /**
  * @template-extends QBMapper<PublicKeyCredentialEntity>
@@ -121,17 +120,21 @@ class PublicKeyCredentialEntityMapper extends QBMapper {
 		}
 	}
 
-	/**
-	 * @param IUser $user
-	 * @param int $id
-	 */
-	public function findPublicKeyCredential($publicKeyCredentialId): ?PublicKeyCredentialEntity {
-		/* @var $qb IQueryBuilder */
+	public function findPublicKeyCredential(string $publicKeyCredentialId, string $userId): ?PublicKeyCredentialEntity {
 		$qb = $this->db->getQueryBuilder();
 
 		$qb->select('id', 'name', 'public_key_credential_id', 'type', 'transports', 'attestation_type', 'trust_path', 'aaguid', 'credential_public_key', 'user_handle', 'counter', 'active', 'created_at')
 			->from('twofactor_webauthn_regs')
-			->where($qb->expr()->eq('public_key_credential_id', $qb->createNamedParameter($publicKeyCredentialId)));
+			->where($qb->expr()->eq(
+				'public_key_credential_id',
+				$qb->createNamedParameter($publicKeyCredentialId, IQueryBuilder::PARAM_STR),
+				IQueryBuilder::PARAM_STR,
+			))
+			->andWhere($qb->expr()->eq(
+				'user_handle',
+				$qb->createNamedParameter($userId, IQueryBuilder::PARAM_STR),
+				IQueryBuilder::PARAM_STR,
+			));
 		try {
 			return $this->findEntity($qb);
 		} catch (\Exception $exception) {
@@ -153,7 +156,7 @@ class PublicKeyCredentialEntityMapper extends QBMapper {
 	}
 
 	public function insertOrUpdate(Entity $entity): Entity {
-		$publicKeyCredentialEntity = $this->findPublicKeyCredential($entity->getPublicKeyCredentialId());
+		$publicKeyCredentialEntity = $this->findPublicKeyCredential($entity->getPublicKeyCredentialId(), $entity->getUserHandle());
 		if ($publicKeyCredentialEntity !== null) {
 			$entity->setId($publicKeyCredentialEntity->getId());
 			return parent::update($entity);

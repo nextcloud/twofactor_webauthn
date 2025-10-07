@@ -231,7 +231,7 @@ class WebAuthnManager {
 		);
 
 		$this->repository->saveCredentialSource($publicKeyCredentialSource, $name);
-		$entity = $this->mapper->findPublicKeyCredential(base64_encode($publicKeyCredentialSource->getPublicKeyCredentialId()));
+		$entity = $this->mapper->findPublicKeyCredential(base64_encode($publicKeyCredentialSource->getPublicKeyCredentialId()), $user->getUID());
 		$this->eventDispatcher->dispatch(StateChanged::class, new StateChanged($user, true));
 
 		return [
