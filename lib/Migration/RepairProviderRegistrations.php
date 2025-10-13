@@ -52,7 +52,7 @@ class RepairProviderRegistrations implements IRepairStep {
 				$deleteQb->expr()->eq('uid', $deleteQb->createParameter('uid')),
 			);
 
-		$result = $selectQb->execute();
+		$result = $selectQb->executeQuery();
 		while ($row = $result->fetch()) {
 			try {
 				$updateQb->setParameter('uid', $row['uid']);
@@ -62,7 +62,7 @@ class RepairProviderRegistrations implements IRepairStep {
 				if ($e->getReason() === Exception::REASON_UNIQUE_CONSTRAINT_VIOLATION) {
 					// The provider was registered twice for the user. We can safely drop the old one.
 					$deleteQb->setParameter('uid', $row['uid']);
-					$deleteQb->execute();
+					$deleteQb->executeStatement();
 				} else {
 					$output->warning(sprintf(
 						'%s Could not migrate %s:%s',
