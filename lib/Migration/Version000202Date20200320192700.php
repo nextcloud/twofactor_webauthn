@@ -54,11 +54,11 @@ class Version000202Date20200320192700 extends SimpleMigrationStep {
 
 		$this->connection->beginTransaction();
 		try {
-			$result = $select->execute();
+			$result = $select->executeQuery();
 			while ($row = $result->fetch()) {
 				$update->setParameter('aaguid', $this->getBytes($output, $row));
 				$update->setParameter('id', $row['id']);
-				$update->execute();
+				$update->executeStatement();
 			}
 			$result->closeCursor();
 			$this->connection->commit();

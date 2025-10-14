@@ -129,7 +129,7 @@ class Version000400Date20220524123120 extends SimpleMigrationStep {
 		$selectQb->select('*')
 			->from('twofactor_webauthn_registrations');
 
-		$result = $selectQb->execute();
+		$result = $selectQb->executeQuery();
 		while ($row = $result->fetch()) {
 			$insertQb
 				->setParameter('name', $row['name'])
@@ -143,7 +143,7 @@ class Version000400Date20220524123120 extends SimpleMigrationStep {
 				->setParameter('user_handle', $row['user_handle'])
 				->setParameter('counter', (int)$row['counter'], IQueryBuilder::PARAM_INT)
 				->setParameter('active', (bool)$row['active'], IQueryBuilder::PARAM_BOOL);
-			$insertQb->execute();
+			$insertQb->executeStatement();
 		}
 		$result->closeCursor();
 	}
