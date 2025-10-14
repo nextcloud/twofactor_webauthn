@@ -31,3 +31,6 @@
 /tests
 /test-results
 /vendor/bin
+/renovate.json
+/webpack*.config.*
+/vendor-bin
