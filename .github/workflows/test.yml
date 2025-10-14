@@ -33,6 +33,8 @@ jobs:
         exclude:
           - php-version: '8.4'
             nextcloud-version: 'stable30'
+          - php-version: '8.1'
+            nextcloud-version: 'master'
     name: Nextcloud ${{ matrix.nextcloud-version }} php${{ matrix.php-version }} unit tests
     steps:
     - name: Set up Nextcloud env
@@ -62,7 +64,7 @@ jobs:
         nextcloud-version: [ 'master' ]
         db: [ 'sqlite' ]
         include:
-          - php-version: '8.1'
+          - php-version: '8.2'
             nextcloud-version: master
             db: 'oci'
           - php-version: '8.1'
@@ -174,6 +176,8 @@ jobs:
         exclude:
           - php-version: '8.4'
             nextcloud-version: 'stable30'
+          - php-version: '8.1'
+            nextcloud-version: 'master'
     steps:
       - name: Set up Nextcloud env
         uses: ChristophWurst/setup-nextcloud@fc0790385c175d97e88a7cb0933490de6e990374 # v0.3.2
