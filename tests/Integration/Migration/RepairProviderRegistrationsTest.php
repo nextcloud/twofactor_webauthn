@@ -32,7 +32,7 @@ class RepairProviderRegistrationsTest extends TestCase {
 		$deleteQb = $this->db->getQueryBuilder();
 		$deleteQb->delete('twofactor_providers')
 			->where($deleteQb->expr()->eq('uid', $deleteQb->createNamedParameter('test123456789')));
-		$deleteQb->execute();
+		$deleteQb->executeStatement();
 	}
 
 	protected function tearDown(): void {
@@ -41,7 +41,7 @@ class RepairProviderRegistrationsTest extends TestCase {
 		$deleteQb = $this->db->getQueryBuilder();
 		$deleteQb->delete('twofactor_providers')
 			->where($deleteQb->expr()->eq('uid', $deleteQb->createNamedParameter('test123456789')));
-		$deleteQb->execute();
+		$deleteQb->executeStatement();
 	}
 
 	public function testFixesOldRegistration(): void {
@@ -53,7 +53,7 @@ class RepairProviderRegistrationsTest extends TestCase {
 				'enabled' => $insertQb->createNamedParameter(1),
 			]);
 		$insertQb->setParameter('provider_id', 'twofactor_webauthn');
-		$insertQb->execute();
+		$insertQb->executeStatement();
 		$output = $this->createMock(IOutput::class);
 
 		$this->repairStep->run($output);
@@ -65,7 +65,7 @@ class RepairProviderRegistrationsTest extends TestCase {
 				$cntQb->expr()->eq('uid', $cntQb->createNamedParameter('test123456789')),
 				$cntQb->expr()->eq('provider_id', $cntQb->createNamedParameter('webauthn')),
 			);
-		$result = $cntQb->execute();
+		$result = $cntQb->executeQuery();
 		$cnt = $result->fetchOne();
 		$result->closeCursor();
 		self::assertEquals(1, $cnt);
@@ -80,9 +80,9 @@ class RepairProviderRegistrationsTest extends TestCase {
 				'enabled' => $insertQb->createNamedParameter(1),
 			]);
 		$insertQb->setParameter('provider_id', 'webauthn');
-		$insertQb->execute();
+		$insertQb->executeStatement();
 		$insertQb->setParameter('provider_id', 'twofactor_webauthn');
-		$insertQb->execute();
+		$insertQb->executeStatement();
 		$output = $this->createMock(IOutput::class);
 		$output->expects(self::never())->method('warning');
 
@@ -94,7 +94,7 @@ class RepairProviderRegistrationsTest extends TestCase {
 			->where(
 				$cntQb->expr()->eq('uid', $cntQb->createNamedParameter('test123456789')),
 			);
-		$result = $cntQb->execute();
+		$result = $cntQb->executeQuery();
 		$cnt = $result->fetchOne();
 		$result->closeCursor();
 		self::assertEquals(1, $cnt);
