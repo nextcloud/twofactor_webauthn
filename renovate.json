@@ -40,7 +40,7 @@
 			"description": "Request JavaScript reviews",
 			"matchManagers": ["npm"],
 			"reviewers": [
-				"st3iny",
+				"kesselb",
 				"ChristophWurst"
 			]
 		},
@@ -48,7 +48,7 @@
 			"description": "Request PHP reviews",
 			"matchManagers": ["composer"],
 			"reviewers": [
-				"st3iny",
+				"kesselb",
 				"ChristophWurst"
 			]
 		},
@@ -57,7 +57,7 @@
 			"matchManagers": ["github-actions"],
 			"extends": ["schedule:monthly"],
 			"reviewers": [
-				"st3iny",
+				"kesselb",
 				"ChristophWurst"
 			]
 		},
@@ -82,7 +82,7 @@
 				"3. to review"
 			],
 			"reviewers": [
-				"st3iny",
+				"kesselb",
 				"ChristophWurst"
 			]
 		},
