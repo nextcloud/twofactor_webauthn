@@ -1,5 +1,8 @@
 { "translations": {
     "Add" : "ເພີ່ມ",
+    "Retry" : "Retry",
+    "Your browser does not support WebAuthn." : "Your browser does not support WebAuthn.",
+    "Active" : "ກຳລັງໃຊ້ງານ",
     "Remove" : "ຍ້າຍອອກ"
 },"pluralForm" :"nplurals=1; plural=0;"
 }
