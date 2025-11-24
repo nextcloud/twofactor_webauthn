@@ -14,7 +14,7 @@
     "@nextcloud/vue": "^9.2.0",
     "@simplewebauthn/browser": "^13.2.2",
     "pinia": "^3.0.4",
-    "vue": "^3.5.22",
+    "vue": "^3.5.25",
     "vue-material-design-icons": "^5.3.1"
   },
   "devDependencies": {
