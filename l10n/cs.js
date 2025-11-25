@@ -14,7 +14,7 @@ OC.L10N.register(
     "Please use your security key to authorize." : "Udělte pověření pomocí svého klíče zabezpečení.",
     "Name your security key" : "Nazvěte svůj klíč zabezpečení",
     "Add" : "Přidat",
-    "Adding your security key …" : "Přidávání vašeho klíče zabezpečení…",
+    "Adding your security key …" : "Přidávání vašeho klíče zabezpečení …",
     "Authentication cancelled" : "Ověřování zrušeno",
     "An error occurred: {msg}" : "Došlo k chybě: {msg}",
     "Retry" : "Zkusit znovu",
