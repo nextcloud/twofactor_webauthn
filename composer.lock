@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a4d2fc6b0fb1232d1c81839931c0dbfc",
+    "content-hash": "5a303417f00a22648a26585caa3dbdd9",
     "packages": [
         {
             "name": "bamarni/composer-bin-plugin",
@@ -1150,16 +1150,16 @@
     "packages-dev": [
         {
             "name": "christophwurst/nextcloud_testing",
-            "version": "v1.0.1",
+            "version": "v1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ChristophWurst/nextcloud_testing.git",
-                "reference": "dcd62d7ea496891f88e6aa9709b15b1d8a774216"
+                "reference": "3bca2106eb406effc713162f0dc9e71fc735a8b3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ChristophWurst/nextcloud_testing/zipball/dcd62d7ea496891f88e6aa9709b15b1d8a774216",
-                "reference": "dcd62d7ea496891f88e6aa9709b15b1d8a774216",
+                "url": "https://api.github.com/repos/ChristophWurst/nextcloud_testing/zipball/3bca2106eb406effc713162f0dc9e71fc735a8b3",
+                "reference": "3bca2106eb406effc713162f0dc9e71fc735a8b3",
                 "shasum": ""
             },
             "require": {
@@ -1186,9 +1186,9 @@
             "description": "Simple and fast unit and integration testing framework for Nextcloud, based on PHPUnit",
             "support": {
                 "issues": "https://github.com/ChristophWurst/nextcloud_testing/issues",
-                "source": "https://github.com/ChristophWurst/nextcloud_testing/tree/v1.0.1"
+                "source": "https://github.com/ChristophWurst/nextcloud_testing/tree/v1.1.0"
             },
-            "time": "2025-05-23T11:40:46+00:00"
+            "time": "2025-12-10T13:23:32+00:00"
         },
         {
             "name": "doctrine/instantiator",
@@ -3651,5 +3651,5 @@
     "platform-overrides": {
         "php": "8.1.0"
     },
-    "plugin-api-version": "2.6.0"
+    "plugin-api-version": "2.9.0"
 }
