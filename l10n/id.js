@@ -3,6 +3,7 @@ OC.L10N.register(
     {
     "Add" : "Masukkan",
     "Retry" : "Ulangi",
+    "Active" : "Aktif",
     "Remove" : "Buang"
 },
 "nplurals=1; plural=0;");

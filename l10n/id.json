@@ -1,6 +1,7 @@
 { "translations": {
     "Add" : "Masukkan",
     "Retry" : "Ulangi",
+    "Active" : "Aktif",
     "Remove" : "Buang"
 },"pluralForm" :"nplurals=1; plural=0;"
 }
