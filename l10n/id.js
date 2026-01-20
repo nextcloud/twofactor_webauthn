@@ -3,6 +3,7 @@ OC.L10N.register(
     {
     "Add" : "Masukkan",
     "Retry" : "Ulangi",
+    "Your browser does not support WebAuthn." : "Browser Anda tidak mendukung WebAuthn.",
     "Active" : "Aktif",
     "Remove" : "Buang"
 },
