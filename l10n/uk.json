@@ -7,7 +7,7 @@
     "Two-Factor WebAuthn" : "Двофакторна авторизація WebAuthn",
     "WebAuthn two-factor provider" : "Постачальник послуг другого фактору WebAuthn",
     "A two-factor provider for WebAuthn devices" : "Постачальник послуг двофакторної авторизації для пристроїв WebAuthn",
-    "Server error while trying to complete security key registration" : "Помилка серверу під час спроби реєстрації ключа безпеки",
+    "Server error while trying to complete security key registration" : "Помилка сервера під час спроби реєстрації ключа безпеки",
     "Add security key" : "Додайте ключ безпеки",
     "Please use your security key to authorize." : "Будь ласка, використовуйте ключ безпеки для авторизації.",
     "Name your security key" : "Дайте назву вашому ключу безпеки",
