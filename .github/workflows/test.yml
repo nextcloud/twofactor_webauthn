@@ -16,7 +16,10 @@ jobs:
       node-version: ${{ steps.versions.outputs.nodeVersion }}
       npm-version: ${{ steps.versions.outputs.npmVersion }}
     steps:
-      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4
+      - name: Check out the app
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
       - name: Read package.json node and npm engines version
         uses: skjnldsv/read-package-engines-version-actions@8205673bab74a63eb9b8093402fd9e0e018663a1 # v2.2
         id: versions
@@ -46,8 +49,9 @@ jobs:
         node-version: 'false'
         install: true
     - name: Checkout app
-      uses: actions/checkout@master
+      uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       with:
+        persist-credentials: false
         path: nextcloud/apps/twofactor_webauthn
     - name: Install dependencies
       working-directory: nextcloud/apps/twofactor_webauthn
@@ -93,7 +97,7 @@ jobs:
           --health-timeout=5s
           --health-retries=3
       postgres-service:
-        image: postgres
+        image: ghcr.io/nextcloud/continuous-integration-postgres-16:latest # zizmor: ignore[unpinned-images]
         env:
           POSTGRES_USER: nextcloud
           POSTGRES_DB: nextcloud
@@ -115,7 +119,7 @@ jobs:
           - 1521:1521/tcp
     steps:
       - name: Set up php${{ matrix.php-version }}
-        uses: shivammathur/setup-php@master
+        uses: shivammathur/setup-php@44454db4f0199b8b9685a5d763dc37cbf79108e1 # v2.36.0
         with:
           php-version: ${{ matrix.php-version }}
           extensions: ctype,curl,dom,gd,iconv,intl,json,mbstring,openssl,posix,sqlite,xml,zip,gmp,oci8
@@ -123,8 +127,9 @@ jobs:
       - name: Checkout Nextcloud
         run: git clone https://github.com/nextcloud/server.git --recursive --depth 1 -b ${{ matrix.nextcloud-version }} nextcloud
       - name: Check out the app
-        uses: actions/checkout@master
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
+          persist-credentials: false
           path: nextcloud/apps/twofactor_webauthn
       - name: Install Nextcloud
         if: ${{ matrix.db != 'oci' }}
@@ -151,7 +156,10 @@ jobs:
       name: Front-end unit tests
       needs: node-version
       steps:
-          - uses: actions/checkout@master
+          - name: Checkout app
+            uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+            with:
+              persist-credentials: false
           - name: Set up Node ${{ needs.node-version.outputs.node-version }}
             uses: actions/setup-node@f1f314fca9dfce2769ece7d933488f076716723e # v1
             with:
@@ -193,8 +201,9 @@ jobs:
           php -f nextcloud/occ config:system:set overwritehost --value=localhost
           php -f nextcloud/occ config:system:set overwrite.cli.url --value=https://localhost
       - name: Check out the app
-        uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
+          persist-credentials: false
           path: nextcloud/apps/twofactor_webauthn
       - name: Install php dependencies
         working-directory: nextcloud/apps/twofactor_webauthn
