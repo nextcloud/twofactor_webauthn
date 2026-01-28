@@ -32,10 +32,8 @@ jobs:
     strategy:
       matrix:
         php-version: ['8.1', '8.2', '8.3', '8.4']
-        nextcloud-version: ['master', 'stable32', 'stable31', 'stable30']
+        nextcloud-version: ['master', 'stable32', 'stable31']
         exclude:
-          - php-version: '8.4'
-            nextcloud-version: 'stable30'
           - php-version: '8.1'
             nextcloud-version: 'master'
     name: Nextcloud ${{ matrix.nextcloud-version }} php${{ matrix.php-version }} unit tests
@@ -78,7 +76,7 @@ jobs:
             nextcloud-version: stable32
             db: 'mysql'
           - php-version: '8.1'
-            nextcloud-version: stable30
+            nextcloud-version: stable31
             db: 'mysql'
     name: Nextcloud ${{ matrix.nextcloud-version }} php${{ matrix.php-version }}-${{ matrix.db }} integration tests
     services:
@@ -180,13 +178,11 @@ jobs:
     strategy:
       matrix:
         php-version: [ '8.1', '8.2', '8.3', '8.4' ]
-        nextcloud-version: [ 'master', 'stable32', 'stable31', 'stable30' ]
+        nextcloud-version: [ 'master', 'stable32', 'stable31']
         include:
           - php-version: '8.5'
             nextcloud-version: 'master'
         exclude:
-          - php-version: '8.4'
-            nextcloud-version: 'stable30'
           - php-version: '8.1'
             nextcloud-version: 'master'
 
