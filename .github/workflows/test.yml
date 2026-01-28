@@ -64,20 +64,20 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        php-version: [ '8.4' ]
+        php-version: [ '8.5' ]
         nextcloud-version: [ 'master' ]
         db: [ 'sqlite' ]
         include:
-          - php-version: '8.2'
+          - php-version: '8.4'
             nextcloud-version: master
             db: 'oci'
-          - php-version: '8.1'
-            nextcloud-version: stable32
-            db: 'pgsql'
           - php-version: '8.3'
-            nextcloud-version: stable31
-            db: 'mysql'
+            nextcloud-version: stable33
+            db: 'pgsql'
           - php-version: '8.2'
+            nextcloud-version: stable32
+            db: 'mysql'
+          - php-version: '8.1'
             nextcloud-version: stable30
             db: 'mysql'
     name: Nextcloud ${{ matrix.nextcloud-version }} php${{ matrix.php-version }}-${{ matrix.db }} integration tests
@@ -181,11 +181,15 @@ jobs:
       matrix:
         php-version: [ '8.1', '8.2', '8.3', '8.4' ]
         nextcloud-version: [ 'master', 'stable32', 'stable31', 'stable30' ]
+        include:
+          - php-version: '8.5'
+            nextcloud-version: 'master'
         exclude:
           - php-version: '8.4'
             nextcloud-version: 'stable30'
           - php-version: '8.1'
             nextcloud-version: 'master'
+
     steps:
       - name: Set up Nextcloud env
         uses: ChristophWurst/setup-nextcloud@fc0790385c175d97e88a7cb0933490de6e990374 # v0.3.2
