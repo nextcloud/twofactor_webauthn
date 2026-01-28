@@ -177,11 +177,15 @@ jobs:
     needs: node-version
     strategy:
       matrix:
-        php-version: [ '8.1', '8.2', '8.3', '8.4' ]
-        nextcloud-version: [ 'master', 'stable32', 'stable31']
+        php-version: [ '8.1', '8.2', '8.4', '8.5' ]
+        nextcloud-version: [ 'master']
         include:
           - php-version: '8.5'
-            nextcloud-version: 'master'
+            nextcloud-version: 'stable33'
+          - php-version: '8.3'
+            nextcloud-version: 'stable32'
+          - php-version: '8.1'
+            nextcloud-version: 'stable31'
         exclude:
           - php-version: '8.1'
             nextcloud-version: 'master'
