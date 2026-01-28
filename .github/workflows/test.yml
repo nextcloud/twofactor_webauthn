@@ -186,6 +186,9 @@ jobs:
             nextcloud-version: 'stable32'
           - php-version: '8.1'
             nextcloud-version: 'stable31'
+        exclude:
+          - php-version: '8.1'
+            nextcloud-version: 'master'
 
     steps:
       - name: Set up Nextcloud env
