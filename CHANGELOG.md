@@ -6,6 +6,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.6.0 – 2026-02-19
+### Added
+- Support for Nextcloud 34
+- Support for PHP8.5
+### Removed
+- Support for Nextcloud 30 (EOL)
+
 ## 2.3.0 - 2025-08-19
 ### Added
 - Support for Nextcloud 32
