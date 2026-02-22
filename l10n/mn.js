@@ -3,6 +3,8 @@ OC.L10N.register(
     {
     "Add" : "нэмэх",
     "Retry" : "Дахин оролдох",
+    "Your browser does not support WebAuthn." : "Таны хөтөч WebAuthn дэмжихгүй байна.",
+    "Active" : "Идэвхтэй",
     "Remove" : "Устгах"
 },
 "nplurals=2; plural=(n != 1);");
