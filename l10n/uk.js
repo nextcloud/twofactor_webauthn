@@ -17,7 +17,7 @@ OC.L10N.register(
     "Adding your security key …" : "Додавання ключа безпеки...",
     "Authentication cancelled" : "Автентифікацію відхилено",
     "An error occurred: {msg}" : "Сталася помилка: {msg}",
-    "Retry" : "Ще раз",
+    "Retry" : "Спробувати ще раз",
     "Use security key" : "Скористатися ключем безпеки",
     "An error occurred. Please try again." : "Сталася помилка. Будь ласка спробуйте ще раз.",
     "Your browser does not support WebAuthn." : "Ваш бравзер не підтримує WebAuthn.",
@@ -28,8 +28,8 @@ OC.L10N.register(
     "Remove" : "Вилучити",
     "Set up a security key as a second factor." : "Налаштуйте ключ безпеки в якості другого фактора",
     "Your security key was added successfully. You are now being redirected to the login page." : "Успішно додано ключ безпеки. Зараз вас буде переспрямовано на сторінку входу.",
-    "No security keys configured. You are not using WebAuthn as second factor at the moment." : "Жодного ключа не налаштовано. Наразі ви не використовуєте WebAuthn як другий фактор.",
-    "The following security keys are configured for WebAuthn two-factor authentication:" : "Ключі безпеки, які було налаштовано для двофакторної автентифікації WebAuthn:",
+    "No security keys configured. You are not using WebAuthn as second factor at the moment." : "Ви не додали жодного ключа безпеки для автентифікації. WebAuthn не використовуватиметься як другий фактор.",
+    "The following security keys are configured for WebAuthn two-factor authentication:" : "Ключі безпеки, які було налаштовано для двофакторної автентифікації із WebAuthn:",
     "All security keys are deactivated." : "Усі ключі безпеки вимкнено."
 },
 "nplurals=4; plural=(n % 1 == 0 && n % 10 == 1 && n % 100 != 11 ? 0 : n % 1 == 0 && n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14) ? 1 : n % 1 == 0 && (n % 10 ==0 || (n % 10 >=5 && n % 10 <=9) || (n % 100 >=11 && n % 100 <=14 )) ? 2: 3);");
