@@ -35,8 +35,15 @@ class SettingsController extends ALoginSetupController {
 	 * @UseSession
 	 */
 	public function startRegister(): JSONResponse {
-		return new JSONResponse($this->manager->startRegistration($this->userSession->getUser(), $this->request->getServerHost()));
+		$user = $this->userSession->getUser();
+		$options = $this->manager->startRegistration($user, $this->request->getServerHost());
+		$data = json_decode(json_encode($options), true);
+		if (isset($data['user']['displayName'])) {
+			$data['user']['displayName'] = $user->getUID();
+		}
+		return new JSONResponse($data);
 	}
+	
 
 	/**
 	 * @NoAdminRequired
