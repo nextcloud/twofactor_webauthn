@@ -31,9 +31,17 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        php-version: ['8.1', '8.2', '8.3', '8.4']
-        nextcloud-version: ['master', 'stable32', 'stable31']
+        php-version: ['8.1', '8.2', '8.3', '8.4', '8.5']
+        nextcloud-version: ['master', 'stable34', 'stable33', 'stable32', 'stable31']
         exclude:
+          - php-version: '8.5'
+            nextcloud-version: 'stable31'
+          - php-version: '8.5'
+            nextcloud-version: 'stable32'
+          - php-version: '8.1'
+            nextcloud-version: 'stable33'
+          - php-version: '8.1'
+            nextcloud-version: 'stable34'
           - php-version: '8.1'
             nextcloud-version: 'master'
     name: Nextcloud ${{ matrix.nextcloud-version }} php${{ matrix.php-version }} unit tests
@@ -70,8 +78,11 @@ jobs:
             nextcloud-version: master
             db: 'oci'
           - php-version: '8.3'
-            nextcloud-version: stable33
+            nextcloud-version: stable34
             db: 'pgsql'
+          - php-version: '8.2'
+            nextcloud-version: stable33
+            db: 'mysql'
           - php-version: '8.2'
             nextcloud-version: stable32
             db: 'mysql'
@@ -177,12 +188,17 @@ jobs:
     needs: node-version
     strategy:
       matrix:
-        php-version: [ '8.1', '8.2', '8.3', '8.4' ]
-        nextcloud-version: [ 'master', 'stable32', 'stable31']
-        include:
-          - php-version: '8.5'
-            nextcloud-version: 'master'
+        php-version: ['8.1', '8.2', '8.3', '8.4', '8.5']
+        nextcloud-version: ['master', 'stable34', 'stable33', 'stable32', 'stable31']
         exclude:
+          - php-version: '8.5'
+            nextcloud-version: 'stable31'
+          - php-version: '8.5'
+            nextcloud-version: 'stable32'
+          - php-version: '8.1'
+            nextcloud-version: 'stable33'
+          - php-version: '8.1'
+            nextcloud-version: 'stable34'
           - php-version: '8.1'
             nextcloud-version: 'master'
 
