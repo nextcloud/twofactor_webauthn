@@ -10,8 +10,8 @@ declare(strict_types=1);
 namespace OCA\TwoFactorWebauthn\Tests\Unit\Activity;
 
 use ChristophWurst\Nextcloud\Testing\TestCase;
-use InvalidArgumentException;
 use OCA\TwoFactorWebauthn\Activity\Provider;
+use OCP\Activity\Exceptions\UnknownActivityException;
 use OCP\Activity\IEvent;
 use OCP\IL10N;
 use OCP\IURLGenerator;
@@ -40,7 +40,7 @@ class ProviderTest extends TestCase {
 		$event->expects(self::once())
 			->method('getApp')
 			->willReturn('comments');
-		$this->expectException(InvalidArgumentException::class);
+		$this->expectException(UnknownActivityException::class);
 
 		$this->provider->parse($lang, $event);
 	}

@@ -9,7 +9,7 @@ declare(strict_types = 1);
 
 namespace OCA\TwoFactorWebauthn\Activity;
 
-use InvalidArgumentException;
+use OCP\Activity\Exceptions\UnknownActivityException;
 use OCP\Activity\IEvent;
 use OCP\Activity\IProvider;
 use OCP\IURLGenerator;
@@ -32,11 +32,11 @@ class Provider implements IProvider {
 	 * @param IEvent $event
 	 * @param IEvent $previousEvent
 	 * @return IEvent
-	 * @throws InvalidArgumentException
+	 * @throws UnknownActivityException
 	 */
 	public function parse($language, IEvent $event, ?IEvent $previousEvent = null) {
 		if ($event->getApp() !== 'twofactor_webauthn') {
-			throw new InvalidArgumentException();
+			throw new UnknownActivityException();
 		}
 
 		$l = $this->l10n->get('twofactor_webauthn', $language);
