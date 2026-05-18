@@ -126,6 +126,11 @@ jobs:
           APP_USER_PASSWORD: owncloud
         ports:
           - 1521:1521/tcp
+        options: >-
+          --health-cmd healthcheck.sh
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 10
     steps:
       - name: Set up php${{ matrix.php-version }}
         uses: shivammathur/setup-php@44454db4f0199b8b9685a5d763dc37cbf79108e1 # v2.36.0
