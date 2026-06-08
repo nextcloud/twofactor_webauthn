@@ -6,6 +6,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.7.0 - 2026-06-08
+### Added
+- Nextcloud 35 support
+### Fixed
+- Fix activity exception type
+
 ## 2.3.0 - 2025-08-19
 ### Added
 - Support for Nextcloud 32
