@@ -3,6 +3,7 @@ OC.L10N.register(
     {
     "Add" : "Rnu",
     "Retry" : "Ɛreḍ tikkelt-nniḍen",
+    "Active" : "Urmid",
     "Remove" : "Kkes"
 },
 "nplurals=2; plural=(n != 1);");

@@ -1,6 +1,7 @@
 { "translations": {
     "Add" : "Rnu",
     "Retry" : "Ɛreḍ tikkelt-nniḍen",
+    "Active" : "Urmid",
     "Remove" : "Kkes"
 },"pluralForm" :"nplurals=2; plural=(n != 1);"
 }
