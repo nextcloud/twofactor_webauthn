@@ -1,8 +1,8 @@
 OC.L10N.register(
     "twofactor_webauthn",
     {
-    "You added an WebAuthn hardware token" : "Jūs pridėjote „WebAuthn“ aparatinį raktą",
-    "You removed an WebAuthn hardware token" : "Jūs pašalinote „WebAuthn“ aparatinį raktą",
+    "You added an WebAuthn hardware token" : "Jūs pridėjote „WebAuthn“ aparatinį žymenį",
+    "You removed an WebAuthn hardware token" : "Jūs pašalinote „WebAuthn“ aparatinį žymenį",
     "WebAuthn disabled by the administration" : "„WebAuthn“ išjungta administratoriaus",
     "Security key" : "Saugumo raktas",
     "Use WebAuthn for second factor authentication" : "Naudokite „WebAuthn“ dviejų veiksnių autentifikavimui",
