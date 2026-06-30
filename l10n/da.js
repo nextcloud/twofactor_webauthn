@@ -6,6 +6,7 @@ OC.L10N.register(
     "Retry" : "Prøv igen",
     "An error occurred. Please try again." : "En fejl opstod. Prøv venligst igen.",
     "Your browser does not support WebAuthn." : "Din browser understøtter ikke WebAuthn.",
+    "Active" : "Aktiv",
     "Remove" : "Fjern"
 },
 "nplurals=2; plural=(n != 1);");
