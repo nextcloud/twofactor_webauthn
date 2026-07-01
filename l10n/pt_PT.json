@@ -1,11 +1,22 @@
 { "translations": {
     "You added an WebAuthn hardware token" : "Você adicionou um token de hardware WebAuthn",
     "WebAuthn disabled by the administration" : "WebAuthn desativado pela administração",
+    "Security key" : "Chave de segurança",
+    "Use WebAuthn for second factor authentication" : "Use WebAuthn para autenticação de segundo fator",
     "WebAuthn two-factor provider" : "Provedor de dois fatores WebAuthn",
     "A two-factor provider for WebAuthn devices" : "Um provedor de dois fatores para dispositivos WebAuthn",
+    "Add security key" : "Adicionar chave de segurança",
+    "Please use your security key to authorize." : "Use sua chave de segurança para autorizar.",
     "Add" : "Adicionar",
+    "Authentication cancelled" : "Autenticação cancelada",
+    "An error occurred: {msg}" : "Ocorreu um erro: {msg}",
     "Retry" : "Repetir",
+    "An error occurred. Please try again." : "Ocorreu um erro. Por favor, tente novamente.",
+    "You are accessing this site via an insecure connection. Browsers might therefore refuse the WebAuthn authentication." : "Você está acessando este site através de uma conexão insegura. Os navegadores podem, portanto, recusar a autenticação WebAuthn.",
+    "Unnamed key" : "Chave sem nome",
     "Active" : "Ativo",
-    "Remove" : "Remover"
+    "Remove" : "Remover",
+    "Your security key was added successfully. You are now being redirected to the login page." : "Sua chave de segurança foi adicionada com sucesso. Agora você está sendo redirecionado para a página de login.",
+    "The following security keys are configured for WebAuthn two-factor authentication:" : "As seguintes chaves de segurança são configuradas para autenticação de dois fatores WebAuthn:"
 },"pluralForm" :"nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;"
 }
