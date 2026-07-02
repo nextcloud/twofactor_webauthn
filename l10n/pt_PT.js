@@ -2,6 +2,7 @@ OC.L10N.register(
     "twofactor_webauthn",
     {
     "You added an WebAuthn hardware token" : "Você adicionou um token de hardware WebAuthn",
+    "You removed an WebAuthn hardware token" : "Você removeu um token de hardware WebAuthn",
     "WebAuthn disabled by the administration" : "WebAuthn desativado pela administração",
     "Security key" : "Chave de segurança",
     "Use WebAuthn for second factor authentication" : "Use WebAuthn para autenticação de segundo fator",
@@ -10,15 +11,18 @@ OC.L10N.register(
     "Add security key" : "Adicionar chave de segurança",
     "Please use your security key to authorize." : "Use sua chave de segurança para autorizar.",
     "Add" : "Adicionar",
+    "Adding your security key …" : "Adicionando sua chave de segurança …",
     "Authentication cancelled" : "Autenticação cancelada",
     "An error occurred: {msg}" : "Ocorreu um erro: {msg}",
     "Retry" : "Repetir",
     "An error occurred. Please try again." : "Ocorreu um erro. Por favor, tente novamente.",
     "You are accessing this site via an insecure connection. Browsers might therefore refuse the WebAuthn authentication." : "Você está acessando este site através de uma conexão insegura. Os navegadores podem, portanto, recusar a autenticação WebAuthn.",
     "Unnamed key" : "Chave sem nome",
+    "Registered" : "Registrada",
     "Active" : "Ativo",
     "Remove" : "Remover",
     "Your security key was added successfully. You are now being redirected to the login page." : "Sua chave de segurança foi adicionada com sucesso. Agora você está sendo redirecionado para a página de login.",
-    "The following security keys are configured for WebAuthn two-factor authentication:" : "As seguintes chaves de segurança são configuradas para autenticação de dois fatores WebAuthn:"
+    "The following security keys are configured for WebAuthn two-factor authentication:" : "As seguintes chaves de segurança são configuradas para autenticação de dois fatores WebAuthn:",
+    "All security keys are deactivated." : "Todas as chaves de segurança estão desativadas."
 },
 "nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;");
