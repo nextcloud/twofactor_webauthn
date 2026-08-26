@@ -32,7 +32,7 @@ jobs:
     strategy:
       matrix:
         php-version: ['8.1', '8.2', '8.3', '8.4', '8.5']
-        nextcloud-version: ['master', 'stable34', 'stable33', 'stable32', 'stable31']
+        nextcloud-version: ['master', 'stable34', 'stable35', 'stable33', 'stable32', 'stable31']
         exclude:
           - php-version: '8.5'
             nextcloud-version: 'stable31'
@@ -43,6 +43,12 @@ jobs:
           - php-version: '8.1'
             nextcloud-version: 'stable34'
           - php-version: '8.1'
+            nextcloud-version: 'stable35'
+          - php-version: '8.2'
+            nextcloud-version: 'stable35'
+          - php-version: '8.1'
+            nextcloud-version: 'master'
+          - php-version: '8.2'
             nextcloud-version: 'master'
     name: Nextcloud ${{ matrix.nextcloud-version }} php${{ matrix.php-version }} unit tests
     steps:
@@ -75,7 +81,7 @@ jobs:
         db: [ 'sqlite' ]
         include:
           - php-version: '8.4'
-            nextcloud-version: master
+            nextcloud-version: stable35
             db: 'oci'
           - php-version: '8.3'
             nextcloud-version: stable34
@@ -192,7 +198,7 @@ jobs:
     strategy:
       matrix:
         php-version: ['8.1', '8.2', '8.3', '8.4', '8.5']
-        nextcloud-version: ['master', 'stable34', 'stable33', 'stable32', 'stable31']
+        nextcloud-version: ['master', 'stable35', 'stable34', 'stable33', 'stable32', 'stable31']
         exclude:
           - php-version: '8.5'
             nextcloud-version: 'stable31'
@@ -202,6 +208,8 @@ jobs:
             nextcloud-version: 'stable33'
           - php-version: '8.1'
             nextcloud-version: 'stable34'
+          - php-version: '8.1'
+            nextcloud-version: 'stable35'
           - php-version: '8.1'
             nextcloud-version: 'master'
 
