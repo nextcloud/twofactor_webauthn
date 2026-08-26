@@ -1,6 +1,6 @@
 {
     "require": {
-        "nextcloud/coding-standard": "^1.4.0"
+        "nextcloud/coding-standard": "^1.5.0"
     },
 	"config": {
 		"optimize-autoloader": true,
