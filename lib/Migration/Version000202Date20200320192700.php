@@ -91,7 +91,7 @@ class Version000202Date20200320192700 extends SimpleMigrationStep {
 
 		if ($schema->hasTable('twofactor_webauthn_registrations')) {
 			$table = $schema->getTable('twofactor_webauthn_registrations');
-			$table->getColumn('aaguid')->setOptions(['length' => 16]);
+			$table->modifyColumn('aaguid', ['length' => 16]);
 		}
 
 		return $schema;
