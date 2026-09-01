@@ -1,5 +1,6 @@
 { "translations": {
     "Add" : "Derbäimaachen",
+    "Retry" : "Widderhuelen",
     "Remove" : "Läschen"
 },"pluralForm" :"nplurals=2; plural=(n != 1);"
 }
