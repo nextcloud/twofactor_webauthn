@@ -22,7 +22,7 @@
     "@nextcloud/eslint-config": "^8.4.2",
     "@nextcloud/webpack-vue-config": "^6.3.2",
     "@playwright/test": "^1.55.0",
-    "@vue/test-utils": "^2.4.6",
+    "@vue/test-utils": "^2.5.0",
     "chai": "^4.5.0",
     "jsdom": "^21.1.2",
     "jsdom-global": "^3.0.2",
