@@ -19,7 +19,7 @@
   },
   "devDependencies": {
     "@nextcloud/babel-config": "^1.2.0",
-    "@nextcloud/eslint-config": "^8.4.2",
+    "@nextcloud/eslint-config": "^9.0.1",
     "@nextcloud/webpack-vue-config": "^6.3.2",
     "@playwright/test": "^1.55.0",
     "@vue/test-utils": "^2.4.6",
