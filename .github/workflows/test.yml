@@ -210,7 +210,11 @@ jobs:
             nextcloud-version: 'stable34'
           - php-version: '8.1'
             nextcloud-version: 'stable35'
+          - php-version: '8.2'
+            nextcloud-version: 'stable35'
           - php-version: '8.1'
+            nextcloud-version: 'master'
+          - php-version: '8.2'
             nextcloud-version: 'master'
 
     steps:
