@@ -17,7 +17,7 @@ jobs:
       npm-version: ${{ steps.versions.outputs.npmVersion }}
     steps:
       - name: Check out the app
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
         with:
           persist-credentials: false
       - name: Read package.json node and npm engines version
@@ -61,7 +61,7 @@ jobs:
         node-version: 'false'
         install: true
     - name: Checkout app
-      uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
       with:
         persist-credentials: false
         path: nextcloud/apps/twofactor_webauthn
@@ -145,7 +145,7 @@ jobs:
       - name: Checkout Nextcloud
         run: git clone https://github.com/nextcloud/server.git --recursive --depth 1 -b ${{ matrix.nextcloud-version }} nextcloud
       - name: Check out the app
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
         with:
           persist-credentials: false
           path: nextcloud/apps/twofactor_webauthn
@@ -175,7 +175,7 @@ jobs:
       needs: node-version
       steps:
           - name: Checkout app
-            uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+            uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
             with:
               persist-credentials: false
           - name: Set up Node ${{ needs.node-version.outputs.node-version }}
@@ -232,7 +232,7 @@ jobs:
           php -f nextcloud/occ config:system:set overwritehost --value=localhost
           php -f nextcloud/occ config:system:set overwrite.cli.url --value=https://localhost
       - name: Check out the app
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
         with:
           persist-credentials: false
           path: nextcloud/apps/twofactor_webauthn
