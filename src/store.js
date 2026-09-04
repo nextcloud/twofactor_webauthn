@@ -8,7 +8,6 @@ import * as RegistrationService from './services/RegistrationService.js'
 
 export const useMainStore = defineStore('main', {
 	state: () => ({
-		credentialRequestOptions: {},
 		devices: [],
 	}),
 	actions: {
