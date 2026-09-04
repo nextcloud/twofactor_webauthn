@@ -44,6 +44,7 @@ use Webauthn\AuthenticatorAttestationResponse;
 use Webauthn\AuthenticatorAttestationResponseValidator;
 use Webauthn\AuthenticatorSelectionCriteria;
 use Webauthn\PublicKeyCredentialCreationOptions;
+use Webauthn\PublicKeyCredentialDescriptor;
 use Webauthn\PublicKeyCredentialLoader;
 use Webauthn\PublicKeyCredentialParameters;
 use Webauthn\PublicKeyCredentialRequestOptions;
@@ -244,35 +245,40 @@ class WebAuthnManager {
 		return $serverHostWithoutPort;
 	}
 
+	/**
+	 * @return list<PublicKeyCredentialDescriptor>
+	 */
+	private function getAllowedCredentials(string $uid): array {
+		$activeDevices = array_values(array_filter(
+			$this->mapper->findPublicKeyCredentials($uid),
+			function ($device) {
+				return ($device->isActive() === true);
+			}
+		));
+
+		// List of registered PublicKeyCredentialDescriptor classes associated to the user
+		return array_map(
+			fn (PublicKeyCredentialEntity $credential) => $credential->toPublicKeyCredentialSource()->getPublicKeyCredentialDescriptor(),
+			$activeDevices
+		);
+	}
+
 	public function startAuthenticate(IUser $user, string $serverHost): PublicKeyCredentialRequestOptions {
 		// Extensions
 		$extensions = new AuthenticationExtensionsClientInputs();
 		$extensions->add(new AuthenticationExtension('loc', true));
 		$extensions->add(new AuthenticationExtension('appid', "https://$serverHost"));
 
-		$activeDevices = array_filter(
-			$this->mapper->findPublicKeyCredentials($user->getUID()),
-			function ($device) {
-				return ($device->isActive() === true);
-			}
-		);
-
-		// List of registered PublicKeyCredentialDescriptor classes associated to the user
-		$registeredPublicKeyCredentialDescriptors = array_map(function (PublicKeyCredentialEntity $credential) {
-			return $credential->toPublicKeyCredentialSource()->getPublicKeyCredentialDescriptor();
-		}, $activeDevices);
-
 		$publicKeyCredentialRequestOptions = new PublicKeyCredentialRequestOptions(
 			$this->random->generate(32),
 			null,
-			[],
+			$this->getAllowedCredentials($user->getUID()),
 			null,
 			60000,
 			$extensions,
 		);
 		$publicKeyCredentialRequestOptions
 			->setRpId($this->stripPort($serverHost))
-			->allowCredentials(...$registeredPublicKeyCredentialDescriptors)
 			->setUserVerification(PublicKeyCredentialRequestOptions::USER_VERIFICATION_REQUIREMENT_DISCOURAGED);
 
 		$this->session->set(self::TWOFACTORAUTH_WEBAUTHN_REQUEST, $publicKeyCredentialRequestOptions->jsonSerialize());
@@ -287,6 +293,8 @@ class WebAuthnManager {
 
 		// Retrieve the Options passed to the device
 		$publicKeyCredentialRequestOptions = PublicKeyCredentialRequestOptions::createFromArray($this->session->get(self::TWOFACTORAUTH_WEBAUTHN_REQUEST));
+		// Update in case some devices where deactivated in-between
+		$publicKeyCredentialRequestOptions->allowCredentials = $this->getAllowedCredentials($user->getUID());
 
 		$attestationStatementSupportManager = $this->buildAttestationStatementSupportManager();
 
