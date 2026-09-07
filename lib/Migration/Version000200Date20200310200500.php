@@ -28,7 +28,7 @@ class Version000200Date20200310200500 extends SimpleMigrationStep {
 
 		if ($schema->hasTable('twofactor_webauthn_registrations')) {
 			$table = $schema->getTable('twofactor_webauthn_registrations');
-			$table->getColumn('credential_public_key')->setOptions(['length' => 2000]);
+			$table->modifyColumn('credential_public_key', ['length' => 2000]);
 		}
 
 		return $schema;
