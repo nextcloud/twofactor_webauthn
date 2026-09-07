@@ -6,6 +6,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.7.1 - 2026-09-07
+### Fixed
+- DataCloneError (e.g. when using Bitwarden)
+
 ## 2.7.0 - 2026-06-08
 ### Added
 - Nextcloud 35 support
