@@ -19,6 +19,7 @@
 	"commitMessageTopic": "{{depName}}",
 	"commitMessageExtra": "from {{currentVersion}} to {{#if isPinDigest}}{{{newDigestShort}}}{{else}}{{#if isMajor}}{{prettyNewMajor}}{{else}}{{#if isSingleVersion}}{{prettyNewVersion}}{{else}}{{#if newValue}}{{{newValue}}}{{else}}{{{newDigestShort}}}{{/if}}{{/if}}{{/if}}{{/if}}",
 	"rangeStrategy": "bump",
+	"minimumReleaseAge": "7 days",
 	"rebaseWhen": "conflicted",
 	"ignoreUnstable": false,
 	"baseBranches": [
@@ -34,6 +35,21 @@
 		"npm",
 		"php",
 		"postcss-loader"
+	],
+	"ignorePaths": [
+		".github/workflows/ai-policy.yml",
+		".github/workflows/appstore-build-publish.yml",
+		".github/workflows/block-unconventional-commits.yml",
+		".github/workflows/fixup.yml",
+		".github/workflows/lint-eslint.yml",
+		".github/workflows/lint-info-xml.yml",
+		".github/workflows/lint-php-cs.yml",
+		".github/workflows/lint-php.yml",
+		".github/workflows/npm-audit-fix.yml",
+		".github/workflows/pr-feedback.yml",
+		".github/workflows/psalm-matrix.yml",
+		".github/workflows/reuse.yml",
+		".github/workflows/sync-workflow-templates.yml",
 	],
 	"packageRules": [
 		{
