@@ -6,6 +6,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.4.2 - 2026-09-08
+### Fixed
+- DataCloneError (e.g. when using Bitwarden)
+
 ## 2.4.1 - 2025-10-01
 ### Fixed
 - Refactor credential mapper
