@@ -19,7 +19,7 @@ OC.L10N.register(
     "An error occurred: {msg}" : "Es ist ein Fehler aufgetreten: {msg}",
     "Retry" : "Wiederholen",
     "Use security key" : "Sicherheitsschlüssel verwenden",
-    "An error occurred. Please try again." : "Es ist ein Fehler aufgetreten. Bitte erneut versuchen.",
+    "An error occurred. Please try again." : "Es ist ein Fehler aufgetreten. Bitte noch einmal versuchen.",
     "Your browser does not support WebAuthn." : "Ihr Browser unterstützt kein WebAuthn.",
     "You are accessing this site via an insecure connection. Browsers might therefore refuse the WebAuthn authentication." : "Sie greifen auf diese Seite über eine unsichere Verbindung zu. Einige Browser werden daher die WebAuthn-Authentifizierung verweigern.",
     "Unnamed key" : "Unbenannter Sicherheitsschlüssel",
