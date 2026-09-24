@@ -125,7 +125,7 @@ jobs:
           --health-timeout 5s
           --health-retries 5
       oracle:
-        image: ghcr.io/gvenzl/oracle-xe:18
+        image: ghcr.io/gvenzl/oracle-xe:21
         env:
           ORACLE_PASSWORD: rootpassword
         ports:
