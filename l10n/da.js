@@ -16,7 +16,7 @@ OC.L10N.register(
     "Add" : "Tilføj",
     "Adding your security key …" : "Tilføjer din sikkerhedsnøgle …",
     "Authentication cancelled" : "Godkendelsen blev annulleret",
-    "An error occurred: {msg}" : "Der skete en fejl: {msg}",
+    "An error occurred: {msg}" : "Der opstod en fejl: {msg}",
     "Retry" : "Prøv igen",
     "Use security key" : "Brug sikkerhedsnøgle",
     "An error occurred. Please try again." : "Der opstod en fejl. Prøv igen.",
