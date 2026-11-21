@@ -14,7 +14,7 @@
 	"require": {
 		"php": ">=8.1.0",
 		"ext-json": "*",
-		"bamarni/composer-bin-plugin": "^1.8.2",
+		"bamarni/composer-bin-plugin": "^1.9.1",
 		"psr/log": "^2||^3",
 		"web-auth/webauthn-lib": "^4.9.2"
 	},
