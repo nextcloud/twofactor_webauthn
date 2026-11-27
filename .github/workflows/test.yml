@@ -40,10 +40,6 @@ jobs:
             nextcloud-version: 'stable34'
           - php-version: '8.2'
             nextcloud-version: 'stable33'
-          - php-version: '8.2'
-            nextcloud-version: 'stable32'
-          - php-version: '8.1'
-            nextcloud-version: 'stable31'
     name: Nextcloud ${{ matrix.nextcloud-version }} php${{ matrix.php-version }} unit tests
     steps:
     - name: Set up Nextcloud env
@@ -82,12 +78,6 @@ jobs:
             db: 'pgsql'
           - php-version: '8.2'
             nextcloud-version: stable33
-            db: 'mysql'
-          - php-version: '8.2'
-            nextcloud-version: stable32
-            db: 'mysql'
-          - php-version: '8.1'
-            nextcloud-version: stable31
             db: 'mysql'
     name: Nextcloud ${{ matrix.nextcloud-version }} php${{ matrix.php-version }}-${{ matrix.db }} integration tests
     services:
@@ -200,10 +190,6 @@ jobs:
             nextcloud-version: 'stable34'
           - php-version: '8.2'
             nextcloud-version: 'stable33'
-          - php-version: '8.2'
-            nextcloud-version: 'stable32'
-          - php-version: '8.1'
-            nextcloud-version: 'stable31'
 
     steps:
       - name: Set up Nextcloud env
