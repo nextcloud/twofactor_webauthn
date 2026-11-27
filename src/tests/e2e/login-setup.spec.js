@@ -4,8 +4,8 @@
  */
 
 import { test } from '@playwright/test'
-import { createVirtualAuthenticator } from './virtualAuthenticator.js'
 import { disableTwofactorAuth, enforceTwofactorAuth } from './occ.js'
+import { createVirtualAuthenticator } from './virtualAuthenticator.js'
 
 test.beforeAll(async () => {
 	await enforceTwofactorAuth(true)

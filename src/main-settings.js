@@ -4,11 +4,10 @@
  */
 
 import { loadState } from '@nextcloud/initial-state'
-import { createApp } from 'vue'
 import { createPinia } from 'pinia'
-
-import Nextcloud from './mixins/Nextcloud.js'
+import { createApp } from 'vue'
 import PersonalSettings from './components/PersonalSettings.vue'
+import Nextcloud from './mixins/Nextcloud.js'
 import { useMainStore } from './store.js'
 
 import '@nextcloud/password-confirmation/style.css'

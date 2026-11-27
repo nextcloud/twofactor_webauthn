@@ -5,20 +5,24 @@
 
 <template>
 	<div>
-		<form ref="challengeForm"
+		<form
+			ref="challengeForm"
 			method="POST">
-			<input id="challenge"
+			<input
+				id="challenge"
 				:value="challenge"
 				type="hidden"
 				name="challenge">
 		</form>
 
-		<p v-if="error"
+		<p
+			v-if="error"
 			id="webauthn-info">
 			<strong>
 				{{ t('twofactor_webauthn', 'An error occurred: {msg}', {msg: error}) }}
 			</strong>
-			<NcButton class="btn sign"
+			<NcButton
+				class="btn sign"
 				@click="sign">
 				{{ t('twofactor_webauthn', 'Retry') }}
 			</NcButton>
@@ -26,7 +30,8 @@
 		<p v-else id="webauthn-info">
 			{{ t('twofactor_webauthn', 'Use security key') }}
 		</p>
-		<p id="webauthn-error"
+		<p
+			id="webauthn-error"
 			style="display: none">
 			<strong>{{ t('mail', 'An error occurred. Please try again.') }}</strong>
 		</p>
@@ -36,7 +41,8 @@
 				{{ t('twofactor_webauthn', 'Your browser does not support WebAuthn.') }}
 			</em>
 		</p>
-		<p v-else-if="httpWarning"
+		<p
+			v-else-if="httpWarning"
 			id="webauthn-http-warning">
 			<em>
 				{{ t('twofactor_webauthn', 'You are accessing this site via an insecure connection. Browsers might therefore refuse the WebAuthn authentication.') }}
@@ -75,6 +81,7 @@ export default {
 		httpWarning() {
 			return document.location.protocol !== 'https:'
 		},
+
 		/**
 		 * @return {boolean} True, if WebAuthn is not supported by the browser
 		 */
@@ -102,14 +109,14 @@ export default {
 				})
 			} catch (error) {
 				switch (error.name) {
-				case 'AbortError':
-					this.error = t('twofactor_webauthn', 'Authentication cancelled')
-					break
-				case 'NotAllowedError':
-					this.error = t('twofactor_webauthn', 'Authentication cancelled')
-					break
-				default:
-					this.error = error.toString()
+					case 'AbortError':
+						this.error = t('twofactor_webauthn', 'Authentication cancelled')
+						break
+					case 'NotAllowedError':
+						this.error = t('twofactor_webauthn', 'Authentication cancelled')
+						break
+					default:
+						this.error = error.toString()
 				}
 				logger.error('challenge failed', { error })
 				return

@@ -3,10 +3,10 @@
  * SPDX-License-Identifier: AGPL-3.0-or-later
  */
 
-import { createApp } from 'vue'
-import Nextcloud from './mixins/Nextcloud.js'
-import Challenge from './components/Challenge.vue'
 import { loadState } from '@nextcloud/initial-state'
+import { createApp } from 'vue'
+import Challenge from './components/Challenge.vue'
+import Nextcloud from './mixins/Nextcloud.js'
 
 const credentialRequestOptions = loadState('twofactor_webauthn', 'credential-request-options')
 

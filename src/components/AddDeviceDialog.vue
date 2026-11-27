@@ -5,7 +5,8 @@
 
 <template>
 	<div v-if="step === RegistrationSteps.READY">
-		<NcButton class="new-webauthn-device__button"
+		<NcButton
+			class="new-webauthn-device__button"
 			@click="start">
 			{{ t('twofactor_webauthn', 'Add security key') }}
 		</NcButton>
@@ -15,21 +16,25 @@
 		</p>
 	</div>
 
-	<div v-else-if="step === RegistrationSteps.REGISTRATION"
+	<div
+		v-else-if="step === RegistrationSteps.REGISTRATION"
 		class="new-webauthn-device">
 		<span class="icon-loading-small webauthn-loading" />
 		{{ t('twofactor_webauthn', 'Please use your security key to authorize.') }}
 	</div>
 
-	<div v-else-if="step === RegistrationSteps.NAMING"
+	<div
+		v-else-if="step === RegistrationSteps.NAMING"
 		class="new-webauthn-device">
 		<span class="icon-loading-small webauthn-loading" />
-		<form @submit.prevent="submit" class="new-webauthn-device__form">
-			<input v-model="name"
+		<form class="new-webauthn-device__form" @submit.prevent="submit">
+			<input
+				v-model="name"
 				required
 				type="text"
 				:placeholder="t('twofactor_webauthn', 'Name your security key')">
-			<NcButton class="new-webauthn-device__button"
+			<NcButton
+				class="new-webauthn-device__button"
 				type="submit"
 				:disabled="!name.length">
 				{{ t('twofactor_webauthn', 'Add') }}
@@ -37,10 +42,11 @@
 		</form>
 	</div>
 
-	<div v-else-if="step === RegistrationSteps.PERSIST"
+	<div
+		v-else-if="step === RegistrationSteps.PERSIST"
 		class="new-webauthn-device">
 		<span class="icon-loading-small webauthn-loading" />
-		{{ t('twofactor_webauthn', 'Adding your security key …') }}
+		{{ t('twofactor_webauthn', 'Adding your security key …') }}
 	</div>
 
 	<div v-else>
@@ -52,9 +58,9 @@
 import { confirmPassword } from '@nextcloud/password-confirmation'
 import { NcButton } from '@nextcloud/vue'
 import { startRegistration } from '@simplewebauthn/browser'
-import * as RegistrationService from '../services/RegistrationService.js'
-import logger from '../logger.js'
 import { mapStores } from 'pinia'
+import logger from '../logger.js'
+import * as RegistrationService from '../services/RegistrationService.js'
 import { useMainStore } from '../store.js'
 
 const RegistrationSteps = Object.freeze({
@@ -144,7 +150,7 @@ export default {
 				logger.debug('new device added to store', { device })
 			} catch (error) {
 				logger.error('Error persisting webauthn registration', { error })
-				throw new Error(t('twofactor_webauthn', 'Server error while trying to complete security key registration'))
+				throw new Error(t('twofactor_webauthn', 'Server error while trying to complete security key registration'), { cause: error })
 			}
 		},
 

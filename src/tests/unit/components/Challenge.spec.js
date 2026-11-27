@@ -4,8 +4,8 @@
  */
 
 import { shallowMount } from '@vue/test-utils'
-import Nextcloud from '../../../mixins/Nextcloud.js'
 import Challenge from '../../../components/Challenge.vue'
+import Nextcloud from '../../../mixins/Nextcloud.js'
 
 describe('Challenge', () => {
 	it('receives credentialRequestOptions as a prop', () => {

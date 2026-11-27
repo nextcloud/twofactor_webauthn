@@ -5,8 +5,8 @@
 
 import { shallowMount } from '@vue/test-utils'
 import { createPinia, setActivePinia } from 'pinia'
-import Nextcloud from '../../../mixins/Nextcloud.js'
 import PersonalSettings from '../../../components/PersonalSettings.vue'
+import Nextcloud from '../../../mixins/Nextcloud.js'
 import { useMainStore } from '../../../store.js'
 
 describe('PersonalSettings', () => {
