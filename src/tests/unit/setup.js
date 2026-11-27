@@ -7,6 +7,7 @@
 // jsdom's implementation: node:events' setMaxListeners (used by p-queue v10
 // bundled with @nextcloud/vue) only accepts the built-in one.
 const NodeEventTarget = globalThis.EventTarget
+const NodeEvent = globalThis.Event
 
 // Emulate browser environment for tests (inside node)
 // Ref (url): https://github.com/jsdom/jsdom/issues/2383#issuecomment-442199291
@@ -16,6 +17,7 @@ require('jsdom-global')('', {
 })
 global.SVGElement = window.SVGElement
 globalThis.EventTarget = NodeEventTarget
+globalThis.Event = NodeEvent
 
 // webdav's web build (pulled in via @nextcloud/files) reads fetch and the
 // fetch-related classes from window, which jsdom does not provide. Expose
