@@ -55,6 +55,7 @@ use Webauthn\TokenBinding\TokenBindingNotSupportedHandler;
 class WebAuthnManager {
 	public const TWOFACTORAUTH_WEBAUTHN_REGISTRATION = 'twofactorauth_webauthn_regs';
 	public const TWOFACTORAUTH_WEBAUTHN_REQUEST = 'twofactorauth_webauthn_request';
+	private const ZERO_AAGUID = '00000000-0000-0000-0000-000000000000';
 	/**
 	 * @var ISession
 	 */
@@ -246,33 +247,58 @@ class WebAuthnManager {
 	}
 
 	/**
+	 * @return list<PublicKeyCredentialEntity>
+	 */
+	private function getActiveCredentials(string $uid): array {
+		return array_values(array_filter(
+			$this->mapper->findPublicKeyCredentials($uid),
+			fn (PublicKeyCredentialEntity $credential) => $credential->isActive() === true,
+		));
+	}
+
+	/**
+	 * @param list<PublicKeyCredentialEntity> $credentials
 	 * @return list<PublicKeyCredentialDescriptor>
 	 */
-	private function getAllowedCredentials(string $uid): array {
-		$activeDevices = array_values(array_filter(
-			$this->mapper->findPublicKeyCredentials($uid),
-			function ($device) {
-				return ($device->isActive() === true);
-			}
-		));
-
-		// List of registered PublicKeyCredentialDescriptor classes associated to the user
+	private function toCredentialDescriptors(array $credentials): array {
 		return array_map(
 			fn (PublicKeyCredentialEntity $credential) => $credential->toPublicKeyCredentialSource()->getPublicKeyCredentialDescriptor(),
-			$activeDevices
+			$credentials,
 		);
 	}
 
+	/**
+	 * Credentials migrated from twofactor_u2f (see U2FMigrator) are scoped to
+	 * the legacy U2F AppID and carry no creation time and an all-zero AAGUID.
+	 *
+	 * @param list<PublicKeyCredentialEntity> $credentials
+	 */
+	private function hasMigratedU2FCredential(array $credentials): bool {
+		foreach ($credentials as $credential) {
+			if ($credential->getCreatedAt() === null
+				&& $credential->getAaguid() === self::ZERO_AAGUID) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	public function startAuthenticate(IUser $user, string $serverHost): PublicKeyCredentialRequestOptions {
-		// Extensions
+		$activeCredentials = $this->getActiveCredentials($user->getUID());
+
+		// Only request the legacy U2F AppID extension when it is actually
+		// needed. Sending it unconditionally makes some platforms (e.g. Safari
+		// on macOS) obtain a PIN/UV token for the wrong RP ID, so security keys
+		// reject the correct PIN.
 		$extensions = new AuthenticationExtensionsClientInputs();
-		$extensions->add(new AuthenticationExtension('loc', true));
-		$extensions->add(new AuthenticationExtension('appid', "https://$serverHost"));
+		if ($this->hasMigratedU2FCredential($activeCredentials)) {
+			$extensions->add(new AuthenticationExtension('appid', "https://$serverHost"));
+		}
 
 		$publicKeyCredentialRequestOptions = new PublicKeyCredentialRequestOptions(
 			$this->random->generate(32),
 			null,
-			$this->getAllowedCredentials($user->getUID()),
+			$this->toCredentialDescriptors($activeCredentials),
 			null,
 			60000,
 			$extensions,
@@ -294,7 +320,7 @@ class WebAuthnManager {
 		// Retrieve the Options passed to the device
 		$publicKeyCredentialRequestOptions = PublicKeyCredentialRequestOptions::createFromArray($this->session->get(self::TWOFACTORAUTH_WEBAUTHN_REQUEST));
 		// Update in case some devices where deactivated in-between
-		$publicKeyCredentialRequestOptions->allowCredentials = $this->getAllowedCredentials($user->getUID());
+		$publicKeyCredentialRequestOptions->allowCredentials = $this->toCredentialDescriptors($this->getActiveCredentials($user->getUID()));
 
 		$attestationStatementSupportManager = $this->buildAttestationStatementSupportManager();
 

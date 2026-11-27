@@ -136,4 +136,70 @@ class WebAuthnManagerTest extends TestCase {
 
 		$this->manager->startRegistration($user, 'my.next.cloud');
 	}
+
+	private function createCredential(int $id, ?int $createdAt, string $aaguid): PublicKeyCredentialEntity {
+		$credential = new PublicKeyCredentialEntity();
+		$credential->setId($id);
+		$credential->setName("key-$id");
+		$credential->setPublicKeyCredentialId(base64_encode("credential-id-$id"));
+		$credential->setType('public-key');
+		$credential->setTransports(json_encode(['usb', 'nfc']));
+		$credential->setAttestationType('none');
+		$credential->setTrustPath(json_encode(['type' => 'Webauthn\\TrustPath\\EmptyTrustPath']));
+		$credential->setAaguid($aaguid);
+		$credential->setCredentialPublicKey(base64_encode('public-key'));
+		$credential->setUserHandle('user123');
+		$credential->setCounter(0);
+		$credential->setActive(true);
+		$credential->setCreatedAt($createdAt);
+		return $credential;
+	}
+
+	public function testStartAuthenticateOmitsAppIdForWebAuthnCredentials(): void {
+		$user = $this->createMock(IUser::class);
+		$user->method('getUID')->willReturn('user123');
+		$this->mapper->method('findPublicKeyCredentials')
+			->willReturn([$this->createCredential(1, 1700000000, 'ee882879-721c-4913-9775-3dfcce97072a')]);
+
+		$options = $this->manager->startAuthenticate($user, 'my.next.cloud');
+
+		self::assertSame('my.next.cloud', $options->rpId);
+		self::assertSame('discouraged', $options->userVerification);
+		self::assertCount(1, $options->allowCredentials);
+		self::assertFalse($options->extensions->has('appid'));
+		self::assertFalse($options->extensions->has('loc'));
+	}
+
+	public function testStartAuthenticateAddsAppIdForMigratedU2FCredentials(): void {
+		$user = $this->createMock(IUser::class);
+		$user->method('getUID')->willReturn('user123');
+		$this->mapper->method('findPublicKeyCredentials')
+			->willReturn([
+				$this->createCredential(1, 1700000000, 'ee882879-721c-4913-9775-3dfcce97072a'),
+				$this->createCredential(2, null, '00000000-0000-0000-0000-000000000000'),
+			]);
+
+		$options = $this->manager->startAuthenticate($user, 'my.next.cloud:8443');
+
+		self::assertSame('my.next.cloud', $options->rpId);
+		self::assertCount(2, $options->allowCredentials);
+		self::assertSame('https://my.next.cloud:8443', $options->extensions->get('appid')->value());
+	}
+
+	public function testStartAuthenticateIgnoresInactiveMigratedU2FCredentials(): void {
+		$user = $this->createMock(IUser::class);
+		$user->method('getUID')->willReturn('user123');
+		$migrated = $this->createCredential(2, null, '00000000-0000-0000-0000-000000000000');
+		$migrated->setActive(false);
+		$this->mapper->method('findPublicKeyCredentials')
+			->willReturn([
+				$this->createCredential(1, 1700000000, 'ee882879-721c-4913-9775-3dfcce97072a'),
+				$migrated,
+			]);
+
+		$options = $this->manager->startAuthenticate($user, 'my.next.cloud');
+
+		self::assertCount(1, $options->allowCredentials);
+		self::assertFalse($options->extensions->has('appid'));
+	}
 }
