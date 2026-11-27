@@ -4,9 +4,9 @@
  */
 
 import { shallowMount } from '@vue/test-utils'
-import Nextcloud from '../../../mixins/Nextcloud.js'
-import Device from '../../../components/Device.vue'
 import { createPinia, setActivePinia } from 'pinia'
+import Device from '../../../components/Device.vue'
+import Nextcloud from '../../../mixins/Nextcloud.js'
 import { useMainStore } from '../../../store.js'
 
 describe('Device', () => {

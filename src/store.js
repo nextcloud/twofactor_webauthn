@@ -17,9 +17,9 @@ export const useMainStore = defineStore('main', {
 		},
 
 		async removeDevice(entityId) {
-			const device = this.devices.find(device => device.entityId === entityId)
+			const device = this.devices.find((device) => device.entityId === entityId)
 
-			this.devices = this.devices.filter(device => device.entityId !== entityId)
+			this.devices = this.devices.filter((device) => device.entityId !== entityId)
 
 			try {
 				await RegistrationService.removeRegistration(entityId)
@@ -32,7 +32,7 @@ export const useMainStore = defineStore('main', {
 		},
 
 		async changeActivationState({ entityId, active }) {
-			this.devices.find(device => device.entityId === entityId).active = active
+			this.devices.find((device) => device.entityId === entityId).active = active
 
 			try {
 				await RegistrationService.changeActivationState(entityId, active)

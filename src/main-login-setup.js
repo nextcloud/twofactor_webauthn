@@ -3,12 +3,10 @@
  * SPDX-License-Identifier: AGPL-3.0-or-later
  */
 
-import { createApp } from 'vue'
 import { createPinia } from 'pinia'
-
-import Nextcloud from './mixins/Nextcloud.js'
-
+import { createApp } from 'vue'
 import LoginSetup from './components/LoginSetup.vue'
+import Nextcloud from './mixins/Nextcloud.js'
 
 const pinia = createPinia()
 

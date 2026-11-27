@@ -14,12 +14,13 @@
 				</template>
 				{{ createdAtFormatted }}
 			</ActionText>
-			<ActionCheckbox data-testid="device-active"
-				:model-value="active"
+			<ActionCheckbox
+				data-testid="device-active"
+				:modelValue="active"
 				@update:modelValue="changeActivation">
 				{{ t('twofactor_webauthn', 'Active') }}
 			</ActionCheckbox>
-			<ActionButton icon="icon-delete" :close-after-click="true" @click="onDelete">
+			<ActionButton icon="icon-delete" :closeAfterClick="true" @click="onDelete">
 				{{ t('twofactor_webauthn', 'Remove') }}
 			</ActionButton>
 		</Actions>
@@ -27,16 +28,16 @@
 </template>
 
 <script>
+import moment from '@nextcloud/moment'
+import { confirmPassword } from '@nextcloud/password-confirmation'
 import {
-	NcActions as Actions,
 	NcActionButton as ActionButton,
 	NcActionCheckbox as ActionCheckbox,
+	NcActions as Actions,
 	NcActionText as ActionText,
 } from '@nextcloud/vue'
-import InformationOutline from 'vue-material-design-icons/InformationOutline.vue'
-import { confirmPassword } from '@nextcloud/password-confirmation'
-import moment from '@nextcloud/moment'
 import { mapStores } from 'pinia'
+import InformationOutline from 'vue-material-design-icons/InformationOutline.vue'
 import { useMainStore } from '../store.js'
 
 export default {
@@ -48,6 +49,7 @@ export default {
 		ActionText,
 		InformationOutline,
 	},
+
 	props: {
 		entityId: Number,
 		id: String,
@@ -58,6 +60,7 @@ export default {
 			default: undefined,
 		},
 	},
+
 	computed: {
 		...mapStores(useMainStore),
 		createdAtFormatted() {
@@ -68,6 +71,7 @@ export default {
 			return moment(this.createdAt * 1000).format('L')
 		},
 	},
+
 	methods: {
 		async onDelete() {
 			try {
@@ -77,6 +81,7 @@ export default {
 				console.error('could not delete device', e)
 			}
 		},
+
 		async changeActivation(active) {
 			try {
 				await confirmPassword()

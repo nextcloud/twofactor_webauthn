@@ -3,11 +3,11 @@
  * SPDX-License-Identifier: AGPL-3.0-or-later
  */
 
-import { test, expect } from '@playwright/test'
+import { expect, test } from '@playwright/test'
 import { randomBytes } from 'crypto'
-import { createVirtualAuthenticator } from './virtualAuthenticator.js'
 import { login } from './login.js'
 import { disableTwofactorAuth, enforceTwofactorAuth } from './occ.js'
+import { createVirtualAuthenticator } from './virtualAuthenticator.js'
 
 const randomHex = () => randomBytes(16).toString('hex')
 

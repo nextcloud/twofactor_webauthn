@@ -7,7 +7,8 @@
 	<div>
 		<p>{{ t('twofactor_webauthn', 'Set up a security key as a second factor.') }}</p>
 		<div v-if="!added" class="add-device">
-			<AddDeviceDialog :http-warning="httpWarning"
+			<AddDeviceDialog
+				:httpWarning="httpWarning"
 				@add="onAdded" />
 		</div>
 		<p v-else>
@@ -16,7 +17,8 @@
 		<p v-if="notSupported">
 			{{ t('twofactor_webauthn', 'Your browser does not support WebAuthn.') }}
 		</p>
-		<p v-if="httpWarning"
+		<p
+			v-if="httpWarning"
 			id="u2f-http-warning">
 			{{ t('twofactor_webauthn', 'You are accessing this site via an insecure connection. Browsers might therefore refuse the WebAuthn authentication.') }}
 		</p>
@@ -32,17 +34,20 @@ export default {
 	components: {
 		AddDeviceDialog,
 	},
+
 	data() {
 		return {
 			added: false,
 			notSupported: !window.PublicKeyCredential,
 		}
 	},
+
 	computed: {
 		httpWarning() {
 			return document.location.protocol !== 'https:'
 		},
 	},
+
 	methods: {
 		onAdded() {
 			this.added = true
