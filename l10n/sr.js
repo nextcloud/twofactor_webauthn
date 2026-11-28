@@ -14,7 +14,6 @@ OC.L10N.register(
     "Please use your security key to authorize." : "Молимо вас да за пријављивање користите свој безбедносни кључ.",
     "Name your security key" : "Дајте назив свом безбедносном кључу",
     "Add" : "Додај",
-    "Adding your security key …" : "Ваш безбедносни кључ се додајте...",
     "Authentication cancelled" : "Провера идентитета је отказана",
     "An error occurred: {msg}" : "Догодила се грешка: {msg}",
     "Retry" : "Покушај поново",

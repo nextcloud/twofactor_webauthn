@@ -14,7 +14,6 @@ OC.L10N.register(
     "Please use your security key to authorize." : "Tafadhali tumia ufunguo wako wa usalama kuidhinisha.",
     "Name your security key" : "Taja ufunguo wako wa usalama",
     "Add" : "Ongeza",
-    "Adding your security key …" : "Inaongeza ufunguo wako wa usalama…",
     "Authentication cancelled" : "Uthibitishaji umeghairiwa",
     "An error occurred: {msg}" : "Hitilafu imetokea: {msg}",
     "Retry" : "Jaribu tena",

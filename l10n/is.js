@@ -14,7 +14,6 @@ OC.L10N.register(
     "Please use your security key to authorize." : "Notaðu öryggislykilinn þinn til að auðkenna þig.",
     "Name your security key" : "Gefðu öryggislyklinum þinum nafn",
     "Add" : "Bæta við",
-    "Adding your security key …" : "Bæti við öryggislyklinum þínum …",
     "Authentication cancelled" : "Auðkenning afturkölluð",
     "An error occurred: {msg}" : "Villa átti sér stað: {msg}",
     "Retry" : "Reyna aftur",

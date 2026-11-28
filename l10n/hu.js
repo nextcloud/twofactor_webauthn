@@ -14,7 +14,6 @@ OC.L10N.register(
     "Please use your security key to authorize." : "Használja a biztonsági kulcsát a jogosultság-ellenőrzéshez.",
     "Name your security key" : "Nevezze el a biztonsági kulcsot",
     "Add" : "Hozzáadás",
-    "Adding your security key …" : "Biztonsági kulcs hozzáadása…",
     "Authentication cancelled" : "Hitelesítés megszakítva",
     "An error occurred: {msg}" : "Hiba történt: {msg}",
     "Retry" : "Újra",

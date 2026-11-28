@@ -14,7 +14,6 @@ OC.L10N.register(
     "Please use your security key to authorize." : "Bain úsáid as d'eochair shlándála chun údarú le do thoil.",
     "Name your security key" : "Ainmnigh d'eochair shlándála",
     "Add" : "Cuir",
-    "Adding your security key …" : "D'eochair shlándála á cur leis…",
     "Authentication cancelled" : "Cealaíodh an fíordheimhniú",
     "An error occurred: {msg}" : "Tharla earráid: {msg}",
     "Retry" : "Bain triail eile as",

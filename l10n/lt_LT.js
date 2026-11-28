@@ -14,7 +14,6 @@ OC.L10N.register(
     "Please use your security key to authorize." : "Norėdami autorizuoti, naudokite savo saugos raktą.",
     "Name your security key" : "Pavadinkite savo saugos raktą",
     "Add" : "Pridėti",
-    "Adding your security key …" : "Pridedamas jūsų saugumo raktas…",
     "Authentication cancelled" : "Autentifikavimas atšauktas",
     "An error occurred: {msg}" : "Įvyko klaida: {msg}",
     "Retry" : "Bandyti dar kartą",

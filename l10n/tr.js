@@ -14,7 +14,6 @@ OC.L10N.register(
     "Please use your security key to authorize." : "Lütfen kimliğinizi doğrulamak için güvenlik anahtarınızı kullanın.",
     "Name your security key" : "Güvenlik anahtarınızın adı",
     "Add" : "Ekle",
-    "Adding your security key …" : "Güvenlik anahtarınız ekleniyor…",
     "Authentication cancelled" : "Kimlik doğrulama iptal edildi",
     "An error occurred: {msg}" : "Bir sorun çıktı: {message}",
     "Retry" : "Yeniden dene",

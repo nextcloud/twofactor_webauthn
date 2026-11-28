@@ -14,7 +14,6 @@ OC.L10N.register(
     "Please use your security key to authorize." : "Vennligst bruk sikkerhetsnøkkelen din for å autentisere.",
     "Name your security key" : "Navngi sikkerhetsnøkkelen din",
     "Add" : "Legg til",
-    "Adding your security key …" : "Legger til sikkerhetsnøkkelen din...",
     "Authentication cancelled" : "Autentisering avbrutt",
     "An error occurred: {msg}" : "En feil oppsto: {msg}",
     "Retry" : "Prøv igjen",

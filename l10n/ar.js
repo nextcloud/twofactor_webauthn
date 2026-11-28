@@ -14,7 +14,6 @@ OC.L10N.register(
     "Please use your security key to authorize." : "رجاءً، استخدِم مفتاح أمانك للمُصادقة",
     "Name your security key" : "أعطِ اسمَ مفتاح أمانك",
     "Add" : "إضافة",
-    "Adding your security key …" : "إضافة مفتاح أمانك جاريةٌ ...",
     "Authentication cancelled" : "تمّ إلغاء المُصادقة",
     "An error occurred: {msg}" : "حَدَثَ خطأٌ: {msg}",
     "Retry" : "أعِدِ المحاولة",

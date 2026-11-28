@@ -14,7 +14,6 @@ OC.L10N.register(
     "Please use your security key to authorize." : "請使用您的安全金鑰驗證。",
     "Name your security key" : "為您的安全金鑰命名",
     "Add" : "新增",
-    "Adding your security key …" : "正在心憎您的安全金鑰……",
     "Authentication cancelled" : "驗證已取消",
     "An error occurred: {msg}" : "遇到錯誤：{msg}",
     "Retry" : "重試",

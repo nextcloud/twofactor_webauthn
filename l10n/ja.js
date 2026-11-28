@@ -14,7 +14,6 @@ OC.L10N.register(
     "Please use your security key to authorize." : "セキュリティキーを使用して認証を行ってください。",
     "Name your security key" : "セキュリティキーに名前を付けてください",
     "Add" : "追加",
-    "Adding your security key …" : "セキュリティキーを追加しています...",
     "Authentication cancelled" : "認証がキャンセルされました",
     "An error occurred: {msg}" : "エラーが発生しました: {msg}",
     "Retry" : "リトライ",

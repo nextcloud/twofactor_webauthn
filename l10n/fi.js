@@ -8,7 +8,6 @@ OC.L10N.register(
     "Add security key" : "Lisää turva-avain",
     "Name your security key" : "Anna turva-avaimellesi nimi",
     "Add" : "Lisä",
-    "Adding your security key …" : "Lisätään turva-avaimesi…",
     "An error occurred: {msg}" : "Tapahtui virhe: {msg}",
     "Retry" : "Yritä uudelleen",
     "Use security key" : "Käytä turva-avainta",

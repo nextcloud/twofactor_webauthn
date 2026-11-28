@@ -14,7 +14,6 @@ OC.L10N.register(
     "Please use your security key to authorize." : "ھوقۇق بېرىش ئۈچۈن بىخەتەرلىك ئاچقۇچىڭىزنى ئىشلىتىڭ.",
     "Name your security key" : "بىخەتەرلىك ئاچقۇچىغا ئىسىم قويۇڭ",
     "Add" : "قوش",
-    "Adding your security key …" : "بىخەتەرلىك ئاچقۇچىڭىزنى قوشۇش…",
     "Authentication cancelled" : "دەلىللەش ئەمەلدىن قالدۇرۇلدى",
     "An error occurred: {msg}" : "خاتالىق كۆرۈلدى: {msg}",
     "Retry" : "قايتا سىناڭ",

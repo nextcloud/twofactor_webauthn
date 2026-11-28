@@ -14,7 +14,6 @@ OC.L10N.register(
     "Please use your security key to authorize." : "Gebruik uw beveiligingssleutel om de handeling te autoriseren.",
     "Name your security key" : "Geef je beveiligingssleutel een naam",
     "Add" : "Toevoegen",
-    "Adding your security key …" : "Je beveiligingssleutel toevoegen …",
     "Authentication cancelled" : "Verificatie geannuleerd",
     "An error occurred: {msg}" : "Er is een fout opgetreden: {msg}",
     "Retry" : "Opnieuw",

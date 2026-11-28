@@ -14,7 +14,6 @@ OC.L10N.register(
     "Please use your security key to authorize." : "Erabili segurtasun-giltza baimena emateko.",
     "Name your security key" : "Eman izena zure segurtasun gakoari",
     "Add" : "Gehitu",
-    "Adding your security key …" : "Zure segurtasun gakoa gehitzen ...",
     "Authentication cancelled" : "Autentifikazio ezeztatuta",
     "An error occurred: {msg}" : "Errorea gertatu da: {msg}",
     "Retry" : "saiatu berriro",

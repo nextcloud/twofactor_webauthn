@@ -14,7 +14,6 @@ OC.L10N.register(
     "Please use your security key to authorize." : "Παρακαλώ χρησιμοποιήστε το κλειδί ασφαλείας σας για εξουσιοδότηση.",
     "Name your security key" : "Ονομάστε το κλειδί ασφαλείας σας",
     "Add" : "Προσθήκη",
-    "Adding your security key …" : "Προσθήκη του κλειδιού ασφαλείας σας …",
     "Authentication cancelled" : "Η πιστοποίηση ακυρώθηκε",
     "An error occurred: {msg}" : "Παρουσιάστηκε σφάλμα: {msg}",
     "Retry" : "Δοκιμή ξανά",

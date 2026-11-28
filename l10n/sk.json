@@ -12,7 +12,6 @@
     "Please use your security key to authorize." : "Autorizujte sa, prosím, svojím bezpečnostným kľúčom.",
     "Name your security key" : "Pomenujte svoj bezpečnostný kľúč",
     "Add" : "Pridať",
-    "Adding your security key …" : "Pridávam váš bezpečnostný kľúč ...",
     "Authentication cancelled" : "Overenie bolo prerušené",
     "An error occurred: {msg}" : "Vyskytla sa chyba: {msg}",
     "Retry" : "Zopakovať",

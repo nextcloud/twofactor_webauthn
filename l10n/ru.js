@@ -14,7 +14,6 @@ OC.L10N.register(
     "Please use your security key to authorize." : "Используйте ключ безопасности для аутентификации.",
     "Name your security key" : "Назовите свой ключ безопасности",
     "Add" : "Добавить",
-    "Adding your security key …" : "Добавление вашего ключа безопасности …",
     "Authentication cancelled" : "Аутентификация отменена",
     "An error occurred: {msg}" : "Произошла ошибка: {msg}",
     "Retry" : "Повторить",

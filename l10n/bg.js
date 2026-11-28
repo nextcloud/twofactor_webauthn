@@ -14,7 +14,6 @@ OC.L10N.register(
     "Please use your security key to authorize." : "Моля, използвайте вашия ключ за защита за упълномощаване.",
     "Name your security key" : "Наименовайте вашия ключ за защита",
     "Add" : "Добавяне",
-    "Adding your security key …" : "Добавяне на вашия ключ за защита ...",
     "Authentication cancelled" : "Удостоверяването е отказано",
     "An error occurred: {msg}" : "Възникна грешка: {msg}",
     "Retry" : "Повторен опит",

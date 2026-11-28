@@ -14,7 +14,6 @@ OC.L10N.register(
     "Please use your security key to authorize." : "Palun kasuta tuvastamiseks turvavõtit.",
     "Name your security key" : "Turvavõtme nimi",
     "Add" : "Lisa",
-    "Adding your security key …" : "Turvavõti on lisamisel…",
     "Authentication cancelled" : "Autentimine on katkestatud",
     "An error occurred: {msg}" : "Tekkis viga: {msg}",
     "Retry" : "Proovi uuesti",

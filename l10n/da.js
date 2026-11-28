@@ -14,7 +14,6 @@ OC.L10N.register(
     "Please use your security key to authorize." : "Brug din sikkerhedsnøgle til at godkende.",
     "Name your security key" : "Navngiv din sikkerhedsnøgle",
     "Add" : "Tilføj",
-    "Adding your security key …" : "Tilføjer din sikkerhedsnøgle …",
     "Authentication cancelled" : "Godkendelsen blev annulleret",
     "An error occurred: {msg}" : "Der opstod en fejl: {msg}",
     "Retry" : "Prøv igen",

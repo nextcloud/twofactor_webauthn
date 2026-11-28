@@ -14,7 +14,6 @@ OC.L10N.register(
     "Please use your security key to authorize." : "لطفاً از کلید امنیتی خود برای مجوز استفاده کنید.",
     "Name your security key" : "نام کلید امنیتی خود را وارد کنید",
     "Add" : "افزودن",
-    "Adding your security key …" : "در حال افزودن کلید امنیتی شما …",
     "Authentication cancelled" : "احراز هویت لغو شد",
     "An error occurred: {msg}" : "خطایی رخ داد: {msg}",
     "Retry" : "تلاش مجدد",
